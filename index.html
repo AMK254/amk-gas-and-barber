@@ -1,1 +1,2252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>AMK Gas • Sneakers • Barber</title>
+  <meta name="description" content="AMK Gas, Sneakers and Barber Shop in Nanyuki and Nairobi, Kenya. Order gas, shop sneakers and book a barber.">
+
+  <meta name="google-site-verification" content="c9vG_1CoZAgTw9X1cCFCV6TBOk5WROln4cShLVaGHaE">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7fb;
+      color: #111827;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #061a38;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 15px rgba(0,0,0,.15);
+    }
+
+    .header-inner {
+      max-width: 1150px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: #60a5fa;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0755c9, #061a38);
+      color: white;
+      text-align: center;
+      padding: 85px 20px;
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: auto;
+      font-size: 18px;
+      opacity: .95;
+    }
+
+    .hero-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-white {
+      background: white;
+      color: #0755c9;
+    }
+
+    .btn-blue {
+      background: #0755c9;
+      color: white;
+    }
+
+    .btn-green {
+      background: #168447;
+      color: white;
+    }
+
+    .btn-dark {
+      background: #061a38;
+      color: white;
+    }
+
+    .btn-red {
+      background: #dc2626;
+      color: white;
+    }
+
+    section {
+      max-width: 1150px;
+      margin: auto;
+      padding: 65px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+      color: #061a38;
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #64748b;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.07);
+    }
+
+    .service-card {
+      text-align: center;
+    }
+
+    .icon {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      color: #061a38;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      color: #0755c9;
+      font-size: 21px;
+      font-weight: 800;
+      margin: 12px 0;
+    }
+
+    .muted {
+      color: #64748b;
+    }
+
+    .form-box {
+      background: white;
+      max-width: 650px;
+      margin: auto;
+      padding: 28px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.07);
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 6px;
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 15px;
+      background: white;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .full-btn {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .payment-box {
+      background: #eef5ff;
+      border-left: 5px solid #0755c9;
+      padding: 18px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .contact-section {
+      background: #eef5ff;
+      max-width: none;
+    }
+
+    .contact-inner {
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+      gap: 20px;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .contact-card a {
+      color: #0755c9;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* STAFF */
+
+    #staff {
+      display: none;
+      background: #eef2f7;
+      max-width: none;
+    }
+
+    .staff-container {
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .login-box {
+      max-width: 450px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+
+    .staff-dashboard {
+      display: none;
+    }
+
+    .staff-top {
+      background: #061a38;
+      color: white;
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .staff-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .staff-tab {
+      background: white;
+      border: 1px solid #cbd5e1;
+      padding: 10px 14px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .staff-tab.active {
+      background: #0755c9;
+      color: white;
+      border-color: #0755c9;
+    }
+
+    .staff-panel {
+      display: none;
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.06);
+    }
+
+    .staff-panel.active {
+      display: block;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 10px;
+      border-left: 4px solid #0755c9;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      color: #061a38;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th,
+    td {
+      padding: 11px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+    }
+
+    th {
+      background: #f8fafc;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    footer {
+      background: #061a38;
+      color: white;
+      text-align: center;
+      padding: 28px 20px;
+    }
+
+    .footer-links {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: white;
+      margin: 0 8px;
+      text-decoration: none;
+    }
+
+    .whatsapp {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25d366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,.25);
+      z-index: 2000;
+    }
+
+    @media (max-width: 750px) {
+      .header-inner {
+        flex-direction: column;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      nav {
+        gap: 10px;
+      }
+
+      nav a {
+        font-size: 13px;
+      }
+
+      table {
+        font-size: 13px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <div class="logo">
+      AMK GAS • SNEAKERS • BARBER
+    </div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#gas">Gas</a>
+      <a href="#sneakers">Sneakers</a>
+      <a href="#barber">Barber</a>
+      <a href="#orders">My Requests</a>
+      <a href="#contact">Contact</a>
+      <a href="#staff" onclick="openStaff()">Staff</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+
+  <h1>AMK Gas • Sneakers • Barber</h1>
+
+  <p>
+    Gas, sneakers and professional barber services —
+    simple, affordable and convenient.
+  </p>
+
+  <p style="margin-top:8px;">
+    Serving Nanyuki & Nairobi, Kenya.
+  </p>
+
+  <div class="hero-buttons">
+
+    <a href="#gas" class="btn btn-white">
+      🔥 Order Gas
+    </a>
+
+    <a href="#sneakers" class="btn btn-white">
+      👟 Shop Sneakers
+    </a>
+
+    <a href="#barber" class="btn btn-white">
+      💈 Book Barber
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section>
+
+  <div class="section-title">
+    <h2>Our Services</h2>
+    <p>Everything you need from AMK.</p>
+  </div>
+
+  <div class="cards">
+
+    <div class="card service-card">
+      <div class="icon">🔥</div>
+      <h3>Gas</h3>
+      <p>Cooking gas available for pickup or delivery.</p>
+      <a href="#gas" class="btn btn-blue" style="margin-top:15px;">
+        View Gas
+      </a>
+    </div>
+
+    <div class="card service-card">
+      <div class="icon">👟</div>
+      <h3>Sneakers</h3>
+      <p>Affordable and stylish sneakers.</p>
+      <a href="#sneakers" class="btn btn-blue" style="margin-top:15px;">
+        Shop Sneakers
+      </a>
+    </div>
+
+    <div class="card service-card">
+      <div class="icon">💈</div>
+      <h3>Barber</h3>
+      <p>Professional haircuts and beard services.</p>
+      <a href="#barber" class="btn btn-blue" style="margin-top:15px;">
+        Book Barber
+      </a>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- GAS -->
+
+<section id="gas">
+
+  <div class="section-title">
+    <h2>🔥 Gas</h2>
+    <p>Order your cooking gas.</p>
+  </div>
+
+  <div class="cards">
+
+    <div class="card service-card">
+
+      <div class="icon">🔥</div>
+
+      <h3>6 KG Gas</h3>
+
+      <div class="price">
+        KSh 1,200
+      </div>
+
+      <p class="muted">
+        Pickup or delivery available.
+      </p>
+
+      <a
+        class="btn btn-green"
+        style="margin-top:15px;"
+        target="_blank"
+        href="https://wa.me/254117414318?text=Hello%20AMK%20Gas%2C%20I%20want%20to%20order%206KG%20gas.">
+        WhatsApp Order
+      </a>
+
+    </div>
+
+
+    <div class="card service-card">
+
+      <div class="icon">🔥</div>
+
+      <h3>12 KG Gas</h3>
+
+      <div class="price">
+        KSh 2,000
+      </div>
+
+      <p class="muted">
+        Pickup or delivery available.
+      </p>
+
+      <a
+        class="btn btn-green"
+        style="margin-top:15px;"
+        target="_blank"
+        href="https://wa.me/254117414318?text=Hello%20AMK%20Gas%2C%20I%20want%20to%20order%2012KG%20gas.">
+        WhatsApp Order
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-box" style="margin-top:25px;">
+
+    <h3>Gas Delivery Order</h3>
+
+    <form onsubmit="submitGasOrder(event)">
+
+      <label>Full Name</label>
+      <input id="gasName" required>
+
+      <label>Phone Number</label>
+      <input id="gasPhone" type="tel" required>
+
+      <label>Gas Size</label>
+
+      <select id="gasSize" required>
+        <option value="">Select gas size</option>
+        <option value="6 KG - KSh 1,200">
+          6 KG - KSh 1,200
+        </option>
+        <option value="12 KG - KSh 2,000">
+          12 KG - KSh 2,000
+        </option>
+      </select>
+
+      <label>Delivery Location</label>
+      <textarea id="gasLocation" placeholder="Enter your location" required></textarea>
+
+      <label>Payment Method</label>
+
+      <select id="gasPayment" required>
+        <option value="">Select payment method</option>
+        <option>M-Pesa</option>
+        <option>Cash on Delivery</option>
+      </select>
+
+      <button class="btn btn-green full-btn" type="submit">
+        Place Gas Order
+      </button>
+
+    </form>
+
+    <div class="payment-box">
+
+      <strong>M-Pesa Payment</strong>
+
+      <p>
+        Send payment to:
+        <strong>0117 414 318</strong>
+      </p>
+
+      <p class="muted">
+        Please keep your M-Pesa confirmation message.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SNEAKERS -->
+
+<section id="sneakers">
+
+  <div class="section-title">
+
+    <h2>👟 Sneakers</h2>
+
+    <p>
+      Browse our sneaker collection and order through WhatsApp.
+    </p>
+
+  </div>
+
+
+  <div class="cards">
+
+    <div class="card service-card">
+
+      <div class="icon">👟</div>
+
+      <h3>Sneaker Collection</h3>
+
+      <p>
+        Quality sneakers at affordable prices.
+      </p>
+
+      <p class="muted" style="margin-top:10px;">
+        New products will be added here.
+      </p>
+
+      <a
+        class="btn btn-green"
+        style="margin-top:15px;"
+        target="_blank"
+        href="https://wa.me/254118311141?text=Hello%20AMK%2C%20I%20would%20like%20to%20see%20your%20sneaker%20collection.">
+        Ask on WhatsApp
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-box" style="margin-top:25px;">
+
+    <h3>Sneaker Order</h3>
+
+    <form onsubmit="submitSneakerOrder(event)">
+
+      <label>Full Name</label>
+      <input id="sneakerName" required>
+
+      <label>Phone Number</label>
+      <input id="sneakerPhone" type="tel" required>
+
+      <label>Sneaker / Product</label>
+      <input id="sneakerProduct" placeholder="Example: Nike SB" required>
+
+      <label>Size</label>
+      <select id="sneakerSize" required>
+        <option value="">Select size</option>
+        <option>36</option>
+        <option>37</option>
+        <option>38</option>
+        <option>39</option>
+        <option>40</option>
+        <option>41</option>
+        <option>42</option>
+        <option>43</option>
+        <option>44</option>
+        <option>45</option>
+      </select>
+
+      <label>Delivery Location</label>
+      <textarea id="sneakerLocation" required></textarea>
+
+      <button class="btn btn-green full-btn">
+        Send Sneaker Order
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- BARBER -->
+
+<section id="barber">
+
+  <div class="section-title">
+
+    <h2>💈 Barber Shop</h2>
+
+    <p>
+      Book your haircut with AMK Barber Shop.
+    </p>
+
+  </div>
+
+
+  <div class="cards">
+
+    <div class="card service-card">
+
+      <div class="icon">✂️</div>
+
+      <h3>Regular Haircut</h3>
+
+      <div class="price">
+        KSh 200
+      </div>
+
+    </div>
+
+
+    <div class="card service-card">
+
+      <div class="icon">💈</div>
+
+      <h3>Skin Fade</h3>
+
+      <div class="price">
+        KSh 300
+      </div>
+
+    </div>
+
+
+    <div class="card service-card">
+
+      <div class="icon">🧔</div>
+
+      <h3>Beard Trim</h3>
+
+      <div class="price">
+        KSh 100
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-box" style="margin-top:25px;">
+
+    <h3>Book an Appointment</h3>
+
+    <form onsubmit="submitBarberBooking(event)">
+
+      <label>Full Name</label>
+      <input id="barberName" required>
+
+      <label>Phone Number</label>
+      <input id="barberPhone" type="tel" required>
+
+      <label>Service</label>
+
+      <select id="barberService" required>
+
+        <option value="">
+          Select service
+        </option>
+
+        <option>
+          Regular Haircut - KSh 200
+        </option>
+
+        <option>
+          Skin Fade - KSh 300
+        </option>
+
+        <option>
+          Beard Trim - KSh 100
+        </option>
+
+      </select>
+
+
+      <label>Preferred Date</label>
+      <input id="barberDate" type="date" required>
+
+
+      <label>Preferred Time</label>
+      <input id="barberTime" type="time" required>
+
+
+      <button class="btn btn-green full-btn">
+        Request Booking
+      </button>
+
+    </form>
+
+    <div class="payment-box">
+
+      <strong>Booking notice</strong>
+
+      <p>
+        Your booking is a request. The barber will confirm your appointment.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CUSTOMER REQUESTS -->
+
+<section id="orders">
+
+  <div class="section-title">
+
+    <h2>🛒 My Requests</h2>
+
+    <p>
+      Your orders and bookings on this device.
+    </p>
+
+  </div>
+
+
+  <div id="customerRequests">
+
+    <div class="card" style="text-align:center;">
+      <p class="muted">
+        No requests yet.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="contact-section" id="contact">
+
+  <div class="contact-inner">
+
+    <div class="section-title">
+
+      <h2>Contact AMK</h2>
+
+      <p>
+        We are ready to serve you.
+      </p>
+
+    </div>
+
+
+    <div class="contact-grid">
+
+      <div class="contact-card">
+
+        <div class="icon">🔥</div>
+
+        <h3>Gas</h3>
+
+        <p>
+          0117 414 318
+        </p>
+
+        <a
+          href="https://wa.me/254117414318"
+          target="_blank">
+          WhatsApp Gas
+        </a>
+
+      </div>
+
+
+      <div class="contact-card">
+
+        <div class="icon">💈</div>
+
+        <h3>Barber</h3>
+
+        <p>
+          0118 311 141
+        </p>
+
+        <a
+          href="https://wa.me/254118311141"
+          target="_blank">
+          WhatsApp Barber
+        </a>
+
+      </div>
+
+
+      <div class="contact-card">
+
+        <div class="icon">💳</div>
+
+        <h3>M-Pesa</h3>
+
+        <p>
+          0117 414 318
+        </p>
+
+        <p class="muted">
+          Send Money
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- STAFF AREA -->
+
+<section id="staff">
+
+  <div class="staff-container">
+
+    <!-- LOGIN -->
+
+    <div id="staffLogin">
+
+      <div class="section-title">
+
+        <h2>🔐 Staff Area</h2>
+
+        <p>
+          Authorized AMK staff only.
+        </p>
+
+      </div>
+
+
+      <div class="login-box">
+
+        <label>Staff Role</label>
+
+        <select id="staffRole">
+
+          <option value="Owner/Admin">
+            Owner / Admin
+          </option>
+
+          <option value="Manager">
+            Manager
+          </option>
+
+          <option value="Barber">
+            Barber
+          </option>
+
+          <option value="Gas Attendant">
+            Gas Attendant
+          </option>
+
+          <option value="Shop Staff">
+            Shop Staff
+          </option>
+
+        </select>
+
+
+        <label>Password</label>
+
+        <input
+          type="password"
+          id="staffPassword"
+          placeholder="Enter password">
+
+
+        <button
+          class="btn btn-blue full-btn"
+          onclick="staffLogin()">
+
+          Login
+
+        </button>
+
+        <p
+          id="loginMessage"
+          style="color:#dc2626;margin-top:12px;text-align:center;">
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- DASHBOARD -->
+
+    <div id="staffDashboard" class="staff-dashboard">
+
+      <div class="staff-top">
+
+        <div>
+
+          <h2>AMK Business Dashboard</h2>
+
+          <p id="loggedRole"></p>
+
+        </div>
+
+        <button
+          class="btn btn-red"
+          onclick="staffLogout()">
+
+          Logout
+
+        </button>
+
+      </div>
+
+
+      <div class="staff-tabs">
+
+        <button
+          class="staff-tab active"
+          onclick="showPanel('dashboardPanel',this)">
+          Dashboard
+        </button>
+
+        <button
+          class="staff-tab"
+          onclick="showPanel('salesPanel',this)">
+          Sales
+        </button>
+
+        <button
+          class="staff-tab"
+          onclick="showPanel('expensesPanel',this)">
+          Expenses
+        </button>
+
+        <button
+          class="staff-tab"
+          onclick="showPanel('inventoryPanel',this)">
+          Inventory
+        </button>
+
+        <button
+          class="staff-tab"
+          onclick="showPanel('deliveryPanel',this)">
+          Deliveries
+        </button>
+
+        <button
+          class="staff-tab"
+          onclick="showPanel('employeesPanel',this)">
+          Employees
+        </button>
+
+      </div>
+
+
+      <!-- DASHBOARD -->
+
+      <div id="dashboardPanel" class="staff-panel active">
+
+        <h3>Business Overview</h3>
+
+        <div class="stat-grid">
+
+          <div class="stat">
+
+            <span>Requests</span>
+
+            <strong id="statRequests">
+              0
+            </strong>
+
+          </div>
+
+
+          <div class="stat">
+
+            <span>Sales</span>
+
+            <strong id="statSales">
+              KSh 0
+            </strong>
+
+          </div>
+
+
+          <div class="stat">
+
+            <span>Expenses</span>
+
+            <strong id="statExpenses">
+              KSh 0
+            </strong>
+
+          </div>
+
+
+          <div class="stat">
+
+            <span>Profit</span>
+
+            <strong id="statProfit">
+              KSh 0
+            </strong>
+
+          </div>
+
+        </div>
+
+        <p class="muted">
+          Use the tabs above to manage the business.
+        </p>
+
+      </div>
+
+
+      <!-- SALES -->
+
+      <div id="salesPanel" class="staff-panel">
+
+        <h3>💰 Sales</h3>
+
+        <form onsubmit="addSale(event)">
+
+          <label>Product / Service</label>
+
+          <input
+            id="saleItem"
+            placeholder="Example: 6KG Gas"
+            required>
+
+          <label>Amount (KSh)</label>
+
+          <input
+            id="saleAmount"
+            type="number"
+            min="0"
+            required>
+
+          <label>Payment Method</label>
+
+          <select id="salePayment">
+
+            <option>M-Pesa</option>
+            <option>Cash</option>
+            <option>Card</option>
+
+          </select>
+
+          <button class="btn btn-green full-btn">
+            Add Sale
+          </button>
+
+        </form>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Item</th>
+                <th>Amount</th>
+                <th>Payment</th>
+                <th>Date</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="salesTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- EXPENSES -->
+
+      <div id="expensesPanel" class="staff-panel">
+
+        <h3>💸 Expenses</h3>
+
+        <form onsubmit="addExpense(event)">
+
+          <label>Expense</label>
+
+          <input
+            id="expenseName"
+            placeholder="Example: Fuel"
+            required>
+
+          <label>Amount (KSh)</label>
+
+          <input
+            id="expenseAmount"
+            type="number"
+            min="0"
+            required>
+
+          <button class="btn btn-green full-btn">
+            Add Expense
+          </button>
+
+        </form>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Expense</th>
+                <th>Amount</th>
+                <th>Date</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="expensesTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- INVENTORY -->
+
+      <div id="inventoryPanel" class="staff-panel">
+
+        <h3>📦 Inventory</h3>
+
+        <form onsubmit="addInventory(event)">
+
+          <label>Product</label>
+
+          <input
+            id="inventoryName"
+            placeholder="Example: 6KG Gas"
+            required>
+
+          <label>Quantity</label>
+
+          <input
+            id="inventoryQty"
+            type="number"
+            min="0"
+            required>
+
+          <button class="btn btn-green full-btn">
+            Add Inventory
+          </button>
+
+        </form>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Date</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="inventoryTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- DELIVERIES -->
+
+      <div id="deliveryPanel" class="staff-panel">
+
+        <h3>🚚 Deliveries</h3>
+
+        <form onsubmit="addDelivery(event)">
+
+          <label>Customer</label>
+
+          <input
+            id="deliveryCustomer"
+            required>
+
+          <label>Location</label>
+
+          <input
+            id="deliveryLocation"
+            required>
+
+          <label>Item</label>
+
+          <input
+            id="deliveryItem"
+            placeholder="Example: 6KG Gas"
+            required>
+
+          <label>Status</label>
+
+          <select id="deliveryStatus">
+
+            <option>Pending</option>
+            <option>Out for Delivery</option>
+            <option>Delivered</option>
+
+          </select>
+
+          <button class="btn btn-green full-btn">
+            Add Delivery
+          </button>
+
+        </form>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Customer</th>
+                <th>Location</th>
+                <th>Item</th>
+                <th>Status</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="deliveryTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- EMPLOYEES -->
+
+      <div id="employeesPanel" class="staff-panel">
+
+        <h3>👥 Employees</h3>
+
+        <form onsubmit="addEmployee(event)">
+
+          <label>Employee Name</label>
+
+          <input
+            id="employeeName"
+            required>
+
+          <label>Role</label>
+
+          <select id="employeeRole">
+
+            <option>Manager</option>
+            <option>Barber</option>
+            <option>Gas Attendant</option>
+            <option>Shop Staff</option>
+
+          </select>
+
+          <label>Salary (KSh)</label>
+
+          <input
+            id="employeeSalary"
+            type="number"
+            min="0">
+
+          <label>Commission (%)</label>
+
+          <input
+            id="employeeCommission"
+            type="number"
+            min="0"
+            max="100"
+            value="0">
+
+          <button class="btn btn-green full-btn">
+            Add Employee
+          </button>
+
+        </form>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Salary</th>
+                <th>Commission</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="employeesTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+
+  <div class="footer-links">
+
+    <a href="#home">Home</a>
+    <a href="#gas">Gas</a>
+    <a href="#sneakers">Sneakers</a>
+    <a href="#barber">Barber</a>
+    <a href="#contact">Contact</a>
+
+  </div>
+
+  <p>
+    © 2026 AMK Gas • Sneakers • Barber
+  </p>
+
+  <p style="margin-top:5px;">
+    Nanyuki & Nairobi, Kenya
+  </p>
+
+</footer>
+
+
+<!-- WHATSAPP -->
+
+<a
+  class="whatsapp"
+  href="https://wa.me/254117414318"
+  target="_blank"
+  title="WhatsApp AMK">
+
+  ☎
+
+</a>
+
+
+<script>
+
+  /* ================================
+     BASIC BUSINESS DATA
+  ================================= */
+
+  const STORAGE_KEY = "amk_fresh_business";
+
+  let businessData =
+    JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+
+      requests: [],
+      sales: [],
+      expenses: [],
+      inventory: [],
+      deliveries: [],
+      employees: []
+
+    };
+
+
+  function saveData() {
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(businessData)
+    );
+
+  }
+
+
+  function today() {
+
+    return new Date().toLocaleDateString();
+
+  }
+
+
+  /* ================================
+     CUSTOMER GAS ORDER
+  ================================= */
+
+  function submitGasOrder(event) {
+
+    event.preventDefault();
+
+    const name =
+      document.getElementById("gasName").value;
+
+    const phone =
+      document.getElementById("gasPhone").value;
+
+    const size =
+      document.getElementById("gasSize").value;
+
+    const location =
+      document.getElementById("gasLocation").value;
+
+    const payment =
+      document.getElementById("gasPayment").value;
+
+
+    businessData.requests.push({
+
+      type: "Gas",
+      name: name,
+      phone: phone,
+      item: size,
+      location: location,
+      payment: payment,
+      date: today()
+
+    });
+
+
+    saveData();
+
+    updateCustomerRequests();
+
+
+    const message =
+      "Hello AMK Gas,%0A%0A" +
+      "Gas Order%0A" +
+      "Name: " + encodeURIComponent(name) + "%0A" +
+      "Phone: " + encodeURIComponent(phone) + "%0A" +
+      "Gas: " + encodeURIComponent(size) + "%0A" +
+      "Location: " + encodeURIComponent(location) + "%0A" +
+      "Payment: " + encodeURIComponent(payment);
+
+
+    window.open(
+      "https://wa.me/254117414318?text=" + message,
+      "_blank"
+    );
+
+    event.target.reset();
+
+    alert("Gas order saved. WhatsApp will open to complete the order.");
+
+  }
+
+
+  /* ================================
+     SNEAKER ORDER
+  ================================= */
+
+  function submitSneakerOrder(event) {
+
+    event.preventDefault();
+
+    const name =
+      document.getElementById("sneakerName").value;
+
+    const phone =
+      document.getElementById("sneakerPhone").value;
+
+    const product =
+      document.getElementById("sneakerProduct").value;
+
+    const size =
+      document.getElementById("sneakerSize").value;
+
+    const location =
+      document.getElementById("sneakerLocation").value;
+
+
+    businessData.requests.push({
+
+      type: "Sneaker",
+      name: name,
+      phone: phone,
+      item: product,
+      size: size,
+      location: location,
+      date: today()
+
+    });
+
+
+    saveData();
+
+    updateCustomerRequests();
+
+
+    const message =
+      "Hello AMK,%0A%0A" +
+      "Sneaker Order%0A" +
+      "Name: " + encodeURIComponent(name) + "%0A" +
+      "Phone: " + encodeURIComponent(phone) + "%0A" +
+      "Product: " + encodeURIComponent(product) + "%0A" +
+      "Size: " + encodeURIComponent(size) + "%0A" +
+      "Location: " + encodeURIComponent(location);
+
+
+    window.open(
+      "https://wa.me/254118311141?text=" + message,
+      "_blank"
+    );
+
+    event.target.reset();
+
+    alert("Sneaker order saved.");
+
+  }
+
+
+  /* ================================
+     BARBER BOOKING
+  ================================= */
+
+  function submitBarberBooking(event) {
+
+    event.preventDefault();
+
+    const name =
+      document.getElementById("barberName").value;
+
+    const phone =
+      document.getElementById("barberPhone").value;
+
+    const service =
+      document.getElementById("barberService").value;
+
+    const date =
+      document.getElementById("barberDate").value;
+
+    const time =
+      document.getElementById("barberTime").value;
+
+
+    businessData.requests.push({
+
+      type: "Barber Booking",
+      name: name,
+      phone: phone,
+      item: service,
+      dateRequested: date,
+      time: time,
+      date: today()
+
+    });
+
+
+    saveData();
+
+    updateCustomerRequests();
+
+
+    const message =
+      "Hello AMK Barber,%0A%0A" +
+      "Barber Booking%0A" +
+      "Name: " + encodeURIComponent(name) + "%0A" +
+      "Phone: " + encodeURIComponent(phone) + "%0A" +
+      "Service: " + encodeURIComponent(service) + "%0A" +
+      "Date: " + encodeURIComponent(date) + "%0A" +
+      "Time: " + encodeURIComponent(time);
+
+
+    window.open(
+      "https://wa.me/254118311141?text=" + message,
+      "_blank"
+    );
+
+    event.target.reset();
+
+    alert("Booking request saved. WhatsApp will open.");
+
+  }
+
+
+  /* ================================
+     CUSTOMER REQUESTS
+  ================================= */
+
+  function updateCustomerRequests() {
+
+    const container =
+      document.getElementById("customerRequests");
+
+
+    if (!businessData.requests.length) {
+
+      container.innerHTML = `
+        <div class="card" style="text-align:center;">
+          <p class="muted">No requests yet.</p>
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      businessData.requests
+      .slice()
+      .reverse()
+      .map(function(request) {
+
+        return `
+
+          <div class="card" style="margin-bottom:15px;">
+
+            <h3>${escapeHTML(request.type)}</h3>
+
+            <p>
+              <strong>Name:</strong>
+              ${escapeHTML(request.name)}
+            </p>
+
+            <p>
+              <strong>Item:</strong>
+              ${escapeHTML(request.item || "")}
+            </p>
+
+            <p>
+              <strong>Date:</strong>
+              ${escapeHTML(request.date || "")}
+            </p>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+  }
+
+
+  /* ================================
+     STAFF LOGIN
+  ================================= */
+
+  function openStaff() {
+
+    document.getElementById("staff").style.display =
+      "block";
+
+  }
+
+
+  function staffLogin() {
+
+    const password =
+      document.getElementById("staffPassword").value;
+
+    const role =
+      document.getElementById("staffRole").value;
+
+
+    /*
+      Temporary starter password.
+      We will replace this with secure authentication
+      when the database is connected.
+    */
+
+    if (password !== "AMK2026") {
+
+      document.getElementById("loginMessage").textContent =
+        "Incorrect password.";
+
+      return;
+
+    }
+
+
+    document.getElementById("staffLogin").style.display =
+      "none";
+
+    document.getElementById("staffDashboard").style.display =
+      "block";
+
+    document.getElementById("loggedRole").textContent =
+      "Logged in as: " + role;
+
+
+    loadStaffData();
+
+  }
+
+
+  function staffLogout() {
+
+    document.getElementById("staffDashboard").style.display =
+      "none";
+
+    document.getElementById("staffLogin").style.display =
+      "block";
+
+    document.getElementById("staffPassword").value =
+      "";
+
+  }
+
+
+  /* ================================
+     STAFF TABS
+  ================================= */
+
+  function showPanel(panelId, button) {
+
+    document
+      .querySelectorAll(".staff-panel")
+      .forEach(function(panel) {
+
+        panel.classList.remove("active");
+
+      });
+
+
+    document
+      .querySelectorAll(".staff-tab")
+      .forEach(function(tab) {
+
+        tab.classList.remove("active");
+
+      });
+
+
+    document
+      .getElementById(panelId)
+      .classList.add("active");
+
+
+    button.classList.add("active");
+
+  }
+
+
+  /* ================================
+     SALES
+  ================================= */
+
+  function addSale(event) {
+
+    event.preventDefault();
+
+
+    businessData.sales.push({
+
+      item:
+        document.getElementById("saleItem").value,
+
+      amount:
+        Number(document.getElementById("saleAmount").value),
+
+      payment:
+        document.getElementById("salePayment").value,
+
+      date:
+        today()
+
+    });
+
+
+    saveData();
+
+    event.target.reset();
+
+    loadStaffData();
+
+  }
+
+
+  /* ================================
+     EXPENSES
+  ================================= */
+
+  function addExpense(event) {
+
+    event.preventDefault();
+
+
+    businessData.expenses.push({
+
+      name:
+        document.getElementById("expenseName").value,
+
+      amount:
+        Number(document.getElementById("expenseAmount").value),
+
+      date:
+        today()
+
+    });
+
+
+    saveData();
+
+    event.target.reset();
+
+    loadStaffData();
+
+  }
+
+
+  /* ================================
+     INVENTORY
+  ================================= */
+
+  function addInventory(event) {
+
+    event.preventDefault();
+
+
+    businessData.inventory.push({
+
+      name:
+        document.getElementById("inventoryName").value,
+
+      quantity:
+        Number(document.getElementById("inventoryQty").value),
+
+      date:
+        today()
+
+    });
+
+
+    saveData();
+
+    event.target.reset();
+
+    loadStaffData();
+
+  }
+
+
+  /* ================================
+     DELIVERIES
+  ================================= */
+
+  function addDelivery(event) {
+
+    event.preventDefault();
+
+
+    businessData.deliveries.push({
+
+      customer:
+        document.getElementById("deliveryCustomer").value,
+
+      location:
+        document.getElementById("deliveryLocation").value,
+
+      item:
+        document.getElementById("deliveryItem").value,
+
+      status:
+        document.getElementById("deliveryStatus").value
+
+    });
+
+
+    saveData();
+
+    event.target.reset();
+
+    loadStaffData();
+
+  }
+
+
+  /* ================================
+     EMPLOYEES
+  ================================= */
+
+  function addEmployee(event) {
+
+    event.preventDefault();
+
+
+    businessData.employees.push({
+
+      name:
+        document.getElementById("employeeName").value,
+
+      role:
+        document.getElementById("employeeRole").value,
+
+      salary:
+        Number(document.getElementById("employeeSalary").value || 0),
+
+      commission:
+        Number(document.getElementById("employeeCommission").value || 0)
+
+    });
+
+
+    saveData();
+
+    event.target.reset();
+
+    loadStaffData();
+
+  }
+
+
+  /* ================================
+     LOAD STAFF DATA
+  ================================= */
+
+  function loadStaffData() {
+
+    const totalSales =
+      businessData.sales.reduce(
+        (sum, item) => sum + Number(item.amount),
+        0
+      );
+
+
+    const totalExpenses =
+      businessData.expenses.reduce(
+        (sum, item) => sum + Number(item.amount),
+        0
+      );
+
+
+    document.getElementById("statRequests").textContent =
+      businessData.requests.length;
+
+
+    document.getElementById("statSales").textContent =
+      "KSh " + totalSales.toLocaleString();
+
+
+    document.getElementById("statExpenses").textContent =
+      "KSh " + totalExpenses.toLocaleString();
+
+
+    document.getElementById("statProfit").textContent =
+      "KSh " + (totalSales - totalExpenses).toLocaleString();
+
+
+    document.getElementById("salesTable").innerHTML =
+      businessData.sales
+      .map(function(item) {
+
+        return `
+          <tr>
+            <td>${escapeHTML(item.item)}</td>
+            <td>KSh ${Number(item.amount).toLocaleString()}</td>
+            <td>${escapeHTML(item.payment)}</td>
+            <td>${escapeHTML(item.date)}</td>
+          </tr>
+        `;
+
+      })
+      .join("");
+
+
+    document.getElementById("expensesTable").innerHTML =
+      businessData.expenses
+      .map(function(item) {
+
+        return `
+          <tr>
+            <td>${escapeHTML(item.name)}</td>
+            <td>KSh ${Number(item.amount).toLocaleString()}</td>
+            <td>${escapeHTML(item.date)}</td>
+          </tr>
+        `;
+
+      })
+      .join("");
+
+
+    document.getElementById("inventoryTable").innerHTML =
+      businessData.inventory
+      .map(function(item) {
+
+        return `
+          <tr>
+            <td>${escapeHTML(item.name)}</td>
+            <td>${escapeHTML(item.quantity)}</td>
+            <td>${escapeHTML(item.date)}</td>
+          </tr>
+        `;
+
+      })
+      .join("");
+
+
+    document.getElementById("deliveryTable").innerHTML =
+      businessData.deliveries
+      .map(function(item) {
+
+        return `
+          <tr>
+            <td>${escapeHTML(item.customer)}</td>
+            <td>${escapeHTML(item.location)}</td>
+            <td>${escapeHTML(item.item)}</td>
+            <td>${escapeHTML(item.status)}</td>
+          </tr>
+        `;
+
+      })
+      .join("");
+
+
+    document.getElementById("employeesTable").innerHTML =
+      businessData.employees
+      .map(function(item) {
+
+        return `
+          <tr>
+            <td>${escapeHTML(item.name)}</td>
+            <td>${escapeHTML(item.role)}</td>
+            <td>KSh ${Number(item.salary).toLocaleString()}</td>
+            <td>${escapeHTML(item.commission)}%</td>
+          </tr>
+        `;
+
+      })
+      .join("");
+
+  }
+
+
+  /* ================================
+     SECURITY HELPER
+  ================================= */
+
+  function escapeHTML(value) {
+
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /* ================================
+     START
+  ================================= */
+
+  updateCustomerRequests();
+
+</script>
+
+</body>
+</html>
