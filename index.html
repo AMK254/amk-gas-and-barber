@@ -8,38 +8,35 @@
 
   <meta name="description" content="AMK Gas, Sneakers and Barber Shop in Nanyuki and Nairobi, Kenya. Order gas, shop sneakers and book a barber.">
 
-  <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="JIcMktQWOmy3LyI9mGIQeIEf87Dy8OQ2joHIn-WRSrI">
-<link rel="canonical" href="https://amkgasandbarber.co.ke/">
 
-<meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://amkgasandbarber.co.ke/">
+  <meta name="robots" content="index, follow">
 
-<meta property="og:title" content="AMK Gas • Sneakers • Barber">
-<meta property="og:description" content="AMK Gas, sneakers and barber services in Nanyuki and Nairobi, Kenya. Order cooking gas, shop sneakers and book a barber.">
-<meta property="og:url" content="https://amkgasandbarber.co.ke/">
-<meta property="og:type" content="website">
+  <meta property="og:title" content="AMK Gas • Sneakers • Barber">
+  <meta property="og:description" content="AMK Gas, sneakers and barber services in Nanyuki and Nairobi, Kenya. Order cooking gas, shop sneakers and book a barber.">
+  <meta property="og:url" content="https://amkgasandbarber.co.ke/">
+  <meta property="og:type" content="website">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "AMK Gas • Sneakers • Barber",
-  "url": "https://amkgasandbarber.co.ke/",
-  "description": "Cooking gas, sneakers and barber services in Nanyuki and Nairobi, Kenya.",
-  "telephone": "+254117414318",
-  "areaServed": [
-    {
-      "@type": "City",
-      "name": "Nanyuki"
-    },
-    {
-      "@type": "City",
-      "name": "Nairobi"
-    }
-  ],
-  "priceRange": "KSh"
-}
-</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "AMK Gas • Sneakers • Barber",
+    "url": "https://amkgasandbarber.co.ke/",
+    "description": "Cooking gas, sneakers and barber services in Nanyuki and Nairobi, Kenya.",
+    "telephone": "+254117414318",
+    "areaServed": [
+      {"@type": "City", "name": "Nanyuki"},
+      {"@type": "City", "name": "Nairobi"}
+    ],
+    "priceRange": "KSh"
+  }
+  </script>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -94,7 +91,7 @@
     }
 
     nav button:hover {
-      opacity: 0.85;
+      opacity: .85;
     }
 
     .hero {
@@ -158,7 +155,7 @@
       background: white;
       border-radius: 14px;
       padding: 22px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
     }
 
     .card h3 {
@@ -193,11 +190,15 @@
       background: #061a38;
     }
 
+    .btn.red {
+      background: #c62828;
+    }
+
     form {
       background: white;
       padding: 22px;
       border-radius: 14px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
       max-width: 700px;
     }
 
@@ -305,7 +306,7 @@
       background: white;
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+      box-shadow: 0 5px 15px rgba(0,0,0,.07);
     }
 
     .stat strong {
@@ -317,6 +318,26 @@
     .small {
       font-size: 13px;
       color: #666;
+    }
+
+    .user-box {
+      background: #e8f5e9;
+      border-left: 5px solid #168447;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .error {
+      color: #c62828;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .success {
+      color: #168447;
+      margin-top: 10px;
+      font-weight: bold;
     }
 
     @media (max-width: 700px) {
@@ -347,7 +368,10 @@
 
 <header>
   <div class="header-inner">
-    <div class="logo">AMK Gas • Sneakers • Barber</div>
+
+    <div class="logo">
+      AMK Gas • Sneakers • Barber
+    </div>
 
     <nav>
       <button onclick="showSection('home')">Home</button>
@@ -358,12 +382,17 @@
       <button onclick="showSection('contact')">Contact</button>
       <button onclick="showSection('staff')">Staff</button>
     </nav>
+
   </div>
 </header>
 
+
 <!-- HOME -->
+
 <section id="home">
+
   <div class="hero">
+
     <h1>AMK Gas • Sneakers • Barber</h1>
 
     <p>
@@ -372,38 +401,64 @@
     </p>
 
     <div class="hero-buttons">
-      <a href="#gas" onclick="showSection('gas')">Order Gas</a>
-      <a href="#sneakers" onclick="showSection('sneakers')">Shop Sneakers</a>
-      <a href="#barber" onclick="showSection('barber')">Book Barber</a>
+
+      <a href="#gas" onclick="showSection('gas')">
+        Order Gas
+      </a>
+
+      <a href="#sneakers" onclick="showSection('sneakers')">
+        Shop Sneakers
+      </a>
+
+      <a href="#barber" onclick="showSection('barber')">
+        Book Barber
+      </a>
+
     </div>
+
   </div>
 
   <main>
+
     <div class="grid">
+
       <div class="card">
         <h3>🔥 Cooking Gas</h3>
         <p>6 KG and 12 KG gas available.</p>
-        <a class="btn" href="#gas" onclick="showSection('gas')">Order Gas</a>
+        <a class="btn" href="#gas" onclick="showSection('gas')">
+          Order Gas
+        </a>
       </div>
 
       <div class="card">
         <h3>👟 Sneakers</h3>
         <p>Affordable sneakers and streetwear.</p>
-        <a class="btn" href="#sneakers" onclick="showSection('sneakers')">Shop Now</a>
+        <a class="btn" href="#sneakers" onclick="showSection('sneakers')">
+          Shop Now
+        </a>
       </div>
 
       <div class="card">
         <h3>💈 Barber</h3>
         <p>Book your haircut quickly.</p>
-        <a class="btn" href="#barber" onclick="showSection('barber')">Book Now</a>
+        <a class="btn" href="#barber" onclick="showSection('barber')">
+          Book Now
+        </a>
       </div>
+
     </div>
+
   </main>
+
 </section>
 
+
 <!-- GAS -->
+
 <section id="gas" class="hidden">
+
   <main>
+
     <h2>🔥 Gas</h2>
 
     <div class="grid">
@@ -435,6 +490,7 @@
       <input id="gasPhone" type="tel" required>
 
       <label>Gas Size</label>
+
       <select id="gasSize" required>
         <option value="">Select gas</option>
         <option value="6 KG">6 KG - KSh 1,200</option>
@@ -448,6 +504,7 @@
       <input id="gasLocation" placeholder="Nanyuki / Nairobi / area" required>
 
       <label>Payment Method</label>
+
       <select id="gasPayment" required>
         <option value="">Select payment</option>
         <option>M-Pesa</option>
@@ -461,34 +518,59 @@
     </form>
 
     <div class="notice">
-      <strong>M-Pesa:</strong> Send payment to
-      <strong>0117 414 318</strong>
+      <strong>M-Pesa:</strong>
+      Send payment to <strong>0117 414 318</strong>
     </div>
+
   </main>
+
 </section>
 
+
 <!-- SNEAKERS -->
+
 <section id="sneakers" class="hidden">
+
   <main>
+
     <h2>👟 Sneakers</h2>
 
     <div class="grid">
 
       <div class="card">
+
         <h3>Premium Sneakers</h3>
-        <p>Affordable sneakers available.</p>
-        <p class="small">Contact us for current designs, sizes and prices.</p>
-        <a class="btn" href="https://wa.me/254117414318" target="_blank">
+
+        <p>
+          Affordable sneakers available.
+        </p>
+
+        <p class="small">
+          Contact us for current designs, sizes and prices.
+        </p>
+
+        <a class="btn"
+           href="https://wa.me/254117414318"
+           target="_blank">
           WhatsApp to Order
         </a>
+
       </div>
 
       <div class="card">
+
         <h3>Streetwear</h3>
-        <p>Clothing and accessories available.</p>
-        <a class="btn" href="https://wa.me/254117414318" target="_blank">
+
+        <p>
+          Clothing and accessories available.
+        </p>
+
+        <a class="btn"
+           href="https://wa.me/254117414318"
+           target="_blank">
           Ask on WhatsApp
         </a>
+
       </div>
 
     </div>
@@ -506,7 +588,7 @@
       <input id="sneakerPhone" type="tel" required>
 
       <label>Sneaker / Product</label>
-      <input id="sneakerProduct" placeholder="Product name" required>
+      <input id="sneakerProduct" required>
 
       <label>Size</label>
       <input id="sneakerSize" placeholder="e.g. 40" required>
@@ -522,12 +604,18 @@
       </button>
 
     </form>
+
   </main>
+
 </section>
 
+
 <!-- BARBER -->
+
 <section id="barber" class="hidden">
+
   <main>
+
     <h2>💈 Barber Shop</h2>
 
     <div class="grid">
@@ -562,6 +650,7 @@
       <input id="barberPhone" type="tel" required>
 
       <label>Service</label>
+
       <select id="barberService" required>
         <option value="">Select service</option>
         <option>Regular Haircut - KSh 200</option>
@@ -583,21 +672,31 @@
       </button>
 
     </form>
+
   </main>
+
 </section>
 
+
 <!-- REQUESTS -->
+
 <section id="requests" class="hidden">
+
   <main>
+
     <h2>📋 My Requests</h2>
 
     <div id="requestsList"></div>
 
   </main>
+
 </section>
 
+
 <!-- CONTACT -->
+
 <section id="contact" class="hidden">
+
   <main>
 
     <h2>📞 Contact AMK</h2>
@@ -636,43 +735,59 @@
 
       <br>
 
-      <p><strong>Locations:</strong> Nanyuki & Nairobi, Kenya</p>
+      <p>
+        <strong>Locations:</strong>
+        Nanyuki & Nairobi, Kenya
+      </p>
 
       <br>
 
-      <p><strong>M-Pesa:</strong> 0117 414 318</p>
+      <p>
+        <strong>M-Pesa:</strong>
+        0117 414 318
+      </p>
 
     </div>
 
   </main>
+
 </section>
 
+
 <!-- STAFF -->
+
 <section id="staff" class="hidden">
+
   <main>
+
+    <!-- LOGIN -->
 
     <div id="staffLogin" class="staff-login">
 
       <h2>🔐 Staff Login</h2>
 
+      <div class="notice">
+        Staff members must use their own Supabase account.
+        The old temporary AMK2026 password has been removed.
+      </div>
+
       <form onsubmit="staffLogin(event)">
 
-        <label>Staff Role</label>
+        <label>Email</label>
 
-        <select id="staffRole" required>
-          <option>Owner/Admin</option>
-          <option>Manager</option>
-          <option>Barber</option>
-          <option>Gas Attendant</option>
-          <option>Shop Staff</option>
-        </select>
+        <input
+          id="staffEmail"
+          type="email"
+          placeholder="Staff email"
+          required
+        >
 
         <label>Password</label>
 
         <input
           id="staffPassword"
           type="password"
-          placeholder="Enter password"
+          placeholder="Password"
           required
         >
 
@@ -680,29 +795,67 @@
           Login
         </button>
 
-        <p class="small">
-          Temporary password: AMK2026
-        </p>
+        <p id="loginError" class="error"></p>
 
       </form>
 
     </div>
 
+
+    <!-- DASHBOARD -->
+
     <div id="staffDashboard" class="hidden">
+
+      <div class="user-box">
+
+        <strong>Logged in:</strong>
+        <span id="loggedUser"></span>
+
+        <br>
+
+        <strong>Role:</strong>
+        <span id="loggedRole"></span>
+
+      </div>
+
 
       <h2>📊 Staff Dashboard</h2>
 
       <div class="staff-nav">
-        <button onclick="staffTab('dashboard')">Dashboard</button>
-        <button onclick="staffTab('sales')">Sales</button>
-        <button onclick="staffTab('expenses')">Expenses</button>
-        <button onclick="staffTab('inventory')">Inventory</button>
-        <button onclick="staffTab('deliveries')">Deliveries</button>
-        <button onclick="staffTab('employees')">Employees</button>
-        <button onclick="logoutStaff()">Logout</button>
+
+        <button onclick="staffTab('dashboard')">
+          Dashboard
+        </button>
+
+        <button onclick="staffTab('sales')">
+          Sales
+        </button>
+
+        <button onclick="staffTab('expenses')">
+          Expenses
+        </button>
+
+        <button onclick="staffTab('inventory')">
+          Inventory
+        </button>
+
+        <button onclick="staffTab('deliveries')">
+          Deliveries
+        </button>
+
+        <button onclick="staffTab('employees')">
+          Employees
+        </button>
+
+        <button class="btn red" onclick="logoutStaff()">
+          Logout
+        </button>
+
       </div>
 
+
       <!-- DASHBOARD -->
+
       <div id="tab-dashboard">
 
         <div class="stat-grid">
@@ -731,7 +884,9 @@
 
       </div>
 
+
       <!-- SALES -->
+
       <div id="tab-sales" class="hidden">
 
         <h3>Sales</h3>
@@ -745,6 +900,7 @@
           <input id="saleAmount" type="number" min="0" required>
 
           <label>Payment Method</label>
+
           <select id="salePayment" required>
             <option>M-Pesa</option>
             <option>Cash</option>
@@ -755,13 +911,17 @@
             Add Sale
           </button>
 
+          <p id="saleMessage" class="success"></p>
+
         </form>
 
         <div id="salesTable"></div>
 
       </div>
 
+
       <!-- EXPENSES -->
+
       <div id="tab-expenses" class="hidden">
 
         <h3>Expenses</h3>
@@ -778,13 +938,17 @@
             Add Expense
           </button>
 
+          <p id="expenseMessage" class="success"></p>
+
         </form>
 
         <div id="expensesTable"></div>
 
       </div>
 
+
       <!-- INVENTORY -->
+
       <div id="tab-inventory" class="hidden">
 
         <h3>Inventory</h3>
@@ -793,6 +957,14 @@
 
           <label>Product</label>
           <input id="inventoryProduct" required>
+
+          <label>Category</label>
+          <select id="inventoryCategory">
+            <option>Gas</option>
+            <option>Sneakers</option>
+            <option>Barber</option>
+            <option>Other</option>
+          </select>
 
           <label>Quantity</label>
           <input id="inventoryQuantity" type="number" min="0" required>
@@ -813,7 +985,9 @@
 
       </div>
 
+
       <!-- DELIVERIES -->
+
       <div id="tab-deliveries" class="hidden">
 
         <h3>Deliveries</h3>
@@ -823,17 +997,24 @@
           <label>Customer</label>
           <input id="deliveryCustomer" required>
 
+          <label>Phone</label>
+          <input id="deliveryPhone" type="tel">
+
           <label>Product</label>
           <input id="deliveryProduct" required>
+
+          <label>Quantity</label>
+          <input id="deliveryQuantity" type="number" min="1" value="1">
 
           <label>Location</label>
           <input id="deliveryLocation" required>
 
           <label>Status</label>
+
           <select id="deliveryStatus">
-            <option>Pending</option>
-            <option>Out for Delivery</option>
-            <option>Delivered</option>
+            <option value="pending">Pending</option>
+            <option value="out_for_delivery">Out for Delivery</option>
+            <option value="delivered">Delivered</option>
           </select>
 
           <button class="btn" type="submit">
@@ -846,75 +1027,81 @@
 
       </div>
 
+
       <!-- EMPLOYEES -->
+
       <div id="tab-employees" class="hidden">
 
-        <h3>Employees</h3>
+        <h3>Employees / Staff</h3>
 
-        <form onsubmit="addEmployee(event)">
-
-          <label>Name</label>
-          <input id="employeeName" required>
-
-          <label>Role</label>
-          <input id="employeeRole" required>
-
-          <label>Salary</label>
-          <input id="employeeSalary" type="number" min="0">
-
-          <label>Commission %</label>
-          <input id="employeeCommission" type="number" min="0" max="100">
-
-          <button class="btn" type="submit">
-            Add Employee
-          </button>
-
-        </form>
+        <div class="notice">
+          Staff accounts are securely managed through Supabase
+          authentication. Each employee will have their own login
+          and role.
+        </div>
 
         <div id="employeesTable"></div>
 
       </div>
 
-      <br>
-
-      <p class="small">
-        Note: This is a simple website dashboard. Data is currently
-        stored in the browser. For real staff accounts and shared
-        business data across phones/computers, a secure database and
-        authentication system will be needed.
-      </p>
-
     </div>
 
   </main>
+
 </section>
 
+
 <footer>
-  <p>© 2026 AMK Gas • Sneakers • Barber</p>
-  <p>Nanyuki & Nairobi, Kenya</p>
+
+  <p>
+    © 2026 AMK Gas • Sneakers • Barber
+  </p>
+
+  <p>
+    Nanyuki & Nairobi, Kenya
+  </p>
+
 </footer>
+
 
 <script>
 
-const STORAGE_KEY = "amk_fresh_business";
+/* =========================================================
+   SUPABASE CONNECTION
+   ========================================================= */
 
-let data = JSON.parse(
-  localStorage.getItem(STORAGE_KEY)
-) || {
-  requests: [],
-  sales: [],
-  expenses: [],
-  inventory: [],
-  deliveries: [],
-  employees: []
-};
+const SUPABASE_URL =
+  "https://snvulxcguwofowhglbrw.supabase.co";
 
-function saveData() {
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(data)
+/*
+ IMPORTANT:
+ This is the PUBLIC/PUBLISHABLE key.
+ Never put a Supabase SECRET/service_role key here.
+*/
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_3DLOM4jXxzCwM1nyAlAEkQ_b2EwnTZd";
+
+const { createClient } = window.supabase;
+
+const supabaseClient =
+  createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
   );
-}
+
+
+/* =========================================================
+   GLOBAL VARIABLES
+   ========================================================= */
+
+let currentUser = null;
+let currentProfile = null;
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
 function showSection(id) {
 
@@ -930,13 +1117,16 @@ function showSection(id) {
 
   sections.forEach(section => {
 
-    const element = document.getElementById(section);
+    const element =
+      document.getElementById(section);
 
     if (element) {
+
       element.classList.toggle(
         "hidden",
         section !== id
       );
+
     }
 
   });
@@ -951,11 +1141,43 @@ function showSection(id) {
   }
 
   if (id === "staff") {
-    updateDashboard();
+    checkExistingSession();
   }
 }
 
-function submitGasOrder(event) {
+
+/* =========================================================
+   CUSTOMER REQUESTS
+   ========================================================= */
+
+async function createCustomerRequest(request) {
+
+  const { error } =
+    await supabaseClient
+      .from("customer_requests")
+      .insert([request]);
+
+  if (error) {
+
+    console.error(error);
+
+    alert(
+      "Your order could not be saved. " +
+      "Please continue with WhatsApp."
+    );
+
+    return false;
+  }
+
+  return true;
+}
+
+
+/* =========================================================
+   GAS ORDER
+   ========================================================= */
+
+async function submitGasOrder(event) {
 
   event.preventDefault();
 
@@ -969,7 +1191,9 @@ function submitGasOrder(event) {
     document.getElementById("gasSize").value;
 
   const quantity =
-    document.getElementById("gasQuantity").value;
+    Number(
+      document.getElementById("gasQuantity").value
+    );
 
   const location =
     document.getElementById("gasLocation").value;
@@ -977,35 +1201,37 @@ function submitGasOrder(event) {
   const payment =
     document.getElementById("gasPayment").value;
 
-  let price =
+  const price =
     size === "6 KG" ? 1200 : 2000;
 
-  let total =
-    price * Number(quantity);
+  const total =
+    price * quantity;
 
-  const request = {
 
-    type: "Gas Order",
+  await createCustomerRequest({
 
-    name,
+    customer_name: name,
 
-    phone,
+    phone: phone,
 
-    product: `${size} Gas x ${quantity}`,
+    service_type: "gas",
 
-    total,
+    item: size,
 
-    location,
+    quantity: quantity,
 
-    payment,
+    amount: total,
 
-    date: new Date().toLocaleString()
+    payment_method: payment,
 
-  };
+    location: location,
 
-  data.requests.push(request);
+    notes: "Gas order",
 
-  saveData();
+    status: "pending"
+
+  });
+
 
   const message =
 `Hello AMK Gas,
@@ -1027,9 +1253,15 @@ Payment: ${payment}`;
   );
 
   event.target.reset();
+
 }
 
-function submitSneakerOrder(event) {
+
+/* =========================================================
+   SNEAKER ORDER
+   ========================================================= */
+
+async function submitSneakerOrder(event) {
 
   event.preventDefault();
 
@@ -1046,34 +1278,38 @@ function submitSneakerOrder(event) {
     document.getElementById("sneakerSize").value;
 
   const quantity =
-    document.getElementById("sneakerQuantity").value;
+    Number(
+      document.getElementById("sneakerQuantity").value
+    );
 
   const location =
     document.getElementById("sneakerLocation").value;
 
-  const request = {
 
-    type: "Sneaker Order",
+  await createCustomerRequest({
 
-    name,
+    customer_name: name,
 
-    phone,
+    phone: phone,
 
-    product,
+    service_type: "sneaker",
 
-    size,
+    item: `${product} - Size ${size}`,
 
-    quantity,
+    quantity: quantity,
 
-    location,
+    amount: 0,
 
-    date: new Date().toLocaleString()
+    payment_method: "",
 
-  };
+    location: location,
 
-  data.requests.push(request);
+    notes: "Sneaker order",
 
-  saveData();
+    status: "pending"
+
+  });
+
 
   const message =
 `Hello AMK Sneakers,
@@ -1094,9 +1330,15 @@ Delivery: ${location}`;
   );
 
   event.target.reset();
+
 }
 
-function submitBarberBooking(event) {
+
+/* =========================================================
+   BARBER BOOKING
+   ========================================================= */
+
+async function submitBarberBooking(event) {
 
   event.preventDefault();
 
@@ -1118,31 +1360,47 @@ function submitBarberBooking(event) {
   const location =
     document.getElementById("barberLocation").value;
 
-  const request = {
 
-    type: "Barber Booking",
+  let amount = 0;
 
-    name,
+  if (service.includes("200")) {
+    amount = 200;
+  }
 
-    phone,
+  if (service.includes("300")) {
+    amount = 300;
+  }
 
-    service,
+  if (service.includes("100")) {
+    amount = 100;
+  }
 
-    date,
 
-    time,
+  await createCustomerRequest({
 
-    location,
+    customer_name: name,
 
-    status: "Pending Approval",
+    phone: phone,
 
-    created: new Date().toLocaleString()
+    service_type: "barber",
 
-  };
+    item: service,
 
-  data.requests.push(request);
+    quantity: 1,
 
-  saveData();
+    amount: amount,
+
+    payment_method: "",
+
+    location: location,
+
+    notes:
+      `Requested date: ${date}; Time: ${time}`,
+
+    status: "pending"
+
+  });
+
 
   const message =
 `Hello AMK Barber,
@@ -1165,120 +1423,292 @@ Please confirm my booking.`;
   );
 
   event.target.reset();
+
 }
+
+
+/* =========================================================
+   MY REQUESTS
+   ========================================================= */
 
 function renderRequests() {
 
   const container =
     document.getElementById("requestsList");
 
-  if (!data.requests.length) {
+  container.innerHTML = `
+    <div class="card">
+      <h3>My Requests</h3>
+      <p>
+        Your order or booking is saved securely in AMK's
+        business system after submission.
+      </p>
+      <p class="small">
+        For confirmation, please also check your WhatsApp
+        conversation with AMK.
+      </p>
+    </div>
+  `;
 
-    container.innerHTML =
-      `<div class="card">
-        <p>No requests yet.</p>
-      </div>`;
-
-    return;
-  }
-
-  container.innerHTML =
-    data.requests
-      .slice()
-      .reverse()
-      .map((request, index) => {
-
-        return `
-          <div class="card" style="margin-bottom:15px">
-
-            <h3>${request.type}</h3>
-
-            <p>
-              <strong>Name:</strong>
-              ${request.name || ""}
-            </p>
-
-            <p>
-              <strong>Phone:</strong>
-              ${request.phone || ""}
-            </p>
-
-            <p>
-              <strong>Product/Service:</strong>
-              ${request.product || request.service || ""}
-            </p>
-
-            ${
-              request.total
-              ? `<p><strong>Total:</strong> KSh ${request.total}</p>`
-              : ""
-            }
-
-            ${
-              request.date
-              ? `<p><strong>Date:</strong> ${request.date}</p>`
-              : ""
-            }
-
-            ${
-              request.time
-              ? `<p><strong>Time:</strong> ${request.time}</p>`
-              : ""
-            }
-
-            ${
-              request.status
-              ? `<p><strong>Status:</strong> ${request.status}</p>`
-              : ""
-            }
-
-          </div>
-        `;
-
-      })
-      .join("");
 }
 
-function staffLogin(event) {
+
+/* =========================================================
+   STAFF LOGIN
+   ========================================================= */
+
+async function staffLogin(event) {
 
   event.preventDefault();
+
+  const email =
+    document.getElementById("staffEmail").value.trim();
 
   const password =
     document.getElementById("staffPassword").value;
 
-  if (password !== "AMK2026") {
+  const errorBox =
+    document.getElementById("loginError");
 
-    alert("Incorrect password.");
+  errorBox.textContent = "";
+
+
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
+
+      email: email,
+
+      password: password
+
+    });
+
+
+  if (error) {
+
+    console.error(error);
+
+    errorBox.textContent =
+      "Login failed: " + error.message;
 
     return;
   }
 
-  document
-    .getElementById("staffLogin")
-    .classList.add("hidden");
 
-  document
-    .getElementById("staffDashboard")
-    .classList.remove("hidden");
+  currentUser = data.user;
 
-  updateDashboard();
+
+  await loadProfile();
+
 }
 
-function logoutStaff() {
+
+/* =========================================================
+   LOAD PROFILE
+   ========================================================= */
+
+async function loadProfile() {
+
+  if (!currentUser) {
+    return;
+  }
+
+
+  const { data, error } =
+    await supabaseClient
+      .from("profiles")
+      .select("*")
+      .eq("id", currentUser.id)
+      .single();
+
+
+  if (error) {
+
+    console.error(error);
+
+    alert(
+      "Your login works, but your staff profile could not be loaded."
+    );
+
+    return;
+  }
+
+
+  currentProfile = data;
+
+
+  if (!currentProfile.active) {
+
+    await supabaseClient.auth.signOut();
+
+    alert(
+      "This staff account is inactive."
+    );
+
+    return;
+  }
+
+
+  document
+    .getElementById("staffLogin")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("staffDashboard")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("loggedUser")
+    .textContent =
+      currentProfile.email ||
+      currentUser.email ||
+      "";
+
+
+  document
+    .getElementById("loggedRole")
+    .textContent =
+      formatRole(currentProfile.role);
+
+
+  applyRoleAccess();
+
+  await updateDashboard();
+
+}
+
+
+/* =========================================================
+   ROLE ACCESS
+   ========================================================= */
+
+function applyRoleAccess() {
+
+  const role =
+    currentProfile?.role;
+
+
+  const buttons =
+    document.querySelectorAll(
+      ".staff-nav button"
+    );
+
+
+  buttons.forEach(button => {
+
+    const text =
+      button.textContent.trim();
+
+    let allowed = true;
+
+
+    if (
+      text === "Expenses" &&
+      !["admin", "manager"].includes(role)
+    ) {
+      allowed = false;
+    }
+
+
+    if (
+      text === "Employees" &&
+      role !== "admin"
+    ) {
+      allowed = false;
+    }
+
+
+    button.classList.toggle(
+      "hidden",
+      !allowed
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   ROLE FORMAT
+   ========================================================= */
+
+function formatRole(role) {
+
+  const roles = {
+
+    admin: "Admin",
+
+    manager: "Manager",
+
+    barber: "Barber",
+
+    gas_attendant: "Gas Attendant",
+
+    shop_staff: "Shop Staff"
+
+  };
+
+  return roles[role] || role;
+
+}
+
+
+/* =========================================================
+   CHECK SESSION
+   ========================================================= */
+
+async function checkExistingSession() {
+
+  const { data } =
+    await supabaseClient.auth.getSession();
+
+
+  if (data.session) {
+
+    currentUser =
+      data.session.user;
+
+    await loadProfile();
+
+  }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+async function logoutStaff() {
+
+  await supabaseClient.auth.signOut();
+
+  currentUser = null;
+
+  currentProfile = null;
+
 
   document
     .getElementById("staffDashboard")
     .classList.add("hidden");
 
+
   document
     .getElementById("staffLogin")
     .classList.remove("hidden");
+
 
   document
     .getElementById("staffPassword")
     .value = "";
 
 }
+
+
+/* =========================================================
+   STAFF TABS
+   ========================================================= */
 
 function staffTab(tab) {
 
@@ -1291,10 +1721,13 @@ function staffTab(tab) {
     "employees"
   ];
 
+
   tabs.forEach(name => {
 
     const element =
-      document.getElementById("tab-" + name);
+      document.getElementById(
+        "tab-" + name
+      );
 
     if (element) {
 
@@ -1306,6 +1739,7 @@ function staffTab(tab) {
     }
 
   });
+
 
   if (tab === "dashboard") {
     updateDashboard();
@@ -1330,203 +1764,461 @@ function staffTab(tab) {
   if (tab === "employees") {
     renderEmployees();
   }
+
 }
 
-function addSale(event) {
+
+/* =========================================================
+   SALES
+   ========================================================= */
+
+async function addSale(event) {
 
   event.preventDefault();
 
-  data.sales.push({
 
-    item:
-      document.getElementById("saleItem").value,
+  if (!currentUser) {
+    return;
+  }
 
-    amount:
-      Number(
-        document.getElementById("saleAmount").value
-      ),
 
-    payment:
-      document.getElementById("salePayment").value,
+  const item =
+    document.getElementById("saleItem").value;
 
-    date:
-      new Date().toLocaleString()
+  const amount =
+    Number(
+      document.getElementById("saleAmount").value
+    );
 
-  });
+  const payment =
+    document.getElementById("salePayment").value;
 
-  saveData();
+
+  const { error } =
+    await supabaseClient
+      .from("sales")
+      .insert([{
+
+        item: item,
+
+        category: "General",
+
+        quantity: 1,
+
+        amount: amount,
+
+        payment_method: payment,
+
+        staff_id: currentUser.id
+
+      }]);
+
+
+  if (error) {
+
+    alert(
+      "Could not save sale: " +
+      error.message
+    );
+
+    return;
+  }
+
 
   event.target.reset();
 
-  renderSales();
+  document.getElementById("saleMessage")
+    .textContent =
+      "Sale saved successfully.";
 
-  updateDashboard();
+  await renderSales();
+
+  await updateDashboard();
+
 }
 
-function addExpense(event) {
+
+/* =========================================================
+   EXPENSES
+   ========================================================= */
+
+async function addExpense(event) {
 
   event.preventDefault();
 
-  data.expenses.push({
 
-    name:
-      document.getElementById("expenseName").value,
+  if (
+    !currentProfile ||
+    !["admin", "manager"].includes(
+      currentProfile.role
+    )
+  ) {
 
-    amount:
-      Number(
-        document.getElementById("expenseAmount").value
-      ),
+    alert(
+      "You do not have permission to add expenses."
+    );
 
-    date:
-      new Date().toLocaleString()
+    return;
+  }
 
-  });
 
-  saveData();
+  const description =
+    document.getElementById("expenseName").value;
+
+  const amount =
+    Number(
+      document.getElementById("expenseAmount").value
+    );
+
+
+  const { error } =
+    await supabaseClient
+      .from("expenses")
+      .insert([{
+
+        description: description,
+
+        category: "General",
+
+        amount: amount,
+
+        staff_id: currentUser.id
+
+      }]);
+
+
+  if (error) {
+
+    alert(
+      "Could not save expense: " +
+      error.message
+    );
+
+    return;
+  }
+
 
   event.target.reset();
 
-  renderExpenses();
+  document.getElementById("expenseMessage")
+    .textContent =
+      "Expense saved successfully.";
 
-  updateDashboard();
+  await renderExpenses();
+
+  await updateDashboard();
+
 }
 
-function addInventory(event) {
+
+/* =========================================================
+   INVENTORY
+   ========================================================= */
+
+async function addInventory(event) {
 
   event.preventDefault();
 
-  data.inventory.push({
 
-    product:
-      document.getElementById("inventoryProduct").value,
+  if (
+    !currentProfile ||
+    !["admin", "manager"].includes(
+      currentProfile.role
+    )
+  ) {
 
-    quantity:
-      Number(
-        document.getElementById("inventoryQuantity").value
-      ),
+    alert(
+      "Only Admin or Manager can change inventory."
+    );
 
-    buying:
-      Number(
-        document.getElementById("inventoryBuying").value
-      ),
+    return;
+  }
 
-    selling:
-      Number(
-        document.getElementById("inventorySelling").value
-      )
 
-  });
+  const item =
+    document.getElementById(
+      "inventoryProduct"
+    ).value;
 
-  saveData();
+  const category =
+    document.getElementById(
+      "inventoryCategory"
+    ).value;
+
+  const quantity =
+    Number(
+      document.getElementById(
+        "inventoryQuantity"
+      ).value
+    );
+
+  const buying =
+    Number(
+      document.getElementById(
+        "inventoryBuying"
+      ).value
+    );
+
+  const selling =
+    Number(
+      document.getElementById(
+        "inventorySelling"
+      ).value
+    );
+
+
+  const { error } =
+    await supabaseClient
+      .from("inventory")
+      .insert([{
+
+        item: item,
+
+        category: category,
+
+        quantity: quantity,
+
+        buying_price: buying,
+
+        selling_price: selling
+
+      }]);
+
+
+  if (error) {
+
+    alert(
+      "Could not save inventory: " +
+      error.message
+    );
+
+    return;
+  }
+
 
   event.target.reset();
 
-  renderInventory();
+  await renderInventory();
+
 }
 
-function addDelivery(event) {
+
+/* =========================================================
+   DELIVERIES
+   ========================================================= */
+
+async function addDelivery(event) {
 
   event.preventDefault();
 
-  data.deliveries.push({
 
-    customer:
-      document.getElementById("deliveryCustomer").value,
+  const customer =
+    document.getElementById(
+      "deliveryCustomer"
+    ).value;
 
-    product:
-      document.getElementById("deliveryProduct").value,
+  const phone =
+    document.getElementById(
+      "deliveryPhone"
+    ).value;
 
-    location:
-      document.getElementById("deliveryLocation").value,
+  const product =
+    document.getElementById(
+      "deliveryProduct"
+    ).value;
 
-    status:
-      document.getElementById("deliveryStatus").value,
+  const quantity =
+    Number(
+      document.getElementById(
+        "deliveryQuantity"
+      ).value || 1
+    );
 
-    date:
-      new Date().toLocaleString()
+  const location =
+    document.getElementById(
+      "deliveryLocation"
+    ).value;
 
-  });
+  const status =
+    document.getElementById(
+      "deliveryStatus"
+    ).value;
 
-  saveData();
+
+  const { error } =
+    await supabaseClient
+      .from("deliveries")
+      .insert([{
+
+        customer_name: customer,
+
+        phone: phone,
+
+        location: location,
+
+        item: product,
+
+        quantity: quantity,
+
+        amount: 0,
+
+        status: status,
+
+        assigned_to:
+          currentUser.id
+
+      }]);
+
+
+  if (error) {
+
+    alert(
+      "Could not save delivery: " +
+      error.message
+    );
+
+    return;
+  }
+
 
   event.target.reset();
 
-  renderDeliveries();
+  await renderDeliveries();
+
 }
 
-function addEmployee(event) {
 
-  event.preventDefault();
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
 
-  data.employees.push({
+async function updateDashboard() {
 
-    name:
-      document.getElementById("employeeName").value,
+  if (!currentUser) {
+    return;
+  }
 
-    role:
-      document.getElementById("employeeRole").value,
 
-    salary:
-      Number(
-        document.getElementById("employeeSalary").value || 0
-      ),
+  const [
+    requestsResult,
+    salesResult,
+    expensesResult
+  ] = await Promise.all([
 
-    commission:
-      Number(
-        document.getElementById("employeeCommission").value || 0
-      )
+    supabaseClient
+      .from("customer_requests")
+      .select("*"),
 
-  });
+    supabaseClient
+      .from("sales")
+      .select("amount"),
 
-  saveData();
+    supabaseClient
+      .from("expenses")
+      .select("amount")
 
-  event.target.reset();
+  ]);
 
-  renderEmployees();
-}
 
-function updateDashboard() {
+  const requests =
+    requestsResult.data || [];
 
   const sales =
-    data.sales.reduce(
-      (sum, sale) => sum + Number(sale.amount || 0),
-      0
-    );
+    salesResult.data || [];
 
   const expenses =
-    data.expenses.reduce(
-      (sum, expense) => sum + Number(expense.amount || 0),
+    expensesResult.data || [];
+
+
+  const salesTotal =
+    sales.reduce(
+      (sum, sale) =>
+        sum + Number(sale.amount || 0),
       0
     );
 
-  document.getElementById("statRequests")
-    .textContent = data.requests.length;
 
-  document.getElementById("statSales")
-    .textContent = "KSh " + sales.toLocaleString();
+  const expensesTotal =
+    expenses.reduce(
+      (sum, expense) =>
+        sum + Number(expense.amount || 0),
+      0
+    );
 
-  document.getElementById("statExpenses")
-    .textContent = "KSh " + expenses.toLocaleString();
 
-  document.getElementById("statProfit")
-    .textContent =
-      "KSh " +
-      (sales - expenses).toLocaleString();
+  document.getElementById(
+    "statRequests"
+  ).textContent =
+    requests.length;
+
+
+  document.getElementById(
+    "statSales"
+  ).textContent =
+    "KSh " +
+    salesTotal.toLocaleString();
+
+
+  document.getElementById(
+    "statExpenses"
+  ).textContent =
+    "KSh " +
+    expensesTotal.toLocaleString();
+
+
+  document.getElementById(
+    "statProfit"
+  ).textContent =
+    "KSh " +
+    (
+      salesTotal -
+      expensesTotal
+    ).toLocaleString();
 
 }
 
-function renderSales() {
+
+/* =========================================================
+   RENDER SALES
+   ========================================================= */
+
+async function renderSales() {
 
   const container =
-    document.getElementById("salesTable");
+    document.getElementById(
+      "salesTable"
+    );
 
-  if (!data.sales.length) {
+
+  const { data, error } =
+    await supabaseClient
+      .from("sales")
+      .select("*")
+      .order(
+        "created_at",
+        { ascending: false }
+      );
+
+
+  if (error) {
+
+    container.innerHTML =
+      `<p class="error">
+        Could not load sales.
+      </p>`;
+
+    return;
+  }
+
+
+  if (!data.length) {
 
     container.innerHTML =
       "<p>No sales recorded.</p>";
 
     return;
   }
+
 
   container.innerHTML = `
 
@@ -1539,13 +2231,32 @@ function renderSales() {
         <th>Date</th>
       </tr>
 
-      ${data.sales.map(sale => `
+      ${data.map(sale => `
 
         <tr>
-          <td>${sale.item}</td>
-          <td>KSh ${sale.amount.toLocaleString()}</td>
-          <td>${sale.payment}</td>
-          <td>${sale.date}</td>
+
+          <td>
+            ${escapeHTML(sale.item)}
+          </td>
+
+          <td>
+            KSh ${Number(
+              sale.amount || 0
+            ).toLocaleString()}
+          </td>
+
+          <td>
+            ${escapeHTML(
+              sale.payment_method || ""
+            )}
+          </td>
+
+          <td>
+            ${new Date(
+              sale.created_at
+            ).toLocaleString()}
+          </td>
+
         </tr>
 
       `).join("")}
@@ -1553,20 +2264,51 @@ function renderSales() {
     </table>
 
   `;
+
 }
 
-function renderExpenses() {
+
+/* =========================================================
+   RENDER EXPENSES
+   ========================================================= */
+
+async function renderExpenses() {
 
   const container =
-    document.getElementById("expensesTable");
+    document.getElementById(
+      "expensesTable"
+    );
 
-  if (!data.expenses.length) {
+
+  const { data, error } =
+    await supabaseClient
+      .from("expenses")
+      .select("*")
+      .order(
+        "created_at",
+        { ascending: false }
+      );
+
+
+  if (error) {
+
+    container.innerHTML =
+      `<p class="error">
+        Could not load expenses.
+      </p>`;
+
+    return;
+  }
+
+
+  if (!data.length) {
 
     container.innerHTML =
       "<p>No expenses recorded.</p>";
 
     return;
   }
+
 
   container.innerHTML = `
 
@@ -1578,12 +2320,28 @@ function renderExpenses() {
         <th>Date</th>
       </tr>
 
-      ${data.expenses.map(expense => `
+      ${data.map(expense => `
 
         <tr>
-          <td>${expense.name}</td>
-          <td>KSh ${expense.amount.toLocaleString()}</td>
-          <td>${expense.date}</td>
+
+          <td>
+            ${escapeHTML(
+              expense.description
+            )}
+          </td>
+
+          <td>
+            KSh ${Number(
+              expense.amount || 0
+            ).toLocaleString()}
+          </td>
+
+          <td>
+            ${new Date(
+              expense.created_at
+            ).toLocaleString()}
+          </td>
+
         </tr>
 
       `).join("")}
@@ -1591,14 +2349,44 @@ function renderExpenses() {
     </table>
 
   `;
+
 }
 
-function renderInventory() {
+
+/* =========================================================
+   RENDER INVENTORY
+   ========================================================= */
+
+async function renderInventory() {
 
   const container =
-    document.getElementById("inventoryTable");
+    document.getElementById(
+      "inventoryTable"
+    );
 
-  if (!data.inventory.length) {
+
+  const { data, error } =
+    await supabaseClient
+      .from("inventory")
+      .select("*")
+      .order(
+        "item",
+        { ascending: true }
+      );
+
+
+  if (error) {
+
+    container.innerHTML =
+      `<p class="error">
+        Could not load inventory.
+      </p>`;
+
+    return;
+  }
+
+
+  if (!data.length) {
 
     container.innerHTML =
       "<p>No inventory recorded.</p>";
@@ -1606,24 +2394,49 @@ function renderInventory() {
     return;
   }
 
+
   container.innerHTML = `
 
     <table>
 
       <tr>
         <th>Product</th>
+        <th>Category</th>
         <th>Qty</th>
         <th>Buying</th>
         <th>Selling</th>
       </tr>
 
-      ${data.inventory.map(item => `
+      ${data.map(item => `
 
         <tr>
-          <td>${item.product}</td>
-          <td>${item.quantity}</td>
-          <td>KSh ${item.buying.toLocaleString()}</td>
-          <td>KSh ${item.selling.toLocaleString()}</td>
+
+          <td>
+            ${escapeHTML(item.item)}
+          </td>
+
+          <td>
+            ${escapeHTML(
+              item.category || ""
+            )}
+          </td>
+
+          <td>
+            ${item.quantity}
+          </td>
+
+          <td>
+            KSh ${Number(
+              item.buying_price || 0
+            ).toLocaleString()}
+          </td>
+
+          <td>
+            KSh ${Number(
+              item.selling_price || 0
+            ).toLocaleString()}
+          </td>
+
         </tr>
 
       `).join("")}
@@ -1631,20 +2444,51 @@ function renderInventory() {
     </table>
 
   `;
+
 }
 
-function renderDeliveries() {
+
+/* =========================================================
+   RENDER DELIVERIES
+   ========================================================= */
+
+async function renderDeliveries() {
 
   const container =
-    document.getElementById("deliveriesTable");
+    document.getElementById(
+      "deliveriesTable"
+    );
 
-  if (!data.deliveries.length) {
+
+  const { data, error } =
+    await supabaseClient
+      .from("deliveries")
+      .select("*")
+      .order(
+        "created_at",
+        { ascending: false }
+      );
+
+
+  if (error) {
+
+    container.innerHTML =
+      `<p class="error">
+        Could not load deliveries.
+      </p>`;
+
+    return;
+  }
+
+
+  if (!data.length) {
 
     container.innerHTML =
       "<p>No deliveries recorded.</p>";
 
     return;
   }
+
 
   container.innerHTML = `
 
@@ -1657,13 +2501,34 @@ function renderDeliveries() {
         <th>Status</th>
       </tr>
 
-      ${data.deliveries.map(delivery => `
+      ${data.map(delivery => `
 
         <tr>
-          <td>${delivery.customer}</td>
-          <td>${delivery.product}</td>
-          <td>${delivery.location}</td>
-          <td>${delivery.status}</td>
+
+          <td>
+            ${escapeHTML(
+              delivery.customer_name || ""
+            )}
+          </td>
+
+          <td>
+            ${escapeHTML(
+              delivery.item || ""
+            )}
+          </td>
+
+          <td>
+            ${escapeHTML(
+              delivery.location || ""
+            )}
+          </td>
+
+          <td>
+            ${escapeHTML(
+              delivery.status || ""
+            )}
+          </td>
+
         </tr>
 
       `).join("")}
@@ -1671,20 +2536,65 @@ function renderDeliveries() {
     </table>
 
   `;
+
 }
 
-function renderEmployees() {
+
+/* =========================================================
+   RENDER EMPLOYEES
+   ========================================================= */
+
+async function renderEmployees() {
 
   const container =
-    document.getElementById("employeesTable");
+    document.getElementById(
+      "employeesTable"
+    );
 
-  if (!data.employees.length) {
+
+  if (
+    !currentProfile ||
+    currentProfile.role !== "admin"
+  ) {
 
     container.innerHTML =
-      "<p>No employees recorded.</p>";
+      "<p>You do not have permission to view staff.</p>";
 
     return;
   }
+
+
+  const { data, error } =
+    await supabaseClient
+      .from("profiles")
+      .select(
+        "id,email,full_name,role,active,created_at"
+      )
+      .order(
+        "created_at",
+        { ascending: false }
+      );
+
+
+  if (error) {
+
+    container.innerHTML =
+      `<p class="error">
+        Could not load employees.
+      </p>`;
+
+    return;
+  }
+
+
+  if (!data.length) {
+
+    container.innerHTML =
+      "<p>No staff accounts found.</p>";
+
+    return;
+  }
+
 
   container.innerHTML = `
 
@@ -1692,18 +2602,41 @@ function renderEmployees() {
 
       <tr>
         <th>Name</th>
+        <th>Email</th>
         <th>Role</th>
-        <th>Salary</th>
-        <th>Commission</th>
+        <th>Status</th>
       </tr>
 
-      ${data.employees.map(employee => `
+      ${data.map(employee => `
 
         <tr>
-          <td>${employee.name}</td>
-          <td>${employee.role}</td>
-          <td>KSh ${employee.salary.toLocaleString()}</td>
-          <td>${employee.commission}%</td>
+
+          <td>
+            ${escapeHTML(
+              employee.full_name || "-"
+            )}
+          </td>
+
+          <td>
+            ${escapeHTML(
+              employee.email || ""
+            )}
+          </td>
+
+          <td>
+            ${formatRole(
+              employee.role
+            )}
+          </td>
+
+          <td>
+            ${
+              employee.active
+                ? "Active"
+                : "Inactive"
+            }
+          </td>
+
         </tr>
 
       `).join("")}
@@ -1711,7 +2644,31 @@ function renderEmployees() {
     </table>
 
   `;
+
 }
+
+
+/* =========================================================
+   SECURITY HELPER
+   ========================================================= */
+
+function escapeHTML(value) {
+
+  return String(
+    value ?? ""
+  )
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================================
+   START WEBSITE
+   ========================================================= */
 
 showSection("home");
 
