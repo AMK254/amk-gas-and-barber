@@ -2,39 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>AMK Gas • Sneakers • Barber</title>
 
-  <meta name="description" content="AMK Gas, Sneakers and Barber Shop in Nanyuki and Nairobi, Kenya. Order gas, shop sneakers and book a barber.">
+  <meta name="description"
+        content="AMK Gas, Sneakers and Barber Shop. Order cooking gas, shop sneakers and clothes, and book barber services.">
 
-  <meta name="google-site-verification" content="JIcMktQWOmy3LyI9mGIQeIEf87Dy8OQ2joHIn-WRSrI">
+  <meta name="keywords"
+        content="AMK Gas, gas Nanyuki, cooking gas Nanyuki, sneakers Nanyuki, barber Nanyuki, Kenya">
 
-  <link rel="canonical" href="https://amkgasandbarber.co.ke/">
-  <meta name="robots" content="index, follow">
+  <meta name="author" content="AMK">
 
-  <meta property="og:title" content="AMK Gas • Sneakers • Barber">
-  <meta property="og:description" content="AMK Gas, sneakers and barber services in Nanyuki and Nairobi, Kenya. Order cooking gas, shop sneakers and book a barber.">
-  <meta property="og:url" content="https://amkgasandbarber.co.ke/">
-  <meta property="og:type" content="website">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "AMK Gas • Sneakers • Barber",
-    "url": "https://amkgasandbarber.co.ke/",
-    "description": "Cooking gas, sneakers and barber services in Nanyuki and Nairobi, Kenya.",
-    "telephone": "+254117414318",
-    "areaServed": [
-      {"@type": "City", "name": "Nanyuki"},
-      {"@type": "City", "name": "Nairobi"}
-    ],
-    "priceRange": "KSh"
-  }
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Google Search Console verification -->
+  <meta name="google-site-verification"
+        content="c9vG_1CoZAgTw9X1cCFCV6TBOk5WROln4cShLVaGHaE">
 
   <style>
     * {
@@ -43,169 +26,397 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #eef5ff;
       color: #061a38;
       line-height: 1.6;
     }
 
+    a {
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
-      background: #0755c9;
+      background: #061a38;
       color: white;
-      padding: 18px 20px;
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.15);
     }
 
-    .header-inner {
+    .header-container {
       max-width: 1200px;
       margin: auto;
+      padding: 14px 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 15px;
+      justify-content: space-between;
+      gap: 20px;
     }
 
     .logo {
       font-size: 22px;
-      font-weight: bold;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 0.5px;
+    }
+
+    .logo span {
+      color: #168447;
     }
 
     nav {
       display: flex;
+      gap: 18px;
       flex-wrap: wrap;
-      gap: 8px;
+      justify-content: center;
     }
 
-    nav button {
-      border: none;
-      background: white;
-      color: #0755c9;
-      padding: 9px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
+    nav a {
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.3s;
     }
 
-    nav button:hover {
-      opacity: .85;
+    nav a:hover {
+      color: #168447;
     }
+
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
-      background: linear-gradient(135deg, #0755c9, #061a38);
-      color: white;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       padding: 70px 20px;
+      background:
+        linear-gradient(
+          rgba(6,26,56,0.86),
+          rgba(6,26,56,0.86)
+        );
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 900px;
     }
 
     .hero h1 {
-      font-size: 42px;
-      margin-bottom: 12px;
+      font-size: clamp(38px, 7vw, 72px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+
+    .hero h1 span {
+      color: #168447;
     }
 
     .hero p {
       max-width: 700px;
-      margin: auto;
+      margin: 0 auto 30px;
       font-size: 18px;
+      color: #eef5ff;
     }
 
     .hero-buttons {
-      margin-top: 25px;
       display: flex;
-      justify-content: center;
       gap: 12px;
+      justify-content: center;
       flex-wrap: wrap;
-    }
-
-    .hero-buttons a {
-      text-decoration: none;
-      background: white;
-      color: #0755c9;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 30px 20px;
-    }
-
-    section {
-      margin-bottom: 50px;
-    }
-
-    section h2 {
-      font-size: 30px;
-      margin-bottom: 20px;
-      color: #061a38;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 14px;
-      padding: 22px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.08);
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      color: #0755c9;
-    }
-
-    .price {
-      font-size: 24px;
-      font-weight: bold;
-      margin: 12px 0;
     }
 
     .btn {
       display: inline-block;
+      padding: 13px 22px;
+      border-radius: 8px;
+      font-weight: 700;
       border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #168447;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .btn-blue {
       background: #0755c9;
       color: white;
-      padding: 11px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 8px;
     }
 
-    .btn.green {
-      background: #168447;
+    .btn-blue:hover {
+      opacity: 0.9;
     }
 
-    .btn.dark {
-      background: #061a38;
-    }
-
-    .btn.red {
-      background: #c62828;
-    }
-
-    form {
+    .btn-light {
       background: white;
-      padding: 22px;
+      color: #061a38;
+    }
+
+    .btn-light:hover {
+      background: #eef5ff;
+    }
+
+    /* =========================
+       GENERAL
+    ========================= */
+
+    section {
+      padding: 70px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #53657d;
+    }
+
+    /* =========================
+       BUSINESS CARDS
+    ========================= */
+
+    .business-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .business-card {
+      background: white;
+      padding: 30px 25px;
       border-radius: 14px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.08);
-      max-width: 700px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(6,26,56,0.08);
+      transition: 0.3s;
+    }
+
+    .business-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .business-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .business-card h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .business-card p {
+      color: #53657d;
+      margin-bottom: 20px;
+    }
+
+    /* =========================
+       GAS
+    ========================= */
+
+    #gas {
+      background: white;
+    }
+
+    .gas-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .product-card {
+      background: #eef5ff;
+      border-radius: 12px;
+      padding: 22px;
+      text-align: center;
+      border: 1px solid #dce8f8;
+    }
+
+    .product-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0755c9;
+      margin: 10px 0;
+    }
+
+    .product-card p {
+      color: #53657d;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    /* =========================
+       SNEAKERS
+    ========================= */
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .shop-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(6,26,56,0.08);
+    }
+
+    .product-image {
+      height: 180px;
+      background: #dfeaff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .shop-content {
+      padding: 18px;
+    }
+
+    .shop-content h3 {
+      margin-bottom: 5px;
+    }
+
+    .shop-content p {
+      color: #53657d;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .shop-price {
+      font-size: 20px;
+      color: #0755c9;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    /* =========================
+       BARBER
+    ========================= */
+
+    #barber {
+      background: #061a38;
+      color: white;
+    }
+
+    #barber .section-title p {
+      color: #cbd8eb;
+    }
+
+    .barber-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: white;
+      color: #061a38;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .service-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      color: #53657d;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .service-price {
+      font-weight: 800;
+      color: #168447;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    /* =========================
+       BOOKING
+    ========================= */
+
+    #booking {
+      background: #eef5ff;
+    }
+
+    .form-container {
+      max-width: 750px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 5px 25px rgba(6,26,56,0.08);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
     }
 
     label {
-      display: block;
-      font-weight: bold;
-      margin-top: 14px;
-      margin-bottom: 5px;
+      font-weight: 700;
+      font-size: 14px;
     }
 
     input,
@@ -213,9 +424,16 @@
     textarea {
       width: 100%;
       padding: 12px;
-      border: 1px solid #ccd6e5;
-      border-radius: 8px;
-      font-size: 16px;
+      border: 1px solid #ccd7e6;
+      border-radius: 7px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #0755c9;
     }
 
     textarea {
@@ -223,145 +441,305 @@
       resize: vertical;
     }
 
-    .notice {
-      background: #e8f5e9;
-      border-left: 5px solid #168447;
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 8px;
+    .form-submit {
+      margin-top: 20px;
+      width: 100%;
     }
 
-    .contact-box {
+    /* =========================
+       DELIVERY
+    ========================= */
+
+    .delivery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .delivery-card {
+      background: white;
+      padding: 28px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(6,26,56,0.07);
+    }
+
+    .delivery-card .icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .delivery-card p {
+      color: #53657d;
+    }
+
+    /* =========================
+       PAYMENT
+    ========================= */
+
+    #payment {
+      background: white;
+    }
+
+    .payment-box {
+      max-width: 850px;
+      margin: auto;
+      background: #eef5ff;
+      border-radius: 14px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .payment-box h3 {
+      margin-bottom: 15px;
+    }
+
+    .payment-methods {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .payment-method {
+      background: white;
+      padding: 14px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid #dce8f8;
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      font-size: 34px;
+      margin-bottom: 15px;
+    }
+
+    .about-text p {
+      color: #53657d;
+      margin-bottom: 15px;
+    }
+
+    .about-box {
       background: #061a38;
       color: white;
-      padding: 25px;
+      padding: 35px;
       border-radius: 14px;
     }
 
-    .contact-box a {
-      color: white;
-      font-weight: bold;
+    .about-box h3 {
+      margin-bottom: 15px;
+      font-size: 25px;
     }
+
+    .about-box ul {
+      list-style: none;
+    }
+
+    .about-box li {
+      margin-bottom: 10px;
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    #contact {
+      background: #eef5ff;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 25px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(6,26,56,0.07);
+    }
+
+    .contact-card .icon {
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
+
+    .contact-card h3 {
+      margin-bottom: 7px;
+    }
+
+    .contact-card a {
+      color: #0755c9;
+      font-weight: 700;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       background: #061a38;
       color: white;
-      text-align: center;
-      padding: 25px 15px;
-      margin-top: 30px;
+      padding: 40px 20px 20px;
     }
 
-    .hidden {
-      display: none !important;
-    }
-
-    .staff-login {
-      max-width: 500px;
+    .footer-grid {
+      max-width: 1200px;
       margin: auto;
-    }
-
-    .staff-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .staff-nav button {
-      border: none;
-      background: #0755c9;
-      color: white;
-      padding: 10px 14px;
-      border-radius: 7px;
-      cursor: pointer;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-      background: white;
-    }
-
-    th,
-    td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background: #0755c9;
-      color: white;
-    }
-
-    .stat-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 35px;
     }
 
-    .stat {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,.07);
+    .footer-section h3 {
+      margin-bottom: 12px;
     }
 
-    .stat strong {
+    .footer-section p,
+    .footer-section a {
+      color: #cbd8eb;
+      font-size: 14px;
+    }
+
+    .footer-section a {
       display: block;
-      font-size: 28px;
-      color: #0755c9;
+      margin-bottom: 7px;
     }
 
-    .small {
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 30px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      text-align: center;
+      color: #cbd8eb;
       font-size: 13px;
-      color: #666;
     }
 
-    .user-box {
-      background: #e8f5e9;
-      border-left: 5px solid #168447;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
+    /* =========================
+       WHATSAPP
+    ========================= */
+
+    .whatsapp {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 2000;
+      background: #168447;
+      color: white;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 27px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
     }
 
-    .error {
-      color: #c62828;
-      margin-top: 10px;
-      font-weight: bold;
+    .whatsapp:hover {
+      transform: scale(1.05);
     }
 
-    .success {
-      color: #168447;
-      margin-top: 10px;
-      font-weight: bold;
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      .business-grid,
+      .barber-grid,
+      .delivery-grid,
+      .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gas-grid,
+      .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
-    .staff-form {
-      margin-bottom: 25px;
-    }
+    @media (max-width: 650px) {
 
-    @media (max-width: 700px) {
-      .header-inner {
+      .header-container {
         flex-direction: column;
       }
 
       nav {
-        justify-content: center;
+        gap: 10px;
+      }
+
+      nav a {
+        font-size: 12px;
+      }
+
+      .hero {
+        min-height: 560px;
       }
 
       .hero h1 {
-        font-size: 32px;
+        font-size: 42px;
       }
 
-      section h2 {
-        font-size: 25px;
+      .hero p {
+        font-size: 16px;
       }
 
-      table {
-        font-size: 13px;
+      section {
+        padding: 55px 15px;
+      }
+
+      .business-grid,
+      .gas-grid,
+      .shop-grid,
+      .barber-grid,
+      .delivery-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .about-text h2 {
+        font-size: 29px;
       }
     }
   </style>
@@ -369,2737 +747,1202 @@
 
 <body>
 
-<header>
-  <div class="header-inner">
+  <!-- =========================
+       HEADER
+  ========================== -->
 
-    <div class="logo">
-      AMK Gas • Sneakers • Barber
-    </div>
+  <header>
+    <div class="header-container">
 
-    <nav>
-      <button onclick="showSection('home')">Home</button>
-      <button onclick="showSection('gas')">Gas</button>
-      <button onclick="showSection('sneakers')">Sneakers</button>
-      <button onclick="showSection('barber')">Barber</button>
-      <button onclick="showSection('requests')">My Requests</button>
-      <button onclick="showSection('contact')">Contact</button>
-      <button onclick="showSection('staff')">Staff</button>
-    </nav>
-
-  </div>
-</header>
-
-<section id="home">
-
-  <div class="hero">
-
-    <h1>AMK Gas • Sneakers • Barber</h1>
-
-    <p>
-      Your trusted business in Nanyuki and Nairobi, Kenya.
-      Order cooking gas, shop sneakers and book your barber.
-    </p>
-
-    <div class="hero-buttons">
-
-      <a href="#gas" onclick="showSection('gas')">
-        Order Gas
+      <a href="#home" class="logo">
+        AMK <span>GROUP</span>
       </a>
 
-      <a href="#sneakers" onclick="showSection('sneakers')">
-        Shop Sneakers
-      </a>
-
-      <a href="#barber" onclick="showSection('barber')">
-        Book Barber
-      </a>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#business">Our Businesses</a>
+        <a href="#gas">Gas</a>
+        <a href="#sneakers">Sneakers</a>
+        <a href="#barber">Barber</a>
+        <a href="#booking">Book</a>
+        <a href="#delivery">Delivery</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
     </div>
+  </header>
 
-  </div>
 
-  <main>
+  <!-- =========================
+       HERO
+  ========================== -->
 
-    <div class="grid">
+  <section id="home" class="hero">
 
-      <div class="card">
-        <h3>🔥 Cooking Gas</h3>
-        <p>6 KG and 12 KG gas available.</p>
-        <a class="btn" href="#gas" onclick="showSection('gas')">
+    <div class="hero-content">
+
+      <h1>
+        AMK <span>Gas</span> • Sneakers • Barber
+      </h1>
+
+      <p>
+        Your one-stop business for cooking gas, quality sneakers,
+        clothing and professional barber services.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#gas" class="btn btn-primary">
           Order Gas
         </a>
-      </div>
 
-      <div class="card">
-        <h3>👟 Sneakers</h3>
-        <p>Affordable sneakers and streetwear.</p>
-        <a class="btn" href="#sneakers" onclick="showSection('sneakers')">
-          Shop Now
-        </a>
-      </div>
-
-      <div class="card">
-        <h3>💈 Barber</h3>
-        <p>Book your haircut quickly.</p>
-        <a class="btn" href="#barber" onclick="showSection('barber')">
-          Book Now
-        </a>
-      </div>
-
-    </div>
-
-  </main>
-
-</section>
-
-<section id="gas" class="hidden">
-
-  <main>
-
-    <h2>🔥 Gas</h2>
-
-    <div class="grid">
-
-      <div class="card">
-        <h3>6 KG Gas</h3>
-        <div class="price">KSh 1,200</div>
-        <p>Cooking gas cylinder.</p>
-      </div>
-
-      <div class="card">
-        <h3>12 KG Gas</h3>
-        <div class="price">KSh 2,000</div>
-        <p>Cooking gas cylinder.</p>
-      </div>
-
-    </div>
-
-    <br>
-
-    <h2>Order Gas</h2>
-
-    <form onsubmit="submitGasOrder(event)">
-
-      <label>Name</label>
-      <input id="gasName" required>
-
-      <label>Phone</label>
-      <input id="gasPhone" type="tel" required>
-
-      <label>Gas Size</label>
-
-      <select id="gasSize" required>
-        <option value="">Select gas</option>
-        <option value="6 KG">6 KG - KSh 1,200</option>
-        <option value="12 KG">12 KG - KSh 2,000</option>
-      </select>
-
-      <label>Quantity</label>
-      <input id="gasQuantity" type="number" min="1" value="1" required>
-
-      <label>Delivery Location</label>
-      <input id="gasLocation" placeholder="Nanyuki / Nairobi / area" required>
-
-      <label>Payment Method</label>
-
-      <select id="gasPayment" required>
-        <option value="">Select payment</option>
-        <option>M-Pesa</option>
-        <option>Cash on Delivery</option>
-      </select>
-
-      <button class="btn green" type="submit">
-        Order via WhatsApp
-      </button>
-
-    </form>
-
-    <div class="notice">
-      <strong>M-Pesa:</strong>
-      Send payment to <strong>0117 414 318</strong>
-    </div>
-
-  </main>
-
-</section>
-
-<section id="sneakers" class="hidden">
-
-  <main>
-
-    <h2>👟 Sneakers</h2>
-
-    <div class="grid">
-
-      <div class="card">
-
-        <h3>Premium Sneakers</h3>
-
-        <p>
-          Affordable sneakers available.
-        </p>
-
-        <p class="small">
-          Contact us for current designs, sizes and prices.
-        </p>
-
-        <a class="btn"
-           href="https://wa.me/254117414318"
-           target="_blank">
-          WhatsApp to Order
+        <a href="#sneakers" class="btn btn-blue">
+          Shop Sneakers
         </a>
 
-      </div>
-
-      <div class="card">
-
-        <h3>Streetwear</h3>
-
-        <p>
-          Clothing and accessories available.
-        </p>
-
-        <a class="btn"
-           href="https://wa.me/254117414318"
-           target="_blank">
-          Ask on WhatsApp
+        <a href="#booking" class="btn btn-light">
+          Book Barber
         </a>
 
       </div>
 
     </div>
 
-    <br>
+  </section>
 
-    <h2>Sneaker Order</h2>
 
-    <form onsubmit="submitSneakerOrder(event)">
+  <!-- =========================
+       OUR BUSINESSES
+  ========================== -->
 
-      <label>Name</label>
-      <input id="sneakerName" required>
+  <section id="business">
 
-      <label>Phone</label>
-      <input id="sneakerPhone" type="tel" required>
+    <div class="container">
 
-      <label>Sneaker / Product</label>
-      <input id="sneakerProduct" required>
-
-      <label>Size</label>
-      <input id="sneakerSize" placeholder="e.g. 40" required>
-
-      <label>Quantity</label>
-      <input id="sneakerQuantity" type="number" min="1" value="1" required>
-
-      <label>Delivery Location</label>
-      <input id="sneakerLocation" required>
-
-      <button class="btn green" type="submit">
-        Order via WhatsApp
-      </button>
-
-    </form>
-
-  </main>
-
-</section>
-
-<section id="barber" class="hidden">
-
-  <main>
-
-    <h2>💈 Barber Shop</h2>
-
-    <div class="grid">
-
-      <div class="card">
-        <h3>Regular Haircut</h3>
-        <div class="price">KSh 200</div>
+      <div class="section-title">
+        <h2>Our Businesses</h2>
+        <p>Everything you need, all under AMK.</p>
       </div>
 
-      <div class="card">
-        <h3>Skin Fade</h3>
-        <div class="price">KSh 300</div>
-      </div>
+      <div class="business-grid">
 
-      <div class="card">
-        <h3>Beard Trim</h3>
-        <div class="price">KSh 100</div>
-      </div>
+        <div class="business-card">
 
-    </div>
+          <div class="business-icon">🔥</div>
 
-    <br>
+          <h3>AMK Gas</h3>
 
-    <h2>Book Your Barber</h2>
+          <p>
+            Cooking gas cylinders and refills with
+            convenient delivery options.
+          </p>
 
-    <form onsubmit="submitBarberBooking(event)">
+          <a href="#gas" class="btn btn-blue">
+            View Gas
+          </a>
 
-      <label>Name</label>
-      <input id="barberName" required>
+        </div>
 
-      <label>Phone</label>
-      <input id="barberPhone" type="tel" required>
 
-      <label>Service</label>
+        <div class="business-card">
 
-      <select id="barberService" required>
-        <option value="">Select service</option>
-        <option>Regular Haircut - KSh 200</option>
-        <option>Skin Fade - KSh 300</option>
-        <option>Beard Trim - KSh 100</option>
-      </select>
+          <div class="business-icon">👟</div>
 
-      <label>Preferred Date</label>
-      <input id="barberDate" type="date" required>
+          <h3>AMK Sneakers</h3>
 
-      <label>Preferred Time</label>
-      <input id="barberTime" type="time" required>
+          <p>
+            Affordable sneakers, clothes and streetwear
+            for everyday style.
+          </p>
 
-      <label>Location</label>
-      <input id="barberLocation" placeholder="Nanyuki / Nairobi" required>
+          <a href="#sneakers" class="btn btn-blue">
+            Shop Now
+          </a>
 
-      <button class="btn green" type="submit">
-        Book via WhatsApp
-      </button>
+        </div>
 
-    </form>
 
-  </main>
+        <div class="business-card">
 
-</section>
+          <div class="business-icon">💈</div>
 
-<section id="requests" class="hidden">
+          <h3>AMK Barber</h3>
 
-  <main>
+          <p>
+            Professional haircuts, beard services and
+            grooming with easy online booking.
+          </p>
 
-    <h2>📋 My Requests</h2>
-
-    <div id="requestsList"></div>
-
-  </main>
-
-</section>
-
-<section id="contact" class="hidden">
-
-  <main>
-
-    <h2>📞 Contact AMK</h2>
-
-    <div class="contact-box">
-
-      <p><strong>Gas / Sneakers:</strong></p>
-
-      <p>
-        Phone:
-        <a href="tel:0117414318">0117 414 318</a>
-      </p>
-
-      <p>
-        WhatsApp:
-        <a href="https://wa.me/254117414318" target="_blank">
-          Chat on WhatsApp
-        </a>
-      </p>
-
-      <br>
-
-      <p><strong>Barber:</strong></p>
-
-      <p>
-        Phone:
-        <a href="tel:0118311141">0118 311 141</a>
-      </p>
-
-      <p>
-        WhatsApp:
-        <a href="https://wa.me/254118311141" target="_blank">
-          Chat on WhatsApp
-        </a>
-      </p>
-
-      <br>
-
-      <p>
-        <strong>Locations:</strong>
-        Nanyuki & Nairobi, Kenya
-      </p>
-
-      <br>
-
-      <p>
-        <strong>M-Pesa:</strong>
-        0117 414 318
-      </p>
-
-    </div>
-
-  </main>
-
-</section>
-
-<section id="staff" class="hidden">
-
-  <main>
-
-    <div id="staffLogin" class="staff-login">
-
-      <h2>🔐 Staff Login</h2>
-
-      <div class="notice">
-        Staff members must use their own Supabase account.
-      </div>
-
-      <form onsubmit="staffLogin(event)">
-
-        <label>Email</label>
-
-        <input
-          id="staffEmail"
-          type="email"
-          placeholder="Staff email"
-          required
-        >
-
-        <label>Password</label>
-
-        <input
-          id="staffPassword"
-          type="password"
-          placeholder="Password"
-          required
-        >
-
-        <button class="btn" type="submit">
-          Login
-        </button>
-
-        <p id="loginError" class="error"></p>
-
-      </form>
-
-    </div>
-
-    <div id="staffDashboard" class="hidden">
-
-      <div class="user-box">
-
-        <strong>Logged in:</strong>
-        <span id="loggedUser"></span>
-
-        <br>
-
-        <strong>Role:</strong>
-        <span id="loggedRole"></span>
-
-      </div>
-
-      <h2>📊 Staff Dashboard</h2>
-
-      <div class="staff-nav">
-
-        <button onclick="staffTab('dashboard')">
-          Dashboard
-        </button>
-
-        <button onclick="staffTab('sales')">
-          Sales
-        </button>
-
-        <button onclick="staffTab('expenses')">
-          Expenses
-        </button>
-
-        <button onclick="staffTab('inventory')">
-          Inventory
-        </button>
-
-        <button onclick="staffTab('deliveries')">
-          Deliveries
-        </button>
-
-        <button onclick="staffTab('employees')">
-          Employees
-        </button>
-
-        <button class="btn red" onclick="logoutStaff()">
-          Logout
-        </button>
-
-      </div>
-
-      <div id="tab-dashboard">
-
-        <div class="stat-grid">
-
-          <div class="stat">
-            <strong id="statRequests">0</strong>
-            Requests
-          </div>
-
-          <div class="stat">
-            <strong id="statSales">KSh 0</strong>
-            Sales
-          </div>
-
-          <div class="stat">
-            <strong id="statExpenses">KSh 0</strong>
-            Expenses
-          </div>
-
-          <div class="stat">
-            <strong id="statProfit">KSh 0</strong>
-            Profit
-          </div>
+          <a href="#booking" class="btn btn-primary">
+            Book Now
+          </a>
 
         </div>
 
       </div>
 
-      <div id="tab-sales" class="hidden">
+    </div>
 
-        <h3>Sales</h3>
+  </section>
 
-        <form onsubmit="addSale(event)">
 
-          <label>Item</label>
-          <input id="saleItem" required>
+  <!-- =========================
+       GAS
+  ========================== -->
 
-          <label>Amount</label>
-          <input id="saleAmount" type="number" min="0" required>
+  <section id="gas">
 
-          <label>Payment Method</label>
+    <div class="container">
 
-          <select id="salePayment" required>
-            <option>M-Pesa</option>
-            <option>Cash</option>
-            <option>Card</option>
-          </select>
+      <div class="section-title">
 
-          <button class="btn" type="submit">
-            Add Sale
-          </button>
+        <h2>🔥 Cooking Gas</h2>
 
-          <p id="saleMessage" class="success"></p>
-
-        </form>
-
-        <div id="salesTable"></div>
+        <p>
+          Order your preferred gas cylinder and request delivery.
+        </p>
 
       </div>
 
-      <div id="tab-expenses" class="hidden">
 
-        <h3>Expenses</h3>
+      <div class="gas-grid">
 
-        <form onsubmit="addExpense(event)">
+        <div class="product-card">
 
-          <label>Expense</label>
-          <input id="expenseName" required>
+          <h3>Afri Gas</h3>
 
-          <label>Amount</label>
-          <input id="expenseAmount" type="number" min="0" required>
+          <p>6 KG Cylinder</p>
 
-          <button class="btn" type="submit">
-            Add Expense
-          </button>
+          <div class="price">
+            KSh ——
+          </div>
 
-          <p id="expenseMessage" class="success"></p>
-
-        </form>
-
-        <div id="expensesTable"></div>
-
-      </div>
-
-      <div id="tab-inventory" class="hidden">
-
-        <h3>Inventory</h3>
-
-        <form id="inventoryForm" onsubmit="addInventory(event)">
-
-          <label>Product</label>
-          <input id="inventoryProduct" required>
-
-          <label>Category</label>
-
-          <select id="inventoryCategory">
-            <option>Gas</option>
-            <option>Sneakers</option>
-            <option>Barber</option>
-            <option>Other</option>
-          </select>
-
-          <label>Quantity</label>
-          <input id="inventoryQuantity" type="number" min="0" required>
-
-          <label>Buying Price</label>
-          <input id="inventoryBuying" type="number" min="0" required>
-
-          <label>Selling Price</label>
-          <input id="inventorySelling" type="number" min="0" required>
-
-          <button class="btn" type="submit">
-            Add Inventory
-          </button>
-
-        </form>
-
-        <div id="inventoryTable"></div>
-
-      </div>
-
-      <div id="tab-deliveries" class="hidden">
-
-        <h3>Deliveries</h3>
-
-        <form onsubmit="addDelivery(event)">
-
-          <label>Customer</label>
-          <input id="deliveryCustomer" required>
-
-          <label>Phone</label>
-          <input id="deliveryPhone" type="tel">
-
-          <label>Product</label>
-          <input id="deliveryProduct" required>
-
-          <label>Quantity</label>
-
-          <input
-            id="deliveryQuantity"
-            type="number"
-            min="1"
-            value="1"
-          >
-
-          <label>Location</label>
-          <input id="deliveryLocation" required>
-
-          <label>Status</label>
-
-          <select id="deliveryStatus">
-            <option value="pending">Pending</option>
-            <option value="out_for_delivery">
-              Out for Delivery
-            </option>
-            <option value="delivered">Delivered</option>
-          </select>
-
-          <button class="btn" type="submit">
-            Add Delivery
-          </button>
-
-        </form>
-
-        <div id="deliveriesTable"></div>
-
-      </div>
-
-      <div id="tab-employees" class="hidden">
-
-        <h3>Employees / Staff</h3>
-
-        <div class="notice">
-
-          <strong>Admin only:</strong>
-
-          Create and manage staff accounts here.
-          Each employee gets their own email,
-          password and role.
+          <a href="#contact" class="btn btn-blue">
+            Order
+          </a>
 
         </div>
+
+
+        <div class="product-card">
+
+          <h3>ProGas</h3>
+
+          <p>6 KG Cylinder</p>
+
+          <div class="price">
+            KSh ——
+          </div>
+
+          <a href="#contact" class="btn btn-blue">
+            Order
+          </a>
+
+        </div>
+
+
+        <div class="product-card">
+
+          <h3>K-Gas</h3>
+
+          <p>6 KG Cylinder</p>
+
+          <div class="price">
+            KSh ——
+          </div>
+
+          <a href="#contact" class="btn btn-blue">
+            Order
+          </a>
+
+        </div>
+
+
+        <div class="product-card">
+
+          <h3>Wanjiku</h3>
+
+          <p>6 KG Cylinder</p>
+
+          <div class="price">
+            KSh ——
+          </div>
+
+          <a href="#contact" class="btn btn-blue">
+            Order
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SNEAKERS
+  ========================== -->
+
+  <section id="sneakers">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>👟 Sneakers & Clothing</h2>
+
+        <p>
+          Affordable fashion and streetwear.
+        </p>
+
+      </div>
+
+
+      <div class="shop-grid">
+
+
+        <div class="shop-card">
+
+          <div class="product-image">
+            👟
+          </div>
+
+          <div class="shop-content">
+
+            <h3>Nike SB</h3>
+
+            <p>
+              Available sizes: 36–45
+            </p>
+
+            <div class="shop-price">
+              KSh 1,500
+            </div>
+
+            <a href="#contact" class="btn btn-blue">
+              Order
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="shop-card">
+
+          <div class="product-image">
+            👕
+          </div>
+
+          <div class="shop-content">
+
+            <h3>White Graphic T-Shirt</h3>
+
+            <p>
+              Available sizes: L / XL
+            </p>
+
+            <div class="shop-price">
+              KSh 500
+            </div>
+
+            <a href="#contact" class="btn btn-blue">
+              Order
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="shop-card">
+
+          <div class="product-image">
+            👕
+          </div>
+
+          <div class="shop-content">
+
+            <h3>Black Graphic T-Shirt</h3>
+
+            <p>
+              Available sizes: L / XL
+            </p>
+
+            <div class="shop-price">
+              KSh 500
+            </div>
+
+            <a href="#contact" class="btn btn-blue">
+              Order
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="shop-card">
+
+          <div class="product-image">
+            👖
+          </div>
+
+          <div class="shop-content">
+
+            <h3>Blue Jeans</h3>
+
+            <p>
+              Available sizes: M / L / XL
+            </p>
+
+            <div class="shop-price">
+              KSh 450
+            </div>
+
+            <a href="#contact" class="btn btn-blue">
+              Order
+            </a>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       BARBER
+  ========================== -->
+
+  <section id="barber">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>💈 AMK Barber Shop</h2>
+
+        <p>
+          Professional grooming services.
+          Prices can be updated later.
+        </p>
+
+      </div>
+
+
+      <div class="barber-grid">
+
+
+        <div class="service-card">
+
+          <h3>Classic Haircut</h3>
+
+          <p>
+            Clean and professional haircut.
+          </p>
+
+          <div class="service-price">
+            KSh ——
+          </div>
+
+          <a href="#booking" class="btn btn-primary">
+            Book
+          </a>
+
+        </div>
+
+
+        <div class="service-card">
+
+          <h3>Haircut + Beard</h3>
+
+          <p>
+            Haircut with beard grooming.
+          </p>
+
+          <div class="service-price">
+            KSh ——
+          </div>
+
+          <a href="#booking" class="btn btn-primary">
+            Book
+          </a>
+
+        </div>
+
+
+        <div class="service-card">
+
+          <h3>Beard Trim</h3>
+
+          <p>
+            Professional beard shaping and trim.
+          </p>
+
+          <div class="service-price">
+            KSh ——
+          </div>
+
+          <a href="#booking" class="btn btn-primary">
+            Book
+          </a>
+
+        </div>
+
+
+        <div class="service-card">
+
+          <h3>Kids Haircut</h3>
+
+          <p>
+            Comfortable haircut for children.
+          </p>
+
+          <div class="service-price">
+            KSh ——
+          </div>
+
+          <a href="#booking" class="btn btn-primary">
+            Book
+          </a>
+
+        </div>
+
+
+        <div class="service-card">
+
+          <h3>Hair Styling</h3>
+
+          <p>
+            Styling for your preferred look.
+          </p>
+
+          <div class="service-price">
+            KSh ——
+          </div>
+
+          <a href="#booking" class="btn btn-primary">
+            Book
+          </a>
+
+        </div>
+
+
+        <div class="service-card">
+
+          <h3>Other Service</h3>
+
+          <p>
+            Ask us about available services.
+          </p>
+
+          <div class="service-price">
+            KSh ——
+          </div>
+
+          <a href="#booking" class="btn btn-primary">
+            Book
+          </a>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       BOOKING
+  ========================== -->
+
+  <section id="booking">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>📅 Book a Barber</h2>
+
+        <p>
+          Send your booking request and we will confirm your appointment.
+        </p>
+
+      </div>
+
+
+      <div class="form-container">
 
         <form
-          class="staff-form"
-          onsubmit="addStaff(event)"
+          onsubmit="sendBooking(event)"
         >
 
-          <h3>➕ Add Staff</h3>
+          <div class="form-grid">
 
-          <label>Full Name</label>
 
-          <input
-            id="newStaffName"
-            type="text"
-            placeholder="Employee full name"
-            required
-          >
+            <div class="form-group">
 
-          <label>Email</label>
+              <label for="name">
+                Full Name
+              </label>
 
-          <input
-            id="newStaffEmail"
-            type="email"
-            placeholder="employee@example.com"
-            required
-          >
+              <input
+                type="text"
+                id="name"
+                placeholder="Your name"
+                required
+              >
 
-          <label>Temporary Password</label>
+            </div>
 
-          <input
-            id="newStaffPassword"
-            type="password"
-            placeholder="Minimum 8 characters"
-            minlength="8"
-            required
-          >
 
-          <label>Role</label>
+            <div class="form-group">
 
-          <select id="newStaffRole" required>
+              <label for="phone">
+                Phone Number
+              </label>
 
-            <option value="">
-              Select staff role
-            </option>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="07XXXXXXXX"
+                required
+              >
 
-            <option value="manager">
-              Manager
-            </option>
+            </div>
 
-            <option value="barber">
-              Barber
-            </option>
 
-            <option value="gas_attendant">
-              Gas Attendant
-            </option>
+            <div class="form-group">
 
-            <option value="shop_staff">
-              Shop Staff
-            </option>
+              <label for="service">
+                Service
+              </label>
 
-            <option value="admin">
-              Admin
-            </option>
+              <select id="service" required>
 
-          </select>
+                <option value="">
+                  Select service
+                </option>
+
+                <option>
+                  Classic Haircut
+                </option>
+
+                <option>
+                  Haircut + Beard
+                </option>
+
+                <option>
+                  Beard Trim
+                </option>
+
+                <option>
+                  Kids Haircut
+                </option>
+
+                <option>
+                  Hair Styling
+                </option>
+
+                <option>
+                  Other
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="date">
+                Preferred Date
+              </label>
+
+              <input
+                type="date"
+                id="date"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="time">
+                Preferred Time
+              </label>
+
+              <input
+                type="time"
+                id="time"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="barber">
+                Preferred Barber
+              </label>
+
+              <select id="barber">
+
+                <option value="">
+                  Any available barber
+                </option>
+
+                <option>
+                  Barber 1
+                </option>
+
+                <option>
+                  Barber 2
+                </option>
+
+                <option>
+                  Barber 3
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group full">
+
+              <label for="notes">
+                Additional Notes
+              </label>
+
+              <textarea
+                id="notes"
+                placeholder="Any special request?"
+              ></textarea>
+
+            </div>
+
+          </div>
+
 
           <button
-            class="btn green"
             type="submit"
+            class="btn btn-primary form-submit"
           >
-            Create Staff Account
+            Request Booking
           </button>
 
-          <p
-            id="staffCreateMessage"
-            class="success"
-          ></p>
-
         </form>
-
-        <h3>Current Staff</h3>
-
-        <div id="employeesTable"></div>
 
       </div>
 
     </div>
 
-  </main>
+  </section>
 
-</section>
 
-<footer>
+  <!-- =========================
+       DELIVERY
+  ========================== -->
 
-  <p>
-    © 2026 AMK Gas • Sneakers • Barber
-  </p>
+  <section id="delivery">
 
-  <p>
-    Nanyuki & Nairobi, Kenya
-  </p>
+    <div class="container">
 
-</footer>
+      <div class="section-title">
 
-<script>
+        <h2>🛵 Delivery</h2>
 
-/* =========================================================
-   SUPABASE CONNECTION
-   ========================================================= */
+        <p>
+          Convenient delivery for your orders.
+        </p>
 
-const SUPABASE_URL =
-  "https://snvulxcguwofowhglbrw.supabase.co";
+      </div>
 
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_3DLOM4jXxzCwM1nyAlAEkQ_b2EwnTZd";
 
-const { createClient } =
-  window.supabase;
+      <div class="delivery-grid">
 
-const supabaseClient =
-  createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
 
+        <div class="delivery-card">
 
-/* =========================================================
-   GLOBAL VARIABLES
-   ========================================================= */
+          <div class="icon">
+            🔥
+          </div>
 
-let currentUser = null;
-let currentProfile = null;
+          <h3>Gas Delivery</h3>
 
+          <p>
+            Order cooking gas and request delivery
+            to your location.
+          </p>
 
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
+        </div>
 
-function showSection(id) {
 
-  const sections = [
-    "home",
-    "gas",
-    "sneakers",
-    "barber",
-    "requests",
-    "contact",
-    "staff"
-  ];
+        <div class="delivery-card">
 
-  sections.forEach(section => {
+          <div class="icon">
+            👟
+          </div>
 
-    const element =
-      document.getElementById(section);
+          <h3>Fashion Delivery</h3>
 
-    if (element) {
+          <p>
+            Order sneakers and clothing and arrange
+            delivery.
+          </p>
 
-      element.classList.toggle(
-        "hidden",
-        section !== id
-      );
+        </div>
 
-    }
 
-  });
+        <div class="delivery-card">
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+          <div class="icon">
+            📍
+          </div>
 
-  if (id === "requests") {
-    renderRequests();
-  }
+          <h3>Easy Ordering</h3>
 
-  if (id === "staff") {
-    checkExistingSession();
-  }
+          <p>
+            Contact us through WhatsApp or phone
+            to confirm your order.
+          </p>
 
-}
+        </div>
 
 
-/* =========================================================
-   CUSTOMER REQUESTS
-   ========================================================= */
-
-async function createCustomerRequest(request) {
-
-  const { error } =
-    await supabaseClient
-      .from("customer_requests")
-      .insert([request]);
-
-  if (error) {
-
-    console.error(error);
-
-    alert(
-      "Your order could not be saved. " +
-      "Please continue with WhatsApp."
-    );
-
-    return false;
-  }
-
-  return true;
-
-}
-
-
-/* =========================================================
-   GAS ORDER
-   ========================================================= */
-
-async function submitGasOrder(event) {
-
-  event.preventDefault();
-
-  const name =
-    document.getElementById("gasName").value;
-
-  const phone =
-    document.getElementById("gasPhone").value;
-
-  const size =
-    document.getElementById("gasSize").value;
-
-  const quantity =
-    Number(
-      document.getElementById("gasQuantity").value
-    );
-
-  const location =
-    document.getElementById("gasLocation").value;
-
-  const payment =
-    document.getElementById("gasPayment").value;
-
-  const price =
-    size === "6 KG"
-      ? 1200
-      : 2000;
-
-  const total =
-    price * quantity;
-
-  await createCustomerRequest({
-
-    customer_name: name,
-    phone: phone,
-    service_type: "gas",
-    item: size,
-    quantity: quantity,
-    amount: total,
-    payment_method: payment,
-    location: location,
-    notes: "Gas order",
-    status: "pending"
-
-  });
-
-  const message =
-`Hello AMK Gas,
-
-I want to order gas.
-
-Name: ${name}
-Phone: ${phone}
-Gas: ${size}
-Quantity: ${quantity}
-Total: KSh ${total}
-Location: ${location}
-Payment: ${payment}`;
-
-  window.open(
-    "https://wa.me/254117414318?text=" +
-    encodeURIComponent(message),
-    "_blank"
-  );
-
-  event.target.reset();
-
-}
-
-
-/* =========================================================
-   SNEAKER ORDER
-   ========================================================= */
-
-async function submitSneakerOrder(event) {
-
-  event.preventDefault();
-
-  const name =
-    document.getElementById("sneakerName").value;
-
-  const phone =
-    document.getElementById("sneakerPhone").value;
-
-  const product =
-    document.getElementById("sneakerProduct").value;
-
-  const size =
-    document.getElementById("sneakerSize").value;
-
-  const quantity =
-    Number(
-      document.getElementById(
-        "sneakerQuantity"
-      ).value
-    );
-
-  const location =
-    document.getElementById(
-      "sneakerLocation"
-    ).value;
-
-  await createCustomerRequest({
-
-    customer_name: name,
-    phone: phone,
-    service_type: "sneaker",
-    item:
-      `${product} - Size ${size}`,
-    quantity: quantity,
-    amount: 0,
-    payment_method: "",
-    location: location,
-    notes: "Sneaker order",
-    status: "pending"
-
-  });
-
-  const message =
-`Hello AMK Sneakers,
-
-I want to order:
-
-Name: ${name}
-Phone: ${phone}
-Product: ${product}
-Size: ${size}
-Quantity: ${quantity}
-Delivery: ${location}`;
-
-  window.open(
-    "https://wa.me/254117414318?text=" +
-    encodeURIComponent(message),
-    "_blank"
-  );
-
-  event.target.reset();
-
-}
-
-
-/* =========================================================
-   BARBER BOOKING
-   ========================================================= */
-
-async function submitBarberBooking(event) {
-
-  event.preventDefault();
-
-  const name =
-    document.getElementById("barberName").value;
-
-  const phone =
-    document.getElementById("barberPhone").value;
-
-  const service =
-    document.getElementById(
-      "barberService"
-    ).value;
-
-  const date =
-    document.getElementById(
-      "barberDate"
-    ).value;
-
-  const time =
-    document.getElementById(
-      "barberTime"
-    ).value;
-
-  const location =
-    document.getElementById(
-      "barberLocation"
-    ).value;
-
-  let amount = 0;
-
-  if (service.includes("200")) {
-    amount = 200;
-  }
-
-  if (service.includes("300")) {
-    amount = 300;
-  }
-
-  if (service.includes("100")) {
-    amount = 100;
-  }
-
-  await createCustomerRequest({
-
-    customer_name: name,
-    phone: phone,
-    service_type: "barber",
-    item: service,
-    quantity: 1,
-    amount: amount,
-    payment_method: "",
-    location: location,
-    notes:
-      `Requested date: ${date}; Time: ${time}`,
-    status: "pending"
-
-  });
-
-  const message =
-`Hello AMK Barber,
-
-I want to book a barber.
-
-Name: ${name}
-Phone: ${phone}
-Service: ${service}
-Date: ${date}
-Time: ${time}
-Location: ${location}
-
-Please confirm my booking.`;
-
-  window.open(
-    "https://wa.me/254118311141?text=" +
-    encodeURIComponent(message),
-    "_blank"
-  );
-
-  event.target.reset();
-
-}
-
-
-/* =========================================================
-   MY REQUESTS
-   ========================================================= */
-
-function renderRequests() {
-
-  const container =
-    document.getElementById(
-      "requestsList"
-    );
-
-  container.innerHTML = `
-
-    <div class="card">
-
-      <h3>My Requests</h3>
-
-      <p>
-        Your order or booking is saved securely
-        in AMK's business system after submission.
-      </p>
-
-      <p class="small">
-        For confirmation, please also check
-        your WhatsApp conversation with AMK.
-      </p>
+      </div>
 
     </div>
 
-  `;
+  </section>
 
-}
 
+  <!-- =========================
+       PAYMENT
+  ========================== -->
 
-/* =========================================================
-   STAFF LOGIN
-   ========================================================= */
+  <section id="payment">
 
-async function staffLogin(event) {
+    <div class="container">
 
-  event.preventDefault();
+      <div class="section-title">
 
-  const email =
-    document.getElementById(
-      "staffEmail"
-    ).value.trim();
+        <h2>💳 Payment Methods</h2>
 
-  const password =
-    document.getElementById(
-      "staffPassword"
-    ).value;
+        <p>
+          Choose your preferred payment method.
+        </p>
 
-  const errorBox =
-    document.getElementById(
-      "loginError"
-    );
+      </div>
 
-  errorBox.textContent = "";
 
-  const { data, error } =
-    await supabaseClient.auth.signInWithPassword({
+      <div class="payment-box">
 
-      email: email,
-      password: password
+        <h3>
+          Available Payment Options
+        </h3>
 
-    });
+        <p>
+          Payment details can be confirmed when placing
+          your order or booking.
+        </p>
 
-  if (error) {
 
-    console.error(error);
+        <div class="payment-methods">
 
-    errorBox.textContent =
-      "Login failed: " +
-      error.message;
+          <div class="payment-method">
+            📱 M-PESA
+          </div>
 
-    return;
-  }
+          <div class="payment-method">
+            💵 Cash
+          </div>
 
-  currentUser =
-    data.user;
+          <div class="payment-method">
+            💳 Card
+          </div>
 
-  await loadProfile();
+          <div class="payment-method">
+            🏦 Bank
+          </div>
 
-}
+        </div>
 
+      </div>
 
-/* =========================================================
-   LOAD PROFILE
-   ========================================================= */
+    </div>
 
-async function loadProfile() {
+  </section>
 
-  if (!currentUser) {
-    return;
-  }
 
-  const { data, error } =
-    await supabaseClient
-      .from("profiles")
-      .select("*")
-      .eq("id", currentUser.id)
-      .single();
+  <!-- =========================
+       ABOUT
+  ========================== -->
 
-  if (error) {
+  <section id="about">
 
-    console.error(error);
+    <div class="container">
 
-    alert(
-      "Your login works, but your staff profile " +
-      "could not be loaded."
-    );
+      <div class="about-grid">
 
-    return;
-  }
 
-  currentProfile =
-    data;
+        <div class="about-text">
 
-  if (!currentProfile.active) {
+          <h2>
+            About AMK
+          </h2>
 
-    await supabaseClient
-      .auth
-      .signOut();
+          <p>
+            AMK brings several everyday services together
+            in one convenient business.
+          </p>
 
-    alert(
-      "This staff account is inactive."
-    );
+          <p>
+            From cooking gas and fashion to professional
+            barber services, our goal is to make ordering
+            and booking simple.
+          </p>
 
-    return;
-  }
-
-  document
-    .getElementById("staffLogin")
-    .classList.add("hidden");
-
-  document
-    .getElementById("staffDashboard")
-    .classList.remove("hidden");
-
-  document
-    .getElementById("loggedUser")
-    .textContent =
-      currentProfile.email ||
-      currentUser.email ||
-      "";
-
-  document
-    .getElementById("loggedRole")
-    .textContent =
-      formatRole(
-        currentProfile.role
-      );
-
-  applyRoleAccess();
-
-  staffTab("dashboard");
-
-}
-
-
-/* =========================================================
-   ROLE ACCESS
-   ========================================================= */
-
-function applyRoleAccess() {
-
-  const role =
-    currentProfile?.role || "";
-
-  const permissions = {
-
-    admin: {
-      sales: true,
-      expenses: true,
-      inventory: true,
-      deliveries: true,
-      employees: true
-    },
-
-    manager: {
-      sales: true,
-      expenses: true,
-      inventory: true,
-      deliveries: true,
-      employees: false
-    },
-
-    barber: {
-      sales: true,
-      expenses: false,
-      inventory: true,
-      deliveries: false,
-      employees: false
-    },
-
-    gas_attendant: {
-      sales: true,
-      expenses: false,
-      inventory: true,
-      deliveries: true,
-      employees: false
-    },
+          <p>
+            Customers can contact us online, place orders,
+            request delivery and book barber appointments.
+          </p>
 
-    shop_staff: {
-      sales: true,
-      expenses: false,
-      inventory: true,
-      deliveries: true,
-      employees: false
-    }
+        </div>
 
-  };
 
-  const access =
-    permissions[role] || {};
+        <div class="about-box">
 
-  document
-    .querySelectorAll(".staff-nav button")
-    .forEach(button => {
+          <h3>
+            Why Choose AMK?
+          </h3>
 
-      const text =
-        button.textContent.trim();
+          <ul>
 
-      let allowed = true;
+            <li>
+              ✓ Convenient online ordering
+            </li>
 
-      if (text === "Sales") {
-        allowed =
-          access.sales === true;
-      }
+            <li>
+              ✓ Gas delivery
+            </li>
 
-      if (text === "Expenses") {
-        allowed =
-          access.expenses === true;
-      }
+            <li>
+              ✓ Affordable sneakers & clothing
+            </li>
 
-      if (text === "Inventory") {
-        allowed =
-          access.inventory === true;
-      }
+            <li>
+              ✓ Easy barber booking
+            </li>
 
-      if (text === "Deliveries") {
-        allowed =
-          access.deliveries === true;
-      }
+            <li>
+              ✓ Multiple payment options
+            </li>
 
-      if (text === "Employees") {
-        allowed =
-          access.employees === true;
-      }
+            <li>
+              ✓ Customer-focused service
+            </li>
 
-      button.classList.toggle(
-        "hidden",
-        !allowed
-      );
+          </ul>
 
-    });
+        </div>
 
-  const inventoryForm =
-    document.getElementById(
-      "inventoryForm"
-    );
 
-  if (inventoryForm) {
+      </div>
 
-    inventoryForm.classList.toggle(
-      "hidden",
-      !["admin", "manager"]
-        .includes(role)
-    );
+    </div>
 
-  }
+  </section>
 
-}
 
+  <!-- =========================
+       CONTACT
+  ========================== -->
 
-/* =========================================================
-   ROLE FORMAT
-   ========================================================= */
+  <section id="contact">
 
-function formatRole(role) {
+    <div class="container">
 
-  const roles = {
+      <div class="section-title">
 
-    admin: "Admin",
-    manager: "Manager",
-    barber: "Barber",
-    gas_attendant:
-      "Gas Attendant",
-    shop_staff:
-      "Shop Staff"
+        <h2>📞 Contact AMK</h2>
 
-  };
+        <p>
+          Get in touch to order or make a booking.
+        </p>
 
-  return roles[role] || role;
+      </div>
 
-}
 
+      <div class="contact-grid">
 
-/* =========================================================
-   CHECK SESSION
-   ========================================================= */
 
-async function checkExistingSession() {
+        <div class="contact-card">
 
-  const { data } =
-    await supabaseClient
-      .auth
-      .getSession();
+          <div class="icon">
+            📱
+          </div>
 
-  if (data.session) {
+          <h3>
+            Phone
+          </h3>
 
-    currentUser =
-      data.session.user;
+          <a href="tel:+254118311141">
+            +254 118 311 141
+          </a>
 
-    await loadProfile();
+        </div>
 
-  }
 
-}
+        <div class="contact-card">
 
+          <div class="icon">
+            💬
+          </div>
 
-/* =========================================================
-   LOGOUT
-   ========================================================= */
+          <h3>
+            WhatsApp
+          </h3>
 
-async function logoutStaff() {
+          <a
+            href="https://wa.me/254118311141"
+            target="_blank"
+          >
+            Chat on WhatsApp
+          </a>
 
-  await supabaseClient
-    .auth
-    .signOut();
+        </div>
 
-  currentUser = null;
-  currentProfile = null;
 
-  document
-    .getElementById(
-      "staffDashboard"
-    )
-    .classList.add("hidden");
+        <div class="contact-card">
 
-  document
-    .getElementById(
-      "staffLogin"
-    )
-    .classList.remove("hidden");
+          <div class="icon">
+            ✉️
+          </div>
 
-  document
-    .getElementById(
-      "staffPassword"
-    )
-    .value = "";
+          <h3>
+            Email
+          </h3>
 
-}
+          <a href="mailto:info@amkgroup.ke">
+            info@amkgroup.ke
+          </a>
 
+        </div>
 
-/* =========================================================
-   STAFF TABS + ROLE PROTECTION
-   ========================================================= */
 
-function staffTab(tab) {
+      </div>
 
-  if (!currentProfile) {
-    return;
-  }
+    </div>
 
-  const role =
-    currentProfile.role;
+  </section>
 
-  const permissions = {
 
-    admin: [
-      "dashboard",
-      "sales",
-      "expenses",
-      "inventory",
-      "deliveries",
-      "employees"
-    ],
+  <!-- =========================
+       FOOTER
+  ========================== -->
 
-    manager: [
-      "dashboard",
-      "sales",
-      "expenses",
-      "inventory",
-      "deliveries"
-    ],
+  <footer>
 
-    barber: [
-      "dashboard",
-      "sales",
-      "inventory"
-    ],
+    <div class="footer-grid">
 
-    gas_attendant: [
-      "dashboard",
-      "sales",
-      "inventory",
-      "deliveries"
-    ],
 
-    shop_staff: [
-      "dashboard",
-      "sales",
-      "inventory",
-      "deliveries"
-    ]
+      <div class="footer-section">
 
-  };
+        <h3>
+          AMK GROUP
+        </h3>
 
-  const allowedTabs =
-    permissions[role] ||
-    ["dashboard"];
+        <p>
+          Gas • Sneakers • Barber
+        </p>
 
-  if (!allowedTabs.includes(tab)) {
+        <p>
+          Quality products and convenient services
+          for our customers.
+        </p>
 
-    alert(
-      "You do not have permission " +
-      "to access this section."
-    );
+      </div>
 
-    return;
-  }
 
-  const tabs = [
-    "dashboard",
-    "sales",
-    "expenses",
-    "inventory",
-    "deliveries",
-    "employees"
-  ];
+      <div class="footer-section">
 
-  tabs.forEach(name => {
+        <h3>
+          Quick Links
+        </h3>
 
-    const element =
-      document.getElementById(
-        "tab-" + name
-      );
+        <a href="#home">
+          Home
+        </a>
 
-    if (element) {
+        <a href="#gas">
+          Gas
+        </a>
 
-      element.classList.toggle(
-        "hidden",
-        name !== tab
+        <a href="#sneakers">
+          Sneakers
+        </a>
+
+        <a href="#barber">
+          Barber
+        </a>
+
+        <a href="#booking">
+          Booking
+        </a>
+
+      </div>
+
+
+      <div class="footer-section">
+
+        <h3>
+          Contact
+        </h3>
+
+        <a href="tel:+254118311141">
+          +254 118 311 141
+        </a>
+
+        <a
+          href="https://wa.me/254118311141"
+          target="_blank"
+        >
+          WhatsApp
+        </a>
+
+        <a href="mailto:info@amkgroup.ke">
+          info@amkgroup.ke
+        </a>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="copyright">
+
+      © <span id="year"></span>
+      AMK GROUP. All Rights Reserved.
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       WHATSAPP BUTTON
+  ========================== -->
+
+  <a
+    class="whatsapp"
+    href="https://wa.me/254118311141"
+    target="_blank"
+    aria-label="Chat with AMK on WhatsApp"
+  >
+    💬
+  </a>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    /* Current year */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+    /* Barber booking */
+
+    function sendBooking(event) {
+
+      event.preventDefault();
+
+      const name =
+        document.getElementById("name").value;
+
+      const phone =
+        document.getElementById("phone").value;
+
+      const service =
+        document.getElementById("service").value;
+
+      const date =
+        document.getElementById("date").value;
+
+      const time =
+        document.getElementById("time").value;
+
+      const barber =
+        document.getElementById("barber").value;
+
+      const notes =
+        document.getElementById("notes").value;
+
+
+      const message =
+        "AMK BARBER BOOKING%0A%0A" +
+
+        "Name: " + encodeURIComponent(name) + "%0A" +
+
+        "Phone: " + encodeURIComponent(phone) + "%0A" +
+
+        "Service: " + encodeURIComponent(service) + "%0A" +
+
+        "Date: " + encodeURIComponent(date) + "%0A" +
+
+        "Time: " + encodeURIComponent(time) + "%0A" +
+
+        "Barber: " + encodeURIComponent(barber || "Any available barber") + "%0A" +
+
+        "Notes: " + encodeURIComponent(notes || "None");
+
+
+      window.open(
+        "https://wa.me/254118311141?text=" + message,
+        "_blank"
       );
 
     }
 
-  });
 
-  if (tab === "dashboard") {
-    updateDashboard();
-  }
+    /* Prevent selecting dates in the past */
 
-  if (tab === "sales") {
-    renderSales();
-  }
+    const dateInput =
+      document.getElementById("date");
 
-  if (tab === "expenses") {
-    renderExpenses();
-  }
+    if (dateInput) {
 
-  if (tab === "inventory") {
-    renderInventory();
-  }
+      const today =
+        new Date().toISOString().split("T")[0];
 
-  if (tab === "deliveries") {
-    renderDeliveries();
-  }
+      dateInput.setAttribute(
+        "min",
+        today
+      );
 
-  if (tab === "employees") {
-    renderEmployees();
-  }
-
-}
-
-
-/* =========================================================
-   SALES
-   ========================================================= */
-
-async function addSale(event) {
-
-  event.preventDefault();
-
-  if (!currentUser) {
-    return;
-  }
-
-  const item =
-    document.getElementById(
-      "saleItem"
-    ).value;
-
-  const amount =
-    Number(
-      document.getElementById(
-        "saleAmount"
-      ).value
-    );
-
-  const payment =
-    document.getElementById(
-      "salePayment"
-    ).value;
-
-  const { error } =
-    await supabaseClient
-      .from("sales")
-      .insert([{
-
-        item: item,
-        quantity: 1,
-        amount: amount,
-        payment_method: payment,
-        staff_id:
-          currentUser.id
-
-      }]);
-
-  if (error) {
-
-    alert(
-      "Could not save sale: " +
-      error.message
-    );
-
-    return;
-  }
-
-  event.target.reset();
-
-  document.getElementById(
-    "saleMessage"
-  ).textContent =
-    "Sale saved successfully.";
-
-  await renderSales();
-
-  await updateDashboard();
-
-}
-
-
-/* =========================================================
-   EXPENSES
-   ========================================================= */
-
-async function addExpense(event) {
-
-  event.preventDefault();
-
-  if (
-    !currentProfile ||
-    !["admin", "manager"]
-      .includes(
-        currentProfile.role
-      )
-  ) {
-
-    alert(
-      "You do not have permission " +
-      "to add expenses."
-    );
-
-    return;
-  }
-
-  const description =
-    document.getElementById(
-      "expenseName"
-    ).value;
-
-  const amount =
-    Number(
-      document.getElementById(
-        "expenseAmount"
-      ).value
-    );
-
-  const { error } =
-    await supabaseClient
-      .from("expenses")
-      .insert([{
-
-        description:
-          description,
-
-        category:
-          "General",
-
-        amount:
-          amount,
-
-        staff_id:
-          currentUser.id
-
-      }]);
-
-  if (error) {
-
-    alert(
-      "Could not save expense: " +
-      error.message
-    );
-
-    return;
-  }
-
-  event.target.reset();
-
-  document.getElementById(
-    "expenseMessage"
-  ).textContent =
-    "Expense saved successfully.";
-
-  await renderExpenses();
-
-  await updateDashboard();
-
-}
-
-
-/* =========================================================
-   INVENTORY
-   ========================================================= */
-
-async function addInventory(event) {
-
-  event.preventDefault();
-
-  if (
-    !currentProfile ||
-    !["admin", "manager"]
-      .includes(
-        currentProfile.role
-      )
-  ) {
-
-    alert(
-      "Only Admin or Manager can " +
-      "change inventory."
-    );
-
-    return;
-  }
-
-  const item =
-    document.getElementById(
-      "inventoryProduct"
-    ).value;
-
-  const category =
-    document.getElementById(
-      "inventoryCategory"
-    ).value;
-
-  const quantity =
-    Number(
-      document.getElementById(
-        "inventoryQuantity"
-      ).value
-    );
-
-  const buying =
-    Number(
-      document.getElementById(
-        "inventoryBuying"
-      ).value
-    );
-
-  const selling =
-    Number(
-      document.getElementById(
-        "inventorySelling"
-      ).value
-    );
-
-  const { error } =
-    await supabaseClient
-      .from("inventory")
-      .insert([{
-
-        item: item,
-        category: category,
-        quantity: quantity,
-        buying_price:
-          buying,
-        selling_price:
-          selling
-
-      }]);
-
-  if (error) {
-
-    alert(
-      "Could not save inventory: " +
-      error.message
-    );
-
-    return;
-  }
-
-  event.target.reset();
-
-  await renderInventory();
-
-}
-
-
-/* =========================================================
-   DELIVERIES
-   ========================================================= */
-
-async function addDelivery(event) {
-
-  event.preventDefault();
-
-  if (!currentUser) {
-    return;
-  }
-
-  const role =
-    currentProfile?.role;
-
-  if (
-    ![
-      "admin",
-      "manager",
-      "gas_attendant",
-      "shop_staff"
-    ].includes(role)
-  ) {
-
-    alert(
-      "You do not have permission " +
-      "to add deliveries."
-    );
-
-    return;
-  }
-
-  const customer =
-    document.getElementById(
-      "deliveryCustomer"
-    ).value;
-
-  const phone =
-    document.getElementById(
-      "deliveryPhone"
-    ).value;
-
-  const product =
-    document.getElementById(
-      "deliveryProduct"
-    ).value;
-
-  const quantity =
-    Number(
-      document.getElementById(
-        "deliveryQuantity"
-      ).value || 1
-    );
-
-  const location =
-    document.getElementById(
-      "deliveryLocation"
-    ).value;
-
-  const status =
-    document.getElementById(
-      "deliveryStatus"
-    ).value;
-
-  const { error } =
-    await supabaseClient
-      .from("deliveries")
-      .insert([{
-
-        customer_name:
-          customer,
-
-        phone:
-          phone,
-
-        location:
-          location,
-
-        item:
-          product,
-
-        quantity:
-          quantity,
-
-        amount:
-          0,
-
-        status:
-          status,
-
-        assigned_to:
-          currentUser.id
-
-      }]);
-
-  if (error) {
-
-    alert(
-      "Could not save delivery: " +
-      error.message
-    );
-
-    return;
-  }
-
-  event.target.reset();
-
-  await renderDeliveries();
-
-}
-
-
-/* =========================================================
-   ADD STAFF
-   ========================================================= */
-
-async function addStaff(event) {
-
-  event.preventDefault();
-
-  const message =
-    document.getElementById(
-      "staffCreateMessage"
-    );
-
-  message.textContent = "";
-  message.className =
-    "success";
-
-  if (
-    !currentProfile ||
-    currentProfile.role !== "admin"
-  ) {
-
-    message.textContent =
-      "Only an Admin can create " +
-      "staff accounts.";
-
-    message.className =
-      "error";
-
-    return;
-  }
-
-  const full_name =
-    document.getElementById(
-      "newStaffName"
-    ).value.trim();
-
-  const email =
-    document.getElementById(
-      "newStaffEmail"
-    ).value.trim();
-
-  const password =
-    document.getElementById(
-      "newStaffPassword"
-    ).value;
-
-  const role =
-    document.getElementById(
-      "newStaffRole"
-    ).value;
-
-  if (
-    !full_name ||
-    !email ||
-    !password ||
-    !role
-  ) {
-
-    message.textContent =
-      "Please complete all fields.";
-
-    message.className =
-      "error";
-
-    return;
-  }
-
-  if (password.length < 8) {
-
-    message.textContent =
-      "Password must be at least " +
-      "8 characters.";
-
-    message.className =
-      "error";
-
-    return;
-  }
-
-  message.textContent =
-    "Creating staff account...";
-
-  try {
-
-    const {
-      data: sessionData,
-      error: sessionError
-    } =
-      await supabaseClient
-        .auth
-        .getSession();
-
-    if (
-      sessionError ||
-      !sessionData.session
-    ) {
-
-      message.textContent =
-        "Your Admin session has expired. " +
-        "Please log in again.";
-
-      message.className =
-        "error";
-
-      return;
     }
 
-    const accessToken =
-      sessionData.session.access_token;
-
-    const response =
-      await fetch(
-
-        SUPABASE_URL +
-        "/functions/v1/create-staff",
-
-        {
-
-          method: "POST",
-
-          headers: {
-
-            "Content-Type":
-              "application/json",
-
-            "Authorization":
-              "Bearer " +
-              accessToken,
-
-            "apikey":
-              SUPABASE_PUBLISHABLE_KEY
-
-          },
-
-          body:
-            JSON.stringify({
-
-              full_name:
-                full_name,
-
-              email:
-                email,
-
-              password:
-                password,
-
-              role:
-                role
-
-            })
-
-        }
-
-      );
-
-    const result =
-      await response.json();
-
-    if (!response.ok) {
-
-      console.error(
-        "Create staff error:",
-        result
-      );
-
-      message.textContent =
-        result.error ||
-        "Could not create staff account.";
-
-      message.className =
-        "error";
-
-      return;
-    }
-
-    message.textContent =
-      "✅ Staff account created successfully.";
-
-    message.className =
-      "success";
-
-    document.getElementById(
-      "newStaffName"
-    ).value = "";
-
-    document.getElementById(
-      "newStaffEmail"
-    ).value = "";
-
-    document.getElementById(
-      "newStaffPassword"
-    ).value = "";
-
-    document.getElementById(
-      "newStaffRole"
-    ).value = "";
-
-    await renderEmployees();
-
-  } catch (error) {
-
-    console.error(error);
-
-    message.textContent =
-      "Could not connect to the " +
-      "staff system.";
-
-    message.className =
-      "error";
-
-  }
-
-}
-
-
-/* =========================================================
-   DASHBOARD
-   ========================================================= */
-
-async function updateDashboard() {
-
-  if (!currentUser) {
-    return;
-  }
-
-  const [
-    requestsResult,
-    salesResult,
-    expensesResult
-  ] =
-    await Promise.all([
-
-      supabaseClient
-        .from("customer_requests")
-        .select("*"),
-
-      supabaseClient
-        .from("sales")
-        .select("amount"),
-
-      supabaseClient
-        .from("expenses")
-        .select("amount")
-
-    ]);
-
-  const requests =
-    requestsResult.data || [];
-
-  const sales =
-    salesResult.data || [];
-
-  const expenses =
-    expensesResult.data || [];
-
-  const salesTotal =
-    sales.reduce(
-      (sum, sale) =>
-        sum +
-        Number(
-          sale.amount || 0
-        ),
-      0
-    );
-
-  const expensesTotal =
-    expenses.reduce(
-      (sum, expense) =>
-        sum +
-        Number(
-          expense.amount || 0
-        ),
-      0
-    );
-
-  document.getElementById(
-    "statRequests"
-  ).textContent =
-    requests.length;
-
-  document.getElementById(
-    "statSales"
-  ).textContent =
-    "KSh " +
-    salesTotal.toLocaleString();
-
-  document.getElementById(
-    "statExpenses"
-  ).textContent =
-    "KSh " +
-    expensesTotal.toLocaleString();
-
-  document.getElementById(
-    "statProfit"
-  ).textContent =
-    "KSh " +
-    (
-      salesTotal -
-      expensesTotal
-    ).toLocaleString();
-
-}
-
-
-/* =========================================================
-   RENDER SALES
-   ========================================================= */
-
-async function renderSales() {
-
-  const container =
-    document.getElementById(
-      "salesTable"
-    );
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("sales")
-      .select("*")
-      .order(
-        "created_at",
-        {
-          ascending: false
-        }
-      );
-
-  if (error) {
-
-    container.innerHTML =
-      `<p class="error">
-        Could not load sales.
-      </p>`;
-
-    return;
-  }
-
-  if (!data.length) {
-
-    container.innerHTML =
-      "<p>No sales recorded.</p>";
-
-    return;
-  }
-
-  container.innerHTML = `
-
-    <table>
-
-      <tr>
-        <th>Item</th>
-        <th>Amount</th>
-        <th>Payment</th>
-        <th>Date</th>
-      </tr>
-
-      ${data.map(sale => `
-
-        <tr>
-
-          <td>
-            ${escapeHTML(
-              sale.item
-            )}
-          </td>
-
-          <td>
-            KSh ${Number(
-              sale.amount || 0
-            ).toLocaleString()}
-          </td>
-
-          <td>
-            ${escapeHTML(
-              sale.payment_method || ""
-            )}
-          </td>
-
-          <td>
-            ${new Date(
-              sale.created_at
-            ).toLocaleString()}
-          </td>
-
-        </tr>
-
-      `).join("")}
-
-    </table>
-
-  `;
-
-}
-
-
-/* =========================================================
-   RENDER EXPENSES
-   ========================================================= */
-
-async function renderExpenses() {
-
-  const container =
-    document.getElementById(
-      "expensesTable"
-    );
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("expenses")
-      .select("*")
-      .order(
-        "created_at",
-        {
-          ascending: false
-        }
-      );
-
-  if (error) {
-
-    container.innerHTML =
-      `<p class="error">
-        Could not load expenses.
-      </p>`;
-
-    return;
-  }
-
-  if (!data.length) {
-
-    container.innerHTML =
-      "<p>No expenses recorded.</p>";
-
-    return;
-  }
-
-  container.innerHTML = `
-
-    <table>
-
-      <tr>
-        <th>Expense</th>
-        <th>Amount</th>
-        <th>Date</th>
-      </tr>
-
-      ${data.map(expense => `
-
-        <tr>
-
-          <td>
-            ${escapeHTML(
-              expense.description
-            )}
-          </td>
-
-          <td>
-            KSh ${Number(
-              expense.amount || 0
-            ).toLocaleString()}
-          </td>
-
-          <td>
-            ${new Date(
-              expense.created_at
-            ).toLocaleString()}
-          </td>
-
-        </tr>
-
-      `).join("")}
-
-    </table>
-
-  `;
-
-}
-
-
-/* =========================================================
-   RENDER INVENTORY
-   ========================================================= */
-
-async function renderInventory() {
-
-  const container =
-    document.getElementById(
-      "inventoryTable"
-    );
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("inventory")
-      .select("*")
-      .order(
-        "item",
-        {
-          ascending: true
-        }
-      );
-
-  if (error) {
-
-    container.innerHTML =
-      `<p class="error">
-        Could not load inventory.
-      </p>`;
-
-    return;
-  }
-
-  if (!data.length) {
-
-    container.innerHTML =
-      "<p>No inventory recorded.</p>";
-
-    return;
-  }
-
-  container.innerHTML = `
-
-    <table>
-
-      <tr>
-        <th>Product</th>
-        <th>Category</th>
-        <th>Qty</th>
-        <th>Buying</th>
-        <th>Selling</th>
-      </tr>
-
-      ${data.map(item => `
-
-        <tr>
-
-          <td>
-            ${escapeHTML(
-              item.item
-            )}
-          </td>
-
-          <td>
-            ${escapeHTML(
-              item.category || ""
-            )}
-          </td>
-
-          <td>
-            ${item.quantity}
-          </td>
-
-          <td>
-            KSh ${Number(
-              item.buying_price || 0
-            ).toLocaleString()}
-          </td>
-
-          <td>
-            KSh ${Number(
-              item.selling_price || 0
-            ).toLocaleString()}
-          </td>
-
-        </tr>
-
-      `).join("")}
-
-    </table>
-
-  `;
-
-}
-
-
-/* =========================================================
-   RENDER DELIVERIES
-   ========================================================= */
-
-async function renderDeliveries() {
-
-  const container =
-    document.getElementById(
-      "deliveriesTable"
-    );
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("deliveries")
-      .select("*")
-      .order(
-        "created_at",
-        {
-          ascending: false
-        }
-      );
-
-  if (error) {
-
-    container.innerHTML =
-      `<p class="error">
-        Could not load deliveries.
-      </p>`;
-
-    return;
-  }
-
-  if (!data.length) {
-
-    container.innerHTML =
-      "<p>No deliveries recorded.</p>";
-
-    return;
-  }
-
-  container.innerHTML = `
-
-    <table>
-
-      <tr>
-        <th>Customer</th>
-        <th>Product</th>
-        <th>Location</th>
-        <th>Status</th>
-      </tr>
-
-      ${data.map(delivery => `
-
-        <tr>
-
-          <td>
-            ${escapeHTML(
-              delivery.customer_name || ""
-            )}
-          </td>
-
-          <td>
-            ${escapeHTML(
-              delivery.item || ""
-            )}
-          </td>
-
-          <td>
-            ${escapeHTML(
-              delivery.location || ""
-            )}
-          </td>
-
-          <td>
-            ${escapeHTML(
-              delivery.status || ""
-            )}
-          </td>
-
-        </tr>
-
-      `).join("")}
-
-    </table>
-
-  `;
-
-}
-
-
-/* =========================================================
-   RENDER EMPLOYEES
-   ========================================================= */
-
-async function renderEmployees() {
-
-  const container =
-    document.getElementById(
-      "employeesTable"
-    );
-
-  if (
-    !currentProfile ||
-    currentProfile.role !== "admin"
-  ) {
-
-    container.innerHTML =
-      "<p>You do not have permission " +
-      "to view staff.</p>";
-
-    return;
-  }
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("profiles")
-      .select(
-        "id,email,full_name,role,active,created_at"
-      )
-      .order(
-        "created_at",
-        {
-          ascending: false
-        }
-      );
-
-  if (error) {
-
-    container.innerHTML =
-      `<p class="error">
-        Could not load employees.
-      </p>`;
-
-    return;
-  }
-
-  if (!data.length) {
-
-    container.innerHTML =
-      "<p>No staff accounts found.</p>";
-
-    return;
-  }
-
-  container.innerHTML = `
-
-    <table>
-
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Status</th>
-      </tr>
-
-      ${data.map(employee => `
-
-        <tr>
-
-          <td>
-            ${escapeHTML(
-              employee.full_name || "-"
-            )}
-          </td>
-
-          <td>
-            ${escapeHTML(
-              employee.email || ""
-            )}
-          </td>
-
-          <td>
-            ${formatRole(
-              employee.role
-            )}
-          </td>
-
-          <td>
-            ${
-              employee.active
-                ? "Active"
-                : "Inactive"
-            }
-          </td>
-
-        </tr>
-
-      `).join("")}
-
-    </table>
-
-  `;
-
-}
-
-
-/* =========================================================
-   SECURITY HELPER
-   ========================================================= */
-
-function escapeHTML(value) {
-
-  return String(
-    value ?? ""
-  )
-  .replaceAll(
-    "&",
-    "&amp;"
-  )
-  .replaceAll(
-    "<",
-    "&lt;"
-  )
-  .replaceAll(
-    ">",
-    "&gt;"
-  )
-  .replaceAll(
-    '"',
-    "&quot;"
-  )
-  .replaceAll(
-    "'",
-    "&#039;"
-  );
-
-}
-
-
-/* =========================================================
-   START WEBSITE
-   ========================================================= */
-
-showSection("home");
-
-</script>
+  </script>
 
 </body>
 </html>
