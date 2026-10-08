@@ -34,7 +34,6 @@
   }
   </script>
 
-  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -338,6 +337,10 @@
       color: #168447;
       margin-top: 10px;
       font-weight: bold;
+    }
+
+    .staff-form {
+      margin-bottom: 25px;
     }
 
     @media (max-width: 700px) {
@@ -768,7 +771,6 @@
 
       <div class="notice">
         Staff members must use their own Supabase account.
-        The old temporary AMK2026 password has been removed.
       </div>
 
       <form onsubmit="staffLogin(event)">
@@ -817,7 +819,6 @@
         <span id="loggedRole"></span>
 
       </div>
-
 
       <h2>📊 Staff Dashboard</h2>
 
@@ -959,6 +960,7 @@
           <input id="inventoryProduct" required>
 
           <label>Category</label>
+
           <select id="inventoryCategory">
             <option>Gas</option>
             <option>Sneakers</option>
@@ -1004,7 +1006,12 @@
           <input id="deliveryProduct" required>
 
           <label>Quantity</label>
-          <input id="deliveryQuantity" type="number" min="1" value="1">
+          <input
+            id="deliveryQuantity"
+            type="number"
+            min="1"
+            value="1"
+          >
 
           <label>Location</label>
           <input id="deliveryLocation" required>
@@ -1013,7 +1020,9 @@
 
           <select id="deliveryStatus">
             <option value="pending">Pending</option>
-            <option value="out_for_delivery">Out for Delivery</option>
+            <option value="out_for_delivery">
+              Out for Delivery
+            </option>
             <option value="delivered">Delivered</option>
           </select>
 
@@ -1035,10 +1044,107 @@
         <h3>Employees / Staff</h3>
 
         <div class="notice">
-          Staff accounts are securely managed through Supabase
-          authentication. Each employee will have their own login
-          and role.
+
+          <strong>Admin only:</strong>
+
+          Create and manage staff accounts here.
+          Each employee gets their own email,
+          password and role.
+
         </div>
+
+
+        <!-- ADD STAFF -->
+
+        <form
+          class="staff-form"
+          onsubmit="addStaff(event)"
+        >
+
+          <h3>➕ Add Staff</h3>
+
+          <label>Full Name</label>
+
+          <input
+            id="newStaffName"
+            type="text"
+            placeholder="Employee full name"
+            required
+          >
+
+
+          <label>Email</label>
+
+          <input
+            id="newStaffEmail"
+            type="email"
+            placeholder="employee@example.com"
+            required
+          >
+
+
+          <label>Temporary Password</label>
+
+          <input
+            id="newStaffPassword"
+            type="password"
+            placeholder="Minimum 8 characters"
+            minlength="8"
+            required
+          >
+
+
+          <label>Role</label>
+
+          <select
+            id="newStaffRole"
+            required
+          >
+
+            <option value="">
+              Select staff role
+            </option>
+
+            <option value="manager">
+              Manager
+            </option>
+
+            <option value="barber">
+              Barber
+            </option>
+
+            <option value="gas_attendant">
+              Gas Attendant
+            </option>
+
+            <option value="shop_staff">
+              Shop Staff
+            </option>
+
+            <option value="admin">
+              Admin
+            </option>
+
+          </select>
+
+
+          <button
+            class="btn green"
+            type="submit"
+          >
+            Create Staff Account
+          </button>
+
+
+          <p
+            id="staffCreateMessage"
+            class="success"
+          ></p>
+
+        </form>
+
+
+        <h3>Current Staff</h3>
 
         <div id="employeesTable"></div>
 
@@ -1073,16 +1179,11 @@
 const SUPABASE_URL =
   "https://snvulxcguwofowhglbrw.supabase.co";
 
-/*
- IMPORTANT:
- This is the PUBLIC/PUBLISHABLE key.
- Never put a Supabase SECRET/service_role key here.
-*/
-
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_3DLOM4jXxzCwM1nyAlAEkQ_b2EwnTZd";
 
-const { createClient } = window.supabase;
+const { createClient } =
+  window.supabase;
 
 const supabaseClient =
   createClient(
@@ -1143,6 +1244,7 @@ function showSection(id) {
   if (id === "staff") {
     checkExistingSession();
   }
+
 }
 
 
@@ -1170,6 +1272,7 @@ async function createCustomerRequest(request) {
   }
 
   return true;
+
 }
 
 
@@ -1202,7 +1305,9 @@ async function submitGasOrder(event) {
     document.getElementById("gasPayment").value;
 
   const price =
-    size === "6 KG" ? 1200 : 2000;
+    size === "6 KG"
+      ? 1200
+      : 2000;
 
   const total =
     price * quantity;
@@ -1246,11 +1351,13 @@ Total: KSh ${total}
 Location: ${location}
 Payment: ${payment}`;
 
+
   window.open(
     "https://wa.me/254117414318?text=" +
     encodeURIComponent(message),
     "_blank"
   );
+
 
   event.target.reset();
 
@@ -1279,11 +1386,15 @@ async function submitSneakerOrder(event) {
 
   const quantity =
     Number(
-      document.getElementById("sneakerQuantity").value
+      document.getElementById(
+        "sneakerQuantity"
+      ).value
     );
 
   const location =
-    document.getElementById("sneakerLocation").value;
+    document.getElementById(
+      "sneakerLocation"
+    ).value;
 
 
   await createCustomerRequest({
@@ -1294,7 +1405,8 @@ async function submitSneakerOrder(event) {
 
     service_type: "sneaker",
 
-    item: `${product} - Size ${size}`,
+    item:
+      `${product} - Size ${size}`,
 
     quantity: quantity,
 
@@ -1323,11 +1435,13 @@ Size: ${size}
 Quantity: ${quantity}
 Delivery: ${location}`;
 
+
   window.open(
     "https://wa.me/254117414318?text=" +
     encodeURIComponent(message),
     "_blank"
   );
+
 
   event.target.reset();
 
@@ -1349,19 +1463,28 @@ async function submitBarberBooking(event) {
     document.getElementById("barberPhone").value;
 
   const service =
-    document.getElementById("barberService").value;
+    document.getElementById(
+      "barberService"
+    ).value;
 
   const date =
-    document.getElementById("barberDate").value;
+    document.getElementById(
+      "barberDate"
+    ).value;
 
   const time =
-    document.getElementById("barberTime").value;
+    document.getElementById(
+      "barberTime"
+    ).value;
 
   const location =
-    document.getElementById("barberLocation").value;
+    document.getElementById(
+      "barberLocation"
+    ).value;
 
 
   let amount = 0;
+
 
   if (service.includes("200")) {
     amount = 200;
@@ -1416,11 +1539,13 @@ Location: ${location}
 
 Please confirm my booking.`;
 
+
   window.open(
     "https://wa.me/254118311141?text=" +
     encodeURIComponent(message),
     "_blank"
   );
+
 
   event.target.reset();
 
@@ -1434,20 +1559,28 @@ Please confirm my booking.`;
 function renderRequests() {
 
   const container =
-    document.getElementById("requestsList");
+    document.getElementById(
+      "requestsList"
+    );
 
   container.innerHTML = `
+
     <div class="card">
+
       <h3>My Requests</h3>
+
       <p>
-        Your order or booking is saved securely in AMK's
-        business system after submission.
+        Your order or booking is saved securely
+        in AMK's business system after submission.
       </p>
+
       <p class="small">
-        For confirmation, please also check your WhatsApp
-        conversation with AMK.
+        For confirmation, please also check
+        your WhatsApp conversation with AMK.
       </p>
+
     </div>
+
   `;
 
 }
@@ -1462,13 +1595,19 @@ async function staffLogin(event) {
   event.preventDefault();
 
   const email =
-    document.getElementById("staffEmail").value.trim();
+    document.getElementById(
+      "staffEmail"
+    ).value.trim();
 
   const password =
-    document.getElementById("staffPassword").value;
+    document.getElementById(
+      "staffPassword"
+    ).value;
 
   const errorBox =
-    document.getElementById("loginError");
+    document.getElementById(
+      "loginError"
+    );
 
   errorBox.textContent = "";
 
@@ -1488,13 +1627,15 @@ async function staffLogin(event) {
     console.error(error);
 
     errorBox.textContent =
-      "Login failed: " + error.message;
+      "Login failed: " +
+      error.message;
 
     return;
   }
 
 
-  currentUser = data.user;
+  currentUser =
+    data.user;
 
 
   await loadProfile();
@@ -1526,19 +1667,23 @@ async function loadProfile() {
     console.error(error);
 
     alert(
-      "Your login works, but your staff profile could not be loaded."
+      "Your login works, but your staff profile " +
+      "could not be loaded."
     );
 
     return;
   }
 
 
-  currentProfile = data;
+  currentProfile =
+    data;
 
 
   if (!currentProfile.active) {
 
-    await supabaseClient.auth.signOut();
+    await supabaseClient
+      .auth
+      .signOut();
 
     alert(
       "This staff account is inactive."
@@ -1569,7 +1714,9 @@ async function loadProfile() {
   document
     .getElementById("loggedRole")
     .textContent =
-      formatRole(currentProfile.role);
+      formatRole(
+        currentProfile.role
+      );
 
 
   applyRoleAccess();
@@ -1605,9 +1752,12 @@ function applyRoleAccess() {
 
     if (
       text === "Expenses" &&
-      !["admin", "manager"].includes(role)
+      !["admin", "manager"]
+        .includes(role)
     ) {
+
       allowed = false;
+
     }
 
 
@@ -1615,7 +1765,9 @@ function applyRoleAccess() {
       text === "Employees" &&
       role !== "admin"
     ) {
+
       allowed = false;
+
     }
 
 
@@ -1643,9 +1795,11 @@ function formatRole(role) {
 
     barber: "Barber",
 
-    gas_attendant: "Gas Attendant",
+    gas_attendant:
+      "Gas Attendant",
 
-    shop_staff: "Shop Staff"
+    shop_staff:
+      "Shop Staff"
 
   };
 
@@ -1661,7 +1815,9 @@ function formatRole(role) {
 async function checkExistingSession() {
 
   const { data } =
-    await supabaseClient.auth.getSession();
+    await supabaseClient
+      .auth
+      .getSession();
 
 
   if (data.session) {
@@ -1682,7 +1838,9 @@ async function checkExistingSession() {
 
 async function logoutStaff() {
 
-  await supabaseClient.auth.signOut();
+  await supabaseClient
+    .auth
+    .signOut();
 
   currentUser = null;
 
@@ -1690,17 +1848,23 @@ async function logoutStaff() {
 
 
   document
-    .getElementById("staffDashboard")
+    .getElementById(
+      "staffDashboard"
+    )
     .classList.add("hidden");
 
 
   document
-    .getElementById("staffLogin")
+    .getElementById(
+      "staffLogin"
+    )
     .classList.remove("hidden");
 
 
   document
-    .getElementById("staffPassword")
+    .getElementById(
+      "staffPassword"
+    )
     .value = "";
 
 }
@@ -1783,15 +1947,21 @@ async function addSale(event) {
 
 
   const item =
-    document.getElementById("saleItem").value;
+    document.getElementById(
+      "saleItem"
+    ).value;
 
   const amount =
     Number(
-      document.getElementById("saleAmount").value
+      document.getElementById(
+        "saleAmount"
+      ).value
     );
 
   const payment =
-    document.getElementById("salePayment").value;
+    document.getElementById(
+      "salePayment"
+    ).value;
 
 
   const { error } =
@@ -1809,7 +1979,8 @@ async function addSale(event) {
 
         payment_method: payment,
 
-        staff_id: currentUser.id
+        staff_id:
+          currentUser.id
 
       }]);
 
@@ -1827,9 +1998,12 @@ async function addSale(event) {
 
   event.target.reset();
 
-  document.getElementById("saleMessage")
-    .textContent =
-      "Sale saved successfully.";
+
+  document.getElementById(
+    "saleMessage"
+  ).textContent =
+    "Sale saved successfully.";
+
 
   await renderSales();
 
@@ -1849,13 +2023,15 @@ async function addExpense(event) {
 
   if (
     !currentProfile ||
-    !["admin", "manager"].includes(
-      currentProfile.role
-    )
+    !["admin", "manager"]
+      .includes(
+        currentProfile.role
+      )
   ) {
 
     alert(
-      "You do not have permission to add expenses."
+      "You do not have permission " +
+      "to add expenses."
     );
 
     return;
@@ -1863,11 +2039,15 @@ async function addExpense(event) {
 
 
   const description =
-    document.getElementById("expenseName").value;
+    document.getElementById(
+      "expenseName"
+    ).value;
 
   const amount =
     Number(
-      document.getElementById("expenseAmount").value
+      document.getElementById(
+        "expenseAmount"
+      ).value
     );
 
 
@@ -1876,13 +2056,17 @@ async function addExpense(event) {
       .from("expenses")
       .insert([{
 
-        description: description,
+        description:
+          description,
 
-        category: "General",
+        category:
+          "General",
 
-        amount: amount,
+        amount:
+          amount,
 
-        staff_id: currentUser.id
+        staff_id:
+          currentUser.id
 
       }]);
 
@@ -1900,9 +2084,12 @@ async function addExpense(event) {
 
   event.target.reset();
 
-  document.getElementById("expenseMessage")
-    .textContent =
-      "Expense saved successfully.";
+
+  document.getElementById(
+    "expenseMessage"
+  ).textContent =
+    "Expense saved successfully.";
+
 
   await renderExpenses();
 
@@ -1922,13 +2109,15 @@ async function addInventory(event) {
 
   if (
     !currentProfile ||
-    !["admin", "manager"].includes(
-      currentProfile.role
-    )
+    !["admin", "manager"]
+      .includes(
+        currentProfile.role
+      )
   ) {
 
     alert(
-      "Only Admin or Manager can change inventory."
+      "Only Admin or Manager can " +
+      "change inventory."
     );
 
     return;
@@ -1978,9 +2167,11 @@ async function addInventory(event) {
 
         quantity: quantity,
 
-        buying_price: buying,
+        buying_price:
+          buying,
 
-        selling_price: selling
+        selling_price:
+          selling
 
       }]);
 
@@ -2010,6 +2201,11 @@ async function addInventory(event) {
 async function addDelivery(event) {
 
   event.preventDefault();
+
+
+  if (!currentUser) {
+    return;
+  }
 
 
   const customer =
@@ -2050,19 +2246,26 @@ async function addDelivery(event) {
       .from("deliveries")
       .insert([{
 
-        customer_name: customer,
+        customer_name:
+          customer,
 
-        phone: phone,
+        phone:
+          phone,
 
-        location: location,
+        location:
+          location,
 
-        item: product,
+        item:
+          product,
 
-        quantity: quantity,
+        quantity:
+          quantity,
 
-        amount: 0,
+        amount:
+          0,
 
-        status: status,
+        status:
+          status,
 
         assigned_to:
           currentUser.id
@@ -2089,6 +2292,248 @@ async function addDelivery(event) {
 
 
 /* =========================================================
+   ADD STAFF
+   ========================================================= */
+
+async function addStaff(event) {
+
+  event.preventDefault();
+
+
+  const message =
+    document.getElementById(
+      "staffCreateMessage"
+    );
+
+
+  message.textContent = "";
+
+  message.className =
+    "success";
+
+
+  if (
+    !currentProfile ||
+    currentProfile.role !== "admin"
+  ) {
+
+    message.textContent =
+      "Only an Admin can create " +
+      "staff accounts.";
+
+    message.className =
+      "error";
+
+    return;
+  }
+
+
+  const full_name =
+    document.getElementById(
+      "newStaffName"
+    ).value.trim();
+
+
+  const email =
+    document.getElementById(
+      "newStaffEmail"
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      "newStaffPassword"
+    ).value;
+
+
+  const role =
+    document.getElementById(
+      "newStaffRole"
+    ).value;
+
+
+  if (
+    !full_name ||
+    !email ||
+    !password ||
+    !role
+  ) {
+
+    message.textContent =
+      "Please complete all fields.";
+
+    message.className =
+      "error";
+
+    return;
+  }
+
+
+  if (password.length < 8) {
+
+    message.textContent =
+      "Password must be at least " +
+      "8 characters.";
+
+    message.className =
+      "error";
+
+    return;
+  }
+
+
+  message.textContent =
+    "Creating staff account...";
+
+
+  try {
+
+    const {
+      data: sessionData,
+      error: sessionError
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (
+      sessionError ||
+      !sessionData.session
+    ) {
+
+      message.textContent =
+        "Your Admin session has expired. " +
+        "Please log in again.";
+
+      message.className =
+        "error";
+
+      return;
+    }
+
+
+    const accessToken =
+      sessionData.session.access_token;
+
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/functions/v1/create-staff",
+
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json",
+
+            "Authorization":
+              "Bearer " +
+              accessToken,
+
+            "apikey":
+              SUPABASE_PUBLISHABLE_KEY
+
+          },
+
+          body:
+            JSON.stringify({
+
+              full_name:
+                full_name,
+
+              email:
+                email,
+
+              password:
+                password,
+
+              role:
+                role
+
+            })
+
+        }
+
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      console.error(
+        "Create staff error:",
+        result
+      );
+
+
+      message.textContent =
+        result.error ||
+        "Could not create staff account.";
+
+      message.className =
+        "error";
+
+      return;
+    }
+
+
+    message.textContent =
+      "✅ Staff account created successfully.";
+
+    message.className =
+      "success";
+
+
+    document.getElementById(
+      "newStaffName"
+    ).value = "";
+
+
+    document.getElementById(
+      "newStaffEmail"
+    ).value = "";
+
+
+    document.getElementById(
+      "newStaffPassword"
+    ).value = "";
+
+
+    document.getElementById(
+      "newStaffRole"
+    ).value = "";
+
+
+    await renderEmployees();
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    message.textContent =
+      "Could not connect to the " +
+      "staff system.";
+
+    message.className =
+      "error";
+
+  }
+
+}
+
+
+/* =========================================================
    DASHBOARD
    ========================================================= */
 
@@ -2103,21 +2548,22 @@ async function updateDashboard() {
     requestsResult,
     salesResult,
     expensesResult
-  ] = await Promise.all([
+  ] =
+    await Promise.all([
 
-    supabaseClient
-      .from("customer_requests")
-      .select("*"),
+      supabaseClient
+        .from("customer_requests")
+        .select("*"),
 
-    supabaseClient
-      .from("sales")
-      .select("amount"),
+      supabaseClient
+        .from("sales")
+        .select("amount"),
 
-    supabaseClient
-      .from("expenses")
-      .select("amount")
+      supabaseClient
+        .from("expenses")
+        .select("amount")
 
-  ]);
+    ]);
 
 
   const requests =
@@ -2133,7 +2579,10 @@ async function updateDashboard() {
   const salesTotal =
     sales.reduce(
       (sum, sale) =>
-        sum + Number(sale.amount || 0),
+        sum +
+        Number(
+          sale.amount || 0
+        ),
       0
     );
 
@@ -2141,7 +2590,10 @@ async function updateDashboard() {
   const expensesTotal =
     expenses.reduce(
       (sum, expense) =>
-        sum + Number(expense.amount || 0),
+        sum +
+        Number(
+          expense.amount || 0
+        ),
       0
     );
 
@@ -2190,13 +2642,18 @@ async function renderSales() {
     );
 
 
-  const { data, error } =
+  const {
+    data,
+    error
+  } =
     await supabaseClient
       .from("sales")
       .select("*")
       .order(
         "created_at",
-        { ascending: false }
+        {
+          ascending: false
+        }
       );
 
 
@@ -2236,7 +2693,9 @@ async function renderSales() {
         <tr>
 
           <td>
-            ${escapeHTML(sale.item)}
+            ${escapeHTML(
+              sale.item
+            )}
           </td>
 
           <td>
@@ -2280,13 +2739,18 @@ async function renderExpenses() {
     );
 
 
-  const { data, error } =
+  const {
+    data,
+    error
+  } =
     await supabaseClient
       .from("expenses")
       .select("*")
       .order(
         "created_at",
-        { ascending: false }
+        {
+          ascending: false
+        }
       );
 
 
@@ -2365,13 +2829,18 @@ async function renderInventory() {
     );
 
 
-  const { data, error } =
+  const {
+    data,
+    error
+  } =
     await supabaseClient
       .from("inventory")
       .select("*")
       .order(
         "item",
-        { ascending: true }
+        {
+          ascending: true
+        }
       );
 
 
@@ -2412,7 +2881,9 @@ async function renderInventory() {
         <tr>
 
           <td>
-            ${escapeHTML(item.item)}
+            ${escapeHTML(
+              item.item
+            )}
           </td>
 
           <td>
@@ -2460,13 +2931,18 @@ async function renderDeliveries() {
     );
 
 
-  const { data, error } =
+  const {
+    data,
+    error
+  } =
     await supabaseClient
       .from("deliveries")
       .select("*")
       .order(
         "created_at",
-        { ascending: false }
+        {
+          ascending: false
+        }
       );
 
 
@@ -2558,13 +3034,17 @@ async function renderEmployees() {
   ) {
 
     container.innerHTML =
-      "<p>You do not have permission to view staff.</p>";
+      "<p>You do not have permission " +
+      "to view staff.</p>";
 
     return;
   }
 
 
-  const { data, error } =
+  const {
+    data,
+    error
+  } =
     await supabaseClient
       .from("profiles")
       .select(
@@ -2572,7 +3052,9 @@ async function renderEmployees() {
       )
       .order(
         "created_at",
-        { ascending: false }
+        {
+          ascending: false
+        }
       );
 
 
@@ -2657,11 +3139,26 @@ function escapeHTML(value) {
   return String(
     value ?? ""
   )
-  .replaceAll("&", "&amp;")
-  .replaceAll("<", "&lt;")
-  .replaceAll(">", "&gt;")
-  .replaceAll('"', "&quot;")
-  .replaceAll("'", "&#039;");
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
 
 }
 
