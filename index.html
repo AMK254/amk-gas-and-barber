@@ -389,9 +389,6 @@
   </div>
 </header>
 
-
-<!-- HOME -->
-
 <section id="home">
 
   <div class="hero">
@@ -454,9 +451,6 @@
   </main>
 
 </section>
-
-
-<!-- GAS -->
 
 <section id="gas" class="hidden">
 
@@ -528,9 +522,6 @@
   </main>
 
 </section>
-
-
-<!-- SNEAKERS -->
 
 <section id="sneakers" class="hidden">
 
@@ -612,9 +603,6 @@
 
 </section>
 
-
-<!-- BARBER -->
-
 <section id="barber" class="hidden">
 
   <main>
@@ -680,9 +668,6 @@
 
 </section>
 
-
-<!-- REQUESTS -->
-
 <section id="requests" class="hidden">
 
   <main>
@@ -694,9 +679,6 @@
   </main>
 
 </section>
-
-
-<!-- CONTACT -->
 
 <section id="contact" class="hidden">
 
@@ -756,14 +738,9 @@
 
 </section>
 
-
-<!-- STAFF -->
-
 <section id="staff" class="hidden">
 
   <main>
-
-    <!-- LOGIN -->
 
     <div id="staffLogin" class="staff-login">
 
@@ -802,9 +779,6 @@
       </form>
 
     </div>
-
-
-    <!-- DASHBOARD -->
 
     <div id="staffDashboard" class="hidden">
 
@@ -854,9 +828,6 @@
 
       </div>
 
-
-      <!-- DASHBOARD -->
-
       <div id="tab-dashboard">
 
         <div class="stat-grid">
@@ -884,9 +855,6 @@
         </div>
 
       </div>
-
-
-      <!-- SALES -->
 
       <div id="tab-sales" class="hidden">
 
@@ -920,9 +888,6 @@
 
       </div>
 
-
-      <!-- EXPENSES -->
-
       <div id="tab-expenses" class="hidden">
 
         <h3>Expenses</h3>
@@ -947,14 +912,11 @@
 
       </div>
 
-
-      <!-- INVENTORY -->
-
       <div id="tab-inventory" class="hidden">
 
         <h3>Inventory</h3>
 
-        <form onsubmit="addInventory(event)">
+        <form id="inventoryForm" onsubmit="addInventory(event)">
 
           <label>Product</label>
           <input id="inventoryProduct" required>
@@ -987,9 +949,6 @@
 
       </div>
 
-
-      <!-- DELIVERIES -->
-
       <div id="tab-deliveries" class="hidden">
 
         <h3>Deliveries</h3>
@@ -1006,6 +965,7 @@
           <input id="deliveryProduct" required>
 
           <label>Quantity</label>
+
           <input
             id="deliveryQuantity"
             type="number"
@@ -1036,9 +996,6 @@
 
       </div>
 
-
-      <!-- EMPLOYEES -->
-
       <div id="tab-employees" class="hidden">
 
         <h3>Employees / Staff</h3>
@@ -1052,9 +1009,6 @@
           password and role.
 
         </div>
-
-
-        <!-- ADD STAFF -->
 
         <form
           class="staff-form"
@@ -1072,7 +1026,6 @@
             required
           >
 
-
           <label>Email</label>
 
           <input
@@ -1081,7 +1034,6 @@
             placeholder="employee@example.com"
             required
           >
-
 
           <label>Temporary Password</label>
 
@@ -1093,13 +1045,9 @@
             required
           >
 
-
           <label>Role</label>
 
-          <select
-            id="newStaffRole"
-            required
-          >
+          <select id="newStaffRole" required>
 
             <option value="">
               Select staff role
@@ -1127,7 +1075,6 @@
 
           </select>
 
-
           <button
             class="btn green"
             type="submit"
@@ -1135,14 +1082,12 @@
             Create Staff Account
           </button>
 
-
           <p
             id="staffCreateMessage"
             class="success"
           ></p>
 
         </form>
-
 
         <h3>Current Staff</h3>
 
@@ -1156,7 +1101,6 @@
 
 </section>
 
-
 <footer>
 
   <p>
@@ -1168,7 +1112,6 @@
   </p>
 
 </footer>
-
 
 <script>
 
@@ -1312,31 +1255,20 @@ async function submitGasOrder(event) {
   const total =
     price * quantity;
 
-
   await createCustomerRequest({
 
     customer_name: name,
-
     phone: phone,
-
     service_type: "gas",
-
     item: size,
-
     quantity: quantity,
-
     amount: total,
-
     payment_method: payment,
-
     location: location,
-
     notes: "Gas order",
-
     status: "pending"
 
   });
-
 
   const message =
 `Hello AMK Gas,
@@ -1351,13 +1283,11 @@ Total: KSh ${total}
 Location: ${location}
 Payment: ${payment}`;
 
-
   window.open(
     "https://wa.me/254117414318?text=" +
     encodeURIComponent(message),
     "_blank"
   );
-
 
   event.target.reset();
 
@@ -1396,32 +1326,21 @@ async function submitSneakerOrder(event) {
       "sneakerLocation"
     ).value;
 
-
   await createCustomerRequest({
 
     customer_name: name,
-
     phone: phone,
-
     service_type: "sneaker",
-
     item:
       `${product} - Size ${size}`,
-
     quantity: quantity,
-
     amount: 0,
-
     payment_method: "",
-
     location: location,
-
     notes: "Sneaker order",
-
     status: "pending"
 
   });
-
 
   const message =
 `Hello AMK Sneakers,
@@ -1435,13 +1354,11 @@ Size: ${size}
 Quantity: ${quantity}
 Delivery: ${location}`;
 
-
   window.open(
     "https://wa.me/254117414318?text=" +
     encodeURIComponent(message),
     "_blank"
   );
-
 
   event.target.reset();
 
@@ -1482,9 +1399,7 @@ async function submitBarberBooking(event) {
       "barberLocation"
     ).value;
 
-
   let amount = 0;
-
 
   if (service.includes("200")) {
     amount = 200;
@@ -1498,32 +1413,21 @@ async function submitBarberBooking(event) {
     amount = 100;
   }
 
-
   await createCustomerRequest({
 
     customer_name: name,
-
     phone: phone,
-
     service_type: "barber",
-
     item: service,
-
     quantity: 1,
-
     amount: amount,
-
     payment_method: "",
-
     location: location,
-
     notes:
       `Requested date: ${date}; Time: ${time}`,
-
     status: "pending"
 
   });
-
 
   const message =
 `Hello AMK Barber,
@@ -1539,13 +1443,11 @@ Location: ${location}
 
 Please confirm my booking.`;
 
-
   window.open(
     "https://wa.me/254118311141?text=" +
     encodeURIComponent(message),
     "_blank"
   );
-
 
   event.target.reset();
 
@@ -1611,16 +1513,13 @@ async function staffLogin(event) {
 
   errorBox.textContent = "";
 
-
   const { data, error } =
     await supabaseClient.auth.signInWithPassword({
 
       email: email,
-
       password: password
 
     });
-
 
   if (error) {
 
@@ -1633,10 +1532,8 @@ async function staffLogin(event) {
     return;
   }
 
-
   currentUser =
     data.user;
-
 
   await loadProfile();
 
@@ -1653,14 +1550,12 @@ async function loadProfile() {
     return;
   }
 
-
   const { data, error } =
     await supabaseClient
       .from("profiles")
       .select("*")
       .eq("id", currentUser.id)
       .single();
-
 
   if (error) {
 
@@ -1674,10 +1569,8 @@ async function loadProfile() {
     return;
   }
 
-
   currentProfile =
     data;
-
 
   if (!currentProfile.active) {
 
@@ -1692,16 +1585,13 @@ async function loadProfile() {
     return;
   }
 
-
   document
     .getElementById("staffLogin")
     .classList.add("hidden");
 
-
   document
     .getElementById("staffDashboard")
     .classList.remove("hidden");
-
 
   document
     .getElementById("loggedUser")
@@ -1710,7 +1600,6 @@ async function loadProfile() {
       currentUser.email ||
       "";
 
-
   document
     .getElementById("loggedRole")
     .textContent =
@@ -1718,10 +1607,9 @@ async function loadProfile() {
         currentProfile.role
       );
 
-
   applyRoleAccess();
 
-  await updateDashboard();
+  staffTab("dashboard");
 
 }
 
@@ -1733,50 +1621,110 @@ async function loadProfile() {
 function applyRoleAccess() {
 
   const role =
-    currentProfile?.role;
+    currentProfile?.role || "";
 
+  const permissions = {
 
-  const buttons =
-    document.querySelectorAll(
-      ".staff-nav button"
+    admin: {
+      sales: true,
+      expenses: true,
+      inventory: true,
+      deliveries: true,
+      employees: true
+    },
+
+    manager: {
+      sales: true,
+      expenses: true,
+      inventory: true,
+      deliveries: true,
+      employees: false
+    },
+
+    barber: {
+      sales: true,
+      expenses: false,
+      inventory: true,
+      deliveries: false,
+      employees: false
+    },
+
+    gas_attendant: {
+      sales: true,
+      expenses: false,
+      inventory: true,
+      deliveries: true,
+      employees: false
+    },
+
+    shop_staff: {
+      sales: true,
+      expenses: false,
+      inventory: true,
+      deliveries: true,
+      employees: false
+    }
+
+  };
+
+  const access =
+    permissions[role] || {};
+
+  document
+    .querySelectorAll(".staff-nav button")
+    .forEach(button => {
+
+      const text =
+        button.textContent.trim();
+
+      let allowed = true;
+
+      if (text === "Sales") {
+        allowed =
+          access.sales === true;
+      }
+
+      if (text === "Expenses") {
+        allowed =
+          access.expenses === true;
+      }
+
+      if (text === "Inventory") {
+        allowed =
+          access.inventory === true;
+      }
+
+      if (text === "Deliveries") {
+        allowed =
+          access.deliveries === true;
+      }
+
+      if (text === "Employees") {
+        allowed =
+          access.employees === true;
+      }
+
+      button.classList.toggle(
+        "hidden",
+        !allowed
+      );
+
+    });
+
+  const inventoryForm =
+    document.getElementById(
+      "inventoryForm"
     );
 
+  if (inventoryForm) {
 
-  buttons.forEach(button => {
-
-    const text =
-      button.textContent.trim();
-
-    let allowed = true;
-
-
-    if (
-      text === "Expenses" &&
+    inventoryForm.classList.toggle(
+      "hidden",
       !["admin", "manager"]
         .includes(role)
-    ) {
-
-      allowed = false;
-
-    }
-
-
-    if (
-      text === "Employees" &&
-      role !== "admin"
-    ) {
-
-      allowed = false;
-
-    }
-
-
-    button.classList.toggle(
-      "hidden",
-      !allowed
     );
 
-  });
+  }
 
 }
 
@@ -1790,14 +1738,10 @@ function formatRole(role) {
   const roles = {
 
     admin: "Admin",
-
     manager: "Manager",
-
     barber: "Barber",
-
     gas_attendant:
       "Gas Attendant",
-
     shop_staff:
       "Shop Staff"
 
@@ -1818,7 +1762,6 @@ async function checkExistingSession() {
     await supabaseClient
       .auth
       .getSession();
-
 
   if (data.session) {
 
@@ -1843,9 +1786,7 @@ async function logoutStaff() {
     .signOut();
 
   currentUser = null;
-
   currentProfile = null;
-
 
   document
     .getElementById(
@@ -1853,13 +1794,11 @@ async function logoutStaff() {
     )
     .classList.add("hidden");
 
-
   document
     .getElementById(
       "staffLogin"
     )
     .classList.remove("hidden");
-
 
   document
     .getElementById(
@@ -1871,10 +1810,72 @@ async function logoutStaff() {
 
 
 /* =========================================================
-   STAFF TABS
+   STAFF TABS + ROLE PROTECTION
    ========================================================= */
 
 function staffTab(tab) {
+
+  if (!currentProfile) {
+    return;
+  }
+
+  const role =
+    currentProfile.role;
+
+  const permissions = {
+
+    admin: [
+      "dashboard",
+      "sales",
+      "expenses",
+      "inventory",
+      "deliveries",
+      "employees"
+    ],
+
+    manager: [
+      "dashboard",
+      "sales",
+      "expenses",
+      "inventory",
+      "deliveries"
+    ],
+
+    barber: [
+      "dashboard",
+      "sales",
+      "inventory"
+    ],
+
+    gas_attendant: [
+      "dashboard",
+      "sales",
+      "inventory",
+      "deliveries"
+    ],
+
+    shop_staff: [
+      "dashboard",
+      "sales",
+      "inventory",
+      "deliveries"
+    ]
+
+  };
+
+  const allowedTabs =
+    permissions[role] ||
+    ["dashboard"];
+
+  if (!allowedTabs.includes(tab)) {
+
+    alert(
+      "You do not have permission " +
+      "to access this section."
+    );
+
+    return;
+  }
 
   const tabs = [
     "dashboard",
@@ -1884,7 +1885,6 @@ function staffTab(tab) {
     "deliveries",
     "employees"
   ];
-
 
   tabs.forEach(name => {
 
@@ -1903,7 +1903,6 @@ function staffTab(tab) {
     }
 
   });
-
 
   if (tab === "dashboard") {
     updateDashboard();
@@ -1940,11 +1939,9 @@ async function addSale(event) {
 
   event.preventDefault();
 
-
   if (!currentUser) {
     return;
   }
-
 
   const item =
     document.getElementById(
@@ -1963,27 +1960,19 @@ async function addSale(event) {
       "salePayment"
     ).value;
 
-
   const { error } =
     await supabaseClient
       .from("sales")
       .insert([{
 
         item: item,
-
-        category: "General",
-
         quantity: 1,
-
         amount: amount,
-
         payment_method: payment,
-
         staff_id:
           currentUser.id
 
       }]);
-
 
   if (error) {
 
@@ -1995,15 +1984,12 @@ async function addSale(event) {
     return;
   }
 
-
   event.target.reset();
-
 
   document.getElementById(
     "saleMessage"
   ).textContent =
     "Sale saved successfully.";
-
 
   await renderSales();
 
@@ -2019,7 +2005,6 @@ async function addSale(event) {
 async function addExpense(event) {
 
   event.preventDefault();
-
 
   if (
     !currentProfile ||
@@ -2037,7 +2022,6 @@ async function addExpense(event) {
     return;
   }
 
-
   const description =
     document.getElementById(
       "expenseName"
@@ -2049,7 +2033,6 @@ async function addExpense(event) {
         "expenseAmount"
       ).value
     );
-
 
   const { error } =
     await supabaseClient
@@ -2070,7 +2053,6 @@ async function addExpense(event) {
 
       }]);
 
-
   if (error) {
 
     alert(
@@ -2081,15 +2063,12 @@ async function addExpense(event) {
     return;
   }
 
-
   event.target.reset();
-
 
   document.getElementById(
     "expenseMessage"
   ).textContent =
     "Expense saved successfully.";
-
 
   await renderExpenses();
 
@@ -2106,7 +2085,6 @@ async function addInventory(event) {
 
   event.preventDefault();
 
-
   if (
     !currentProfile ||
     !["admin", "manager"]
@@ -2122,7 +2100,6 @@ async function addInventory(event) {
 
     return;
   }
-
 
   const item =
     document.getElementById(
@@ -2155,26 +2132,20 @@ async function addInventory(event) {
       ).value
     );
 
-
   const { error } =
     await supabaseClient
       .from("inventory")
       .insert([{
 
         item: item,
-
         category: category,
-
         quantity: quantity,
-
         buying_price:
           buying,
-
         selling_price:
           selling
 
       }]);
-
 
   if (error) {
 
@@ -2185,7 +2156,6 @@ async function addInventory(event) {
 
     return;
   }
-
 
   event.target.reset();
 
@@ -2202,11 +2172,29 @@ async function addDelivery(event) {
 
   event.preventDefault();
 
-
   if (!currentUser) {
     return;
   }
 
+  const role =
+    currentProfile?.role;
+
+  if (
+    ![
+      "admin",
+      "manager",
+      "gas_attendant",
+      "shop_staff"
+    ].includes(role)
+  ) {
+
+    alert(
+      "You do not have permission " +
+      "to add deliveries."
+    );
+
+    return;
+  }
 
   const customer =
     document.getElementById(
@@ -2240,7 +2228,6 @@ async function addDelivery(event) {
       "deliveryStatus"
     ).value;
 
-
   const { error } =
     await supabaseClient
       .from("deliveries")
@@ -2272,7 +2259,6 @@ async function addDelivery(event) {
 
       }]);
 
-
   if (error) {
 
     alert(
@@ -2282,7 +2268,6 @@ async function addDelivery(event) {
 
     return;
   }
-
 
   event.target.reset();
 
@@ -2299,18 +2284,14 @@ async function addStaff(event) {
 
   event.preventDefault();
 
-
   const message =
     document.getElementById(
       "staffCreateMessage"
     );
 
-
   message.textContent = "";
-
   message.className =
     "success";
-
 
   if (
     !currentProfile ||
@@ -2327,30 +2308,25 @@ async function addStaff(event) {
     return;
   }
 
-
   const full_name =
     document.getElementById(
       "newStaffName"
     ).value.trim();
-
 
   const email =
     document.getElementById(
       "newStaffEmail"
     ).value.trim();
 
-
   const password =
     document.getElementById(
       "newStaffPassword"
     ).value;
 
-
   const role =
     document.getElementById(
       "newStaffRole"
     ).value;
-
 
   if (
     !full_name ||
@@ -2368,7 +2344,6 @@ async function addStaff(event) {
     return;
   }
 
-
   if (password.length < 8) {
 
     message.textContent =
@@ -2381,10 +2356,8 @@ async function addStaff(event) {
     return;
   }
 
-
   message.textContent =
     "Creating staff account...";
-
 
   try {
 
@@ -2395,7 +2368,6 @@ async function addStaff(event) {
       await supabaseClient
         .auth
         .getSession();
-
 
     if (
       sessionError ||
@@ -2412,10 +2384,8 @@ async function addStaff(event) {
       return;
     }
 
-
     const accessToken =
       sessionData.session.access_token;
-
 
     const response =
       await fetch(
@@ -2462,10 +2432,8 @@ async function addStaff(event) {
 
       );
 
-
     const result =
       await response.json();
-
 
     if (!response.ok) {
 
@@ -2473,7 +2441,6 @@ async function addStaff(event) {
         "Create staff error:",
         result
       );
-
 
       message.textContent =
         result.error ||
@@ -2485,41 +2452,33 @@ async function addStaff(event) {
       return;
     }
 
-
     message.textContent =
       "✅ Staff account created successfully.";
 
     message.className =
       "success";
 
-
     document.getElementById(
       "newStaffName"
     ).value = "";
-
 
     document.getElementById(
       "newStaffEmail"
     ).value = "";
 
-
     document.getElementById(
       "newStaffPassword"
     ).value = "";
-
 
     document.getElementById(
       "newStaffRole"
     ).value = "";
 
-
     await renderEmployees();
-
 
   } catch (error) {
 
     console.error(error);
-
 
     message.textContent =
       "Could not connect to the " +
@@ -2543,7 +2502,6 @@ async function updateDashboard() {
     return;
   }
 
-
   const [
     requestsResult,
     salesResult,
@@ -2565,7 +2523,6 @@ async function updateDashboard() {
 
     ]);
 
-
   const requests =
     requestsResult.data || [];
 
@@ -2574,7 +2531,6 @@ async function updateDashboard() {
 
   const expenses =
     expensesResult.data || [];
-
 
   const salesTotal =
     sales.reduce(
@@ -2586,7 +2542,6 @@ async function updateDashboard() {
       0
     );
 
-
   const expensesTotal =
     expenses.reduce(
       (sum, expense) =>
@@ -2597,12 +2552,10 @@ async function updateDashboard() {
       0
     );
 
-
   document.getElementById(
     "statRequests"
   ).textContent =
     requests.length;
-
 
   document.getElementById(
     "statSales"
@@ -2610,13 +2563,11 @@ async function updateDashboard() {
     "KSh " +
     salesTotal.toLocaleString();
 
-
   document.getElementById(
     "statExpenses"
   ).textContent =
     "KSh " +
     expensesTotal.toLocaleString();
-
 
   document.getElementById(
     "statProfit"
@@ -2641,7 +2592,6 @@ async function renderSales() {
       "salesTable"
     );
 
-
   const {
     data,
     error
@@ -2656,7 +2606,6 @@ async function renderSales() {
         }
       );
 
-
   if (error) {
 
     container.innerHTML =
@@ -2667,7 +2616,6 @@ async function renderSales() {
     return;
   }
 
-
   if (!data.length) {
 
     container.innerHTML =
@@ -2675,7 +2623,6 @@ async function renderSales() {
 
     return;
   }
-
 
   container.innerHTML = `
 
@@ -2738,7 +2685,6 @@ async function renderExpenses() {
       "expensesTable"
     );
 
-
   const {
     data,
     error
@@ -2753,7 +2699,6 @@ async function renderExpenses() {
         }
       );
 
-
   if (error) {
 
     container.innerHTML =
@@ -2764,7 +2709,6 @@ async function renderExpenses() {
     return;
   }
 
-
   if (!data.length) {
 
     container.innerHTML =
@@ -2772,7 +2716,6 @@ async function renderExpenses() {
 
     return;
   }
-
 
   container.innerHTML = `
 
@@ -2828,7 +2771,6 @@ async function renderInventory() {
       "inventoryTable"
     );
 
-
   const {
     data,
     error
@@ -2843,7 +2785,6 @@ async function renderInventory() {
         }
       );
 
-
   if (error) {
 
     container.innerHTML =
@@ -2854,7 +2795,6 @@ async function renderInventory() {
     return;
   }
 
-
   if (!data.length) {
 
     container.innerHTML =
@@ -2862,7 +2802,6 @@ async function renderInventory() {
 
     return;
   }
-
 
   container.innerHTML = `
 
@@ -2930,7 +2869,6 @@ async function renderDeliveries() {
       "deliveriesTable"
     );
 
-
   const {
     data,
     error
@@ -2945,7 +2883,6 @@ async function renderDeliveries() {
         }
       );
 
-
   if (error) {
 
     container.innerHTML =
@@ -2956,7 +2893,6 @@ async function renderDeliveries() {
     return;
   }
 
-
   if (!data.length) {
 
     container.innerHTML =
@@ -2964,7 +2900,6 @@ async function renderDeliveries() {
 
     return;
   }
-
 
   container.innerHTML = `
 
@@ -3027,7 +2962,6 @@ async function renderEmployees() {
       "employeesTable"
     );
 
-
   if (
     !currentProfile ||
     currentProfile.role !== "admin"
@@ -3039,7 +2973,6 @@ async function renderEmployees() {
 
     return;
   }
-
 
   const {
     data,
@@ -3057,7 +2990,6 @@ async function renderEmployees() {
         }
       );
 
-
   if (error) {
 
     container.innerHTML =
@@ -3068,7 +3000,6 @@ async function renderEmployees() {
     return;
   }
 
-
   if (!data.length) {
 
     container.innerHTML =
@@ -3076,7 +3007,6 @@ async function renderEmployees() {
 
     return;
   }
-
 
   container.innerHTML = `
 
