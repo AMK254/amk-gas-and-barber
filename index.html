@@ -2090,11 +2090,6 @@ Save
 
 }
 
-</script>
-
-</body>
-</html>
-
 /* AMK SNEAKER ORDER FORM */
 (function () {
   const prices = {
@@ -2114,35 +2109,34 @@ Save
   const unitPrice = document.getElementById("sneakerUnitPrice");
   const total = document.getElementById("sneakerTotal");
 
-  if (!form || !product || !colour) return;
+  if (!form || !product || !size || !colour ||
+      !quantity || !unitPrice || !total) return;
 
-  const money = amount =>
-    "KSh " + Number(amount).toLocaleString("en-KE");
+  function money(amount) {
+    return "KSh " + Number(amount).toLocaleString("en-KE");
+  }
 
   function updateSneakerPrice() {
     const price = prices[product.value] || 0;
     const qty = Math.max(1, Number(quantity.value) || 1);
-
     unitPrice.value = price;
     total.value = money(price * qty);
   }
 
   function updateSneakerColours() {
-    const model = product.value;
-
-    if (model === "Air Force 1 White") {
+    if (product.value === "Air Force 1 White") {
       colour.innerHTML = '<option value="White">White</option>';
-    } else if (model === "Air Force 1 Black") {
+    } else if (product.value === "Air Force 1 Black") {
       colour.innerHTML = '<option value="Black">Black</option>';
     } else {
       colour.innerHTML = `
         <option value="">Select colour</option>
-        <option>White</option>
-        <option>Black</option>
-        <option>Red</option>
-        <option>Blue</option>
-        <option>Grey</option>
-        <option>Mixed colours</option>
+        <option value="White">White</option>
+        <option value="Black">Black</option>
+        <option value="Red">Red</option>
+        <option value="Blue">Blue</option>
+        <option value="Grey">Grey</option>
+        <option value="Mixed colours">Mixed colours</option>
       `;
     }
   }
@@ -2168,11 +2162,9 @@ Save
     const qty = Number(quantity.value);
     const price = prices[model] || 0;
 
-    if (
-      !name || !phone || !address || !model ||
-      !sneakerSize || !sneakerColour ||
-      !Number.isInteger(qty) || qty < 1 || !price
-    ) {
+    if (!name || !phone || !address || !model ||
+        !sneakerSize || !sneakerColour ||
+        !Number.isInteger(qty) || qty < 1 || !price) {
       alert("Please complete all sneaker order details.");
       return;
     }
@@ -2210,7 +2202,7 @@ Save
       save();
 
       const message =
-        "HELLO AMK — NEW SNEAKER ORDER\n\n" +
+        "HELLO AMK - NEW SNEAKER ORDER\n\n" +
         "Customer: " + name + "\n" +
         "Phone: " + phone + "\n" +
         "Sneaker: " + model + "\n" +
@@ -2222,18 +2214,16 @@ Save
         "Delivery location: " + address + "\n" +
         "Status: Pending";
 
-      wa("254118311141", message);
+      const whatsappUrl =
+        "https://wa.me/254118311141?text=" +
+        encodeURIComponent(message);
 
-      alert(
-        "Your sneaker order has been recorded. " +
-        "Please send the order through WhatsApp to confirm it with AMK."
-      );
+      window.open(whatsappUrl, "_blank");
+
+      alert("Order recorded. Please confirm your order with AMK on WhatsApp.");
 
       form.reset();
-      colour.innerHTML =
-        '<option value="">Select colour</option>';
-      unitPrice.value = 0;
-      total.value = "KSh 0";
+      updateSneakerColours();
       updateSneakerPrice();
 
     } catch (error) {
@@ -2242,3 +2232,9 @@ Save
     }
   });
 })();
+
+</script>
+
+</body>
+</html>
+
