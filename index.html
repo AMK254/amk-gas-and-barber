@@ -2094,3 +2094,151 @@ Save
 
 </body>
 </html>
+
+/* AMK SNEAKER ORDER FORM */
+(function () {
+  const prices = {
+    "Air Force 1 White": 1850,
+    "Air Force 1 Black": 1850,
+    "Air Max": 2000,
+    "Bapesta": 1650,
+    "Jordan 4": 2000,
+    "Nike SB": 2500
+  };
+
+  const form = document.getElementById("sneakerForm");
+  const product = document.getElementById("sneakerProduct");
+  const size = document.getElementById("sneakerSize");
+  const colour = document.getElementById("sneakerColour");
+  const quantity = document.getElementById("sneakerQuantity");
+  const unitPrice = document.getElementById("sneakerUnitPrice");
+  const total = document.getElementById("sneakerTotal");
+
+  if (!form || !product || !colour) return;
+
+  const money = amount =>
+    "KSh " + Number(amount).toLocaleString("en-KE");
+
+  function updateSneakerPrice() {
+    const price = prices[product.value] || 0;
+    const qty = Math.max(1, Number(quantity.value) || 1);
+
+    unitPrice.value = price;
+    total.value = money(price * qty);
+  }
+
+  function updateSneakerColours() {
+    const model = product.value;
+
+    if (model === "Air Force 1 White") {
+      colour.innerHTML = '<option value="White">White</option>';
+    } else if (model === "Air Force 1 Black") {
+      colour.innerHTML = '<option value="Black">Black</option>';
+    } else {
+      colour.innerHTML = `
+        <option value="">Select colour</option>
+        <option>White</option>
+        <option>Black</option>
+        <option>Red</option>
+        <option>Blue</option>
+        <option>Grey</option>
+        <option>Mixed colours</option>
+      `;
+    }
+  }
+
+  product.addEventListener("change", function () {
+    updateSneakerColours();
+    updateSneakerPrice();
+  });
+
+  quantity.addEventListener("input", updateSneakerPrice);
+
+  updateSneakerPrice();
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("sneakerName").value.trim();
+    const phone = document.getElementById("sneakerPhone").value.trim();
+    const address = document.getElementById("sneakerAddress").value.trim();
+    const model = product.value;
+    const sneakerSize = size.value;
+    const sneakerColour = colour.value;
+    const qty = Number(quantity.value);
+    const price = prices[model] || 0;
+
+    if (
+      !name || !phone || !address || !model ||
+      !sneakerSize || !sneakerColour ||
+      !Number.isInteger(qty) || qty < 1 || !price
+    ) {
+      alert("Please complete all sneaker order details.");
+      return;
+    }
+
+    const orderTotal = price * qty;
+    const now = new Date();
+
+    const details =
+      model + " | Size: " + sneakerSize +
+      " | Colour: " + sneakerColour +
+      " | Quantity: " + qty +
+      " | Total: " + money(orderTotal);
+
+    const order = {
+      type: "Sneakers",
+      name: name,
+      phone: phone,
+      item: model,
+      service: details,
+      size: sneakerSize,
+      colour: sneakerColour,
+      quantity: qty,
+      unitPrice: price,
+      total: orderTotal,
+      address: address,
+      date: now.toLocaleDateString(),
+      time: now.toLocaleTimeString(),
+      status: "Pending"
+    };
+
+    try {
+      if (!Array.isArray(data.orders)) data.orders = [];
+
+      data.orders.push(order);
+      save();
+
+      const message =
+        "HELLO AMK — NEW SNEAKER ORDER\n\n" +
+        "Customer: " + name + "\n" +
+        "Phone: " + phone + "\n" +
+        "Sneaker: " + model + "\n" +
+        "Size: " + sneakerSize + "\n" +
+        "Colour: " + sneakerColour + "\n" +
+        "Quantity: " + qty + "\n" +
+        "Price per pair: " + money(price) + "\n" +
+        "TOTAL: " + money(orderTotal) + "\n" +
+        "Delivery location: " + address + "\n" +
+        "Status: Pending";
+
+      wa("254118311141", message);
+
+      alert(
+        "Your sneaker order has been recorded. " +
+        "Please send the order through WhatsApp to confirm it with AMK."
+      );
+
+      form.reset();
+      colour.innerHTML =
+        '<option value="">Select colour</option>';
+      unitPrice.value = 0;
+      total.value = "KSh 0";
+      updateSneakerPrice();
+
+    } catch (error) {
+      console.error("AMK sneaker order error:", error);
+      alert("The order could not be saved. Please try again.");
+    }
+  });
+})();
