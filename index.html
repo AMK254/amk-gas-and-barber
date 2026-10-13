@@ -1425,7 +1425,10 @@ return;
 }
 
 const btn=
-document.getElementById("staffLoginBtn");
+document.getElementById("staffLoginBtn").addEventListener("click", function(event) {
+  event.preventDefault();
+  signInStaff();
+});
 
 btn.disabled=true;
 
