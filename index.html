@@ -1861,6 +1861,47 @@ ${x.payment}
 `;
 
 if(section==="expenses")
+if(section==="inventory"){
+  const inventoryForm=document.getElementById("inventoryForm");
+
+  if(inventoryForm){
+    inventoryForm.onsubmit=event=>{
+      event.preventDefault();
+
+      const f=new FormData(inventoryForm);
+      const item={
+        size:f.get("size"),
+        quantity:Number(f.get("quantity")),
+        buy:Number(f.get("buy")),
+        sell:Number(f.get("sell"))
+      };
+
+      if(
+        !item.size ||
+        !Number.isFinite(item.quantity) ||
+        item.quantity<0 ||
+        !Number.isFinite(item.buy) ||
+        item.buy<0 ||
+        !Number.isFinite(item.sell) ||
+        item.sell<0
+      ){
+        alert("Please enter valid stock details.");
+        return;
+      }
+
+      if(!Array.isArray(data.inventory)){
+        data.inventory=[];
+      }
+
+      data.inventory.push(item);
+      save();
+      renderStaff("inventory");
+
+      alert("Stock saved successfully!");
+    };
+  }
+}
+
 
 html=
 formSection(
