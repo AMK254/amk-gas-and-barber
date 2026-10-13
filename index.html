@@ -698,50 +698,132 @@ Confirm the final amount with AMK before paying.
 </div>
 </section>
 
+
 <section class="section" id="sneakers">
-<div class="container">
+  <div class="container">
+    <div class="section-heading">
+      <span>AMK Sneakers</span>
+      <h2>Shop Sneakers</h2>
+      <p>Choose your sneaker, size, colour and quantity. Place your order directly with AMK.</p>
+    </div>
 
-<div class="section-heading">
-<span>AMK Sneakers</span>
-<h2>Shop Sneakers</h2>
-<p>Product prices can be updated later from the staff side.</p>
-</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">👟</div>
+        <h3>Air Force 1 White</h3>
+        <p>Classic all-white style.</p>
+        <div class="price">KSh 1,850</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">👟</div>
+        <h3>Air Force 1 Black</h3>
+        <p>Classic black style.</p>
+        <div class="price">KSh 1,850</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">👟</div>
+        <h3>Air Max</h3>
+        <p>Sporty everyday sneakers.</p>
+        <div class="price">KSh 2,000</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">👟</div>
+        <h3>Bapesta</h3>
+        <p>Streetwear-inspired style.</p>
+        <div class="price">KSh 1,650</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">👟</div>
+        <h3>Jordan 4</h3>
+        <p>Statement basketball-inspired style.</p>
+        <div class="price">KSh 2,000</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">👟</div>
+        <h3>Nike SB</h3>
+        <p>Skate-inspired sneakers.</p>
+        <div class="price">KSh 2,500</div>
+      </div>
+    </div>
 
-<div class="cards">
+    <form class="form-card" id="sneakerForm" style="margin-top:25px">
+      <h3>Place Your Sneaker Order</h3>
 
-<div class="card">
-<div class="card-icon">👟</div>
-<h3>Classic Sneakers</h3>
-<p>Sizes 36–45. Contact us for current colours and stock.</p>
-<div class="price" style="margin:14px 0">Price: Contact AMK</div>
-<button class="btn sneaker-order" data-product="Classic Sneakers">
-Order on WhatsApp
-</button>
-</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="sneakerName">Full Name *</label>
+          <input id="sneakerName" required>
+        </div>
 
-<div class="card">
-<div class="card-icon">👟</div>
-<h3>Streetwear Sneakers</h3>
-<p>Fresh styles for everyday wear.</p>
-<div class="price" style="margin:14px 0">Price: Contact AMK</div>
-<button class="btn sneaker-order" data-product="Streetwear Sneakers">
-Order on WhatsApp
-</button>
-</div>
+        <div class="form-group">
+          <label for="sneakerPhone">Phone Number *</label>
+          <input id="sneakerPhone" type="tel" required>
+        </div>
 
-<div class="card">
-<div class="card-icon">📦</div>
-<h3>Delivery</h3>
-<p>Ask about delivery to your location in Kenya.</p>
-<div class="price" style="margin:14px 0">Countrywide</div>
-<a class="btn" href="https://wa.me/254118311141?text=Hello%20AMK%2C%20I%20want%20to%20order%20sneakers." target="_blank">
-Ask on WhatsApp
-</a>
-</div>
+        <div class="form-group">
+          <label for="sneakerProduct">Sneaker Model *</label>
+          <select id="sneakerProduct" required>
+            <option value="">Choose a model</option>
+            <option>Air Force 1 White</option>
+            <option>Air Force 1 Black</option>
+            <option>Air Max</option>
+            <option>Bapesta</option>
+            <option>Jordan 4</option>
+            <option>Nike SB</option>
+          </select>
+        </div>
 
-</div>
-</div>
+        <div class="form-group">
+          <label for="sneakerSize">Size *</label>
+          <select id="sneakerSize" required>
+            <option value="">Choose size</option>
+            <option>36</option><option>37</option>
+            <option>38</option><option>39</option>
+            <option>40</option><option>41</option>
+            <option>42</option><option>43</option>
+            <option>44</option><option>45</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sneakerColour">Colour *</label>
+          <select id="sneakerColour" required>
+            <option value="">Choose model first</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sneakerQuantity">Quantity *</label>
+          <input id="sneakerQuantity" type="number" min="1" step="1" value="1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="sneakerUnitPrice">Price per pair (KSh)</label>
+          <input id="sneakerUnitPrice" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="sneakerTotal">Order Total</label>
+          <input id="sneakerTotal" readonly>
+        </div>
+
+        <div class="form-group full">
+          <label for="sneakerAddress">Delivery Location / Address *</label>
+          <textarea id="sneakerAddress" rows="2" required placeholder="Town, estate, street or pickup preference"></textarea>
+        </div>
+
+        <div class="form-group full">
+          <button class="btn" type="submit">Order on WhatsApp</button>
+        </div>
+      </div>
+
+      <p style="color:#68758a;font-size:13px;margin-top:12px">
+        Prices are in Kenyan shillings. Stock and colour availability must be confirmed by AMK.
+      </p>
+    </form>
+  </div>
 </section>
+
 
 <!-- BARBER SERVICES -->
 <section class="section white" id="barber">
