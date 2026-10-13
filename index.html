@@ -1860,7 +1860,6 @@ ${x.payment}
 
 `;
 
-if(section==="expenses")
 if(section==="inventory"){
   const inventoryForm=document.getElementById("inventoryForm");
 
@@ -1896,13 +1895,10 @@ if(section==="inventory"){
       data.inventory.push(item);
       save();
       renderStaff("inventory");
-
       alert("Stock saved successfully!");
     };
   }
 }
-
-
 html=
 formSection(
 "Record Expense",
