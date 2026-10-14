@@ -1,1976 +1,1516 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="JIcMktQWOmy3LyI9mGIQeIEf87Dy8OQ2joHIn-WRSrI" />
-<link rel="canonical" href="https://amkgasandbarber.co.ke/">
-<meta name="robots" content="index, follow">
-<meta property="og:title" content="AMK Gas • Sneakers • Barber">
-<meta property="og:description" content="AMK Gas, sneakers and barber services in Nanyuki and Nairobi, Kenya. Order cooking gas, shop sneakers and book a barber.">
-<meta property="og:url" content="https://amkgasandbarber.co.ke/">
-<meta property="og:type" content="website">
-<script type="application/ld+json">{
-  "@context":"https://schema.org",
-  "@type":"LocalBusiness",
-  "name":"AMK Gas • Sneakers • Barber",
-  "url":"https://amkgasandbarber.co.ke/",
-  "description":"Cooking gas, sneakers and barber services in Nanyuki and Nairobi, Kenya.",
-  "telephone":"+254117414318",
-  "areaServed":[{"@type":"City","name":"Nanyuki"},{"@type":"City","name":"Nairobi"}],
-  "priceRange":"KSh"
-}</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<title>AMK Gas, Sneakers & Barber Shop</title>
-<meta name="description" content="AMK Gas, Sneakers & Barber Shop in Kenya. Order gas, shop sneakers and book barber appointments.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071e43">
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#172033;line-height:1.6}
-a{text-decoration:none;color:inherit}
-button,input,select,textarea{font:inherit}
-.container{width:92%;max-width:1150px;margin:auto}
-.hidden{display:none!important}
-.topbar{background:#071e43;color:#fff;padding:8px 0;font-size:13px}
-.topbar-content{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.navbar{background:#fff;border-bottom:1px solid #e3e8ef;position:sticky;top:0;z-index:20}
-.nav-content{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.logo{display:flex;align-items:center;gap:10px;color:#123a72;font-weight:900;font-size:21px}
-.logo-icon{width:45px;height:45px;border-radius:13px;background:#123a72;color:#fff;display:grid;place-items:center;font-size:25px}
-.logo small{display:block;color:#697589;font-size:8px;letter-spacing:1px}
-.nav-links{display:flex;gap:16px;align-items:center}
-.nav-links a{font-size:14px;font-weight:700;color:#3c4b61}
-.nav-links .staff-link{background:#123a72;color:#fff;padding:9px 13px;border-radius:9px}
-.btn{display:inline-block;border:0;border-radius:10px;padding:11px 17px;background:#123a72;color:#fff;font-weight:700;cursor:pointer}
-.btn:hover{background:#0b2b58}
-.btn-light{background:#fff;color:#123a72}
-.btn-outline{background:transparent;border:1px solid #fff}
-.hero{background:linear-gradient(120deg,#071e43,#123a72,#2368b7);color:#fff;padding:70px 0}
-.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:35px;align-items:center}
-.hero-label{font-size:12px;font-weight:800;letter-spacing:2px}
-.hero h1{font-size:clamp(40px,7vw,66px);line-height:1.02;margin:14px 0}
-.hero p{color:#e2eafa;font-size:18px;max-width:650px}
-.hero-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:23px}
-.hero-card{background:#ffffff18;border:1px solid #ffffff33;border-radius:24px;padding:30px;text-align:center}
-.hero-card-icon{font-size:70px}
-.section{padding:58px 0}
-.white{background:#fff}
-.section-heading{margin-bottom:28px}
-.section-heading span{color:#123a72;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
-.section-heading h2{font-size:34px;margin:4px 0}
-.section-heading p{color:#68758a}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{background:#fff;border:1px solid #e0e6ef;border-radius:19px;padding:22px;box-shadow:0 8px 25px #12264a0b}
-.card-icon{width:55px;height:55px;border-radius:14px;background:#edf3ff;display:grid;place-items:center;font-size:29px;margin-bottom:14px}
-.card h3{margin-bottom:7px}
-.card p{color:#68758a}
-.prices{list-style:none;margin:13px 0}
-.prices li{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #e6ebf1}
-.price{color:#123a72;font-weight:800}
-.two-column{display:grid;grid-template-columns:1fr 1fr;gap:25px}
-.form-card,.portal-card,.staff-card{background:#fff;border:1px solid #dfe6ef;border-radius:19px;padding:23px;box-shadow:0 8px 25px #12264a0b}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-group{margin-top:11px}
-.form-group.full{grid-column:1/-1}
-label{display:block;font-size:13px;font-weight:800;margin-bottom:5px}
-input,select,textarea{width:100%;border:1px solid #d5deea;border-radius:9px;padding:11px;background:#fff;color:#172033}
-textarea{resize:vertical}
-.notice{background:#fff8df;border:1px solid #ead898;border-radius:10px;padding:12px;font-size:13px;margin-top:15px}
-.portal{background:#eef3fa}
-.results{margin-top:18px}
-.result{border:1px solid #e0e6ef;border-radius:13px;padding:14px;margin-top:10px;background:#fff}
-.staff-area{background:#eef3fa}
-.staff-login{max-width:500px;margin:auto}
-.staff-header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.role-badge{display:inline-block;background:#edf3ff;color:#123a72;border-radius:20px;padding:5px 10px;font-size:12px;font-weight:800}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:18px 0}
-.stat{background:#fff;border:1px solid #e0e6ef;border-radius:14px;padding:16px}
-.stat small{color:#69758a}
-.stat strong{display:block;font-size:22px;color:#123a72}
-.staff-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
-.staff-tab{border:1px solid #d7dfeb;background:#fff;border-radius:9px;padding:9px 12px;cursor:pointer;font-weight:700}
-.staff-tab.active{background:#123a72;color:#fff}
-.staff-content{min-height:160px}
-.table-wrap{overflow-x:auto}
-.simple-table{width:100%;border-collapse:collapse;margin-top:10px}
-.simple-table th,.simple-table td{text-align:left;padding:10px;border-bottom:1px solid #e5eaf0;font-size:13px}
-.simple-table th{color:#536176}
-.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-footer{background:#071e43;color:#dbe5f5;padding:32px 0}
-.footer-content{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.dashboard-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0 8px}
-.dashboard-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin:18px 0}
-.chart-card{background:#fff;border:1px solid #e0e6ef;border-radius:16px;padding:18px;min-width:0}
-.chart-card h3{margin-bottom:6px}
-.chart-card p{font-size:12px;color:#69758a}
-.chart-canvas{width:100%;height:230px;display:block;margin-top:12px}
-.chart-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:#59667a;margin-top:8px}
-.legend-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
-.kpi-note{font-size:11px;color:#68758a;margin-top:4px}
-.pill{display:inline-block;border-radius:999px;padding:3px 9px;background:#edf3ff;color:#123a72;font-size:11px;font-weight:800}
-.invoice-paper{background:#fff;border:1px dashed #aab6c8;border-radius:12px;padding:18px;margin-top:15px}
-.invoice-paper h3{margin-bottom:5px}
-.right{text-align:right}
-.muted{color:#69758a;font-size:12px}
-@media(max-width:800px){
-.dashboard-grid{grid-template-columns:1fr}
-.chart-canvas{height:210px}
-.nav-links a:not(.staff-link){display:none}
-.hero-grid,.two-column{grid-template-columns:1fr}
-.cards,.contact-grid{grid-template-columns:1fr}
-.stats{grid-template-columns:1fr 1fr}
-.form-grid{grid-template-columns:1fr}
-.form-group.full{grid-column:auto}
-.hero{padding:50px 0}
-}
-</style>
+  <title>AMK Gas • Sneakers • Barber | Kenya</title>
+  <meta name="description" content="Order cooking gas, shop sneakers and book barber services with AMK in Nanyuki and Nairobi, Kenya.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://amkgasandbarber.co.ke/">
+
+  <meta name="google-site-verification" content="JIcMktQWOmy3LyI9mGIQeIEf87Dy8OQ2joHIn-WRSrI">
+
+  <meta property="og:title" content="AMK Gas • Sneakers • Barber">
+  <meta property="og:description" content="Gas orders, sneakers and barber appointments from AMK Kenya.">
+  <meta property="og:url" content="https://amkgasandbarber.co.ke/">
+  <meta property="og:type" content="website">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      --navy: #071e43;
+      --blue: #0755c9;
+      --blue-light: #eef5ff;
+      --green: #168447;
+      --red: #c62828;
+      --white: #ffffff;
+      --ink: #17243a;
+      --muted: #69758a;
+      --border: #dce4ef;
+      --background: #f5f8fc;
+      --radius: 16px;
+      --shadow: 0 8px 28px rgba(7, 30, 67, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--background);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, .btn { cursor: pointer; }
+
+    .container {
+      width: min(1160px, 92%);
+      margin-inline: auto;
+    }
+
+    .topbar {
+      background: var(--navy);
+      color: white;
+      font-size: 12px;
+      padding: 8px 0;
+    }
+
+    .topbar-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-content {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy);
+      font-size: 23px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .logo-icon { font-size: 32px; color: var(--blue); }
+
+    .logo small {
+      display: block;
+      margin-top: 5px;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+
+    .hero {
+      padding: 68px 0;
+      color: white;
+      background: linear-gradient(125deg, #061a38, #0755c9);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr .8fr;
+      align-items: center;
+      gap: 35px;
+    }
+
+    .hero-label {
+      color: #b9d7ff;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .hero h1 {
+      margin: 12px 0;
+      font-size: clamp(38px, 6vw, 64px);
+      line-height: 1.08;
+    }
+
+    .hero p { max-width: 600px; color: #e1ebff; }
+
+    .hero-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .hero-card {
+      padding: 32px;
+      text-align: center;
+      border: 1px solid #ffffff44;
+      border-radius: 24px;
+      background: #ffffff12;
+    }
+
+    .hero-card-icon { font-size: 55px; }
+
+    .section { padding: 58px 0; }
+    .white { background: white; }
+
+    .section-heading { margin-bottom: 25px; }
+    .section-heading > span {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-heading h2 {
+      margin: 6px 0;
+      color: var(--navy);
+      font-size: clamp(25px, 4vw, 36px);
+      line-height: 1.2;
+    }
+
+    .section-heading p { color: var(--muted); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card, .panel, .stat-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+
+    .card-icon { font-size: 34px; }
+    .card h3 { margin: 8px 0; color: var(--navy); }
+    .card p { color: var(--muted); }
+
+    .prices {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .prices li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .price { color: var(--green); }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 16px;
+      background: var(--blue);
+      color: white;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .btn:hover { filter: brightness(.94); }
+    .btn-light { background: white; color: var(--navy); }
+    .btn-outline { background: transparent; border: 1px solid #ffffff99; }
+    .btn-green { background: var(--green); }
+    .btn-red { background: var(--red); }
+    .btn-small { padding: 7px 10px; font-size: 12px; }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 11px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: white;
+      color: var(--ink);
+    }
+
+    textarea { min-height: 95px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid #0755c933;
+      border-color: var(--blue);
+    }
+
+    .notice {
+      padding: 14px;
+      margin: 15px 0;
+      border-radius: 10px;
+      background: var(--blue-light);
+      border: 1px solid #d5e5ff;
+      font-size: 13px;
+    }
+
+    .muted { color: var(--muted); font-size: 12px; }
+    .hidden { display: none !important; }
+    .status-message { margin-top: 12px; font-weight: 700; font-size: 13px; }
+    .success { color: var(--green); }
+    .error { color: var(--red); }
+
+    .table-wrap {
+      overflow-x: auto;
+      width: 100%;
+      margin-top: 14px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: white;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 11px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    th { background: var(--blue-light); color: var(--navy); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card span { color: var(--muted); font-size: 12px; }
+    .stat-card strong {
+      display: block;
+      color: var(--navy);
+      font-size: 23px;
+      overflow-wrap: anywhere;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .side-menu {
+      display: grid;
+      gap: 8px;
+    }
+
+    .side-menu button {
+      text-align: left;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 9px;
+      padding: 11px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .side-menu button.active {
+      background: var(--blue);
+      color: white;
+    }
+
+    .dashboard-content { min-width: 0; }
+    .dashboard-content h3 { color: var(--navy); }
+
+    .chart-canvas {
+      position: relative;
+      height: 280px;
+      max-width: 100%;
+    }
+
+    .invoice-paper {
+      background: white;
+      border: 1px dashed #aab6c8;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 15px;
+    }
+
+    .invoice-paper h3 { margin-bottom: 5px; }
+    .right { text-align: right; }
+
+    footer {
+      background: var(--navy);
+      color: #dbe5f5;
+      padding: 30px 0;
+      margin-top: 30px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    @media (max-width: 800px) {
+      .hero-grid, .two-column, .dashboard-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .nav-content { align-items: flex-start; flex-direction: column; padding: 12px 0; }
+      .nav-links { gap: 12px; }
+      .side-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .chart-canvas { height: 220px; }
+    }
+
+    @media (max-width: 480px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: auto; }
+      .topbar-content { display: block; }
+      .hero { padding: 45px 0; }
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      #printArea, #printArea * { visibility: visible; }
+      #printArea {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        background: white;
+      }
+      .no-print { display: none !important; }
+    }
+  </style>
 </head>
+``````html
 <body>
 
-<div class="topbar"><div class="container topbar-content">
-<span>📍 Nanyuki & Nairobi, Kenya</span>
-<span>Gas: 0117 414 318 | Barber: 0118 311 141</span>
-</div></div>
-
-<nav class="navbar"><div class="container nav-content">
-<a href="#home" class="logo"><span class="logo-icon">♛</span><span>AMK<small>GAS • SNEAKERS • BARBER</small></span></a>
-<div class="nav-links">
-<a href="#services">Services</a>
-<a href="#gas">Gas</a>
-<a href="#sneakers">Sneakers</a>
-<a href="#barber">Barber</a>
-<a href="#orders">My Requests</a>
-<a href="#staff" class="staff-link">🔐 Staff</a>
-</div>
-</div></nav>
-
-<section class="hero" id="home"><div class="container hero-grid">
-<div>
-<div class="hero-label">WELCOME TO AMK</div>
-<h1>Gas, Sneakers<br>& Barber.</h1>
-<p>One AMK website for cooking gas, sneakers and barber services. Customers order and book here; staff manage the business privately.</p>
-<div class="hero-buttons">
-<a href="#gas" class="btn btn-light">🔥 Order Gas</a>
-<a href="#sneakers" class="btn btn-outline">👟 Shop Sneakers</a>
-<a href="#barber" class="btn btn-outline">✂️ Book Barber</a>
-</div>
-</div>
-<div class="hero-card"><div class="hero-card-icon">♛</div><h2>AMK</h2><p>Quality service. Reliable business.</p></div>
-</div></section>
-
-<section class="section" id="services"><div class="container">
-<div class="section-heading">
-<span>Customer Area</span>
-<h2>What can we help you with?</h2>
-<p>Everything customers need is on the public side of the website.</p>
-</div>
-<div class="cards">
-<div class="card">
-<div class="card-icon">🔥</div><h3>AMK Gas</h3>
-<p>Order cooking gas for pickup or delivery.</p>
-<ul class="prices">
-<li><span>6 KG</span><b class="price">KSh 1,200</b></li>
-<li><span>12 KG</span><b class="price">KSh 2,000</b></li>
-</ul>
-<a href="#gas" class="btn">Order Gas</a>
-</div>
-<div class="card">
-<div class="card-icon">👟</div><h3>AMK Sneakers</h3>
-<p>Browse sneakers and send an order request.</p>
-<ul class="prices">
-<li><span>New stock</span><b class="price">Ask price</b></li>
-<li><span>Delivery</span><b class="price">Countrywide</b></li>
-</ul>
-<a href="#sneakers" class="btn">Shop Sneakers</a>
-</div>
-<div class="card">
-<div class="card-icon">✂️</div><h3>AMK Barber</h3>
-<p>Choose a service and request an appointment.</p>
-<ul class="prices">
-<li><span>Regular</span><b class="price">KSh 200</b></li>
-<li><span>Skin Fade</span><b class="price">KSh 300</b></li>
-</ul>
-<a href="#barber" class="btn">Book Barber</a>
-</div>
-</div>
-</div></section>
-
-<section class="section white" id="gas"><div class="container two-column">
-<div>
-<div class="section-heading">
-<span>AMK Gas</span><h2>Order Cooking Gas</h2>
-<p>Send your request to the gas team on WhatsApp.</p>
-</div>
-<div class="notice"><b>M-Pesa Send Money:</b> 0117 414 318<br>Confirm the final amount with AMK before paying.</div>
-</div>
-<form class="form-card" id="gasForm">
-<h3>Gas Order</h3>
-<div class="form-grid">
-<div class="form-group"><label>Full Name *</label><input id="gasName" required></div>
-<div class="form-group"><label>Phone *</label><input id="gasPhone" type="tel" required></div>
-<div class="form-group">
-<label>Gas Size *</label>
-<select id="gasSize" required>
-<option value="">Select size</option>
-<option>6 KG - KSh 1,200</option>
-<option>12 KG - KSh 2,000</option>
-</select>
-</div>
-<div class="form-group"><label>Quantity *</label><input id="gasQuantity" type="number" min="1" value="1" required></div>
-<div class="form-group">
-<label>Town *</label>
-<select id="gasTown" required><option value="">Select</option><option>Nanyuki</option><option>Nairobi</option></select>
-</div>
-<div class="form-group">
-<label>Delivery / Pickup</label>
-<select id="gasMethod"><option>Delivery</option><option>Pickup</option></select>
-</div>
-<div class="form-group full"><label>Location / Address</label><input id="gasAddress" placeholder="Estate, street or landmark"></div>
-<div class="form-group full"><label>Notes</label><textarea id="gasNotes" rows="3"></textarea></div>
-<div class="form-group full"><button class="btn" type="submit">Send Gas Order</button></div>
-</div>
-</form>
-</div></section>
-
-<!-- PART 2: SNEAKERS AND BARBER -->
-
-<section class="section" id="sneakers">
-<div class="container">
-<div class="section-heading">
-<span>AMK Sneakers</span>
-<h2>Shop Sneakers</h2>
-<p>Choose your sneaker, size, colour and quantity. Place your order directly with AMK.</p>
-</div>
-
-<div class="cards">
-<div class="card">
-<div class="card-icon">👟</div>
-<h3>Air Force 1 White</h3>
-<p>Classic all-white style.</p>
-<div class="price">KSh 1,850</div>
-</div>
-<div class="card">
-<div class="card-icon">👟</div>
-<h3>Air Force 1 Black</h3>
-<p>Classic black style.</p>
-<div class="price">KSh 1,850</div>
-</div>
-<div class="card">
-<div class="card-icon">👟</div>
-<h3>Air Max</h3>
-<p>Sporty everyday sneakers.</p>
-<div class="price">KSh 2,000</div>
-</div>
-<div class="card">
-<div class="card-icon">👟</div>
-<h3>Bapesta</h3>
-<p>Streetwear-inspired style.</p>
-<div class="price">KSh 1,650</div>
-</div>
-<div class="card">
-<div class="card-icon">👟</div>
-<h3>Jordan 4</h3>
-<p>Statement basketball-inspired style.</p>
-<div class="price">KSh 2,000</div>
-</div>
-<div class="card">
-<div class="card-icon">👟</div>
-<h3>Nike SB</h3>
-<p>Skate-inspired sneakers.</p>
-<div class="price">KSh 2,500</div>
-</div>
-</div>
-
-<form class="form-card" id="sneakerForm" style="margin-top:25px">
-<h3>Place Your Sneaker Order</h3>
-<div class="form-grid">
-
-<div class="form-group">
-<label for="sneakerName">Full Name *</label>
-<input id="sneakerName" required>
-</div>
-
-<div class="form-group">
-<label for="sneakerPhone">Phone Number *</label>
-<input id="sneakerPhone" type="tel" required>
-</div>
-
-<div class="form-group">
-<label for="sneakerProduct">Sneaker Model *</label>
-<select id="sneakerProduct" required>
-<option value="">Choose a model</option>
-<option>Air Force 1 White</option>
-<option>Air Force 1 Black</option>
-<option>Air Max</option>
-<option>Bapesta</option>
-<option>Jordan 4</option>
-<option>Nike SB</option>
-</select>
-</div>
-
-<div class="form-group">
-<label for="sneakerSize">Size *</label>
-<select id="sneakerSize" required>
-<option value="">Choose size</option>
-<option>36</option><option>37</option>
-<option>38</option><option>39</option>
-<option>40</option><option>41</option>
-<option>42</option><option>43</option>
-<option>44</option><option>45</option>
-</select>
-</div>
-
-<div class="form-group">
-<label for="sneakerColour">Colour *</label>
-<select id="sneakerColour" required>
-<option value="">Choose model first</option>
-</select>
-</div>
-
-<div class="form-group">
-<label for="sneakerQuantity">Quantity *</label>
-<input id="sneakerQuantity" type="number" min="1" step="1" value="1" required>
-</div>
-
-<div class="form-group">
-<label for="sneakerUnitPrice">Price per pair (KSh)</label>
-<input id="sneakerUnitPrice" readonly>
-</div>
-
-<div class="form-group">
-<label for="sneakerTotal">Order Total</label>
-<input id="sneakerTotal" readonly>
-</div>
-
-<div class="form-group full">
-<label for="sneakerAddress">Delivery Location / Address *</label>
-<textarea id="sneakerAddress" rows="2" required placeholder="Town, estate, street or pickup preference"></textarea>
-</div>
-
-<div class="form-group full">
-<button class="btn" type="submit">Order on WhatsApp</button>
-</div>
-</div>
-
-<p style="color:#68758a;font-size:13px;margin-top:12px">
-Prices are in Kenyan shillings. Stock and colour availability must be confirmed by AMK.
-</p>
-</form>
-</div>
-</section>
-
-<!-- BARBER SERVICES -->
-<section class="section white" id="barber">
-<div class="container">
-
-<div class="section-heading">
-<span>AMK Barber Shop</span>
-<h2>Barber Services & Booking</h2>
-<p>Choose your service, check the price and request your appointment.</p>
-</div>
-
-<div class="cards" style="margin-bottom:25px">
-
-<div class="card">
-<div class="card-icon">✂️</div>
-<h3>Regular Haircut</h3>
-<p>Clean and simple haircut for everyday style.</p>
-<div class="price" style="margin:14px 0">KSh 200</div>
-</div>
-
-<div class="card">
-<div class="card-icon">💈</div>
-<h3>Skin Fade</h3>
-<p>Fresh skin fade with a sharp, clean finish.</p>
-<div class="price" style="margin:14px 0">KSh 300</div>
-</div>
-
-<div class="card">
-<div class="card-icon">🧔</div>
-<h3>Beard Trim</h3>
-<p>Shape and trim your beard for a neat look.</p>
-<div class="price" style="margin:14px 0">KSh 100</div>
-</div>
-
-<div class="card">
-<div class="card-icon">🔥</div>
-<h3>Haircut + Beard</h3>
-<p>Regular haircut combined with a beard trim.</p>
-<div class="price" style="margin:14px 0">KSh 300</div>
-</div>
-
-<div class="card">
-<div class="card-icon">👑</div>
-<h3>Fade + Beard</h3>
-<p>Skin fade together with a professional beard trim.</p>
-<div class="price" style="margin:14px 0">KSh 400</div>
-</div>
-
-<div class="card">
-<div class="card-icon">✨</div>
-<h3>Kids Haircut</h3>
-<p>Clean and simple haircut for children.</p>
-<div class="price" style="margin:14px 0">KSh 150</div>
-</div>
-
-</div>
-
-<div class="two-column">
-<div>
-<div class="card">
-<h3>Our Barber Services</h3>
-<ul class="prices">
-<li><span>Regular Haircut</span><span class="price">KSh 200</span></li>
-<li><span>Skin Fade</span><span class="price">KSh 300</span></li>
-<li><span>Beard Trim</span><span class="price">KSh 100</span></li>
-<li><span>Haircut + Beard</span><span class="price">KSh 300</span></li>
-<li><span>Fade + Beard</span><span class="price">KSh 400</span></li>
-<li><span>Kids Haircut</span><span class="price">KSh 150</span></li>
-</ul>
-<p style="color:#68758a;font-size:13px">
-Prices can be updated later from the website.
-</p>
-</div>
-</div>
-
-<form class="form-card" id="barberForm">
-<h3>Book Your Appointment</h3>
-<p style="color:#68758a;margin-bottom:10px">
-Submit a booking request. Staff can confirm it from the private dashboard.
-</p>
-
-<div class="form-grid">
-<div class="form-group">
-<label for="barberName">Full Name *</label>
-<input id="barberName" required>
-</div>
-
-<div class="form-group">
-<label for="barberPhone">Phone *</label>
-<input id="barberPhone" type="tel" required>
-</div>
-
-<div class="form-group">
-<label for="barberService">Service *</label>
-<select id="barberService" required>
-<option value="">Select service</option>
-<option>Regular Haircut - KSh 200</option>
-<option>Skin Fade - KSh 300</option>
-<option>Beard Trim - KSh 100</option>
-<option>Haircut + Beard - KSh 300</option>
-<option>Fade + Beard - KSh 400</option>
-<option>Kids Haircut - KSh 150</option>
-</select>
-</div>
-
-<div class="form-group">
-<label for="barberLocation">Location *</label>
-<select id="barberLocation" required>
-<option value="">Select</option>
-<option>Nanyuki</option>
-<option>Nairobi</option>
-</select>
-</div>
-
-<div class="form-group">
-<label for="barberDate">Date *</label>
-<input id="barberDate" type="date" required>
-</div>
-
-<div class="form-group">
-<label for="barberTime">Time *</label>
-<input id="barberTime" type="time" required>
-</div>
-
-<div class="form-group full">
-<label for="barberNotes">Notes</label>
-<textarea id="barberNotes" rows="3" placeholder="Any special request?"></textarea>
-</div>
-
-<div class="form-group full">
-<button class="btn" type="submit">Request Appointment</button>
-</div>
-</div>
-</form>
-
-</div>
-</div>
-</section>
-
-<!-- ================= CUSTOMER REQUESTS ================= -->
-<section class="section portal" id="orders">
-  <div class="container">
-    <div class="section-heading">
-      <span>Customer Area</span>
-      <h2>My Requests</h2>
-      <p>Check gas orders, sneaker requests and barber bookings saved on this device.</p>
-    </div>
-
-    <div class="portal-card">
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="customerName">Your Name</label>
-          <input id="customerName" type="text" placeholder="Enter your name">
-        </div>
-        <div class="form-group">
-          <label for="customerPhone">Phone Number</label>
-          <input id="customerPhone" type="tel" placeholder="e.g. 0712345678">
-        </div>
-        <div class="form-group full">
-          <button class="btn" type="button" id="viewOrders">View My Requests</button>
-        </div>
-      </div>
-      <div id="customerResults" class="results" aria-live="polite"></div>
-    </div>
+<div class="topbar">
+  <div class="container topbar-content">
+    <span>📍 Nanyuki & Nairobi, Kenya</span>
+    <span>Gas: 0117 414 318 | Barber: 0118 311 141</span>
   </div>
-</section>
+</div>
 
-<!-- ================= STAFF LOGIN & DASHBOARD ================= -->
-<section class="section staff-section" id="staff">
-  <div class="container">
-    <div class="section-heading">
-      <span>Private Staff Area</span>
-      <h2>AMK Staff Portal</h2>
-      <p>Authorised employees can sign in to access their assigned business tools.</p>
-    </div>
-
-    <div class="portal-card" id="staffLogin">
-      <h3>Staff Sign In</h3>
-      <p class="muted">Use the email and password provided by your administrator.</p>
-
-      <div class="form-grid">
-        <div class="form-group full">
-          <label for="staffEmail">Staff Email</label>
-          <input id="staffEmail" type="email" autocomplete="username"
-                 placeholder="staff@example.com">
-        </div>
-        <div class="form-group full">
-          <label for="staffPassword">Password</label>
-          <input id="staffPassword" type="password" autocomplete="current-password"
-                 placeholder="Enter your password">
-        </div>
-        <div class="form-group full">
-          <button class="btn" type="button" id="staffLoginBtn">Sign In</button>
-        </div>
-      </div>
-      <p id="staffError" class="error-message" role="alert"></p>
-    </div>
-
-    <div id="staffDashboard" class="staff-dashboard hidden">
-      <div class="dashboard-top">
-        <div>
-          <span class="eyebrow">AMK MANAGEMENT</span>
-          <h3>Business Dashboard</h3>
-          <p id="currentRole" class="muted">Staff account</p>
-        </div>
-        <button class="btn btn-outline" type="button" id="staffLogout">Sign Out</button>
-      </div>
-
-      <!-- Dashboard summary -->
-      <div class="dashboard-grid">
-        <div class="stat-card">
-          <span>Total Sales</span>
-          <strong id="salesTotal">KSh 0</strong>
-          <small class="kpi-note">Recorded sales</small>
-        </div>
-        <div class="stat-card">
-          <span>Expenses</span>
-          <strong id="expenseTotal">KSh 0</strong>
-          <small class="kpi-note">Recorded expenses</small>
-        </div>
-        <div class="stat-card">
-          <span>Estimated Profit</span>
-          <strong id="profitTotal">KSh 0</strong>
-          <small class="kpi-note">Sales minus expenses</small>
-        </div>
-        <div class="stat-card">
-          <span>Orders & Bookings</span>
-          <strong id="ordersTotal">0</strong>
-          <small class="kpi-note">Saved on this device</small>
-        </div>
-      </div>
-
-      <div class="chart-card">
-        <h3>Business Overview</h3>
-        <p class="muted">Summary of recorded sales, expenses and estimated profit.</p>
-        <div id="dashboardChart" class="chart-canvas" aria-label="Business overview chart"></div>
-        <div id="dashboardLegend" class="chart-legend"></div>
-      </div>
-
-      <!-- Dashboard navigation is built by Part 4 JavaScript -->
-      <nav id="staffTabs" class="staff-tabs" aria-label="Staff dashboard sections"></nav>
-      <div id="staffContent" class="staff-content"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CONTACT ================= -->
-<section class="section contact-section" id="contact">
-  <div class="container">
-    <div class="section-heading">
-      <span>Get in Touch</span>
-      <h2>Contact AMK</h2>
-      <p>Reach us for gas deliveries, sneaker enquiries and barber appointments.</p>
-    </div>
-
-    <div class="contact-grid">
-      <div class="contact-card">
-        <h3>Gas Orders</h3>
-        <p>Call or WhatsApp for gas orders and delivery enquiries.</p>
-        <a href="tel:+254117414318">0117 414 318</a>
-        <a class="btn" href="https://wa.me/254117414318" target="_blank"
-           rel="noopener noreferrer">WhatsApp Gas Team</a>
-      </div>
-
-      <div class="contact-card">
-        <h3>Sneakers</h3>
-        <p>Ask about available styles, sizes, prices and delivery.</p>
-        <a href="https://wa.me/254118311141?text=Hello%20AMK%2C%20I%20would%20like%20to%20ask%20about%20sneakers."
-           target="_blank" rel="noopener noreferrer">Ask About Sneakers</a>
-      </div>
-
-      <div class="contact-card">
-        <h3>Barber Shop</h3>
-        <p>Contact the barber team about services and appointments.</p>
-        <a href="tel:+254118311141">0118 311 141</a>
-        <a class="btn" href="https://wa.me/254118311141" target="_blank"
-           rel="noopener noreferrer">WhatsApp Barber Team</a>
-      </div>
-    </div>
-
-    <div class="location-note">
-      <strong>Serving Nanyuki and Nairobi</strong>
-      <p>Ask our team about delivery availability to your location.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer class="site-footer">
-  <div class="container footer-content">
-    <div>
-      <a class="footer-brand" href="#home">AMK</a>
-      <p>Gas • Sneakers • Barber</p>
-    </div>
-    <div class="footer-links">
+<nav class="navbar">
+  <div class="container nav-content">
+    <a href="#home" class="logo">
+      <span class="logo-icon">♛</span>
+      <span>AMK<small>GAS • SNEAKERS • BARBER</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
       <a href="#gas">Gas</a>
       <a href="#sneakers">Sneakers</a>
       <a href="#barber">Barber</a>
-      <a href="#orders">My Requests</a>
-      <a href="#staff">Staff Login</a>
+      <a href="#myRequests">My Requests</a>
+      <a href="#staff">🔐 Staff</a>
     </div>
-    <p class="copyright">
-      © <span id="currentYear">2026</span> AMK Gas • Sneakers • Barber. All rights reserved.
-    </p>
   </div>
-</footer>
+</nav>
 
-<!-- Part 4 will contain the complete JavaScript and closing HTML tags. -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-label">WELCOME TO AMK</div>
+      <h1>Gas, Sneakers<br>& Barber.</h1>
+      <p>Order cooking gas, discover sneakers and book barber services with AMK. Customers can send requests online while authorized staff manage business operations privately.</p>
+      <div class="hero-buttons">
+        <a href="#gas" class="btn btn-light">🔥 Order Gas</a>
+        <a href="#sneakers" class="btn btn-outline">👟 Shop Sneakers</a>
+        <a href="#barber" class="btn btn-outline">✂️ Book Barber</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-icon">♛</div>
+      <h2>AMK</h2>
+      <p>Quality service. Reliable business.</p>
+      <p>Nanyuki & Nairobi, Kenya</p>
+    </div>
+  </div>
+</section>
 
-<!-- ================= PART 4: APPLICATION JAVASCRIPT ================= -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-heading">
+      <span>Customer Area</span>
+      <h2>What can we help you with?</h2>
+      <p>Choose a service and send your request directly to AMK.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <div class="card-icon">🔥</div>
+        <h3>AMK Gas</h3>
+        <p>Cooking gas orders for pickup or delivery.</p>
+        <ul class="prices">
+          <li><span>6 KG</span><b class="price">KSh 1,200</b></li>
+          <li><span>12 KG</span><b class="price">KSh 2,000</b></li>
+        </ul>
+        <a href="#gas" class="btn">Order Gas</a>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">👟</div>
+        <h3>AMK Sneakers</h3>
+        <p>Ask about available designs, sizes and prices.</p>
+        <ul class="prices">
+          <li><span>Sizes</span><b>36–45</b></li>
+          <li><span>Delivery</span><b>Countrywide</b></li>
+        </ul>
+        <a href="#sneakers" class="btn">Shop Sneakers</a>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">✂️</div>
+        <h3>AMK Barber</h3>
+        <p>Select a service and request your appointment.</p>
+        <ul class="prices">
+          <li><span>Regular haircut</span><b class="price">KSh 200</b></li>
+          <li><span>Skin fade</span><b class="price">KSh 300</b></li>
+        </ul>
+        <a href="#barber" class="btn">Book Barber</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section white" id="gas">
+  <div class="container two-column">
+    <div>
+      <div class="section-heading">
+        <span>AMK Gas</span>
+        <h2>Order Cooking Gas</h2>
+        <p>Complete the form and send your request to the gas team.</p>
+      </div>
+      <div class="notice">
+        <b>M-Pesa contact:</b> 0117 414 318<br>
+        Confirm the final amount with AMK before paying. This form does not process payments automatically.
+      </div>
+    </div>
+
+    <div class="panel">
+      <form id="gasForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="gasName">Your name *</label>
+            <input id="gasName" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="gasPhone">Phone number *</label>
+            <input id="gasPhone" name="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="gasSize">Cylinder size *</label>
+            <select id="gasSize" name="item" required>
+              <option value="6 KG Gas">6 KG — KSh 1,200</option>
+              <option value="12 KG Gas">12 KG — KSh 2,000</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="gasQty">Quantity *</label>
+            <input id="gasQty" name="quantity" type="number" min="1" value="1" required>
+          </div>
+          <div class="form-group">
+            <label for="gasFulfilment">Pickup or delivery *</label>
+            <select id="gasFulfilment" name="fulfilment" required>
+              <option value="Pickup">Pickup</option>
+              <option value="Delivery">Delivery</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="gasLocation">Location / delivery address</label>
+            <input id="gasLocation" name="location">
+          </div>
+          <div class="form-group full">
+            <label for="gasNotes">Additional instructions</label>
+            <textarea id="gasNotes" name="notes" placeholder="Brand, exchange cylinder, preferred time..."></textarea>
+          </div>
+          <div class="form-group full">
+            <button class="btn btn-green" type="submit">Send Gas Request</button>
+          </div>
+        </div>
+        <p id="gasMessage" class="status-message" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sneakers">
+  <div class="container two-column">
+    <div>
+      <div class="section-heading">
+        <span>AMK Sneakers</span>
+        <h2>Find Your Next Pair</h2>
+        <p>Tell us which sneakers you want, your size and where you need delivery.</p>
+      </div>
+      <div class="notice">
+        Prices and availability must be confirmed by AMK before payment.
+        Countrywide delivery can be arranged subject to confirmation.
+      </div>
+    </div>
+
+    <div class="panel">
+      <form id="sneakerForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="sneakerName">Your name *</label>
+            <input id="sneakerName" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="sneakerPhone">Phone number *</label>
+            <input id="sneakerPhone" name="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="sneakerModel">Sneaker design / model *</label>
+            <input id="sneakerModel" name="item" required>
+          </div>
+          <div class="form-group">
+            <label for="sneakerSize">Shoe size *</label>
+            <select id="sneakerSize" name="size" required>
+              <option value="">Select size</option>
+              <option>36</option><option>37</option><option>38</option>
+              <option>39</option><option>40</option><option>41</option>
+              <option>42</option><option>43</option><option>44</option>
+              <option>45</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sneakerQty">Quantity *</label>
+            <input id="sneakerQty" name="quantity" type="number" min="1" value="1" required>
+          </div>
+          <div class="form-group">
+            <label for="sneakerBudget">Budget (KSh)</label>
+            <input id="sneakerBudget" name="budget" type="number" min="0">
+          </div>
+          <div class="form-group full">
+            <label for="sneakerAddress">Delivery address / town</label>
+            <input id="sneakerAddress" name="location">
+          </div>
+          <div class="form-group full">
+            <label for="sneakerNotes">Additional details</label>
+            <textarea id="sneakerNotes" name="notes" placeholder="Colour, style or other preferences"></textarea>
+          </div>
+          <div class="form-group full">
+            <button class="btn" type="submit">Send Sneaker Request</button>
+          </div>
+        </div>
+        <p id="sneakerMessage" class="status-message" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section white" id="barber">
+  <div class="container two-column">
+    <div>
+      <div class="section-heading">
+        <span>AMK Barber</span>
+        <h2>Book a Barber Appointment</h2>
+        <p>Choose your service and preferred appointment time. The appointment is a request until AMK confirms it.</p>
+      </div>
+      <div class="panel">
+        <h3>Barber Service Prices</h3>
+        <ul class="prices">
+          <li><span>Regular Haircut</span><b>KSh 200</b></li>
+          <li><span>Skin Fade</span><b>KSh 300</b></li>
+          <li><span>Beard Trim</span><b>KSh 100</b></li>
+          <li><span>Haircut + Beard</span><b>KSh 300</b></li>
+          <li><span>Fade + Beard</span><b>KSh 400</b></li>
+          <li><span>Kids Haircut</span><b>KSh 150</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel">
+      <form id="barberForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="barberName">Your name *</label>
+            <input id="barberName" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="barberPhone">Phone number *</label>
+            <input id="barberPhone" name="phone" required>
+          </div>
+          <div class="form-group full">
+            <label for="barberService">Service *</label>
+            <select id="barberService" name="item" required>
+              <option value="Regular Haircut — KSh 200">Regular Haircut — KSh 200</option>
+              <option value="Skin Fade — KSh 300">Skin Fade — KSh 300</option>
+              <option value="Beard Trim — KSh 100">Beard Trim — KSh 100</option>
+              <option value="Haircut + Beard — KSh 300">Haircut + Beard — KSh 300</option>
+              <option value="Fade + Beard — KSh 400">Fade + Beard — KSh 400</option>
+              <option value="Kids Haircut — KSh 150">Kids Haircut — KSh 150</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="barberDate">Preferred date *</label>
+            <input id="barberDate" name="date" type="date" required>
+          </div>
+          <div class="form-group">
+            <label for="barberTime">Preferred time *</label>
+            <input id="barberTime" name="time" type="time" required>
+          </div>
+          <div class="form-group full">
+            <label for="barberNotes">Notes</label>
+            <textarea id="barberNotes" name="notes" placeholder="Preferred barber or other request"></textarea>
+          </div>
+          <div class="form-group full">
+            <button class="btn btn-green" type="submit">Request Appointment</button>
+          </div>
+        </div>
+        <p id="barberMessage" class="status-message" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="myRequests">
+  <div class="container">
+    <div class="section-heading">
+      <span>Customer Requests</span>
+      <h2>Send or Follow Up on a Request</h2>
+      <p>Customer requests are sent to AMK for confirmation. This section does not expose private staff records.</p>
+    </div>
+    <div class="panel">
+      <p>For an update on an existing order or appointment, contact the relevant team:</p>
+      <p>
+        <a class="btn btn-green" href="https://wa.me/254117414318" target="_blank" rel="noopener">WhatsApp Gas Team</a>
+        <a class="btn" href="https://wa.me/254118311141" target="_blank" rel="noopener">WhatsApp Sneakers / Barber</a>
+      </p>
+      <p class="muted">For privacy, order history and invoices should be shown only after an appropriate customer identity check or secure sign-in.</p>
+    </div>
+  </div>
+</section>
+``````html
+<!-- PART 3: PRIVATE STAFF LOGIN AND DASHBOARD -->
+<section class="section" id="staff">
+  <div class="section-heading">
+    <span class="eyebrow">AMK TEAM</span>
+    <h2>Staff Portal</h2>
+    <p>Secure access for authorised AMK employees.</p>
+  </div>
+
+  <div class="panel" id="staffLoginPanel">
+    <h3>Staff Login</h3>
+    <p>Sign in using the email and password assigned to your account.</p>
+
+    <form id="staffLoginForm" class="form-grid">
+      <div class="field full">
+        <label for="staffEmail">Email address</label>
+        <input id="staffEmail" type="email" autocomplete="username"
+          placeholder="staff@example.com" required>
+      </div>
+
+      <div class="field full">
+        <label for="staffPassword">Password</label>
+        <input id="staffPassword" type="password"
+          autocomplete="current-password" placeholder="Enter your password"
+          required>
+      </div>
+
+      <div class="field full">
+        <button class="btn btn-primary" id="staffLoginBtn" type="submit">
+          Sign In
+        </button>
+        <p id="staffError" class="error" role="alert" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+
+  <div id="staffDashboard" class="hidden">
+    <div class="panel">
+      <div class="dashboard-heading">
+        <div>
+          <span class="eyebrow">PRIVATE WORKSPACE</span>
+          <h2>AMK Dashboard</h2>
+          <p id="staffUserLabel">Signed in</p>
+          <p id="staffRoleLabel"></p>
+        </div>
+        <button type="button" class="btn btn-outline" id="staffLogoutBtn">
+          Sign Out
+        </button>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <aside class="panel side-menu">
+        <h3>Management</h3>
+        <button type="button" class="side-link active"
+          data-dashboard-view="overview">Overview</button>
+        <button type="button" class="side-link"
+          data-dashboard-view="sales">Sales & Receipts</button>
+        <button type="button" class="side-link"
+          data-dashboard-view="inventory">Inventory</button>
+        <button type="button" class="side-link"
+          data-dashboard-view="requests">Customer Requests</button>
+        <button type="button" class="side-link"
+          data-dashboard-view="deliveries">Deliveries</button>
+        <button type="button" class="side-link"
+          data-dashboard-view="expenses">Expenses</button>
+        <button type="button" class="side-link"
+          data-dashboard-view="employees">Employees</button>
+        <button type="button" class="side-link"
+          data-dashboard-view="purchases">Supplier Purchases</button>
+        <button type="button" class="side-link"
+          data-dashboard-view="invoices">Invoices</button>
+        <button type="button" class="side-link"
+          data-dashboard-view="payroll">Salaries & Payroll</button>
+        <button type="button" class="side-link"
+          data-dashboard-view="reports">Reports & Exports</button>
+      </aside>
+
+      <div class="panel dashboard-main">
+        <div id="staffContent">
+          <h3>Welcome to AMK</h3>
+          <p>Select a section from the menu to continue.</p>
+        </div>
+        <p id="dashboardMessage" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END PART 3 -->
+``````html
+<!-- PART 4: SUPABASE CONNECTION AND STAFF AUTHENTICATION -->
 <script>
-"use strict";
+(() => {
+  "use strict";
 
-/* ---------- AMK CONFIGURATION ---------- */
-const AMK_SUPABASE_URL = "https://snvulxcguwofowhglbrw.supabase.co";
-const AMK_SUPABASE_KEY = "sb_publishable_3DLOM4jXxzCwM1nyAlAEkQ_b2EwnTZd";
+  const SUPABASE_URL = "https://snvulxcguwofowhglbrw.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_3DLOM4jXxzCwM1nyAlAEkQ_b2EwnTZd";
 
-const supabaseClient = window.supabase.createClient(
-  AMK_SUPABASE_URL,
-  AMK_SUPABASE_KEY
-);
+  const $ = (id) => document.getElementById(id);
 
-const AMK_STORAGE_KEY = "amk_business_v2";
-let currentUser = null;
-let currentProfile = null;
-let role = null;
-let activeTab = "overview";
+  const loginPanel = $("staffLoginPanel");
+  const loginForm = $("staffLoginForm");
+  const loginButton = $("staffLoginBtn");
+  const loginError = $("staffError");
+  const dashboard = $("staffDashboard");
+  const userLabel = $("staffUserLabel");
+  const roleLabel = $("staffRoleLabel");
+  const logoutButton = $("staffLogoutBtn");
+  const content = $("staffContent");
+  const message = $("dashboardMessage");
 
-const money = amount =>
-  new Intl.NumberFormat("en-KE", {
-    style: "currency",
-    currency: "KES",
-    maximumFractionDigits: 2
-  }).format(Number(amount) || 0);
+  if (!loginForm || !dashboard || !content) return;
 
-const today = () => new Date().toISOString().slice(0, 10);
-
-function makeId(prefix = "AMK") {
-  return prefix + "-" + Date.now().toString(36).toUpperCase() +
-    "-" + Math.random().toString(36).slice(2, 7).toUpperCase();
-}
-
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
-}
-
-function readBusinessData() {
-  const empty = {
-    requests: [],
-    sales: [],
-    expenses: [],
-    inventory: [],
-    employees: [],
-    invoices: [],
-    deliveries: []
-  };
-
-  try {
-    const saved = JSON.parse(localStorage.getItem(AMK_STORAGE_KEY) || "{}");
-    return { ...empty, ...saved };
-  } catch (error) {
-    console.error("Could not read AMK records:", error);
-    return empty;
-  }
-}
-
-let businessData = readBusinessData();
-
-function saveBusinessData() {
-  try {
-    localStorage.setItem(AMK_STORAGE_KEY, JSON.stringify(businessData));
-    return true;
-  } catch (error) {
-    alert("Could not save these records on this device. Check your browser storage.");
-    console.error(error);
-    return false;
-  }
-}
-
-function showMessage(message, type = "success") {
-  let box = document.getElementById("amkMessage");
-
-  if (!box) {
-    box = document.createElement("div");
-    box.id = "amkMessage";
-    box.style.cssText =
-      "position:relative;padding:12px;margin:12px 0;border-radius:8px;";
-    const target =
-      document.getElementById("staffContent") ||
-      document.getElementById("customerResults") ||
-      document.querySelector("main") ||
-      document.body;
-    target.prepend(box);
-  }
-
-  box.textContent = message;
-  box.style.background = type === "error" ? "#fee2e2" : "#dcfce7";
-  box.style.color = type === "error" ? "#991b1b" : "#166534";
-}
-
-function sumRecords(records, field = "amount") {
-  return records.reduce((total, item) =>
-    total + (Number(item[field]) || 0), 0);
-}
-
-function setText(id, value) {
-  const element = document.getElementById(id);
-  if (element) element.textContent = value;
-}
-
-/* ---------- CUSTOMER REQUESTS ---------- */
-
-function addCustomerRequest(request) {
-  const record = {
-    id: makeId("REQ"),
-    date: new Date().toISOString(),
-    status: "Received",
-    ...request
-  };
-
-  businessData.requests.unshift(record);
-  saveBusinessData();
-  return record;
-}
-
-function getField(form, names) {
-  for (const name of names) {
-    const element = form.querySelector(
-      `[name="${name}"], #${name}`
-    );
-    if (element && String(element.value || "").trim()) {
-      return String(element.value).trim();
+  if (!window.supabase) {
+    if (loginError) {
+      loginError.textContent =
+        "The login library could not load. Check your internet connection and refresh.";
     }
-  }
-  return "";
-}
-
-function connectRequestForm(formId, category, fields) {
-  const form = document.getElementById(formId);
-  if (!form || form.dataset.amkConnected === "yes") return;
-
-  form.dataset.amkConnected = "yes";
-
-  form.addEventListener("submit", event => {
-    event.preventDefault();
-
-    const name = getField(form, ["name", "customerName", "fullName"]);
-    const phone = getField(form, ["phone", "customerPhone", "telephone"]);
-
-    if (!name || !phone) {
-      showMessage("Please enter your name and phone number.", "error");
-      return;
-    }
-
-    const details = {};
-    fields.forEach(field => {
-      details[field] = getField(form, [field]);
-    });
-
-    const request = addCustomerRequest({
-      category,
-      name,
-      phone,
-      details,
-      description: Object.entries(details)
-        .filter(([, value]) => value)
-        .map(([key, value]) => key + ": " + value)
-        .join(" • ")
-    });
-
-    showMessage("Request saved on this device. Reference: " + request.id);
-    form.reset();
-  });
-}
-
-function connectRequestButtons() {
-  /*
-   * These handlers support forms with the listed IDs.
-   * If your Part 1 or Part 2 uses different form IDs, add them here.
-   */
-  connectRequestForm("gasOrderForm", "Gas Order", [
-    "gasType", "quantity", "deliveryLocation", "address", "paymentMethod", "notes"
-  ]);
-  connectRequestForm("sneakerOrderForm", "Sneaker Request", [
-    "product", "shoeSize", "size", "quantity", "deliveryLocation", "notes"
-  ]);
-  connectRequestForm("barberBookingForm", "Barber Booking", [
-    "service", "bookingDate", "bookingTime", "barber", "notes"
-  ]);
-
-  document.querySelectorAll("[data-amk-request]").forEach(form => {
-    if (form.dataset.amkConnected === "yes") return;
-    form.dataset.amkConnected = "yes";
-
-    form.addEventListener("submit", event => {
-      event.preventDefault();
-
-      const data = new FormData(form);
-      const values = Object.fromEntries(data.entries());
-      const name = values.name || values.customerName || "";
-      const phone = values.phone || values.customerPhone || "";
-
-      if (!String(name).trim() || !String(phone).trim()) {
-        showMessage("Please enter your name and phone number.", "error");
-        return;
-      }
-
-      const request = addCustomerRequest({
-        category: form.dataset.amkRequest,
-        name: String(name).trim(),
-        phone: String(phone).trim(),
-        details: values,
-        description: Object.entries(values)
-          .map(([key, value]) => key + ": " + value)
-          .join(" • ")
-      });
-
-      showMessage("Request saved. Reference: " + request.id);
-      form.reset();
-    });
-  });
-}
-
-function viewCustomerRequests() {
-  const name = (document.getElementById("customerName")?.value || "")
-    .trim().toLowerCase();
-  const phone = (document.getElementById("customerPhone")?.value || "")
-    .replace(/\s+/g, "");
-
-  const output = document.getElementById("customerResults");
-  if (!output) return;
-
-  if (!name || !phone) {
-    output.textContent = "Enter the name and phone number used for your request.";
     return;
   }
 
-  const matches = businessData.requests.filter(request =>
-    String(request.name || "").trim().toLowerCase() === name &&
-    String(request.phone || "").replace(/\s+/g, "") === phone
-  );
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  window.amkSupabase = db;
 
-  if (!matches.length) {
-    output.textContent =
-      "No matching requests were found on this device. Requests saved on another device may not appear here.";
-    return;
-  }
+  let currentProfile = null;
 
-  output.innerHTML = matches.map(request => `
-    <article class="request-result">
-      <h4>${escapeHTML(request.category || "Request")}</h4>
-      <p><strong>Reference:</strong> ${escapeHTML(request.id)}</p>
-      <p><strong>Date:</strong> ${escapeHTML(
-        new Date(request.date).toLocaleString()
-      )}</p>
-      <p><strong>Status:</strong> ${escapeHTML(request.status || "Received")}</p>
-      <p>${escapeHTML(request.description || "")}</p>
-    </article>
-  `).join("");
-}
-
-/* ---------- STAFF AUTHENTICATION ---------- */
-
-function displayRole(value) {
-  const names = {
+  const roleNames = {
     admin: "Administrator",
     manager: "Manager",
     barber: "Barber",
     gas_attendant: "Gas Attendant",
     shop_staff: "Shop Staff"
   };
-  return names[value] || "Staff";
-}
 
-async function loadStaffProfile(userId) {
-  const { data, error } = await supabaseClient
-    .from("profiles")
-    .select("id,email,full_name,role,active")
-    .eq("id", userId)
-    .maybeSingle();
+  const permittedViews = {
+    admin: [
+      "overview", "sales", "inventory", "requests", "deliveries",
+      "expenses", "employees", "purchases", "invoices", "payroll", "reports"
+    ],
+    manager: [
+      "overview", "sales", "inventory", "requests", "deliveries",
+      "expenses", "employees", "purchases", "invoices", "reports"
+    ],
+    barber: ["overview", "sales", "requests", "invoices"],
+    gas_attendant: ["overview", "sales", "requests", "deliveries", "invoices"],
+    shop_staff: ["overview", "sales", "requests", "invoices"]
+  };
 
-  if (error) throw error;
-  if (!data) throw new Error("Your staff profile was not found. Contact the administrator.");
-  if (data.active === false) throw new Error("This staff account is inactive.");
-  if (!["admin", "manager", "barber", "gas_attendant", "shop_staff"].includes(data.role)) {
-    throw new Error("This account does not have an authorised staff role.");
+  const viewTitles = {
+    overview: "Overview",
+    sales: "Sales & Receipts",
+    inventory: "Inventory",
+    requests: "Customer Requests",
+    deliveries: "Deliveries",
+    expenses: "Expenses",
+    employees: "Employees",
+    purchases: "Supplier Purchases",
+    invoices: "Invoices",
+    payroll: "Salaries & Payroll",
+    reports: "Reports & Exports"
+  };
+
+  function setMessage(text, isError = false) {
+    if (!message) return;
+    message.textContent = text || "";
+    message.className = isError ? "error" : "success";
   }
 
-  return data;
-}
-
-function showStaffDashboard(profile) {
-  currentProfile = profile;
-  role = profile.role;
-
-  const login = document.getElementById("staffLogin");
-  const dashboard = document.getElementById("staffDashboard");
-
-  if (login) login.classList.add("hidden");
-  if (dashboard) dashboard.classList.remove("hidden");
-
-  setText(
-    "currentRole",
-    displayRole(profile.role) +
-      (profile.full_name ? " • " + profile.full_name : "")
-  );
-
-  buildTabs();
-  renderStaff(activeTab);
-}
-
-async function signInStaff() {
-  const email = document.getElementById("staffEmail")?.value.trim() || "";
-  const password = document.getElementById("staffPassword")?.value || "";
-  const errorEl = document.getElementById("staffError");
-  const btn = document.getElementById("staffLoginBtn");
-
-  if (errorEl) errorEl.textContent = "";
-
-  if (!email || !password) {
-    if (errorEl) errorEl.textContent = "Enter your email and password.";
-    return;
+  function setLoginError(text) {
+    if (loginError) loginError.textContent = text || "";
   }
 
-  if (btn) {
-    btn.disabled = true;
-    btn.textContent = "Signing in...";
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
   }
 
-  try {
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-      email,
-      password
+  function canOpen(view) {
+    return !!currentProfile &&
+      (permittedViews[currentProfile.role] || []).includes(view);
+  }
+
+  function updateMenu() {
+    document.querySelectorAll("[data-dashboard-view]").forEach((button) => {
+      const view = button.dataset.dashboardView;
+      const allowed = canOpen(view);
+      button.hidden = !allowed;
+      button.classList.toggle("active", allowed && view === "overview");
     });
+  }
+
+  function showLoggedOut() {
+    currentProfile = null;
+    dashboard.classList.add("hidden");
+    loginPanel.classList.remove("hidden");
+    userLabel.textContent = "";
+    roleLabel.textContent = "";
+    content.innerHTML = "";
+    setMessage("");
+  }
+
+  async function loadProfile(user) {
+    const { data, error } = await db
+      .from("profiles")
+      .select("id,email,full_name,role,active")
+      .eq("id", user.id)
+      .maybeSingle();
 
     if (error) throw error;
 
-    const profile = await loadStaffProfile(data.user.id);
-    currentUser = data.user;
-    showStaffDashboard(profile);
-  } catch (error) {
-    console.error("AMK staff login error:", error);
-    if (errorEl) {
-      errorEl.textContent = error.message ||
-        "Sign-in failed. Check your connection and login details.";
+    if (!data || data.active !== true ||
+        !Object.prototype.hasOwnProperty.call(roleNames, data.role)) {
+      throw new Error(
+        "Your staff profile is missing, inactive, or has no valid role. Contact the AMK administrator."
+      );
     }
-    await supabaseClient.auth.signOut();
-  } finally {
-    if (btn) {
-      btn.disabled = false;
-      btn.textContent = "Sign In";
-    }
-  }
-}
 
-async function signOutStaff() {
-  try {
-    const { error } = await supabaseClient.auth.signOut();
-    if (error) throw error;
-  } catch (error) {
-    console.error("Sign-out error:", error);
+    currentProfile = data;
+    loginPanel.classList.add("hidden");
+    dashboard.classList.remove("hidden");
+
+    userLabel.textContent = data.full_name || data.email || user.email;
+    roleLabel.textContent = roleNames[data.role];
+
+    updateMenu();
+    await openView("overview");
   }
 
-  currentUser = null;
-  currentProfile = null;
-  role = null;
-
-  document.getElementById("staffDashboard")?.classList.add("hidden");
-  document.getElementById("staffLogin")?.classList.remove("hidden");
-
-  const password = document.getElementById("staffPassword");
-  if (password) password.value = "";
-
-  const errorEl = document.getElementById("staffError");
-  if (errorEl) errorEl.textContent = "";
-}
-
-async function restoreStaffSession() {
-  try {
-    const { data, error } = await supabaseClient.auth.getSession();
-    if (error) throw error;
-
-    if (data.session?.user) {
-      const profile = await loadStaffProfile(data.session.user.id);
-      currentUser = data.session.user;
-      showStaffDashboard(profile);
-    }
-  } catch (error) {
-    console.warn("No active AMK staff session:", error.message);
-  }
-}
-
-/* ---------- STAFF PERMISSIONS ---------- */
-
-function isAdmin() {
-  return role === "admin";
-}
-
-function canManageBusiness() {
-  return role === "admin" || role === "manager";
-}
-
-function canSeeTab(tab) {
-  if (role === "admin") return true;
-
-  const permissions = {
-    manager: ["overview", "sales", "expenses", "inventory", "invoices", "deliveries"],
-    barber: ["overview", "bookings"],
-    gas_attendant: ["overview", "sales", "inventory", "deliveries"],
-    shop_staff: ["overview", "sales", "inventory", "invoices"]
-  };
-
-  return (permissions[role] || ["overview"]).includes(tab);
-}
-
-function buildTabs() {
-  const container = document.getElementById("staffTabs");
-  if (!container) return;
-
-  const tabs = [
-    ["overview", "Overview"],
-    ["sales", "Sales"],
-    ["invoices", "Customer Invoices"],
-    ["expenses", "Expenses"],
-    ["inventory", "Inventory"],
-    ["deliveries", "Deliveries"],
-    ["bookings", "Bookings"],
-    ["employees", "Employees"]
-  ];
-
-  container.innerHTML = tabs
-    .filter(([id]) => canSeeTab(id))
-    .map(([id, label]) => `
-      <button type="button"
-        class="staff-tab ${id === activeTab ? "active" : ""}"
-        data-tab="${id}">${label}</button>
-    `).join("");
-
-  container.querySelectorAll("[data-tab]").forEach(button => {
-    button.addEventListener("click", () => {
-      activeTab = button.dataset.tab;
-      buildTabs();
-      renderStaff(activeTab);
-    });
-  });
-}
-
-/* ---------- DASHBOARD & CHART ---------- */
-
-function renderOverview() {
-  const sales = sumRecords(businessData.sales);
-  const expenses = sumRecords(businessData.expenses);
-  const profit = sales - expenses;
-
-  setText("salesTotal", money(sales));
-  setText("expenseTotal", money(expenses));
-  setText("profitTotal", money(profit));
-  setText("ordersTotal", businessData.requests.length);
-
-  const chart = document.getElementById("dashboardChart");
-  const legend = document.getElementById("dashboardLegend");
-
-  if (chart) {
-    const max = Math.max(sales, expenses, Math.abs(profit), 1);
-    const values = [
-      ["Sales", sales],
-      ["Expenses", expenses],
-      ["Profit", profit]
-    ];
-
-    chart.innerHTML = `
-      <div class="amk-chart-bars">
-        ${values.map(([label, value]) => `
-          <div class="amk-chart-row">
-            <span>${escapeHTML(label)}</span>
-            <div class="amk-chart-track">
-              <div class="amk-chart-bar"
-                   style="width:${Math.min(100, Math.abs(value) / max * 100)}%">
-              </div>
-            </div>
-            <strong>${escapeHTML(money(value))}</strong>
-          </div>
-        `).join("")}
-      </div>
-    `;
-  }
-
-  if (legend) {
-    legend.textContent =
-      "Totals are calculated from records saved in this browser.";
-  }
-}
-
-function renderTable(headers, rows) {
-  if (!rows.length) return "<p>No records yet.</p>";
-
-  return `
-    <div class="table-wrap">
-      <table>
-        <thead><tr>${headers.map(h => `<th>${escapeHTML(h)}</th>`).join("")}</tr></thead>
-        <tbody>
-          ${rows.map(row => `
-            <tr>${row.map(cell => `<td>${escapeHTML(cell ?? "")}</td>`).join("")}</tr>
-          `).join("")}
-        </tbody>
-      </table>
-    </div>
-  `;
-}
-
-function inputField(label, name, type = "text", required = true) {
-  return `
-    <label class="form-group">
-      ${escapeHTML(label)}
-      <input name="${escapeHTML(name)}" type="${escapeHTML(type)}"
-        ${required ? "required" : ""}>
-    </label>
-  `;
-}
-
-function recordForm(title, fields, submitLabel = "Save Record") {
-  return `
-    <div class="portal-card">
-      <h3>${escapeHTML(title)}</h3>
-      <form data-record-form>
-        <div class="form-grid">
-          ${fields.join("")}
-          <div class="form-group full">
-            <button class="btn" type="submit">${escapeHTML(submitLabel)}</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  `;
-}
-
-/* ---------- SALES ---------- */
-
-function renderSales() {
-  const form = canManageBusiness() ||
-    ["gas_attendant", "shop_staff"].includes(role)
-    ? recordForm("Record a Sale", [
-        inputField("Item or Service", "item"),
-        inputField("Quantity", "quantity", "number"),
-        inputField("Unit Selling Price (KSh)", "price", "number"),
-        inputField("Payment Method", "paymentMethod"),
-        inputField("Customer Name (optional)", "customer", "text", false)
-      ])
-    : "";
-
-  const rows = businessData.sales.map(s => [
-    s.id, s.date, s.item, s.quantity, money(s.amount),
-    s.paymentMethod, s.customer || "-"
-  ]);
-
-  return form + "<h3>Sales Records</h3>" +
-    renderTable(
-      ["Reference", "Date", "Item", "Qty", "Total", "Payment", "Customer"],
-      rows
-    );
-}
-
-function saveSale(values) {
-  const quantity = Number(values.quantity);
-  const price = Number(values.price);
-
-  if (!values.item || quantity <= 0 || price < 0) {
-    throw new Error("Enter an item, a quantity greater than zero, and a valid price.");
-  }
-
-  businessData.sales.unshift({
-    id: makeId("SALE"),
-    date: today(),
-    item: values.item,
-    quantity,
-    amount: quantity * price,
-    paymentMethod: values.paymentMethod || "Not specified",
-    customer: values.customer || ""
-  });
-
-  saveBusinessData();
-}
-
-/* ---------- EXPENSES ---------- */
-
-function renderExpenses() {
-  if (!canManageBusiness()) {
-    return "<p>You do not have permission to manage expenses.</p>";
-  }
-
-  const form = recordForm("Record an Expense", [
-    inputField("Expense Description", "description"),
-    inputField("Amount (KSh)", "amount", "number"),
-    inputField("Category", "category"),
-    inputField("Date", "date", "date")
-  ]);
-
-  const rows = businessData.expenses.map(e => [
-    e.id, e.date, e.description, e.category, money(e.amount)
-  ]);
-
-  return form + "<h3>Expense Records</h3>" +
-    renderTable(["Reference", "Date", "Description", "Category", "Amount"], rows);
-}
-
-function saveExpense(values) {
-  const amount = Number(values.amount);
-  if (!values.description || amount <= 0) {
-    throw new Error("Enter an expense description and an amount greater than zero.");
-  }
-
-  businessData.expenses.unshift({
-    id: makeId("EXP"),
-    date: values.date || today(),
-    description: values.description,
-    category: values.category || "General",
-    amount
-  });
-
-  saveBusinessData();
-}
-
-/* ---------- INVENTORY ---------- */
-
-function renderInventory() {
-  const form = canManageBusiness() ||
-    ["gas_attendant", "shop_staff"].includes(role)
-    ? recordForm("Add Inventory Item", [
-        inputField("Item Name", "item"),
-        inputField("Category", "category"),
-        inputField("Quantity in Stock", "quantity", "number"),
-        inputField("Buying Price per Unit (KSh)", "buyPrice", "number"),
-        inputField("Selling Price per Unit (KSh)", "sellPrice", "number")
-      ])
-    : "";
-
-  const rows = businessData.inventory.map(item => [
-    item.id, item.item, item.category, item.quantity,
-    money(item.buyPrice), money(item.sellPrice),
-    money((item.sellPrice - item.buyPrice) * item.quantity)
-  ]);
-
-  return form + "<h3>Stock Records</h3>" +
-    renderTable(
-      ["Code", "Item", "Category", "Stock", "Buy Price", "Sell Price", "Potential Margin"],
-      rows
-    );
-}
-
-function saveInventory(values) {
-  const quantity = Number(values.quantity);
-  const buyPrice = Number(values.buyPrice);
-  const sellPrice = Number(values.sellPrice);
-
-  if (!values.item || quantity < 0 || buyPrice < 0 || sellPrice < 0) {
-    throw new Error("Enter a valid item, quantity, buying price and selling price.");
-  }
-
-  const existing = businessData.inventory.find(item =>
-    item.item.toLowerCase() === values.item.toLowerCase()
-  );
-
-  if (existing) {
-    existing.quantity += quantity;
-    existing.category = values.category || existing.category;
-    existing.buyPrice = buyPrice;
-    existing.sellPrice = sellPrice;
-  } else {
-    businessData.inventory.unshift({
-      id: makeId("STK"),
-      item: values.item,
-      category: values.category || "General",
-      quantity,
-      buyPrice,
-      sellPrice
-    });
-  }
-
-  saveBusinessData();
-}
-
-/* ---------- CUSTOMER INVOICES ---------- */
-
-function renderInvoices() {
-  const form = canManageBusiness() ||
-    ["shop_staff", "gas_attendant"].includes(role)
-    ? recordForm("Create Customer Invoice", [
-        inputField("Customer Name", "customer"),
-        inputField("Customer Phone", "phone", "tel"),
-        inputField("Item or Service", "item"),
-        inputField("Quantity", "quantity", "number"),
-        inputField("Unit Price (KSh)", "price", "number"),
-        inputField("Discount (KSh)", "discount", "number", false),
-        inputField("Amount Paid (KSh)", "paid", "number", false)
-      ], "Create Invoice")
-    : "";
-
-  const rows = businessData.invoices.map(invoice => [
-    invoice.id, invoice.date, invoice.customer, invoice.item,
-    invoice.quantity, money(invoice.total), money(invoice.paid),
-    money(invoice.balance)
-  ]);
-
-  return form + "<h3>Customer Invoices</h3>" +
-    renderTable(
-      ["Invoice No.", "Date", "Customer", "Item", "Qty", "Total", "Paid", "Balance"],
-      rows
-    ) +
-    `<p class="muted">For an official printable receipt, use the Print Receipt button on each invoice in the invoice list.</p>` +
-    `<div id="invoicePrintArea"></div>`;
-}
-
-function saveInvoice(values) {
-  const quantity = Number(values.quantity);
-  const price = Number(values.price);
-  const discount = Math.max(0, Number(values.discount) || 0);
-  const paid = Math.max(0, Number(values.paid) || 0);
-
-  if (!values.customer || !values.item || quantity <= 0 || price < 0) {
-    throw new Error("Enter the customer, item, valid quantity and unit price.");
-  }
-
-  const total = Math.max(0, quantity * price - discount);
-  if (paid > total) {
-    throw new Error("Amount paid cannot exceed the invoice total.");
-  }
-
-  const invoice = {
-    id: makeId("INV"),
-    date: today(),
-    customer: values.customer,
-    phone: values.phone || "",
-    item: values.item,
-    quantity,
-    price,
-    discount,
-    total,
-    paid,
-    balance: total - paid
-  };
-
-  businessData.invoices.unshift(invoice);
-  saveBusinessData();
-  printInvoice(invoice);
-}
-
-function printInvoice(invoice) {
-  const area = document.getElementById("invoicePrintArea");
-  if (!area) return;
-
-  area.innerHTML = `
-    <div class="invoice-paper">
-      <h2>AMK Gas • Sneakers • Barber</h2>
-      <h3>Customer Invoice / Receipt</h3>
-      <p><strong>Invoice:</strong> ${escapeHTML(invoice.id)}</p>
-      <p><strong>Date:</strong> ${escapeHTML(invoice.date)}</p>
-      <p><strong>Customer:</strong> ${escapeHTML(invoice.customer)}</p>
-      <p><strong>Phone:</strong> ${escapeHTML(invoice.phone || "-")}</p>
-      <hr>
-      <p><strong>Item / Service:</strong> ${escapeHTML(invoice.item)}</p>
-      <p><strong>Quantity:</strong> ${escapeHTML(invoice.quantity)}</p>
-      <p><strong>Unit price:</strong> ${escapeHTML(money(invoice.price))}</p>
-      <p><strong>Discount:</strong> ${escapeHTML(money(invoice.discount))}</p>
-      <h3>Total: ${escapeHTML(money(invoice.total))}</h3>
-      <p><strong>Paid:</strong> ${escapeHTML(money(invoice.paid))}</p>
-      <p><strong>Balance:</strong> ${escapeHTML(money(invoice.balance))}</p>
-      <p>Thank you for choosing AMK.</p>
-      <button class="btn" type="button" id="printInvoiceButton">Print Receipt</button>
-    </div>
-  `;
-
-  document.getElementById("printInvoiceButton")?.addEventListener("click", () => {
-    window.print();
-  });
-}
-
-/* ---------- DELIVERIES ---------- */
-
-function renderDeliveries() {
-  const form = canManageBusiness() ||
-    ["gas_attendant", "shop_staff"].includes(role)
-    ? recordForm("Record a Delivery", [
-        inputField("Customer Name", "customer"),
-        inputField("Customer Phone", "phone", "tel"),
-        inputField("Delivery Address", "address"),
-        inputField("Order / Item", "item"),
-        inputField("Delivery Fee (KSh)", "fee", "number"),
-        inputField("Delivery Status", "status")
-      ])
-    : "";
-
-  const rows = businessData.deliveries.map(d => [
-    d.id, d.date, d.customer, d.phone, d.address, d.item,
-    money(d.fee), d.status
-  ]);
-
-  return form + "<h3>Delivery Records</h3>" +
-    renderTable(
-      ["Reference", "Date", "Customer", "Phone", "Address", "Order", "Fee", "Status"],
-      rows
-    );
-}
-
-function saveDelivery(values) {
-  if (!values.customer || !values.phone || !values.address || !values.item) {
-    throw new Error("Enter the customer, phone, address and delivery item.");
-  }
-
-  businessData.deliveries.unshift({
-    id: makeId("DEL"),
-    date: today(),
-    customer: values.customer,
-    phone: values.phone,
-    address: values.address,
-    item: values.item,
-    fee: Math.max(0, Number(values.fee) || 0),
-    status: values.status || "Pending"
-  });
-
-  saveBusinessData();
-}
-
-/* ---------- EMPLOYEES: ADMIN ONLY ---------- */
-
-function renderEmployees() {
-  if (!isAdmin()) {
-    return "<p>Only the administrator can access employee and salary records.</p>";
-  }
-
-  const form = recordForm("Add Employee Record", [
-    inputField("Employee Name", "name"),
-    inputField("Phone Number", "phone", "tel"),
-    inputField("Job Role", "jobRole"),
-    inputField("Basic Salary (KSh)", "salary", "number"),
-    inputField("Commission (KSh)", "commission", "number", false),
-    inputField("Deductions (KSh)", "deductions", "number", false)
-  ]);
-
-  const rows = businessData.employees.map(employee => [
-    employee.id, employee.name, employee.phone, employee.jobRole,
-    money(employee.salary), money(employee.commission),
-    money(employee.deductions),
-    money(employee.salary + employee.commission - employee.deductions)
-  ]);
-
-  return form + "<h3>Private Employee & Payroll Records</h3>" +
-    renderTable(
-      ["Staff Code", "Name", "Phone", "Role", "Salary", "Commission", "Deductions", "Net Pay"],
-      rows
-    ) +
-    `<p class="muted">These payroll records are browser-local records, not official payslips or a shared payroll database.</p>`;
-}
-
-function saveEmployee(values) {
-  if (!isAdmin()) throw new Error("Only the administrator can add employee records.");
-  if (!values.name || !values.jobRole) {
-    throw new Error("Enter the employee name and job role.");
-  }
-
-  businessData.employees.unshift({
-    id: makeId("EMP"),
-    name: values.name,
-    phone: values.phone || "",
-    jobRole: values.jobRole,
-    salary: Math.max(0, Number(values.salary) || 0),
-    commission: Math.max(0, Number(values.commission) || 0),
-    deductions: Math.max(0, Number(values.deductions) || 0)
-  });
-
-  saveBusinessData();
-}
-
-/* ---------- BOOKINGS ---------- */
-
-function renderBookings() {
-  const rows = businessData.requests
-    .filter(request => /barber|booking/i.test(request.category || ""))
-    .map(request => [
-      request.id,
-      request.date ? new Date(request.date).toLocaleDateString() : "",
-      request.name,
-      request.phone,
-      request.description,
-      request.status
-    ]);
-
-  return "<h3>Barber Bookings</h3>" +
-    renderTable(
-      ["Reference", "Date Received", "Customer", "Phone", "Details", "Status"],
-      rows
-    );
-}
-
-/* ---------- STAFF VIEW ROUTER ---------- */
-
-function renderStaff(tab) {
-  if (!currentProfile || !canSeeTab(tab)) {
-    const content = document.getElementById("staffContent");
-    if (content) content.innerHTML = "<p>You do not have permission to view this section.</p>";
-    return;
-  }
-
-  activeTab = tab;
-  renderOverview();
-
-  const content = document.getElementById("staffContent");
-  if (!content) return;
-
-  const views = {
-    overview: () => `
-      <h3>Welcome to AMK</h3>
-      <p>Use the dashboard tabs to manage the records available to your role.</p>
-      <p><strong>Reminder:</strong> these business records are stored in this browser.</p>
-    `,
-    sales: renderSales,
-    invoices: renderInvoices,
-    expenses: renderExpenses,
-    inventory: renderInventory,
-    deliveries: renderDeliveries,
-    bookings: renderBookings,
-    employees: renderEmployees
-  };
-
-  content.innerHTML = (views[tab] || views.overview)();
-
-  content.querySelectorAll("[data-record-form]").forEach(form => {
-    form.addEventListener("submit", event => {
-      event.preventDefault();
-
-      const values = Object.fromEntries(new FormData(form).entries());
-
-      try {
-        if (tab === "sales") saveSale(values);
-        else if (tab === "expenses") saveExpense(values);
-        else if (tab === "inventory") saveInventory(values);
-        else if (tab === "invoices") saveInvoice(values);
-        else if (tab === "deliveries") saveDelivery(values);
-        else if (tab === "employees") saveEmployee(values);
-
-        renderStaff(tab);
-        showMessage("Record saved successfully on this device.");
-      } catch (error) {
-        showMessage(error.message || "Could not save the record.", "error");
-      }
-    });
-  });
-}
-
-/* ---------- STARTUP ---------- */
-
-document.addEventListener("DOMContentLoaded", () => {
-  setText("currentYear", new Date().getFullYear());
-
-  connectRequestButtons();
-
-  const viewButton = document.getElementById("viewOrders");
-  if (viewButton) viewButton.addEventListener("click", viewCustomerRequests);
-
-  /*
-   * Keep the click handler outside signInStaff().
-   * Do not assign the result of addEventListener() to a variable.
-   */
-  const loginButton = document.getElementById("staffLoginBtn");
-  if (loginButton) loginButton.addEventListener("click", signInStaff);
-
-  const passwordInput = document.getElementById("staffPassword");
-  if (passwordInput) {
-    passwordInput.addEventListener("keydown", event => {
-      if (event.key === "Enter") signInStaff();
-    });
-  }
-
-  const logoutButton = document.getElementById("staffLogout");
-  if (logoutButton) logoutButton.addEventListener("click", signOutStaff);
-
-  restoreStaffSession();
-});
-</script>
-
-<!-- AMK FIX: SNEAKER COLOURS, GAS ORDERS & BARBER BOOKINGS -->
-<script>
-(function () {
-  const $ = id => document.getElementById(id);
-
-  function openWhatsApp(number, message) {
-    const url = "https://wa.me/" + number +
-      "?text=" + encodeURIComponent(message);
-    window.open(url, "_blank");
-  }
-
-  function saveRequest(record) {
-    // Use the same business storage as the existing Part 4 script.
-    if (typeof businessData !== "undefined") {
-      if (!Array.isArray(businessData.requests)) {
-        businessData.requests = [];
-      }
-      businessData.requests.unshift(record);
-      if (typeof saveBusinessData === "function") {
-        saveBusinessData();
-      }
+  async function openView(view) {
+    if (!canOpen(view)) {
+      setMessage("You do not have permission to open this section.", true);
       return;
     }
 
-    // Fallback for the earlier AMK storage format.
-    const key = "amk_business_v2";
-    let data = {};
-    try {
-      data = JSON.parse(localStorage.getItem(key) || "{}");
-    } catch (_) {}
-
-    if (!Array.isArray(data.orders)) data.orders = [];
-    data.orders.unshift(record);
-    localStorage.setItem(key, JSON.stringify(data));
-  }
-
-  // ---------- SNEAKER COLOURS AND PRICES ----------
-  const prices = {
-    "Air Force 1 White": 1850,
-    "Air Force 1 Black": 1850,
-    "Air Max": 2000,
-    "Bapesta": 1650,
-    "Jordan 4": 2000,
-    "Nike SB": 2500
-  };
-
-  const colours = {
-    "Air Force 1 White": ["White"],
-    "Air Force 1 Black": ["Black"],
-    "Air Max": ["White", "Black", "Red", "Blue", "Grey", "Green", "Pink", "Cream", "Brown", "Purple", "Other"],
-    "Bapesta": ["White", "Black", "Red", "Blue", "Grey", "Green", "Pink", "Cream", "Brown", "Purple", "Other"],
-    "Jordan 4": ["White", "Black", "Red", "Blue", "Grey", "Green", "Pink", "Cream", "Brown", "Purple", "Other"],
-    "Nike SB": ["White", "Black", "Red", "Blue", "Grey", "Green", "Pink", "Cream", "Brown", "Purple", "Other"]
-  };
-
-  const product = $("sneakerProduct");
-  const colour = $("sneakerColour");
-  const quantity = $("sneakerQuantity");
-  const unitPrice = $("sneakerUnitPrice");
-  const total = $("sneakerTotal");
-
-  function updateSneakerOptions() {
-    if (!product || !colour) return;
-
-    const model = product.value;
-    colour.replaceChildren();
-
-    colour.add(new Option(
-      model ? "Choose colour" : "Choose model first", ""
-    ));
-
-    (colours[model] || []).forEach(c => {
-      colour.add(new Option(c, c));
+    document.querySelectorAll("[data-dashboard-view]").forEach((button) => {
+      button.classList.toggle(
+        "active",
+        button.dataset.dashboardView === view
+      );
     });
 
-    if (model === "Air Force 1 White") colour.value = "White";
-    if (model === "Air Force 1 Black") colour.value = "Black";
+    content.innerHTML =
+      "<h3>" + escapeHtml(viewTitles[view] || "Dashboard") + "</h3>" +
+      "<p>Loading section...</p>";
 
-    updateSneakerPrice();
+    setMessage("");
+
+    try {
+      await renderView(view);
+    } catch (error) {
+      content.innerHTML =
+        "<h3>" + escapeHtml(viewTitles[view] || "Dashboard") + "</h3>" +
+        "<p class='error'>This section could not be loaded.</p>";
+      setMessage(
+        error && error.message ? error.message : "Please try again.",
+        true
+      );
+    }
   }
 
-  function updateSneakerPrice() {
-    if (!product || !quantity || !unitPrice || !total) return;
+  async function renderView(view) {
+    if (view === "overview") {
+      content.innerHTML = `
+        <h3>Dashboard Overview</h3>
+        <p>Welcome, ${escapeHtml(currentProfile.full_name ||
+          currentProfile.email || "AMK staff")}.</p>
+        <div class="stats">
+          <div class="stat-card">
+            <span>Account</span>
+            <strong>${escapeHtml(roleNames[currentProfile.role])}</strong>
+          </div>
+          <div class="stat-card">
+            <span>Access</span>
+            <strong>Authorised</strong>
+          </div>
+        </div>
+        <p>Choose a section from the menu to continue.</p>
+        <p>Sales and stock figures will appear when their data sections are connected.</p>
+      `;
+      return;
+    }
 
-    const price = prices[product.value] || 0;
-    const qty = Math.max(1, Number(quantity.value) || 1);
+    if (view === "payroll" && currentProfile.role !== "admin") {
+      throw new Error("Payroll is restricted to administrators.");
+    }
 
-    unitPrice.textContent = price
-      ? "KSh " + price.toLocaleString("en-KE")
-      : "Select a model";
-
-    total.textContent = "KSh " +
-      (price * qty).toLocaleString("en-KE");
+    content.innerHTML = `
+      <h3>${escapeHtml(viewTitles[view] || "Dashboard")}</h3>
+      <p>This section's data tools are being connected in the next part.</p>
+    `;
   }
 
-  if (product && !product.dataset.amkFixed) {
-    product.dataset.amkFixed = "yes";
-    product.addEventListener("change", updateSneakerOptions);
-    if (quantity) quantity.addEventListener("input", updateSneakerPrice);
+  loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    setLoginError("");
+    setMessage("");
 
-    const sneakerForm = $("sneakerForm");
-    if (sneakerForm) {
-      sneakerForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+    const email = $("staffEmail").value.trim();
+    const password = $("staffPassword").value;
 
-        const model = product.value;
-        const size = $("sneakerSize")?.value || "";
-        const selectedColour = colour?.value || "";
-        const qty = Number(quantity?.value);
-        const price = prices[model];
+    if (!email || !password) {
+      setLoginError("Enter your email and password.");
+      return;
+    }
 
-        if (!price || !size || !selectedColour ||
-            !Number.isInteger(qty) || qty < 1) {
-          alert("Please choose the sneaker model, size, colour and a valid quantity.");
+    loginButton.disabled = true;
+    loginButton.textContent = "Signing in...";
+
+    try {
+      const { data, error } = await db.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) throw error;
+
+      if (!data.user) {
+        throw new Error("Login did not return a user account.");
+      }
+
+      await loadProfile(data.user);
+      loginForm.reset();
+    } catch (error) {
+      await db.auth.signOut();
+      showLoggedOut();
+      setLoginError(
+        error && error.message
+          ? error.message
+          : "Unable to sign in. Check your details and try again."
+      );
+    } finally {
+      loginButton.disabled = false;
+      loginButton.textContent = "Sign In";
+    }
+  });
+
+  logoutButton.addEventListener("click", async () => {
+    logoutButton.disabled = true;
+
+    try {
+      const { error } = await db.auth.signOut();
+      if (error) throw error;
+
+      showLoggedOut();
+      setLoginError("");
+    } catch (error) {
+      setMessage("Sign-out failed. Please try again.", true);
+    } finally {
+      logoutButton.disabled = false;
+    }
+  });
+
+  document.querySelectorAll("[data-dashboard-view]").forEach((button) => {
+    button.addEventListener("click", () => {
+      openView(button.dataset.dashboardView);
+    });
+  });
+
+  async function restoreSession() {
+    try {
+      const { data, error } = await db.auth.getSession();
+      if (error) throw error;
+
+      if (data.session && data.session.user) {
+        await loadProfile(data.session.user);
+      } else {
+        showLoggedOut();
+      }
+    } catch (error) {
+      showLoggedOut();
+      setLoginError(
+        "Could not verify your staff session. Sign in again or check your connection."
+      );
+    }
+  }
+
+  db.auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_OUT" || !session) {
+      showLoggedOut();
+    }
+  });
+
+  restoreSession();
+})();
+</script>
+<!-- END PART 4 -->
+``````html
+<!-- PART 5: REPORTS AND EXPORTS -->
+<script>
+(() => {
+  "use strict";
+
+  const db = window.amkSupabase;
+  if (!db) return;
+
+  const $ = (id) => document.getElementById(id);
+
+  function esc(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;",
+      '"': "&quot;", "'": "&#39;"
+    })[c]);
+  }
+
+  function money(value) {
+    return "KSh " + Number(value || 0).toLocaleString("en-KE", {
+      maximumFractionDigits: 2
+    });
+  }
+
+  function downloadBlob(filename, content, type) {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function csvValue(value) {
+    let text = String(value ?? "");
+    if (/^[=+\-@]/.test(text)) text = "'" + text;
+    return '"' + text.replace(/"/g, '""') + '"';
+  }
+
+  async function getAllRows(viewName, dateFrom, dateTo) {
+    const allRows = [];
+    const pageSize = 500;
+
+    for (let start = 0; ; start += pageSize) {
+      let query = db.from(viewName).select("*");
+
+      if (dateFrom) query = query.gte("created_at", dateFrom + "T00:00:00");
+      if (dateTo) query = query.lt("created_at", dateTo + "T23:59:59.999");
+
+      query = query.order("created_at", { ascending: false })
+        .range(start, start + pageSize - 1);
+
+      const { data, error } = await query;
+      if (error) throw error;
+
+      allRows.push(...(data || []));
+      if (!data || data.length < pageSize) break;
+    }
+
+    return allRows;
+  }
+
+  function showExportSection() {
+    const content = $("staffContent");
+    if (!content) return;
+
+    content.innerHTML = `
+      <h3>Reports & Exports</h3>
+      <p>Choose a date range, then export the data your account is authorised to access.</p>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="reportFrom">From date</label>
+          <input type="date" id="reportFrom">
+        </div>
+        <div class="field">
+          <label for="reportTo">To date</label>
+          <input type="date" id="reportTo">
+        </div>
+        <div class="field full">
+          <label for="reportType">Report</label>
+          <select id="reportType">
+            <option value="sales_export">Sales</option>
+            <option value="inventory_export">Inventory (no buying prices)</option>
+            ${window.amkCurrentRole === "admin" || window.amkCurrentRole === "manager"
+              ? '<option value="inventory_financial_export">Inventory financial report</option>'
+              : ""}
+          </select>
+        </div>
+        <div class="field full">
+          <button type="button" class="btn btn-primary" id="exportCsvBtn">
+            Export CSV
+          </button>
+          <button type="button" class="btn btn-outline" id="exportExcelBtn">
+            Export Excel
+          </button>
+        </div>
+      </div>
+      <p id="exportStatus" aria-live="polite"></p>
+      <p class="muted">Financial exports are limited by database permissions. Inventory reports do not have a transaction date filter because the inventory view represents current stock.</p>
+    `;
+
+    async function exportData(format) {
+      const status = $("exportStatus");
+      const csvButton = $("exportCsvBtn");
+      const excelButton = $("exportExcelBtn");
+      const report = $("reportType").value;
+      const from = $("reportFrom").value;
+      const to = $("reportTo").value;
+
+      if (from && to && from > to) {
+        status.textContent = "The start date must be before the end date.";
+        return;
+      }
+
+      if (report === "inventory_financial_export" &&
+          !["admin", "manager"].includes(window.amkCurrentRole)) {
+        status.textContent = "Your account cannot export financial inventory data.";
+        return;
+      }
+
+      csvButton.disabled = true;
+      excelButton.disabled = true;
+      status.textContent = "Preparing your export...";
+
+      try {
+        const isInventory = report.startsWith("inventory");
+        const rows = await getAllRows(
+          report,
+          isInventory ? "" : from,
+          isInventory ? "" : to
+        );
+
+        if (!rows.length) {
+          status.textContent = "No records were found for this report.";
           return;
         }
 
-        const order = {
-          id: "REQ-" + Date.now(),
-          type: "Sneakers",
-          category: "Sneakers",
-          name: $("sneakerName").value.trim(),
-          phone: $("sneakerPhone").value.trim(),
-          item: model,
-          size: size,
-          colour: selectedColour,
-          quantity: qty,
-          price: price,
-          amount: price * qty,
-          description: model + " • Size " + size +
-            " • Colour " + selectedColour + " • Qty " + qty,
-          date: new Date().toISOString(),
-          status: "Pending"
-        };
+        const headers = Object.keys(rows[0]);
+        const filename = report + "_" +
+          new Date().toISOString().slice(0, 10);
 
-        saveRequest(order);
+        if (format === "csv") {
+          const csv = [
+            headers.map(csvValue).join(","),
+            ...rows.map(row => headers.map(key => csvValue(row[key])).join(","))
+          ].join("\r\n");
 
-        openWhatsApp(
-          "254118311141",
-          "AMK SNEAKER ORDER\n\n" +
-          "Customer: " + order.name + "\n" +
-          "Phone: " + order.phone + "\n" +
-          "Model: " + model + "\n" +
-          "Size: " + size + "\n" +
-          "Colour: " + selectedColour + "\n" +
-          "Quantity: " + qty + "\n" +
-          "Price per pair: KSh " + price + "\n" +
-          "Total: KSh " + order.amount + "\n" +
-          "Delivery: " + ($("sneakerAddress").value || "To be confirmed")
-        );
+          downloadBlob(filename + ".csv", "\uFEFF" + csv, "text/csv;charset=utf-8");
+        } else {
+          if (!window.XLSX) {
+            throw new Error("Excel export library failed to load. Use CSV instead.");
+          }
 
-        alert("Sneaker request saved on this device. WhatsApp will open to send the order.");
-        sneakerForm.reset();
-        updateSneakerOptions();
-      });
+          const worksheet = XLSX.utils.json_to_sheet(rows);
+          const workbook = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(workbook, worksheet, "AMK Report");
+          XLSX.writeFile(workbook, filename + ".xlsx");
+        }
+
+        status.textContent = "Export prepared: " + rows.length + " records.";
+      } catch (error) {
+        status.textContent = "Export failed: " +
+          (error && error.message ? error.message : "Please try again.");
+      } finally {
+        csvButton.disabled = false;
+        excelButton.disabled = false;
+      }
     }
 
-    updateSneakerOptions();
+    $("exportCsvBtn").addEventListener("click", () => exportData("csv"));
+    $("exportExcelBtn").addEventListener("click", () => exportData("xlsx"));
   }
 
-  // ---------- GAS ORDER FORM ----------
-  const gasForm = $("gasForm");
-
-  if (gasForm && !gasForm.dataset.amkFixed) {
-    gasForm.dataset.amkFixed = "yes";
-
-    gasForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const order = {
-        id: "REQ-" + Date.now(),
-        type: "Gas",
-        category: "Gas Order",
-        name: $("gasName").value.trim(),
-        phone: $("gasPhone").value.trim(),
-        item: $("gasSize").value,
-        quantity: Number($("gasQuantity").value),
-        town: $("gasTown").value,
-        method: $("gasMethod").value,
-        address: $("gasAddress").value.trim(),
-        notes: $("gasNotes").value.trim(),
-        description: $("gasSize").value + " • Qty " +
-          $("gasQuantity").value + " • " + $("gasTown").value +
-          " • " + $("gasMethod").value,
-        date: new Date().toISOString(),
-        status: "Pending"
-      };
-
-      if (!order.name || !order.phone || !order.item ||
-          order.quantity < 1 || !order.town) {
-        alert("Please complete all required gas order fields.");
-        return;
-      }
-
-      saveRequest(order);
-
-      openWhatsApp(
-        "254117414318",
-        "AMK GAS ORDER\n\n" +
-        "Name: " + order.name + "\n" +
-        "Phone: " + order.phone + "\n" +
-        "Gas: " + order.item + "\n" +
-        "Quantity: " + order.quantity + "\n" +
-        "Town: " + order.town + "\n" +
-        "Delivery/Pickup: " + order.method + "\n" +
-        "Address: " + (order.address || "Not provided") + "\n" +
-        "Notes: " + (order.notes || "None") +
-        "\n\nPlease confirm my order."
-      );
-
-      alert("Gas order saved on this device. WhatsApp will open to send the request.");
-      gasForm.reset();
-      if ($("gasQuantity")) $("gasQuantity").value = "1";
-    });
-  }
-
-  // ---------- BARBER BOOKING FORM ----------
-  const barberForm = $("barberForm");
-
-  if (barberForm && !barberForm.dataset.amkFixed) {
-    barberForm.dataset.amkFixed = "yes";
-
-    barberForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const booking = {
-        id: "REQ-" + Date.now(),
-        type: "Barber",
-        category: "Barber Booking",
-        name: $("barberName").value.trim(),
-        phone: $("barberPhone").value.trim(),
-        service: $("barberService").value,
-        location: $("barberLocation").value,
-        date: $("barberDate").value,
-        time: $("barberTime").value,
-        notes: $("barberNotes").value.trim(),
-        description: $("barberService").value + " • " +
-          $("barberLocation").value + " • " +
-          $("barberDate").value + " at " + $("barberTime").value,
-        created: new Date().toISOString(),
-        status: "Pending"
-      };
-
-      if (!booking.name || !booking.phone || !booking.service ||
-          !booking.location || !booking.date || !booking.time) {
-        alert("Please complete all required barber booking fields.");
-        return;
-      }
-
-      if (booking.date < new Date().toISOString().slice(0, 10)) {
-        alert("Please choose today or a future date.");
-        return;
-      }
-
-      saveRequest(booking);
-
-      openWhatsApp(
-        "254118311141",
-        "AMK BARBER BOOKING\n\n" +
-        "Name: " + booking.name + "\n" +
-        "Phone: " + booking.phone + "\n" +
-        "Service: " + booking.service + "\n" +
-        "Location: " + booking.location + "\n" +
-        "Date: " + booking.date + "\n" +
-        "Time: " + booking.time + "\n" +
-        "Notes: " + (booking.notes || "None") +
-        "\n\nPlease confirm my appointment."
-      );
-
-      alert("Barber booking saved on this device. WhatsApp will open to send the request.");
-      barberForm.reset();
-    });
-  }
+  /*
+   * Part 4 will be updated here so the signed-in role is available
+   * to the reports screen.
+   */
+  window.amkRenderReports = showExportSection;
 })();
 </script>
-
+<!-- END PART 5 -->
+``````html
+<!-- PART 6: CUSTOMER FORMS, REPORTS INTEGRATION AND FINAL SETUP -->
 <script>
-(function () {
-  const button = document.createElement("button");
-  button.textContent = "Export AMK Backup";
-  button.style.cssText =
-    "position:fixed;bottom:18px;right:12px;z-index:99999;" +
-    "padding:14px 18px;background:#1d3d70;color:white;" +
-    "border:0;border-radius:12px;font-size:15px;font-weight:bold;";
+(() => {
+  "use strict";
 
-  button.onclick = function () {
+  const $ = (id) => document.getElementById(id);
+  const db = window.amkSupabase;
+
+  const GAS_WHATSAPP = "254117414318";
+  const SHOP_WHATSAPP = "254118311141";
+
+  function value(id) {
+    const element = $(id);
+    return element ? element.value.trim() : "";
+  }
+
+  function showMessage(id, text, isError = false) {
+    const element = $(id);
+    if (!element) return;
+    element.textContent = text;
+    element.className = isError ? "error" : "success";
+  }
+
+  function sendWhatsApp(phone, text) {
+    const url = "https://wa.me/" + phone + "?text=" +
+      encodeURIComponent(text);
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
+  function handleForm(formId, messageId, phone, buildMessage) {
+    const form = $(formId);
+    if (!form) return;
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      try {
+        const message = buildMessage();
+        if (!message) return;
+
+        showMessage(
+          messageId,
+          "Opening WhatsApp. Review your message and press Send to submit your request."
+        );
+        sendWhatsApp(phone, message);
+      } catch (error) {
+        showMessage(messageId, "Please check the form and try again.", true);
+      }
+    });
+  }
+
+  handleForm("gasForm", "gasMessage", GAS_WHATSAPP, () => {
+    const name = value("gasName");
+    const phone = value("gasPhone");
+    const size = value("gasSize");
+    const qty = value("gasQty");
+
+    if (!name || !phone || !size || !qty) {
+      showMessage("gasMessage", "Complete all required fields.", true);
+      return "";
+    }
+
+    const prices = { "6 KG": 1200, "12 KG": 2000 };
+    const price = prices[size];
+
+    return [
+      "AMK GAS ORDER",
+      "Name: " + name,
+      "Customer phone: " + phone,
+      "Cylinder: " + size,
+      "Quantity: " + qty,
+      price ? "Listed price per cylinder: KSh " + price : "",
+      price ? "Estimated total: KSh " + (price * Number(qty)) : "",
+      "Fulfilment: " + value("gasFulfilment"),
+      "Location: " + value("gasLocation"),
+      "Notes: " + value("gasNotes"),
+      "",
+      "Please confirm availability and the final amount with AMK before payment."
+    ].filter(Boolean).join("\n");
+  });
+
+  handleForm("sneakerForm", "sneakerMessage", SHOP_WHATSAPP, () => {
+    const name = value("sneakerName");
+    const phone = value("sneakerPhone");
+    const model = value("sneakerModel");
+    const size = value("sneakerSize");
+    const qty = value("sneakerQty");
+
+    if (!name || !phone || !model || !size || !qty) {
+      showMessage("sneakerMessage", "Complete all required fields.", true);
+      return "";
+    }
+
+    return [
+      "AMK SNEAKERS ENQUIRY",
+      "Name: " + name,
+      "Phone: " + phone,
+      "Sneaker/model: " + model,
+      "Size: " + size,
+      "Quantity: " + qty,
+      "Budget: " + value("sneakerBudget"),
+      "Delivery address: " + value("sneakerAddress"),
+      "Notes: " + value("sneakerNotes"),
+      "",
+      "Please confirm availability, price and delivery charges."
+    ].join("\n");
+  });
+
+  handleForm("barberForm", "barberMessage", SHOP_WHATSAPP, () => {
+    const name = value("barberName");
+    const phone = value("barberPhone");
+    const service = value("barberService");
+    const date = value("barberDate");
+    const time = value("barberTime");
+
+    if (!name || !phone || !service || !date || !time) {
+      showMessage("barberMessage", "Complete all required fields.", true);
+      return "";
+    }
+
+    return [
+      "AMK BARBER APPOINTMENT REQUEST",
+      "Name: " + name,
+      "Phone: " + phone,
+      "Service: " + service,
+      "Preferred date: " + date,
+      "Preferred time: " + time,
+      "Notes: " + value("barberNotes"),
+      "",
+      "Please confirm the appointment before I visit."
+    ].join("\n");
+  });
+
+  /*
+   * Reports integration:
+   * Intercept the Reports menu before Part 4's placeholder handler.
+   * Retrieve the role from the signed-in user's database profile.
+   */
+  document.addEventListener("click", async (event) => {
+    const button = event.target.closest('[data-dashboard-view="reports"]');
+    if (!button) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    const content = $("staffContent");
+    if (!db || !content) return;
+
+    content.innerHTML = "<h3>Reports & Exports</h3><p>Checking permissions...</p>";
+
     try {
-      const raw = localStorage.getItem("amk_business_v2");
+      const { data: userResult, error: userError } =
+        await db.auth.getUser();
 
-      if (!raw) {
-        alert("No AMK browser records were found in this Safari storage.");
-        return;
+      if (userError) throw userError;
+      if (!userResult.user) throw new Error("Please sign in again.");
+
+      const { data: profile, error: profileError } = await db
+        .from("profiles")
+        .select("role,active")
+        .eq("id", userResult.user.id)
+        .maybeSingle();
+
+      if (profileError) throw profileError;
+      if (!profile || profile.active !== true) {
+        throw new Error("Your staff account is inactive or unavailable.");
       }
 
-      // Validate without changing the original stored value.
-      const parsed = JSON.parse(raw);
-      const backup = {
-        app: "AMK Gas Sneakers Barber",
-        key: "amk_business_v2",
-        exportedAt: new Date().toISOString(),
-        data: parsed
-      };
+      window.amkCurrentRole = profile.role;
 
-      const blob = new Blob(
-        [JSON.stringify(backup, null, 2)],
-        { type: "application/json" }
-      );
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "AMK-backup-" +
-        new Date().toISOString().slice(0, 10) + ".json";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+      if (typeof window.amkRenderReports !== "function") {
+        throw new Error("The reports module did not load. Refresh and try again.");
+      }
 
-      setTimeout(() => URL.revokeObjectURL(url), 3000);
-      alert("Backup export started. Save the JSON file in Files.");
+      window.amkRenderReports();
     } catch (error) {
-      alert("Backup failed: " + error.message);
+      content.innerHTML =
+        "<h3>Reports & Exports</h3><p class='error'></p>";
+      content.querySelector(".error").textContent =
+        error.message || "Unable to open reports.";
     }
-  };
+  }, true);
 
-  document.body.appendChild(button);
+  /*
+   * Set the earliest appointment date to today.
+   */
+  const barberDate = $("barberDate");
+  if (barberDate) {
+    const today = new Date();
+    const localToday = [
+      today.getFullYear(),
+      String(today.getMonth() + 1).padStart(2, "0"),
+      String(today.getDate()).padStart(2, "0")
+    ].join("-");
+    barberDate.min = localToday;
+  }
+
+  /*
+   * Keep the existing local business records untouched.
+   * This script does not clear or overwrite localStorage.
+   */
 })();
 </script>
-
+<!-- END PART 6 -->
 </body>
 </html>
+```
