@@ -1645,5 +1645,281 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<!-- AMK FIX: SNEAKER COLOURS, GAS ORDERS & BARBER BOOKINGS -->
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+
+  function openWhatsApp(number, message) {
+    const url = "https://wa.me/" + number +
+      "?text=" + encodeURIComponent(message);
+    window.open(url, "_blank");
+  }
+
+  function saveRequest(record) {
+    // Use the same business storage as the existing Part 4 script.
+    if (typeof businessData !== "undefined") {
+      if (!Array.isArray(businessData.requests)) {
+        businessData.requests = [];
+      }
+      businessData.requests.unshift(record);
+      if (typeof saveBusinessData === "function") {
+        saveBusinessData();
+      }
+      return;
+    }
+
+    // Fallback for the earlier AMK storage format.
+    const key = "amk_business_v2";
+    let data = {};
+    try {
+      data = JSON.parse(localStorage.getItem(key) || "{}");
+    } catch (_) {}
+
+    if (!Array.isArray(data.orders)) data.orders = [];
+    data.orders.unshift(record);
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  // ---------- SNEAKER COLOURS AND PRICES ----------
+  const prices = {
+    "Air Force 1 White": 1850,
+    "Air Force 1 Black": 1850,
+    "Air Max": 2000,
+    "Bapesta": 1650,
+    "Jordan 4": 2000,
+    "Nike SB": 2500
+  };
+
+  const colours = {
+    "Air Force 1 White": ["White"],
+    "Air Force 1 Black": ["Black"],
+    "Air Max": ["White", "Black", "Red", "Blue", "Grey", "Green", "Pink", "Cream", "Brown", "Purple", "Other"],
+    "Bapesta": ["White", "Black", "Red", "Blue", "Grey", "Green", "Pink", "Cream", "Brown", "Purple", "Other"],
+    "Jordan 4": ["White", "Black", "Red", "Blue", "Grey", "Green", "Pink", "Cream", "Brown", "Purple", "Other"],
+    "Nike SB": ["White", "Black", "Red", "Blue", "Grey", "Green", "Pink", "Cream", "Brown", "Purple", "Other"]
+  };
+
+  const product = $("sneakerProduct");
+  const colour = $("sneakerColour");
+  const quantity = $("sneakerQuantity");
+  const unitPrice = $("sneakerUnitPrice");
+  const total = $("sneakerTotal");
+
+  function updateSneakerOptions() {
+    if (!product || !colour) return;
+
+    const model = product.value;
+    colour.replaceChildren();
+
+    colour.add(new Option(
+      model ? "Choose colour" : "Choose model first", ""
+    ));
+
+    (colours[model] || []).forEach(c => {
+      colour.add(new Option(c, c));
+    });
+
+    if (model === "Air Force 1 White") colour.value = "White";
+    if (model === "Air Force 1 Black") colour.value = "Black";
+
+    updateSneakerPrice();
+  }
+
+  function updateSneakerPrice() {
+    if (!product || !quantity || !unitPrice || !total) return;
+
+    const price = prices[product.value] || 0;
+    const qty = Math.max(1, Number(quantity.value) || 1);
+
+    unitPrice.textContent = price
+      ? "KSh " + price.toLocaleString("en-KE")
+      : "Select a model";
+
+    total.textContent = "KSh " +
+      (price * qty).toLocaleString("en-KE");
+  }
+
+  if (product && !product.dataset.amkFixed) {
+    product.dataset.amkFixed = "yes";
+    product.addEventListener("change", updateSneakerOptions);
+    if (quantity) quantity.addEventListener("input", updateSneakerPrice);
+
+    const sneakerForm = $("sneakerForm");
+    if (sneakerForm) {
+      sneakerForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const model = product.value;
+        const size = $("sneakerSize")?.value || "";
+        const selectedColour = colour?.value || "";
+        const qty = Number(quantity?.value);
+        const price = prices[model];
+
+        if (!price || !size || !selectedColour ||
+            !Number.isInteger(qty) || qty < 1) {
+          alert("Please choose the sneaker model, size, colour and a valid quantity.");
+          return;
+        }
+
+        const order = {
+          id: "REQ-" + Date.now(),
+          type: "Sneakers",
+          category: "Sneakers",
+          name: $("sneakerName").value.trim(),
+          phone: $("sneakerPhone").value.trim(),
+          item: model,
+          size: size,
+          colour: selectedColour,
+          quantity: qty,
+          price: price,
+          amount: price * qty,
+          description: model + " • Size " + size +
+            " • Colour " + selectedColour + " • Qty " + qty,
+          date: new Date().toISOString(),
+          status: "Pending"
+        };
+
+        saveRequest(order);
+
+        openWhatsApp(
+          "254118311141",
+          "AMK SNEAKER ORDER\n\n" +
+          "Customer: " + order.name + "\n" +
+          "Phone: " + order.phone + "\n" +
+          "Model: " + model + "\n" +
+          "Size: " + size + "\n" +
+          "Colour: " + selectedColour + "\n" +
+          "Quantity: " + qty + "\n" +
+          "Price per pair: KSh " + price + "\n" +
+          "Total: KSh " + order.amount + "\n" +
+          "Delivery: " + ($("sneakerAddress").value || "To be confirmed")
+        );
+
+        alert("Sneaker request saved on this device. WhatsApp will open to send the order.");
+        sneakerForm.reset();
+        updateSneakerOptions();
+      });
+    }
+
+    updateSneakerOptions();
+  }
+
+  // ---------- GAS ORDER FORM ----------
+  const gasForm = $("gasForm");
+
+  if (gasForm && !gasForm.dataset.amkFixed) {
+    gasForm.dataset.amkFixed = "yes";
+
+    gasForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const order = {
+        id: "REQ-" + Date.now(),
+        type: "Gas",
+        category: "Gas Order",
+        name: $("gasName").value.trim(),
+        phone: $("gasPhone").value.trim(),
+        item: $("gasSize").value,
+        quantity: Number($("gasQuantity").value),
+        town: $("gasTown").value,
+        method: $("gasMethod").value,
+        address: $("gasAddress").value.trim(),
+        notes: $("gasNotes").value.trim(),
+        description: $("gasSize").value + " • Qty " +
+          $("gasQuantity").value + " • " + $("gasTown").value +
+          " • " + $("gasMethod").value,
+        date: new Date().toISOString(),
+        status: "Pending"
+      };
+
+      if (!order.name || !order.phone || !order.item ||
+          order.quantity < 1 || !order.town) {
+        alert("Please complete all required gas order fields.");
+        return;
+      }
+
+      saveRequest(order);
+
+      openWhatsApp(
+        "254117414318",
+        "AMK GAS ORDER\n\n" +
+        "Name: " + order.name + "\n" +
+        "Phone: " + order.phone + "\n" +
+        "Gas: " + order.item + "\n" +
+        "Quantity: " + order.quantity + "\n" +
+        "Town: " + order.town + "\n" +
+        "Delivery/Pickup: " + order.method + "\n" +
+        "Address: " + (order.address || "Not provided") + "\n" +
+        "Notes: " + (order.notes || "None") +
+        "\n\nPlease confirm my order."
+      );
+
+      alert("Gas order saved on this device. WhatsApp will open to send the request.");
+      gasForm.reset();
+      if ($("gasQuantity")) $("gasQuantity").value = "1";
+    });
+  }
+
+  // ---------- BARBER BOOKING FORM ----------
+  const barberForm = $("barberForm");
+
+  if (barberForm && !barberForm.dataset.amkFixed) {
+    barberForm.dataset.amkFixed = "yes";
+
+    barberForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const booking = {
+        id: "REQ-" + Date.now(),
+        type: "Barber",
+        category: "Barber Booking",
+        name: $("barberName").value.trim(),
+        phone: $("barberPhone").value.trim(),
+        service: $("barberService").value,
+        location: $("barberLocation").value,
+        date: $("barberDate").value,
+        time: $("barberTime").value,
+        notes: $("barberNotes").value.trim(),
+        description: $("barberService").value + " • " +
+          $("barberLocation").value + " • " +
+          $("barberDate").value + " at " + $("barberTime").value,
+        created: new Date().toISOString(),
+        status: "Pending"
+      };
+
+      if (!booking.name || !booking.phone || !booking.service ||
+          !booking.location || !booking.date || !booking.time) {
+        alert("Please complete all required barber booking fields.");
+        return;
+      }
+
+      if (booking.date < new Date().toISOString().slice(0, 10)) {
+        alert("Please choose today or a future date.");
+        return;
+      }
+
+      saveRequest(booking);
+
+      openWhatsApp(
+        "254118311141",
+        "AMK BARBER BOOKING\n\n" +
+        "Name: " + booking.name + "\n" +
+        "Phone: " + booking.phone + "\n" +
+        "Service: " + booking.service + "\n" +
+        "Location: " + booking.location + "\n" +
+        "Date: " + booking.date + "\n" +
+        "Time: " + booking.time + "\n" +
+        "Notes: " + (booking.notes || "None") +
+        "\n\nPlease confirm my appointment."
+      );
+
+      alert("Barber booking saved on this device. WhatsApp will open to send the request.");
+      barberForm.reset();
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
