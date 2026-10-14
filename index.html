@@ -4,901 +4,448 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>AMK Gas • Sneakers • Barber | Kenya</title>
-<meta name="description" content="Order cooking gas, shop sneakers and request barber appointments with AMK in Nanyuki and Nairobi, Kenya.">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#0755c9">
-<link rel="canonical" href="https://amkgasandbarber.co.ke/">
-
-<meta property="og:title" content="AMK Gas • Sneakers • Barber">
-<meta property="og:description" content="Gas delivery, sneakers and barber services in Kenya.">
-<meta property="og:url" content="https://amkgasandbarber.co.ke/">
-<meta property="og:type" content="website">
-
+<meta name="theme-color" content="#0b1d35">
+<meta name="description" content="AMK Gas, Sneakers and Barber inventory control panel.">
 <meta name="google-site-verification" content="JIcMktQWOmy3LyI9mGIQeIEf87Dy8OQ2joHIn-WRSrI">
+<link rel="canonical" href="https://amkgasandbarber.co.ke/">
+<title>AMK Business Control Panel</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 :root {
-  --blue: #0755c9;
-  --navy: #061a38;
-  --green: #168447;
-  --light: #eef5ff;
-  --white: #ffffff;
-  --text: #182438;
-  --muted: #637087;
-  --border: #dce4ef;
-  --danger: #b42318;
-  --radius: 15px;
-  --shadow: 0 8px 25px rgba(6,26,56,.08);
+  --navy:#0b1d35;
+  --blue:#1769e0;
+  --light:#f3f6fb;
+  --white:#ffffff;
+  --text:#19283d;
+  --muted:#718096;
+  --green:#168447;
+  --red:#c53030;
+  --border:#e0e7f0;
+  --shadow:0 5px 22px rgba(15,35,65,.07);
 }
-
-* { box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
-
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f7f9fc;
-  color: var(--text);
-  line-height: 1.6;
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--light);
+  color:var(--text);
 }
-
-a { color: var(--blue); }
-
-button, input, select, textarea {
-  font: inherit;
-}
-
-button, .button {
-  display: inline-block;
-  padding: 12px 18px;
-  border: 0;
-  border-radius: 9px;
-  background: var(--blue);
-  color: var(--white);
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-}
-
-button:hover, .button:hover {
-  filter: brightness(.94);
-}
-
-button:disabled {
-  opacity: .6;
-  cursor: not-allowed;
-}
-
-.secondary-button {
-  background: var(--navy);
-}
-
-.green-button {
-  background: var(--green);
-}
-
-.container {
-  width: min(1120px, 92%);
-  margin-inline: auto;
-}
-
+button,input,select,textarea { font:inherit; }
+button { cursor:pointer; }
+button:disabled { opacity:.55; cursor:not-allowed; }
+a { color:var(--blue); }
 .topbar {
-  padding: 8px 4%;
-  background: var(--navy);
-  color: white;
-  text-align: center;
-  font-size: .88rem;
+  background:var(--navy);
+  color:white;
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
 }
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(255,255,255,.97);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
+.brand { font-size:20px; font-weight:800; }
+.brand small {
+  display:block;
+  font-size:11px;
+  color:#b8c9e2;
+  margin-top:4px;
+  font-weight:400;
 }
-
-.header-inner {
-  width: min(1200px, 94%);
-  margin: auto;
-  min-height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+.topbar-status { font-size:12px; color:#d4e2f5; }
+.layout {
+  display:grid;
+  grid-template-columns:235px minmax(0,1fr);
+  min-height:calc(100vh - 66px);
 }
-
-.brand {
-  color: var(--navy);
-  text-decoration: none;
-  font-size: 1.12rem;
-  font-weight: 900;
-  line-height: 1.3;
+.sidebar {
+  background:#102641;
+  color:white;
+  padding:18px 12px;
 }
-
-.brand span {
-  display: block;
-  color: var(--blue);
-  font-size: .76rem;
-  letter-spacing: 1px;
+.sidebar h3 {
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+  color:#9db2ce;
+  padding:0 10px;
+  margin:18px 0 8px;
 }
-
-.nav-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 14px;
+.nav-btn {
+  display:block;
+  width:100%;
+  text-align:left;
+  border:0;
+  color:#e4edf9;
+  background:transparent;
+  padding:12px 11px;
+  margin:3px 0;
+  border-radius:8px;
+  font-size:14px;
 }
-
-.nav-links a {
-  color: var(--text);
-  text-decoration: none;
-  font-size: .9rem;
-  font-weight: 700;
+.nav-btn:hover,.nav-btn.active {
+  background:#23466f;
+  color:white;
 }
-
-.nav-links a:hover {
-  color: var(--blue);
+.nav-btn.active { box-shadow:inset 3px 0 #6ca7ff; }
+.main { min-width:0; padding:24px; }
+.page-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:22px;
 }
-
-.hero {
-  background: linear-gradient(125deg, var(--navy), #0c438e);
-  color: white;
-  padding: 78px 0;
+h1 { font-size:26px; margin:0 0 7px; }
+h2 { font-size:21px; margin:0 0 16px; }
+h3 { font-size:16px; margin:0 0 13px; }
+.muted { color:var(--muted); font-size:13px; line-height:1.6; }
+.panel,.stat-card,.form-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:13px;
+  box-shadow:var(--shadow);
+  padding:18px;
+  min-width:0;
 }
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.35fr .65fr;
-  gap: 35px;
-  align-items: center;
+.stats-grid {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+  margin-bottom:20px;
 }
-
-.hero h1 {
-  font-size: clamp(2.1rem, 5vw, 4rem);
-  line-height: 1.12;
-  margin: 12px 0 18px;
+.stat-label { font-size:12px; color:var(--muted); }
+.stat-number {
+  font-size:25px;
+  font-weight:800;
+  margin:10px 0 5px;
+  overflow-wrap:anywhere;
 }
-
-.hero p {
-  max-width: 650px;
-  color: #e1ebff;
-  font-size: 1.08rem;
+.stat-note { font-size:12px; color:var(--muted); }
+.content-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  margin-bottom:20px;
 }
-
-.hero .button {
-  margin: 8px 8px 0 0;
+.business-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:20px;
 }
-
-.hero-panel {
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 20px;
-  padding: 25px;
+.business-card {
+  padding:16px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:12px;
 }
-
-.hero-panel h2 {
-  margin-top: 0;
-}
-
-.hero-panel p {
-  font-size: .96rem;
-}
-
-.section {
-  padding: 58px 0;
-}
-
-.section-heading {
-  margin-bottom: 25px;
-}
-
-.section-heading h2 {
-  color: var(--navy);
-  font-size: clamp(1.65rem, 4vw, 2.35rem);
-  margin: 0 0 8px;
-}
-
-.section-heading p {
-  color: var(--muted);
-  margin: 0;
-}
-
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.card {
-  padding: 24px;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-.card h3 {
-  margin-top: 0;
-  color: var(--navy);
-}
-
-.service-icon {
-  font-size: 2.3rem;
-}
-
-.price {
-  font-size: 1.3rem;
-  font-weight: 900;
-  color: var(--green);
-}
-
-.muted {
-  color: var(--muted);
-}
-
-.badge {
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 20px;
-  background: var(--light);
-  color: var(--blue);
-  font-size: .82rem;
-  font-weight: 700;
-}
-
-.form-card {
-  max-width: 850px;
-  margin: auto;
-  padding: 25px;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
+.business-icon { font-size:25px; margin-bottom:10px; }
+.business-card p { font-size:12px; color:var(--muted); line-height:1.5; }
+.business-card button { width:100%; }
 .form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
 }
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.field.full {
-  grid-column: 1 / -1;
-}
-
+.field { margin-bottom:13px; min-width:0; }
 .field label {
-  font-size: .92rem;
-  font-weight: 700;
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:7px;
 }
-
-.field input,
-.field select,
-.field textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 9px;
-  background: white;
-  color: var(--text);
+input,select,textarea {
+  display:block;
+  width:100%;
+  min-width:0;
+  padding:11px 12px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  background:white;
+  color:var(--text);
 }
-
-.field textarea {
-  min-height: 95px;
-  resize: vertical;
+textarea { min-height:85px; resize:vertical; }
+input:focus,select:focus,textarea:focus {
+  outline:2px solid #b9d4ff;
+  border-color:var(--blue);
 }
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  outline: 2px solid #9bc2ff;
-  border-color: var(--blue);
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:11px 15px;
+  border:0;
+  border-radius:8px;
+  background:var(--blue);
+  color:white;
+  font-weight:700;
+  font-size:13px;
 }
-
-.form-message {
-  min-height: 24px;
-  margin: 12px 0 0;
-  font-weight: 700;
-  overflow-wrap: anywhere;
+.btn:hover { filter:brightness(.94); }
+.btn-secondary {
+  background:#e8eff9;
+  color:var(--navy);
 }
-
-.notice {
-  padding: 14px;
-  border-radius: 9px;
-  background: var(--light);
-  border: 1px solid var(--border);
-}
-
-.hidden { display: none !important; }
-
-.dashboard-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 16px;
-}
-
-.dashboard-card,
-.dashboard-panel {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px;
-  margin: 16px 0;
-  box-shadow: var(--shadow);
-}
-
-.dashboard-number {
-  font-size: 1.55rem;
-  font-weight: 900;
-  overflow-wrap: anywhere;
-}
-
-.dashboard-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin: 20px 0;
-}
-
-.dashboard-nav button {
-  font-size: .88rem;
-}
-
-.dashboard-nav button.active {
-  background: var(--green);
-}
-
+.btn-danger { background:var(--red); }
+.btn-success { background:var(--green); }
+.btn-small { padding:7px 10px; font-size:12px; }
+.button-row { display:flex; flex-wrap:wrap; gap:8px; }
 .table-wrap {
-  width: 100%;
-  overflow-x: auto;
+  overflow-x:auto;
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:9px;
 }
-
-.table-wrap table {
-  width: 100%;
-  border-collapse: collapse;
+table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+  background:white;
+  white-space:nowrap;
 }
-
-.table-wrap th,
-.table-wrap td {
-  padding: 10px;
-  border-bottom: 1px solid var(--border);
-  text-align: left;
-  vertical-align: top;
+th,td {
+  padding:11px 12px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
 }
-
-.table-wrap th {
-  background: var(--light);
+th { background:#f5f8fc; font-size:12px; }
+tbody tr:last-child td { border-bottom:0; }
+.badge {
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+  background:#e8eff9;
+  color:#254b7c;
 }
-
-.site-footer {
-  padding: 35px 0;
-  background: var(--navy);
-  color: white;
+.badge-low { background:#fff0d8; color:#925400; }
+.badge-out { background:#ffe2e2; color:#a21d1d; }
+.badge-good { background:#dcf7e6; color:#17663a; }
+.notice {
+  padding:12px 14px;
+  margin:12px 0;
+  border-radius:8px;
+  background:#e8f1ff;
+  color:#174b91;
+  font-size:13px;
+  line-height:1.6;
+  overflow-wrap:anywhere;
 }
-
-.site-footer a { color: white; }
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+.notice.error { background:#ffe9e9; color:#9b1c1c; }
+.notice.success { background:#e0f8e8; color:#17663a; }
+.hidden { display:none !important; }
+.chart-container { position:relative; height:260px; }
+.login-wrap {
+  max-width:430px;
+  margin:35px auto;
 }
-
-@media (max-width: 760px) {
-  .header-inner {
-    padding: 12px 0;
-    align-items: flex-start;
-    flex-direction: column;
+.login-wrap .panel { padding:25px; }
+.login-brand { text-align:center; margin-bottom:22px; }
+.login-brand strong { font-size:25px; }
+.login-brand p { color:var(--muted); font-size:13px; }
+.toolbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:15px;
+}
+.toolbar input,.toolbar select { width:auto; min-width:140px; }
+.empty {
+  text-align:center;
+  padding:25px 12px;
+  color:var(--muted);
+  font-size:13px;
+}
+.footer {
+  padding:20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+@media(max-width:1000px) {
+  .stats-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .business-grid { grid-template-columns:1fr; }
+}
+@media(max-width:720px) {
+  .layout { grid-template-columns:1fr; }
+  .sidebar {
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+    padding:9px;
+    position:sticky;
+    top:0;
+    z-index:20;
   }
-
-  .nav-links { gap: 12px; }
-
-  .hero { padding: 48px 0; }
-
-  .hero-grid,
-  .service-grid,
-  .footer-grid {
-    grid-template-columns: 1fr;
+  .sidebar h3 { display:none; }
+  .nav-btn {
+    width:auto;
+    flex:1 0 auto;
+    padding:10px;
+    text-align:center;
+    font-size:12px;
   }
-
-  .form-grid { grid-template-columns: 1fr; }
-
-  .field.full { grid-column: auto; }
-
-  .form-card { padding: 17px; }
+  .main { padding:15px 12px; }
+  .content-grid { grid-template-columns:1fr; }
+  .form-grid { grid-template-columns:1fr; }
+  h1 { font-size:23px; }
+  .stat-number { font-size:21px; }
+  .panel,.stat-card,.form-card { padding:14px; }
+}
+@media(max-width:380px) {
+  .stats-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
-<body>
 
-<div class="topbar">
-  AMK Gas • Sneakers • Barber | Nanyuki & Nairobi, Kenya
+<body>
+<header class="topbar">
+  <div class="brand">
+    AMK BUSINESS
+    <small>Gas • Sneakers • Barber | Inventory Control</small>
+  </div>
+  <div class="topbar-status" id="connectionStatus">Connecting to database…</div>
+</header>
+
+<div id="loginScreen" class="login-wrap">
+  <section class="panel">
+    <div class="login-brand">
+      <strong>AMK Control Panel</strong>
+      <p>Secure business inventory and sales management</p>
+    </div>
+    <div id="setupNotice" class="notice">
+      Sign in using an employee account created in Supabase Authentication.
+    </div>
+    <form id="loginForm">
+      <div class="field">
+        <label for="loginEmail">Email address</label>
+        <input id="loginEmail" type="email" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password" autocomplete="current-password" required>
+      </div>
+      <button class="btn" id="loginButton" type="submit" style="width:100%">
+        Sign in
+      </button>
+      <div id="loginMessage" class="notice hidden" role="status"></div>
+    </form>
+  </section>
 </div>
 
-<header class="site-header">
-  <div class="header-inner">
-    <a class="brand" href="#home">
-      AMK
-      <span>GAS • SNEAKERS • BARBER</span>
-    </a>
+<div id="appLayout" class="layout hidden">
+  <aside class="sidebar">
+    <h3>Main</h3>
+    <button class="nav-btn active" data-view="overview">📊 Overview</button>
+    <button class="nav-btn" data-view="inventory">📦 Inventory</button>
+    <button class="nav-btn" data-view="sales">🧾 Record Sale</button>
+    <button class="nav-btn" data-view="purchases">🚚 Purchases</button>
+    <button class="nav-btn" data-view="suppliers">🏭 Suppliers</button>
+    <h3>Business</h3>
+    <button class="nav-btn" data-view="gas">🔥 Gas Stock</button>
+    <button class="nav-btn" data-view="sneakers">👟 Sneakers</button>
+    <button class="nav-btn" data-view="barber">💈 Barber</button>
+    <h3>Management</h3>
+    <button class="nav-btn" data-view="expenses">💳 Expenses</button>
+    <button class="nav-btn" data-view="employees">👥 Employees</button>
+    <button class="nav-btn" data-view="payroll" data-admin-only="true">🔒 Payroll</button>
+    <button class="nav-btn" data-view="reports">📈 Reports</button>
+    <button class="nav-btn" data-view="settings" data-admin-only="true">⚙️ Settings</button>
+    <h3>Account</h3>
+    <button class="nav-btn" id="logoutButton">↪ Sign out</button>
+  </aside>
 
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="#services">Services</a>
-      <a href="#gas">Gas</a>
-      <a href="#sneakers">Sneakers</a>
-      <a href="#barber">Barber</a>
-      <a href="#requests">My Requests</a>
-      <a href="#staff">Staff Login</a>
-    </nav>
-  </div>
-</header>
-``````html
-<main id="home">
-
-  <section class="hero">
-    <div class="container hero-grid">
+  <main class="main">
+    <div class="page-heading">
       <div>
-        <span class="badge">WELCOME TO AMK</span>
-        <h1>Gas. Sneakers. Fresh Cuts.</h1>
-        <p>
-          Your trusted destination for cooking gas, stylish sneakers and
-          barber services. Order from AMK in Nanyuki and Nairobi, Kenya.
-        </p>
-        <a class="button green-button" href="#gas">Order Gas</a>
-        <a class="button" href="#sneakers">Shop Sneakers</a>
-        <a class="button secondary-button" href="#barber">Book a Barber</a>
+        <h1 id="pageTitle">Business Overview</h1>
+        <div class="muted" id="welcomeText">Your business at a glance.</div>
       </div>
-
-      <div class="hero-panel">
-        <h2>AMK — Everything in One Place</h2>
-        <p>Convenient gas ordering, sneaker requests and barber appointments.</p>
-        <p><strong>Gas WhatsApp:</strong> 0117 414 318</p>
-        <p><strong>Sneakers & Barber:</strong> 0118 311 141</p>
+      <div>
+        <span class="badge" id="roleBadge">Signed out</span>
       </div>
     </div>
-  </section>
-
-  <section class="section" id="services">
-    <div class="container">
-      <div class="section-heading">
-        <h2>Our Services</h2>
-        <p>Choose a service to get started.</p>
-      </div>
-
-      <div class="service-grid">
-        <article class="card">
-          <div class="service-icon">🔥</div>
-          <h3>Cooking Gas</h3>
-          <p>Order 6 KG and 12 KG gas cylinders. Delivery arrangements can be confirmed with our team.</p>
-          <p class="price">From KSh 1,200</p>
-          <a class="button" href="#gas">Order Gas</a>
-        </article>
-
-        <article class="card">
-          <div class="service-icon">👟</div>
-          <h3>Sneakers</h3>
-          <p>Request your preferred sneaker model and size. Stock and delivery are confirmed before payment.</p>
-          <p class="price">Contact AMK</p>
-          <a class="button" href="#sneakers">Request Sneakers</a>
-        </article>
-
-        <article class="card">
-          <div class="service-icon">💈</div>
-          <h3>Barber Services</h3>
-          <p>Choose your haircut or beard service and request a suitable appointment time.</p>
-          <p class="price">From KSh 100</p>
-          <a class="button" href="#barber">Book Now</a>
-        </article>
-      </div>
+    <div id="appMessage" class="notice hidden" role="status"></div>
+    <div id="viewContent">
+      <div class="panel"><p class="muted">Loading your dashboard…</p></div>
     </div>
-  </section>
-
-  <section class="section" id="gas">
-    <div class="container">
-      <div class="section-heading">
-        <h2>Order Cooking Gas</h2>
-        <p>Submit your order through WhatsApp. AMK will confirm availability and the final amount.</p>
-      </div>
-
-      <div class="form-card">
-        <div class="notice">
-          <strong>Gas prices</strong><br>
-          6 KG — KSh 1,200<br>
-          12 KG — KSh 2,000
-        </div>
-
-        <form id="gasForm">
-          <div class="form-grid">
-            <div class="field">
-              <label for="gasName">Your name *</label>
-              <input id="gasName" name="gasName" required maxlength="100" autocomplete="name">
-            </div>
-
-            <div class="field">
-              <label for="gasPhone">Phone number *</label>
-              <input id="gasPhone" name="gasPhone" required type="tel" maxlength="25" autocomplete="tel">
-            </div>
-
-            <div class="field">
-              <label for="gasSize">Gas cylinder size *</label>
-              <select id="gasSize" name="gasSize" required>
-                <option value="">Choose size</option>
-                <option value="6 KG">6 KG — KSh 1,200</option>
-                <option value="12 KG">12 KG — KSh 2,000</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="gasQty">Quantity *</label>
-              <input id="gasQty" name="gasQty" type="number" min="1" max="50" step="1" value="1" required>
-            </div>
-
-            <div class="field">
-              <label for="gasFulfilment">Collection or delivery *</label>
-              <select id="gasFulfilment" name="gasFulfilment" required>
-                <option value="">Choose option</option>
-                <option value="Delivery">Delivery</option>
-                <option value="Collection">Collection</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="gasLocation">Delivery location</label>
-              <input id="gasLocation" name="gasLocation" maxlength="200" placeholder="Estate, town or landmark">
-            </div>
-
-            <div class="field full">
-              <label for="gasNotes">Additional notes</label>
-              <textarea id="gasNotes" name="gasNotes" maxlength="500" placeholder="Brand preference or delivery instructions"></textarea>
-            </div>
-
-            <div class="field full">
-              <button type="submit" id="gasSubmit">Send Gas Order on WhatsApp</button>
-            </div>
-          </div>
-          <p id="gasMessage" class="form-message" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="sneakers">
-    <div class="container">
-      <div class="section-heading">
-        <h2>Order Sneakers</h2>
-        <p>Tell us the style and size you need. We will confirm stock, price and delivery.</p>
-      </div>
-
-      <div class="form-card">
-        <form id="sneakerForm">
-          <div class="form-grid">
-            <div class="field">
-              <label for="sneakerName">Your name *</label>
-              <input id="sneakerName" name="sneakerName" required maxlength="100" autocomplete="name">
-            </div>
-
-            <div class="field">
-              <label for="sneakerPhone">Phone number *</label>
-              <input id="sneakerPhone" name="sneakerPhone" required type="tel" maxlength="25" autocomplete="tel">
-            </div>
-
-            <div class="field">
-              <label for="sneakerModel">Sneaker model or style *</label>
-              <input id="sneakerModel" name="sneakerModel" required maxlength="150" placeholder="Brand, colour or style">
-            </div>
-
-            <div class="field">
-              <label for="sneakerSize">Shoe size *</label>
-              <select id="sneakerSize" name="sneakerSize" required>
-                <option value="">Choose size</option>
-                <option>36</option><option>37</option><option>38</option>
-                <option>39</option><option>40</option><option>41</option>
-                <option>42</option><option>43</option><option>44</option>
-                <option>45</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="sneakerQty">Quantity *</label>
-              <input id="sneakerQty" name="sneakerQty" type="number" min="1" max="20" step="1" value="1" required>
-            </div>
-
-            <div class="field">
-              <label for="sneakerBudget">Budget (KSh)</label>
-              <input id="sneakerBudget" name="sneakerBudget" type="number" min="0" step="50" placeholder="Optional">
-            </div>
-
-            <div class="field full">
-              <label for="sneakerAddress">Delivery address</label>
-              <input id="sneakerAddress" name="sneakerAddress" maxlength="250" placeholder="Town, estate or delivery location">
-            </div>
-
-            <div class="field full">
-              <label for="sneakerNotes">Additional details</label>
-              <textarea id="sneakerNotes" name="sneakerNotes" maxlength="500" placeholder="Colour, preferred brand or other details"></textarea>
-            </div>
-
-            <div class="field full">
-              <button type="submit" id="sneakerSubmit">Send Sneaker Order on WhatsApp</button>
-            </div>
-          </div>
-          <p id="sneakerMessage" class="form-message" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="barber">
-    <div class="container">
-      <div class="section-heading">
-        <h2>Book a Barber</h2>
-        <p>Choose a service and request an appointment. Your booking is confirmed after AMK responds.</p>
-      </div>
-
-      <div class="form-card">
-        <div class="service-grid">
-          <div>
-            <strong>Regular Haircut</strong>
-            <p class="price">KSh 200</p>
-          </div>
-          <div>
-            <strong>Skin Fade</strong>
-            <p class="price">KSh 300</p>
-          </div>
-          <div>
-            <strong>Beard Trim</strong>
-            <p class="price">KSh 100</p>
-          </div>
-          <div>
-            <strong>Haircut + Beard</strong>
-            <p class="price">KSh 300</p>
-          </div>
-          <div>
-            <strong>Fade + Beard</strong>
-            <p class="price">KSh 400</p>
-          </div>
-          <div>
-            <strong>Kids Haircut</strong>
-            <p class="price">KSh 150</p>
-          </div>
-        </div>
-
-        <hr>
-
-        <form id="barberForm">
-          <div class="form-grid">
-            <div class="field">
-              <label for="barberName">Your name *</label>
-              <input id="barberName" name="barberName" required maxlength="100" autocomplete="name">
-            </div>
-
-            <div class="field">
-              <label for="barberPhone">Phone number *</label>
-              <input id="barberPhone" name="barberPhone" required type="tel" maxlength="25" autocomplete="tel">
-            </div>
-
-            <div class="field">
-              <label for="barberService">Service *</label>
-              <select id="barberService" name="barberService" required>
-                <option value="">Choose service</option>
-                <option>Regular Haircut</option>
-                <option>Skin Fade</option>
-                <option>Beard Trim</option>
-                <option>Haircut + Beard</option>
-                <option>Fade + Beard</option>
-                <option>Kids Haircut</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="barberDate">Preferred date *</label>
-              <input id="barberDate" name="barberDate" type="date" required>
-            </div>
-
-            <div class="field">
-              <label for="barberTime">Preferred time *</label>
-              <input id="barberTime" name="barberTime" type="time" required>
-            </div>
-
-            <div class="field full">
-              <label for="barberNotes">Notes</label>
-              <textarea id="barberNotes" name="barberNotes" maxlength="500" placeholder="Any special requests"></textarea>
-            </div>
-
-            <div class="field full">
-              <button type="submit" id="barberSubmit">Request Appointment on WhatsApp</button>
-            </div>
-          </div>
-          <p id="barberMessage" class="form-message" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="requests">
-    <div class="container">
-      <div class="section-heading">
-        <h2>My Requests</h2>
-        <p>Contact AMK about an existing order or booking.</p>
-      </div>
-
-      <div class="service-grid">
-        <article class="card">
-          <h3>Gas Orders</h3>
-          <p>Ask about gas stock, delivery and payment.</p>
-          <a class="button green-button" href="https://wa.me/254117414318" target="_blank" rel="noopener noreferrer">Contact Gas Team</a>
-        </article>
-
-        <article class="card">
-          <h3>Sneaker Orders</h3>
-          <p>Check sizes, prices and delivery arrangements.</p>
-          <a class="button" href="https://wa.me/254118311141" target="_blank" rel="noopener noreferrer">Contact Sneaker Team</a>
-        </article>
-
-        <article class="card">
-          <h3>Barber Bookings</h3>
-          <p>Follow up on your appointment request.</p>
-          <a class="button secondary-button" href="https://wa.me/254118311141" target="_blank" rel="noopener noreferrer">Contact Barber</a>
-        </article>
-      </div>
-    </div>
-  </section>
-``````html
-<section class="section" id="staff">
-  <div class="container">
-    <div class="section-heading">
-      <h2>AMK Staff Portal</h2>
-      <p>Secure access for authorised AMK employees.</p>
-    </div>
-
-    <div class="form-card" id="staffLogin">
-      <h3>Staff Sign In</h3>
-
-      <form id="staffLoginForm">
-        <div class="form-grid">
-          <div class="field">
-            <label for="staffEmail">Email address</label>
-            <input id="staffEmail" name="email" type="email"
-              required autocomplete="username">
-          </div>
-
-          <div class="field">
-            <label for="staffPassword">Password</label>
-            <input id="staffPassword" name="password" type="password"
-              required autocomplete="current-password">
-          </div>
-
-          <div class="field full">
-            <button type="submit" id="staffLoginBtn">Sign In</button>
-          </div>
-        </div>
-      </form>
-
-      <p id="staffError" class="form-message" role="alert"></p>
-      <p class="muted">
-        Staff accounts must be created and authorised by the AMK administrator.
-      </p>
-    </div>
-
-    <div id="staffDashboard" class="hidden">
-      <div class="dashboard-panel">
-        <div class="section-heading">
-          <div>
-            <h2>AMK Business Dashboard</h2>
-            <p>
-              Signed in as <strong id="staffUserLabel">Staff</strong>
-            </p>
-            <span class="badge" id="staffRoleLabel">Role</span>
-          </div>
-
-          <button type="button" class="secondary-button" id="staffLogoutBtn">
-            Sign Out
-          </button>
-        </div>
-      </div>
-
-      <nav class="dashboard-nav" id="staffMenu" aria-label="Dashboard sections">
-        <button type="button" data-dashboard-view="overview">Overview</button>
-        <button type="button" data-dashboard-view="sales">Sales / POS</button>
-        <button type="button" data-dashboard-view="inventory">Inventory</button>
-        <button type="button" data-dashboard-view="requests">Customer Requests</button>
-        <button type="button" data-dashboard-view="deliveries">Deliveries</button>
-        <button type="button" data-dashboard-view="expenses">Expenses</button>
-        <button type="button" data-dashboard-view="employees">Employees</button>
-        <button type="button" data-dashboard-view="purchases">Supplier Purchases</button>
-        <button type="button" data-dashboard-view="invoices">Invoices / Receipts</button>
-        <button type="button" data-dashboard-view="payroll" data-admin-only="true">Payroll</button>
-        <button type="button" data-dashboard-view="reports">Reports</button>
-      </nav>
-
-      <div id="dashboardMessage" class="notice hidden" role="status"></div>
-
-      <div id="staffContent" aria-live="polite">
-        <p>Loading your dashboard…</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <h3>AMK Gas • Sneakers • Barber</h3>
-      <p>Your trusted business partner in Kenya.</p>
-    </div>
-
-    <div>
-      <h3>Gas Orders</h3>
-      <p><a href="https://wa.me/254117414318" target="_blank" rel="noopener noreferrer">WhatsApp: 0117 414 318</a></p>
-    </div>
-
-    <div>
-      <h3>Sneakers & Barber</h3>
-      <p><a href="https://wa.me/254118311141" target="_blank" rel="noopener noreferrer">WhatsApp: 0118 311 141</a></p>
-      <p>&copy; <span id="footerYear">2026</span> AMK. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+    <footer class="footer">
+      AMK Gas • Sneakers • Barber · Business Control Panel
+      <br>Keep your stock and business records up to date.
+    </footer>
+  </main>
+</div>
 ``````html
 <script>
-/* AMK PART 4 — SUPABASE, STAFF LOGIN AND DASHBOARD */
+/* AMK PART 2 — SUPABASE CONNECTION, LOGIN AND OVERVIEW */
 
-const AMK_SUPABASE_URL =
-  "https://snvulxcguwofowhglbrw.supabase.co";
+const AMK_SUPABASE_URL = "https://snvulxcguwofowhglbrw.supabase.co";
+const AMK_SUPABASE_KEY = "sb_publishable_3DLOM4jXxzCwM1nyAlAEkQ_b2EwnTZd";
 
-const AMK_SUPABASE_KEY =
-  "sb_publishable_3DLOM4jXxzCwM1nyAlAEkQ_b2EwnTZd";
+const amkDb = window.supabase
+  ? window.supabase.createClient(AMK_SUPABASE_URL, AMK_SUPABASE_KEY)
+  : null;
 
-const amkDb = window.supabase?.createClient(
-  AMK_SUPABASE_URL,
-  AMK_SUPABASE_KEY
-);
+let amkUser = null;
+let amkProfile = null;
+let amkCurrentView = "overview";
+let amkChart = null;
+let amkInventoryCache = [];
+let amkSalesCache = [];
 
-let amkCurrentUser = null;
-let amkCurrentProfile = null;
-let amkSalesChart = null;
-
-const AMK_ROLE_VIEWS = {
+const AMK_ROLES = {
   admin: [
-    "overview", "sales", "inventory", "requests", "deliveries",
-    "expenses", "employees", "purchases", "invoices", "payroll", "reports"
+    "overview", "inventory", "sales", "purchases", "suppliers",
+    "gas", "sneakers", "barber", "expenses", "employees",
+    "payroll", "reports", "settings"
   ],
   manager: [
-    "overview", "sales", "inventory", "requests", "deliveries",
-    "expenses", "employees", "purchases", "invoices", "reports"
+    "overview", "inventory", "sales", "purchases", "suppliers",
+    "gas", "sneakers", "barber", "expenses", "employees", "reports"
   ],
-  barber: ["overview", "requests", "invoices"],
-  gas_attendant: ["overview", "sales", "requests", "deliveries"],
-  shop_staff: ["overview", "sales", "requests", "invoices"]
+  gas_attendant: ["overview", "inventory", "sales", "gas"],
+  shop_staff: ["overview", "inventory", "sales", "sneakers"],
+  barber: ["overview", "sales", "barber"]
 };
 
-const amkEl = id => document.getElementById(id);
+const AMK_TITLES = {
+  overview: "Business Overview",
+  inventory: "Inventory Control",
+  sales: "Record a Sale",
+  purchases: "Stock Purchases",
+  suppliers: "Suppliers",
+  gas: "Gas Stock",
+  sneakers: "Sneakers Stock",
+  barber: "Barber Services",
+  expenses: "Business Expenses",
+  employees: "Employees",
+  payroll: "Private Payroll",
+  reports: "Business Reports",
+  settings: "Settings"
+};
+
+function amk$(id) {
+  return document.getElementById(id);
+}
 
 function amkEscape(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
+  return String(value ?? "").replace(/[&<>"']/g, character => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
     '"': "&quot;",
     "'": "&#39;"
-  })[char]);
+  })[character]);
 }
 
 function amkMoney(value) {
@@ -908,29 +455,56 @@ function amkMoney(value) {
   });
 }
 
-function amkNotice(message, error = false) {
-  const box = amkEl("dashboardMessage");
+function amkShowMessage(message, type = "") {
+  const box = amk$("appMessage");
   box.textContent = message;
+  box.className = "notice" + (type ? " " + type : "");
   box.classList.remove("hidden");
-  box.style.background = error ? "#fff0f0" : "#eef8f1";
-  box.style.borderColor = error ? "#e7b8b8" : "#b8dfc5";
 }
 
-function amkClearNotice() {
-  amkEl("dashboardMessage").classList.add("hidden");
+function amkHideMessage() {
+  amk$("appMessage").classList.add("hidden");
 }
 
-function amkSetLoggedOut(message = "") {
-  amkCurrentUser = null;
-  amkCurrentProfile = null;
-
-  amkEl("staffDashboard").classList.add("hidden");
-  amkEl("staffLogin").classList.remove("hidden");
-  amkEl("staffContent").innerHTML = "";
-  amkEl("staffError").textContent = message;
+function amkSetLoginMessage(message, isError = true) {
+  const box = amk$("loginMessage");
+  box.textContent = message;
+  box.className = "notice" + (isError ? " error" : " success");
+  box.classList.remove("hidden");
 }
 
-async function amkGetProfile(user) {
+function amkCanOpen(view) {
+  if (!amkProfile) return false;
+  return (AMK_ROLES[amkProfile.role] || []).includes(view);
+}
+
+function amkApplyPermissions() {
+  document.querySelectorAll("[data-view]").forEach(button => {
+    const view = button.dataset.view;
+    button.classList.toggle("hidden", !amkCanOpen(view));
+  });
+
+  document.querySelectorAll("[data-admin-only]").forEach(button => {
+    button.classList.toggle(
+      "hidden",
+      !amkProfile || amkProfile.role !== "admin"
+    );
+  });
+}
+
+function amkShowLoggedOut() {
+  amkUser = null;
+  amkProfile = null;
+  amkInventoryCache = [];
+  amkSalesCache = [];
+
+  amk$("appLayout").classList.add("hidden");
+  amk$("loginScreen").classList.remove("hidden");
+  amk$("connectionStatus").textContent = "Signed out";
+  amk$("roleBadge").textContent = "Signed out";
+}
+
+async function amkLoadProfile(user) {
   const { data, error } = await amkDb
     .from("profiles")
     .select("id,email,full_name,role,active")
@@ -938,123 +512,133 @@ async function amkGetProfile(user) {
     .maybeSingle();
 
   if (error) throw error;
-  if (!data) throw new Error("No staff profile exists for this login.");
-  if (data.active !== true) throw new Error("This staff account is inactive.");
-  if (!AMK_ROLE_VIEWS[data.role]) throw new Error("The account role is not recognised.");
+  if (!data) {
+    throw new Error(
+      "No employee profile was found. Ask the administrator to create your profile."
+    );
+  }
+  if (data.active !== true) {
+    throw new Error("This employee account is inactive.");
+  }
+  if (!AMK_ROLES[data.role]) {
+    throw new Error("This account has an unrecognised staff role.");
+  }
 
-  return data;
+  amkProfile = data;
+  amkUser = user;
 }
 
-async function amkFinishLogin(user) {
-  const profile = await amkGetProfile(user);
+async function amkAfterLogin() {
+  amk$("loginScreen").classList.add("hidden");
+  amk$("appLayout").classList.remove("hidden");
+  amk$("connectionStatus").textContent = "Connected";
+  amk$("roleBadge").textContent = amkProfile.role.replace(/_/g, " ");
+  amk$("welcomeText").textContent =
+    "Welcome, " + (amkProfile.full_name || amkProfile.email || "team member");
 
-  amkCurrentUser = user;
-  amkCurrentProfile = profile;
-
-  amkEl("staffLogin").classList.add("hidden");
-  amkEl("staffDashboard").classList.remove("hidden");
-  amkEl("staffUserLabel").textContent =
-    profile.full_name || user.email || "AMK Staff";
-  amkEl("staffRoleLabel").textContent =
-    "Role: " + profile.role.replace(/_/g, " ");
-
-  document.querySelectorAll("[data-dashboard-view]").forEach(button => {
-    const view = button.dataset.dashboardView;
-    const allowed = (AMK_ROLE_VIEWS[profile.role] || []).includes(view);
-    button.classList.toggle("hidden", !allowed);
-    button.classList.remove("active");
-  });
-
-  amkClearNotice();
+  amkApplyPermissions();
   await amkRenderView("overview");
 }
 
-amkEl("staffLoginForm").addEventListener("submit", async event => {
+amk$("loginForm").addEventListener("submit", async event => {
   event.preventDefault();
 
-  const message = amkEl("staffError");
-  const button = amkEl("staffLoginBtn");
-
   if (!amkDb) {
-    message.textContent = "Supabase did not load. Refresh and try again.";
+    amkSetLoginMessage("The Supabase library did not load. Check your internet connection and refresh.");
     return;
   }
 
+  const button = amk$("loginButton");
   button.disabled = true;
   button.textContent = "Signing in…";
-  message.textContent = "";
 
   try {
+    const email = amk$("loginEmail").value.trim();
+    const password = amk$("loginPassword").value;
+
     const { data, error } = await amkDb.auth.signInWithPassword({
-      email: amkEl("staffEmail").value.trim(),
-      password: amkEl("staffPassword").value
+      email,
+      password
     });
 
     if (error) throw error;
 
-    await amkFinishLogin(data.user);
-    amkEl("staffPassword").value = "";
+    await amkLoadProfile(data.user);
+    await amkAfterLogin();
   } catch (error) {
-    await amkDb.auth.signOut();
-    amkSetLoggedOut(error.message || "Sign-in failed.");
+    if (amkDb) await amkDb.auth.signOut().catch(() => {});
+    amkShowLoggedOut();
+    amkSetLoginMessage(error.message || "Unable to sign in.");
   } finally {
     button.disabled = false;
-    button.textContent = "Sign In";
+    button.textContent = "Sign in";
   }
 });
 
-amkEl("staffLogoutBtn").addEventListener("click", async () => {
+amk$("logoutButton").addEventListener("click", async () => {
   if (amkDb) {
-    const { error } = await amkDb.auth.signOut();
-    if (error) {
-      amkNotice("Sign-out failed: " + error.message, true);
-      return;
-    }
+    await amkDb.auth.signOut();
   }
-
-  amkSetLoggedOut();
-  amkClearNotice();
+  amkShowLoggedOut();
+  amkSetLoginMessage("You have signed out.", false);
 });
 
-document.querySelectorAll("[data-dashboard-view]").forEach(button => {
+document.querySelectorAll("[data-view]").forEach(button => {
   button.addEventListener("click", async () => {
-    if (!amkCurrentProfile) return;
-
-    const view = button.dataset.dashboardView;
-    const allowed = AMK_ROLE_VIEWS[amkCurrentProfile.role] || [];
-
-    if (!allowed.includes(view)) {
-      amkNotice("Your account cannot access this section.", true);
-      return;
-    }
-
-    document.querySelectorAll("[data-dashboard-view]").forEach(item => {
-      item.classList.toggle("active", item === button);
-    });
-
-    await amkRenderView(view);
+    await amkRenderView(button.dataset.view);
   });
 });
 
-async function amkRestoreSession() {
-  if (!amkDb) {
-    amkEl("staffError").textContent =
-      "Connection library unavailable. Check your internet connection.";
-    return;
+function amkTable(rows, columns) {
+  if (!rows || rows.length === 0) {
+    return '<div class="empty">No records found.</div>';
   }
 
-  const { data, error } = await amkDb.auth.getSession();
-  if (error || !data.session) return;
+  const validColumns = columns.filter(column =>
+    rows.some(row =>
+      Object.prototype.hasOwnProperty.call(row, column)
+    )
+  );
 
-  try {
-    await amkFinishLogin(data.session.user);
-  } catch (error) {
-    await amkDb.auth.signOut();
-    amkSetLoggedOut(error.message || "Could not restore your session.");
+  if (!validColumns.length) {
+    return '<div class="empty">No matching columns are available.</div>';
   }
+
+  return `
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          ${validColumns.map(column =>
+            `<th>${amkEscape(column.replace(/_/g, " "))}</th>`
+          ).join("")}
+        </tr></thead>
+        <tbody>
+          ${rows.map(row => `
+            <tr>
+              ${validColumns.map(column => {
+                let value = row[column];
+
+                if (value === null || value === undefined || value === "") {
+                  value = "—";
+                } else if (typeof value === "object") {
+                  value = JSON.stringify(value);
+                } else if (
+                  ["amount", "buying_price", "selling_price",
+                   "basic_salary", "commission", "deductions"].includes(column)
+                  && Number.isFinite(Number(value))
+                ) {
+                  value = amkMoney(value);
+                }
+
+                return `<td>${amkEscape(value)}</td>`;
+              }).join("")}
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>`;
 }
 
-/* SALES ACCESS IS STILL ENFORCED BY SUPABASE RLS */
 async function amkLoadSales() {
   const { data, error } = await amkDb
     .from("sales")
@@ -1063,420 +647,359 @@ async function amkLoadSales() {
     .limit(500);
 
   if (error) throw error;
-  return data || [];
+
+  amkSalesCache = data || [];
+  return amkSalesCache;
 }
 
-function amkTable(rows, columns) {
-  if (!rows || !rows.length) return "<p>No records found.</p>";
+async function amkLoadInventory() {
+  const { data, error } = await amkDb
+    .from("inventory")
+    .select("*")
+    .limit(1000);
 
-  return `
-    <div class="table-wrap">
-      <table>
-        <thead><tr>${columns.map(key =>
-          "<th>" + amkEscape(key.replace(/_/g, " ")) + "</th>"
-        ).join("")}</tr></thead>
-        <tbody>
-          ${rows.map(row => "<tr>" + columns.map(key => {
-            let value = row[key] ?? "";
-            if (["amount", "basic_salary", "commission", "deductions"].includes(key)) {
-              value = amkMoney(value);
-            }
-            if (typeof value === "object" && value !== null) {
-              value = JSON.stringify(value);
-            }
-            return "<td>" + amkEscape(value) + "</td>";
-          }).join("") + "</tr>").join("")}
-        </tbody>
-      </table>
-    </div>
-  `;
+  if (error) throw error;
+
+  amkInventoryCache = data || [];
+  return amkInventoryCache;
 }
 
 async function amkRenderView(view) {
-  if (!amkCurrentUser || !amkCurrentProfile) return;
+  if (!amkCanOpen(view)) {
+    amkShowMessage("Your account does not have permission to open that section.", "error");
+    return;
+  }
 
-  const root = amkEl("staffContent");
-  root.innerHTML = "<p>Loading…</p>";
+  amkCurrentView = view;
+  amkHideMessage();
+
+  document.querySelectorAll("[data-view]").forEach(button => {
+    button.classList.toggle("active", button.dataset.view === view);
+  });
+
+  amk$("pageTitle").textContent = AMK_TITLES[view] || "AMK Control Panel";
+  amk$("viewContent").innerHTML =
+    '<div class="panel"><p class="muted">Loading records…</p></div>';
 
   try {
     switch (view) {
       case "overview":
-        await amkRenderOverview(root);
+        await amkRenderOverview();
+        break;
+      case "inventory":
+      case "gas":
+      case "sneakers":
+      case "barber":
+        await amkRenderInventoryView(view);
         break;
       case "sales":
-        await amkRenderSales(root);
+        await amkRenderSales(amk$("viewContent"));
         break;
-      case "invoices":
-        await amkRenderInvoices(root);
+      case "purchases":
+        await amkRenderPurchases(amk$("viewContent"));
+        break;
+      case "suppliers":
+        await amkRenderSuppliers(amk$("viewContent"));
+        break;
+      case "expenses":
+        await amkRenderExpenses(amk$("viewContent"));
+        break;
+      case "employees":
+        await amkRenderEmployees(amk$("viewContent"));
         break;
       case "payroll":
-        await amkRenderPayroll(root);
+        if (amkProfile.role !== "admin") {
+          throw new Error("Payroll is restricted to the administrator.");
+        }
+        await amkRenderPayroll(amk$("viewContent"));
+        break;
+      case "reports":
+        await amkRenderReports(amk$("viewContent"));
+        break;
+      case "settings":
+        await amkRenderSettings(amk$("viewContent"));
         break;
       default:
-        await amkRenderDataSection(root, view);
+        throw new Error("Unknown dashboard section.");
     }
   } catch (error) {
-    root.innerHTML = `
-      <section class="dashboard-panel">
-        <h3>Could not load this section</h3>
-        <p>${amkEscape(error.message || "Please try again.")}</p>
-        <button type="button" id="amkRetry">Retry</button>
-      </section>
-    `;
-    amkEl("amkRetry").onclick = () => amkRenderView(view);
+    amk$("viewContent").innerHTML =
+      '<section class="panel"><h2>Could not load this section</h2><p class="muted">' +
+      amkEscape(error.message) +
+      '</p><button class="btn" onclick="amkRenderView(amkCurrentView)">Try again</button></section>';
   }
 }
 
-async function amkRenderOverview(root) {
-  const sales = await amkLoadSales();
-  const revenue = sales.reduce((sum, row) => sum + Number(row.amount || 0), 0);
-
-  const today = new Date().toLocaleDateString("en-CA");
-  const todaysSales = sales.filter(row =>
-    new Date(row.created_at).toLocaleDateString("en-CA") === today
-  );
-  const todayRevenue = todaysSales.reduce(
-    (sum, row) => sum + Number(row.amount || 0), 0
-  );
+async function amkRenderOverview() {
+  const root = amk$("viewContent");
 
   root.innerHTML = `
-    <h2>Business Overview</h2>
-    <div class="dashboard-cards">
-      <article class="dashboard-card">
-        <h3>Revenue in Loaded Records</h3>
-        <p class="dashboard-number">${amkEscape(amkMoney(revenue))}</p>
+    <div class="stats-grid">
+      <article class="stat-card">
+        <div class="stat-label">Inventory Items</div>
+        <div class="stat-number" id="overviewItemCount">—</div>
+        <div class="stat-note">Products and stock lines</div>
       </article>
-      <article class="dashboard-card">
-        <h3>Today's Revenue</h3>
-        <p class="dashboard-number">${amkEscape(amkMoney(todayRevenue))}</p>
-        <p>${todaysSales.length} transactions today</p>
+      <article class="stat-card">
+        <div class="stat-label">Units in Stock</div>
+        <div class="stat-number" id="overviewUnits">—</div>
+        <div class="stat-note">Total recorded quantity</div>
       </article>
-      <article class="dashboard-card">
-        <h3>Loaded Transactions</h3>
-        <p class="dashboard-number">${sales.length}</p>
+      <article class="stat-card">
+        <div class="stat-label">Loaded Sales</div>
+        <div class="stat-number" id="overviewSales">—</div>
+        <div class="stat-note">Latest available records</div>
+      </article>
+      <article class="stat-card">
+        <div class="stat-label">Low / Out of Stock</div>
+        <div class="stat-number" id="overviewLow">—</div>
+        <div class="stat-note">Items needing attention</div>
       </article>
     </div>
-    <section class="dashboard-panel">
-      <h3>Sales — Last 7 Days</h3>
-      <canvas id="amkSalesChart" height="110"></canvas>
-    </section>
-    <section class="dashboard-panel">
-      <h3>Recent Sales</h3>
-      ${amkTable(sales.slice(0, 10), [
-        "created_at", "item", "category", "quantity", "amount", "payment_method"
-      ])}
-    </section>
-    <button type="button" id="amkOverviewRefresh">Refresh Overview</button>
-  `;
 
-  amkEl("amkOverviewRefresh").onclick = () => amkRenderView("overview");
+    <div class="business-grid">
+      <article class="business-card">
+        <div class="business-icon">🔥</div>
+        <h3>Gas</h3>
+        <p>Track cylinder stock, brands, refills and accessories.</p>
+        <button class="btn" data-jump="gas">Manage Gas</button>
+      </article>
+      <article class="business-card">
+        <div class="business-icon">👟</div>
+        <h3>Sneakers</h3>
+        <p>Track shoe models, sizes, costs and selling prices.</p>
+        <button class="btn" data-jump="sneakers">Manage Sneakers</button>
+      </article>
+      <article class="business-card">
+        <div class="business-icon">💈</div>
+        <h3>Barber</h3>
+        <p>Manage services, prices and barber consumables.</p>
+        <button class="btn" data-jump="barber">Manage Barber</button>
+      </article>
+    </div>
 
-  if (amkSalesChart) amkSalesChart.destroy();
+    <div class="content-grid">
+      <section class="panel">
+        <h3>Stock Levels</h3>
+        <div class="chart-container"><canvas id="stockChart"></canvas></div>
+      </section>
+      <section class="panel">
+        <h3>Recent Sales</h3>
+        <div id="overviewRecentSales"><div class="empty">Loading…</div></div>
+      </section>
+    </div>
+    <section class="panel">
+      <h3>Items Requiring Attention</h3>
+      <div id="overviewLowItems"><div class="empty">Loading…</div></div>
+    </section>`;
 
-  if (window.Chart) {
-    const labels = [];
-    const amounts = [];
+  root.querySelectorAll("[data-jump]").forEach(button => {
+    button.addEventListener("click", () => amkRenderView(button.dataset.jump));
+  });
 
-    for (let i = 6; i >= 0; i--) {
-      const day = new Date();
-      day.setDate(day.getDate() - i);
-      const key = day.toLocaleDateString("en-CA");
+  let inventory = [];
+  let sales = [];
+  const problems = [];
 
-      labels.push(day.toLocaleDateString(undefined, {
-        month: "short", day: "numeric"
-      }));
+  try {
+    inventory = await amkLoadInventory();
+  } catch (error) {
+    problems.push("Inventory: " + error.message);
+  }
 
-      amounts.push(sales.filter(row =>
-        new Date(row.created_at).toLocaleDateString("en-CA") === key
-      ).reduce((sum, row) => sum + Number(row.amount || 0), 0));
-    }
+  try {
+    sales = await amkLoadSales();
+  } catch (error) {
+    problems.push("Sales: " + error.message);
+  }
 
-    amkSalesChart = new Chart(amkEl("amkSalesChart"), {
+  const quantityField = row =>
+    Number(row.quantity ?? row.stock_quantity ?? row.stock ?? 0) || 0;
+
+  const lowItems = inventory.filter(row => {
+    const quantity = quantityField(row);
+    const threshold = Number(row.reorder_level ?? row.low_stock_threshold ?? 5);
+    return quantity <= Math.max(0, threshold);
+  });
+
+  const totalUnits = inventory.reduce((sum, row) => sum + quantityField(row), 0);
+  const totalSales = sales.reduce((sum, row) => sum + Number(row.amount || 0), 0);
+
+  amk$("overviewItemCount").textContent = inventory.length;
+  amk$("overviewUnits").textContent = totalUnits.toLocaleString("en-KE");
+  amk$("overviewSales").textContent = amkMoney(totalSales);
+  amk$("overviewLow").textContent = lowItems.length;
+
+  amk$("overviewRecentSales").innerHTML = amkTable(
+    sales.slice(0, 8),
+    ["created_at", "item", "quantity", "amount", "payment_method"]
+  );
+
+  amk$("overviewLowItems").innerHTML = amkTable(
+    lowItems.slice(0, 20),
+    ["name", "item_name", "category", "quantity", "stock_quantity", "reorder_level"]
+  );
+
+  const chartCanvas = amk$("stockChart");
+  if (amkChart) {
+    amkChart.destroy();
+    amkChart = null;
+  }
+
+  if (window.Chart && chartCanvas) {
+    const categories = ["Gas", "Sneakers", "Barber", "Other"];
+    const totals = categories.map(category =>
+      inventory.filter(row =>
+        String(row.category || "").toLowerCase() === category.toLowerCase()
+      ).reduce((sum, row) => sum + quantityField(row), 0)
+    );
+
+    amkChart = new Chart(chartCanvas, {
       type: "bar",
       data: {
-        labels,
+        labels: categories,
         datasets: [{
-          label: "Sales (KSh)",
-          data: amounts,
-          borderWidth: 1
+          label: "Units in stock",
+          data: totals,
+          backgroundColor: ["#1769e0", "#168447", "#e1a126", "#8494a7"]
         }]
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: { y: { beginAtZero: true } }
       }
     });
   }
+
+  if (problems.length) {
+    amkShowMessage(
+      "Some dashboard data could not be loaded. " + problems.join(" | "),
+      "error"
+    );
+  }
 }
 
-amkEl("footerYear").textContent = new Date().getFullYear();
+/* Restore an existing Supabase login when the page opens. */
+async function amkRestoreSession() {
+  if (!amkDb) {
+    amk$("connectionStatus").textContent = "Database library unavailable";
+    amkSetLoginMessage("Could not load the Supabase client. Check your internet connection.");
+    return;
+  }
+
+  try {
+    const { data, error } = await amkDb.auth.getSession();
+    if (error) throw error;
+
+    amk$("connectionStatus").textContent = "Database ready";
+
+    if (data.session?.user) {
+      await amkLoadProfile(data.session.user);
+      await amkAfterLogin();
+    }
+  } catch (error) {
+    await amkDb.auth.signOut().catch(() => {});
+    amkShowLoggedOut();
+    amkSetLoginMessage(error.message || "Please sign in again.");
+  }
+}
 
 window.addEventListener("load", amkRestoreSession);
 </script>
 ``````html
 <script>
-/* AMK PART 5 — ORDERS, BOOKINGS, SALES, RECEIPTS AND DATA SECTIONS */
+/* AMK PART 3 — INVENTORY MANAGEMENT */
 
-/* CUSTOMER FORMS: OPEN WHATSAPP WITH THE COMPLETED ORDER */
-function amkOpenWhatsApp(phone, message, statusId, submitId) {
-  const status = document.getElementById(statusId);
-  const submit = document.getElementById(submitId);
-
-  status.textContent = "Opening WhatsApp with your details…";
-  if (submit) submit.disabled = true;
-
-  const url = "https://wa.me/" + phone +
-    "?text=" + encodeURIComponent(message);
-
-  window.location.href = url;
-
-  if (submit) {
-    setTimeout(() => { submit.disabled = false; }, 2500);
-  }
+function amkFindQuantity(row) {
+  return Number(row.quantity ?? row.stock_quantity ?? row.stock ?? 0) || 0;
 }
 
-amkEl("gasForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const name = amkEl("gasName").value.trim();
-  const phone = amkEl("gasPhone").value.trim();
-  const size = amkEl("gasSize").value;
-  const qty = Number(amkEl("gasQty").value);
-  const fulfilment = amkEl("gasFulfilment").value;
-  const location = amkEl("gasLocation").value.trim();
-  const notes = amkEl("gasNotes").value.trim();
-
-  if (!name || !phone || !size || !Number.isInteger(qty) || qty < 1) {
-    amkEl("gasMessage").textContent = "Please complete all required fields.";
-    return;
-  }
-
-  const price = size.includes("6") ? 1200 : 2000;
-  const total = price * qty;
-
-  const message = [
-    "AMK GAS ORDER",
-    "Customer: " + name,
-    "Customer phone: " + phone,
-    "Cylinder: " + size,
-    "Quantity: " + qty,
-    "Unit price: KSh " + price,
-    "Estimated total: KSh " + total,
-    "Collection/delivery: " + fulfilment,
-    "Location: " + (location || "Not provided"),
-    "Notes: " + (notes || "None"),
-    "",
-    "Please confirm stock, delivery charges and the final amount before payment."
-  ].join("\n");
-
-  amkOpenWhatsApp(
-    "254117414318", message, "gasMessage", "gasSubmit"
-  );
-});
-
-amkEl("sneakerForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const name = amkEl("sneakerName").value.trim();
-  const phone = amkEl("sneakerPhone").value.trim();
-  const model = amkEl("sneakerModel").value.trim();
-  const size = amkEl("sneakerSize").value;
-  const qty = Number(amkEl("sneakerQty").value);
-  const budget = amkEl("sneakerBudget").value.trim();
-  const address = amkEl("sneakerAddress").value.trim();
-  const notes = amkEl("sneakerNotes").value.trim();
-
-  if (!name || !phone || !model || !size ||
-      !Number.isInteger(qty) || qty < 1) {
-    amkEl("sneakerMessage").textContent =
-      "Please complete all required fields.";
-    return;
-  }
-
-  const message = [
-    "AMK SNEAKERS ORDER",
-    "Customer: " + name,
-    "Customer phone: " + phone,
-    "Sneaker/model: " + model,
-    "Size: " + size,
-    "Quantity: " + qty,
-    "Budget: " + (budget || "Please quote"),
-    "Delivery address: " + (address || "To be confirmed"),
-    "Notes: " + (notes || "None"),
-    "",
-    "Please confirm availability, price and delivery charges."
-  ].join("\n");
-
-  amkOpenWhatsApp(
-    "254118311141", message, "sneakerMessage", "sneakerSubmit"
-  );
-});
-
-amkEl("barberForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const name = amkEl("barberName").value.trim();
-  const phone = amkEl("barberPhone").value.trim();
-  const service = amkEl("barberService").value;
-  const date = amkEl("barberDate").value;
-  const time = amkEl("barberTime").value;
-  const notes = amkEl("barberNotes").value.trim();
-
-  if (!name || !phone || !service || !date || !time) {
-    amkEl("barberMessage").textContent =
-      "Please complete all required fields.";
-    return;
-  }
-
-  const prices = {
-    "Regular Haircut": 200,
-    "Skin Fade": 300,
-    "Beard Trim": 100,
-    "Haircut + Beard": 300,
-    "Fade + Beard": 400,
-    "Kids Haircut": 150
-  };
-
-  const message = [
-    "AMK BARBER BOOKING REQUEST",
-    "Customer: " + name,
-    "Phone: " + phone,
-    "Service: " + service,
-    "Listed price: KSh " + (prices[service] || "To confirm"),
-    "Preferred date: " + date,
-    "Preferred time: " + time,
-    "Notes: " + (notes || "None"),
-    "",
-    "Please confirm the appointment. This message is a booking request, not a confirmed appointment."
-  ].join("\n");
-
-  amkOpenWhatsApp(
-    "254118311141", message, "barberMessage", "barberSubmit"
-  );
-});
-
-/* GENERIC DATABASE TABLE VIEW */
-const AMK_DATA_SECTIONS = {
-  inventory: {
-    title: "Inventory",
-    table: "inventory",
-    columns: ["id", "name", "category", "quantity", "buying_price", "selling_price"]
-  },
-  requests: {
-    title: "Customer Requests",
-    table: "customer_requests",
-    columns: ["id", "customer_name", "customer_phone", "request_type", "status", "created_at"]
-  },
-  deliveries: {
-    title: "Deliveries",
-    table: "deliveries",
-    columns: ["id", "customer_name", "status", "created_at"]
-  },
-  expenses: {
-    title: "Expenses",
-    table: "expenses",
-    columns: ["id", "description", "amount", "category", "created_at"]
-  },
-  employees: {
-    title: "Employee Records",
-    table: "profiles",
-    columns: ["full_name", "email", "role", "active"]
-  },
-  purchases: {
-    title: "Supplier Purchases",
-    table: "purchases",
-    columns: ["id", "supplier_name", "invoice_number", "amount", "created_at"]
-  }
-};
-
-async function amkRenderDataSection(root, view) {
-  const config = AMK_DATA_SECTIONS[view];
-
-  if (!config) {
-    if (view === "reports") {
-      await amkRenderReports(root);
-      return;
-    }
-
-    root.innerHTML = `
-      <section class="dashboard-panel">
-        <h2>${amkEscape(view)}</h2>
-        <p>This section has no configured data view yet.</p>
-      </section>`;
-    return;
-  }
-
-  root.innerHTML = `
-    <h2>${amkEscape(config.title)}</h2>
-    <section class="dashboard-panel">
-      <button type="button" id="amkRefreshSection">Refresh</button>
-      <p id="amkSectionStatus">Loading records…</p>
-      <div id="amkSectionTable"></div>
-    </section>`;
-
-  const status = amkEl("amkSectionStatus");
-  const table = amkEl("amkSectionTable");
-
-  try {
-    let query = amkDb.from(config.table).select("*");
-
-    if (view === "employees") {
-      query = query.order("full_name", { ascending: true });
-    } else if (view === "inventory") {
-      query = query.order("id", { ascending: false });
-    } else {
-      query = query.order("created_at", { ascending: false });
-    }
-
-    const { data, error } = await query.limit(300);
-    if (error) throw error;
-
-    status.textContent = (data || []).length + " record(s) loaded.";
-
-    if (view === "employees") {
-      const safeRows = (data || []).map(row => ({
-        full_name: row.full_name,
-        email: row.email,
-        role: row.role,
-        active: row.active ? "Active" : "Inactive"
-      }));
-      table.innerHTML = amkTable(safeRows, config.columns);
-    } else {
-      const rows = data || [];
-      const columns = rows.length
-        ? config.columns.filter(column =>
-            Object.prototype.hasOwnProperty.call(rows[0], column))
-        : config.columns;
-
-      table.innerHTML = amkTable(rows, columns);
-    }
-  } catch (error) {
-    status.textContent = "Unable to load records.";
-    table.innerHTML = `
-      <p>${amkEscape(error.message)}</p>
-      <p>If the table does not exist or your role lacks permission, this section needs its database table or access policy configured.</p>`;
-  }
-
-  amkEl("amkRefreshSection").onclick = () => amkRenderView(view);
+function amkFindName(row) {
+  return row.name || row.item_name || row.product_name || row.item || "Unnamed item";
 }
 
-/* SALES: RECORD A SALE USING THE EXISTING SALES TABLE */
-async function amkRenderSales(root) {
-  const sales = await amkLoadSales();
+function amkFindCost(row) {
+  return Number(row.buying_price ?? row.cost_price ?? row.purchase_price ?? 0) || 0;
+}
+
+function amkFindPrice(row) {
+  return Number(row.selling_price ?? row.sale_price ?? row.price ?? 0) || 0;
+}
+
+function amkFindCategory(row) {
+  return String(row.category || "Other");
+}
+
+function amkInventoryStatus(row) {
+  const quantity = amkFindQuantity(row);
+  const reorder = Number(row.reorder_level ?? row.low_stock_threshold ?? 5);
+  if (quantity <= 0) return '<span class="badge badge-out">Out of stock</span>';
+  if (quantity <= reorder) return '<span class="badge badge-low">Low stock</span>';
+  return '<span class="badge badge-good">In stock</span>';
+}
+
+async function amkRenderInventoryView(view) {
+  const root = amk$("viewContent");
+  const categoryFilter = {
+    gas: "Gas",
+    sneakers: "Sneakers",
+    barber: "Barber"
+  }[view] || "";
 
   root.innerHTML = `
-    <h2>Point of Sale</h2>
-    <section class="form-card">
-      <h3>Record a Sale</h3>
-      <form id="amkSaleForm">
+    <section class="panel">
+      <div class="toolbar">
+        <div>
+          <h2>${view === "inventory" ? "All Inventory" : amkEscape(AMK_TITLES[view])}</h2>
+          <p class="muted">Record stock carefully. Buying and selling prices are stored in the inventory database.</p>
+        </div>
+        <button class="btn" id="amkAddStockButton">+ Add Stock Item</button>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-label">Products</div>
+          <div class="stat-number" id="stockProductCount">—</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Total Units</div>
+          <div class="stat-number" id="stockUnitCount">—</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Stock Cost Value</div>
+          <div class="stat-number" id="stockCostValue">—</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Potential Sales Value</div>
+          <div class="stat-number" id="stockSalesValue">—</div>
+        </article>
+      </div>
+      <div class="toolbar">
+        <input id="stockSearch" type="search" placeholder="Search items…">
+        <select id="stockCategoryFilter" aria-label="Filter by category">
+          <option value="">All categories</option>
+          <option value="Gas">Gas</option>
+          <option value="Sneakers">Sneakers</option>
+          <option value="Barber">Barber</option>
+          <option value="Gas Accessories">Gas Accessories</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div id="stockTable"><div class="empty">Loading stock…</div></div>
+      <p class="muted">Stock cost value = quantity × buying price. Potential sales value = quantity × selling price. These are estimates, not net profit.</p>
+    </section>
+    <section class="form-card hidden" id="stockEditor">
+      <h2 id="stockEditorTitle">Add Inventory Item</h2>
+      <form id="stockForm">
+        <input id="stockRecordId" type="hidden">
         <div class="form-grid">
           <div class="field">
-            <label for="saleItem">Item/service</label>
-            <input id="saleItem" required maxlength="150">
+            <label for="stockName">Item name / model</label>
+            <input id="stockName" maxlength="150" required>
           </div>
           <div class="field">
-            <label for="saleCategory">Category</label>
-            <select id="saleCategory" required>
+            <label for="stockCategory">Category</label>
+            <select id="stockCategory" required>
               <option value="Gas">Gas</option>
               <option value="Gas Accessories">Gas Accessories</option>
               <option value="Sneakers">Sneakers</option>
@@ -1485,16 +1008,335 @@ async function amkRenderSales(root) {
             </select>
           </div>
           <div class="field">
-            <label for="saleQty">Quantity</label>
-            <input id="saleQty" type="number" min="1" step="1" value="1" required>
+            <label for="stockSku">SKU / stock code</label>
+            <input id="stockSku" maxlength="80" placeholder="Optional">
           </div>
           <div class="field">
-            <label for="saleAmount">Total amount (KSh)</label>
-            <input id="saleAmount" type="number" min="0.01" step="0.01" required>
+            <label for="stockSize">Size / variant / brand</label>
+            <input id="stockSize" maxlength="100" placeholder="e.g. 6 KG, 12 KG, size 42">
           </div>
           <div class="field">
-            <label for="salePayment">Payment method</label>
-            <select id="salePayment" required>
+            <label for="stockQuantity">Opening quantity</label>
+            <input id="stockQuantity" type="number" min="0" step="1" value="0" required>
+          </div>
+          <div class="field">
+            <label for="stockReorder">Low-stock alert level</label>
+            <input id="stockReorder" type="number" min="0" step="1" value="5" required>
+          </div>
+          <div class="field">
+            <label for="stockCost">Buying price per unit (KSh)</label>
+            <input id="stockCost" type="number" min="0" step="0.01" value="0" required>
+          </div>
+          <div class="field">
+            <label for="stockPrice">Selling price per unit (KSh)</label>
+            <input id="stockPrice" type="number" min="0" step="0.01" value="0" required>
+          </div>
+        </div>
+        <div class="button-row">
+          <button class="btn" type="submit" id="stockSaveButton">Save Item</button>
+          <button class="btn btn-secondary" type="button" id="stockCancelButton">Cancel</button>
+        </div>
+        <div id="stockFormMessage" class="notice hidden" role="status"></div>
+      </form>
+    </section>`;
+
+  if (categoryFilter) {
+    amk$("stockCategoryFilter").value = categoryFilter;
+  }
+
+  const editor = amk$("stockEditor");
+  const form = amk$("stockForm");
+  const formMessage = amk$("stockFormMessage");
+
+  function showEditor(row = null) {
+    form.reset();
+    amk$("stockRecordId").value = row?.id || "";
+    amk$("stockEditorTitle").textContent = row ? "Edit Inventory Item" : "Add Inventory Item";
+    amk$("stockName").value = row ? amkFindName(row) : "";
+    amk$("stockCategory").value = row ? amkFindCategory(row) : (categoryFilter || "Gas");
+    amk$("stockSku").value = row ? (row.sku || row.stock_code || "") : "";
+    amk$("stockSize").value = row ? (row.size || row.variant || row.brand || "") : "";
+    amk$("stockQuantity").value = row ? amkFindQuantity(row) : 0;
+    amk$("stockReorder").value = row ? (row.reorder_level ?? row.low_stock_threshold ?? 5) : 5;
+    amk$("stockCost").value = row ? amkFindCost(row) : 0;
+    amk$("stockPrice").value = row ? amkFindPrice(row) : 0;
+    formMessage.classList.add("hidden");
+    editor.classList.remove("hidden");
+    editor.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  amk$("amkAddStockButton").addEventListener("click", () => showEditor());
+  amk$("stockCancelButton").addEventListener("click", () => editor.classList.add("hidden"));
+
+  function renderStockTable() {
+    const query = amk$("stockSearch").value.trim().toLowerCase();
+    const selectedCategory = amk$("stockCategoryFilter").value;
+
+    const rows = amkInventoryCache.filter(row => {
+      const searchable = [
+        amkFindName(row), amkFindCategory(row),
+        row.sku, row.stock_code, row.size, row.variant, row.brand
+      ].join(" ").toLowerCase();
+
+      return (!query || searchable.includes(query)) &&
+        (!selectedCategory || amkFindCategory(row).toLowerCase() === selectedCategory.toLowerCase());
+    });
+
+    const costTotal = rows.reduce((sum, row) =>
+      sum + amkFindQuantity(row) * amkFindCost(row), 0);
+    const saleTotal = rows.reduce((sum, row) =>
+      sum + amkFindQuantity(row) * amkFindPrice(row), 0);
+    const units = rows.reduce((sum, row) => sum + amkFindQuantity(row), 0);
+
+    amk$("stockProductCount").textContent = rows.length;
+    amk$("stockUnitCount").textContent = units.toLocaleString("en-KE");
+    amk$("stockCostValue").textContent = amkMoney(costTotal);
+    amk$("stockSalesValue").textContent = amkMoney(saleTotal);
+
+    if (!rows.length) {
+      amk$("stockTable").innerHTML = '<div class="empty">No stock items found. Add your first item above.</div>';
+      return;
+    }
+
+    amk$("stockTable").innerHTML = `
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Item</th><th>Category</th><th>SKU</th><th>Variant</th>
+            <th>Quantity</th><th>Buying Price</th><th>Selling Price</th>
+            <th>Stock Cost</th><th>Status</th><th>Action</th>
+          </tr></thead>
+          <tbody>
+            ${rows.map(row => `
+              <tr>
+                <td>${amkEscape(amkFindName(row))}</td>
+                <td>${amkEscape(amkFindCategory(row))}</td>
+                <td>${amkEscape(row.sku || row.stock_code || "—")}</td>
+                <td>${amkEscape(row.size || row.variant || row.brand || "—")}</td>
+                <td>${amkEscape(amkFindQuantity(row))}</td>
+                <td>${amkEscape(amkMoney(amkFindCost(row)))}</td>
+                <td>${amkEscape(amkMoney(amkFindPrice(row)))}</td>
+                <td>${amkEscape(amkMoney(amkFindQuantity(row) * amkFindCost(row)))}</td>
+                <td>${amkInventoryStatus(row)}</td>
+                <td><button class="btn btn-small btn-secondary" data-edit-stock="${amkEscape(row.id)}">Edit</button></td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>`;
+
+    amk$("stockTable").querySelectorAll("[data-edit-stock]").forEach(button => {
+      button.addEventListener("click", () => {
+        const row = amkInventoryCache.find(item =>
+          String(item.id) === button.dataset.editStock
+        );
+        if (row) showEditor(row);
+      });
+    });
+  }
+
+  amk$("stockSearch").addEventListener("input", renderStockTable);
+  amk$("stockCategoryFilter").addEventListener("change", renderStockTable);
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const button = amk$("stockSaveButton");
+    button.disabled = true;
+    formMessage.classList.remove("hidden");
+    formMessage.className = "notice";
+    formMessage.textContent = "Saving item…";
+
+    const quantity = Number(amk$("stockQuantity").value);
+    const reorder = Number(amk$("stockReorder").value);
+    const buying = Number(amk$("stockCost").value);
+    const selling = Number(amk$("stockPrice").value);
+
+    if (![quantity, reorder, buying, selling].every(Number.isFinite) ||
+        quantity < 0 || reorder < 0 || buying < 0 || selling < 0 ||
+        !Number.isInteger(quantity) || !Number.isInteger(reorder)) {
+      formMessage.className = "notice error";
+      formMessage.textContent = "Check the quantity, reorder level and prices.";
+      button.disabled = false;
+      return;
+    }
+
+    const recordId = amk$("stockRecordId").value;
+    const itemName = amk$("stockName").value.trim();
+    const category = amk$("stockCategory").value;
+    const sku = amk$("stockSku").value.trim();
+    const variant = amk$("stockSize").value.trim();
+
+    try {
+      const { data: currentRows, error: schemaError } = await amkDb
+        .from("inventory").select("*").limit(1);
+      if (schemaError) throw schemaError;
+
+      const sample = currentRows?.[0] || {};
+      const fields = Object.keys(sample);
+      const nameField = ["name", "item_name", "product_name", "item"]
+        .find(key => fields.includes(key)) || "name";
+      const quantityField = ["quantity", "stock_quantity", "stock"]
+        .find(key => fields.includes(key)) || "quantity";
+      const costField = ["buying_price", "cost_price", "purchase_price"]
+        .find(key => fields.includes(key)) || "buying_price";
+      const priceField = ["selling_price", "sale_price", "price"]
+        .find(key => fields.includes(key)) || "selling_price";
+      const categoryField = fields.includes("category") ? "category" : "category";
+      const payload = {
+        [nameField]: itemName,
+        [categoryField]: category,
+        [quantityField]: quantity,
+        [costField]: buying,
+        [priceField]: selling
+      };
+
+      if (fields.includes("sku")) payload.sku = sku || null;
+      else if (fields.includes("stock_code")) payload.stock_code = sku || null;
+      if (fields.includes("size")) payload.size = variant || null;
+      else if (fields.includes("variant")) payload.variant = variant || null;
+      else if (fields.includes("brand")) payload.brand = variant || null;
+      if (fields.includes("reorder_level")) payload.reorder_level = reorder;
+      else if (fields.includes("low_stock_threshold")) payload.low_stock_threshold = reorder;
+
+      let result;
+      if (recordId) {
+        /* Do not silently change stock through the edit form.
+           Stock movements belong in the purchase/sale workflow. */
+        delete payload[quantityField];
+        result = await amkDb.from("inventory")
+          .update(payload).eq("id", recordId).select();
+      } else {
+        result = await amkDb.from("inventory")
+          .insert(payload).select();
+      }
+
+      if (result.error) throw result.error;
+
+      formMessage.className = "notice success";
+      formMessage.textContent = recordId
+        ? "Item details updated. Quantity was left unchanged."
+        : "Inventory item added.";
+
+      await amkLoadInventory();
+      renderStockTable();
+
+      if (!recordId) {
+        form.reset();
+        amk$("stockQuantity").value = 0;
+        amk$("stockReorder").value = 5;
+        amk$("stockCost").value = 0;
+        amk$("stockPrice").value = 0;
+      }
+    } catch (error) {
+      formMessage.className = "notice error";
+      formMessage.textContent =
+        "Could not save the item: " + error.message +
+        ". Check the inventory table columns and your account permissions.";
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  try {
+    await amkLoadInventory();
+    renderStockTable();
+  } catch (error) {
+    amk$("stockTable").innerHTML =
+      '<div class="notice error">Could not load inventory: ' +
+      amkEscape(error.message) +
+      '</div>';
+  }
+}
+</script>
+``````html
+<script>
+/* AMK PART 4 — SALES, PURCHASES, SUPPLIERS AND EXPENSES */
+
+/* Helpers */
+function amkField(row, names, fallback = "") {
+  for (const name of names) {
+    if (row && row[name] !== undefined && row[name] !== null) {
+      return row[name];
+    }
+  }
+  return fallback;
+}
+
+function amkOptions(items, selected = "") {
+  return items.map(item =>
+    `<option value="${amkEscape(item)}" ${String(item) === String(selected) ? "selected" : ""}>${amkEscape(item)}</option>`
+  ).join("");
+}
+
+function amkShowFormMessage(id, message, type = "") {
+  const el = amk$(id);
+  if (!el) return;
+  el.textContent = message;
+  el.className = "notice" + (type ? " " + type : "");
+  el.classList.remove("hidden");
+}
+
+function amkRpcErrorMessage(error, action) {
+  const text = String(error?.message || "Unknown database error");
+  if (/record_sale|record_purchase|function.*not found|schema cache/i.test(text)) {
+    return action + " could not be completed because the required Supabase stock function is not installed yet. We will set it up in Part 5.";
+  }
+  return action + " failed: " + text;
+}
+
+/* SALES / POS */
+async function amkRenderSales(root) {
+  let inventory = [];
+
+  try {
+    inventory = await amkLoadInventory();
+  } catch (error) {
+    root.innerHTML = `
+      <section class="panel">
+        <h2>Point of Sale</h2>
+        <div class="notice error">Inventory could not be loaded: ${amkEscape(error.message)}</div>
+      </section>`;
+    return;
+  }
+
+  let sales = [];
+  try {
+    sales = await amkLoadSales();
+  } catch (error) {
+    sales = [];
+  }
+
+  const availableItems = inventory.filter(row => amkFindQuantity(row) > 0);
+
+  root.innerHTML = `
+    <section class="panel">
+      <h2>Record a Sale</h2>
+      <p class="muted">Choose an item, confirm the quantity and price, then record the sale. Stock must be deducted by the secure database function.</p>
+      <form id="posForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="posItem">Stock item</label>
+            <select id="posItem" required>
+              <option value="">Choose an item</option>
+              ${availableItems.map(row => `
+                <option value="${amkEscape(row.id)}">
+                  ${amkEscape(amkFindName(row))} — ${amkEscape(amkFindCategory(row))}
+                  (Stock: ${amkEscape(amkFindQuantity(row))})
+                </option>`).join("")}
+            </select>
+          </div>
+          <div class="field">
+            <label for="posQty">Quantity sold</label>
+            <input id="posQty" type="number" min="1" step="1" value="1" required>
+          </div>
+          <div class="field">
+            <label for="posUnitPrice">Selling price per unit (KSh)</label>
+            <input id="posUnitPrice" type="number" min="0.01" step="0.01" required>
+          </div>
+          <div class="field">
+            <label for="posPayment">Payment method</label>
+            <select id="posPayment" required>
               <option value="Cash">Cash</option>
               <option value="M-Pesa">M-Pesa</option>
               <option value="Card">Card</option>
@@ -1502,264 +1344,866 @@ async function amkRenderSales(root) {
               <option value="Credit">Credit / unpaid</option>
             </select>
           </div>
+          <div class="field">
+            <label for="posCustomer">Customer name (optional)</label>
+            <input id="posCustomer" maxlength="150">
+          </div>
+          <div class="field">
+            <label for="posDiscount">Discount (KSh)</label>
+            <input id="posDiscount" type="number" min="0" step="0.01" value="0" required>
+          </div>
         </div>
-        <button type="submit" id="amkSaleSubmit">Save Sale</button>
-        <p id="amkSaleMessage" class="form-message" role="status"></p>
+        <div class="notice" id="posCalculation">Select an item to calculate the sale total.</div>
+        <button class="btn" id="posSubmit" type="submit">Record Sale & Deduct Stock</button>
+        <div id="posMessage" class="notice hidden" role="status"></div>
       </form>
     </section>
-    <section class="dashboard-panel">
-      <h3>Recent Sales</h3>
-      <div id="amkSalesTable">
+
+    <section class="panel" style="margin-top:18px">
+      <div class="toolbar">
+        <h2>Recent Sales</h2>
+        <button class="btn btn-secondary" id="posRefresh" type="button">Refresh</button>
+      </div>
+      <div id="posRecentSales">
         ${amkTable(sales.slice(0, 100), [
           "created_at", "item", "category", "quantity", "amount", "payment_method"
         ])}
       </div>
     </section>`;
 
-  amkEl("amkSaleForm").addEventListener("submit", async event => {
-    event.preventDefault();
+  const itemSelect = amk$("posItem");
+  const qtyInput = amk$("posQty");
+  const priceInput = amk$("posUnitPrice");
+  const discountInput = amk$("posDiscount");
+  const calculation = amk$("posCalculation");
 
-    const button = amkEl("amkSaleSubmit");
-    const message = amkEl("amkSaleMessage");
-    button.disabled = true;
-    message.textContent = "Saving sale…";
+  function getSelectedItem() {
+    return inventory.find(row => String(row.id) === itemSelect.value);
+  }
 
-    const item = amkEl("saleItem").value.trim();
-    const category = amkEl("saleCategory").value;
-    const quantity = Number(amkEl("saleQty").value);
-    const amount = Number(amkEl("saleAmount").value);
-    const payment_method = amkEl("salePayment").value;
+  function updateSalePreview() {
+    const row = getSelectedItem();
 
-    if (!item || !Number.isInteger(quantity) || quantity < 1 ||
-        !Number.isFinite(amount) || amount <= 0) {
-      message.textContent = "Check the item, quantity and amount.";
-      button.disabled = false;
+    if (!row) {
+      calculation.textContent = "Select an item to calculate the sale total.";
       return;
     }
 
+    if (!priceInput.dataset.userEdited) {
+      priceInput.value = amkFindPrice(row);
+    }
+
+    const quantity = Number(qtyInput.value);
+    const price = Number(priceInput.value);
+    const discount = Number(discountInput.value);
+    const subtotal = quantity * price;
+    const total = subtotal - discount;
+
+    calculation.textContent =
+      "Available: " + amkFindQuantity(row) +
+      " | Subtotal: " + amkMoney(subtotal) +
+      " | Discount: " + amkMoney(discount) +
+      " | Total: " + amkMoney(total);
+  }
+
+  itemSelect.addEventListener("change", () => {
+    priceInput.dataset.userEdited = "";
+    updateSalePreview();
+  });
+
+  priceInput.addEventListener("input", () => {
+    priceInput.dataset.userEdited = "1";
+    updateSalePreview();
+  });
+
+  qtyInput.addEventListener("input", updateSalePreview);
+  discountInput.addEventListener("input", updateSalePreview);
+
+  amk$("posRefresh").addEventListener("click", () => amkRenderView("sales"));
+
+  amk$("posForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const row = getSelectedItem();
+    const quantity = Number(qtyInput.value);
+    const price = Number(priceInput.value);
+    const discount = Number(discountInput.value);
+    const total = quantity * price - discount;
+
+    if (!row) {
+      amkShowFormMessage("posMessage", "Choose a stock item.", "error");
+      return;
+    }
+
+    if (!Number.isInteger(quantity) || quantity < 1 ||
+        quantity > amkFindQuantity(row)) {
+      amkShowFormMessage(
+        "posMessage",
+        "Quantity must be a whole number no greater than the available stock.",
+        "error"
+      );
+      return;
+    }
+
+    if (!Number.isFinite(price) || price <= 0 ||
+        !Number.isFinite(discount) || discount < 0 ||
+        discount > quantity * price) {
+      amkShowFormMessage("posMessage", "Check the selling price and discount.", "error");
+      return;
+    }
+
+    const button = amk$("posSubmit");
+    button.disabled = true;
+    amkShowFormMessage("posMessage", "Recording sale…");
+
     try {
-      const { error } = await amkDb.from("sales").insert({
-        item,
-        category,
-        quantity,
-        amount,
-        payment_method,
-        staff_id: amkCurrentUser.id
+      const { data, error } = await amkDb.rpc("record_sale", {
+        p_inventory_id: row.id,
+        p_quantity: quantity,
+        p_unit_price: price,
+        p_discount: discount,
+        p_payment_method: amk$("posPayment").value,
+        p_customer_name: amk$("posCustomer").value.trim() || null
       });
 
       if (error) throw error;
 
-      message.textContent = "Sale saved successfully.";
+      amkShowFormMessage(
+        "posMessage",
+        "Sale recorded. The database confirmed the stock movement.",
+        "success"
+      );
+
+      await amkLoadInventory();
       await amkRenderSales(root);
+      amkShowMessage("Sale recorded successfully.", "success");
     } catch (error) {
-      message.textContent =
-        "Sale not saved: " + error.message +
-        ". Check your database permissions and required fields.";
+      amkShowFormMessage(
+        "posMessage",
+        amkRpcErrorMessage(error, "Sale"),
+        "error"
+      );
       button.disabled = false;
     }
   });
 }
 
-/* PRINTABLE RECEIPT FROM A SAVED SALE */
-async function amkRenderInvoices(root) {
-  const sales = await amkLoadSales();
+/* PURCHASES / STOCK RECEIVED */
+async function amkRenderPurchases(root) {
+  let inventory = [];
+
+  try {
+    inventory = await amkLoadInventory();
+  } catch (error) {
+    root.innerHTML = `
+      <section class="panel">
+        <h2>Stock Purchases</h2>
+        <div class="notice error">${amkEscape(error.message)}</div>
+      </section>`;
+    return;
+  }
+
+  let purchases = [];
+  let purchaseWarning = "";
+
+  try {
+    const result = await amkDb.from("purchases")
+      .select("*").order("created_at", { ascending: false }).limit(200);
+    if (result.error) throw result.error;
+    purchases = result.data || [];
+  } catch (error) {
+    purchaseWarning =
+      "Purchase history is unavailable until the purchases table is configured: " +
+      error.message;
+  }
 
   root.innerHTML = `
-    <h2>Invoices & Receipts</h2>
-    <p>Select a saved sale to prepare a printable receipt.</p>
-    <section class="dashboard-panel">
-      ${amkTable(sales, [
-        "id", "created_at", "item", "category",
-        "quantity", "amount", "payment_method"
-      ])}
-    </section>
-    <section class="form-card">
-      <h3>Print Receipt</h3>
-      <form id="amkReceiptForm">
-        <div class="field">
-          <label for="receiptSaleId">Sale ID</label>
-          <input id="receiptSaleId" required placeholder="Enter the sale ID above">
+    <section class="panel">
+      <h2>Receive Stock / Record Purchase</h2>
+      <p class="muted">Use this when stock arrives from a supplier. The secure database function must update stock and save the purchase together.</p>
+      ${purchaseWarning ? `<div class="notice">${amkEscape(purchaseWarning)}</div>` : ""}
+      <form id="purchaseForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="purchaseItem">Inventory item</label>
+            <select id="purchaseItem" required>
+              <option value="">Choose item</option>
+              ${inventory.map(row => `
+                <option value="${amkEscape(row.id)}">
+                  ${amkEscape(amkFindName(row))} — ${amkEscape(amkFindCategory(row))}
+                </option>`).join("")}
+            </select>
+          </div>
+          <div class="field">
+            <label for="purchaseQty">Quantity received</label>
+            <input id="purchaseQty" type="number" min="1" step="1" required>
+          </div>
+          <div class="field">
+            <label for="purchaseCost">Buying price per unit (KSh)</label>
+            <input id="purchaseCost" type="number" min="0" step="0.01" required>
+          </div>
+          <div class="field">
+            <label for="purchaseSupplier">Supplier name</label>
+            <input id="purchaseSupplier" maxlength="150" required>
+          </div>
+          <div class="field">
+            <label for="purchaseInvoice">Supplier invoice number</label>
+            <input id="purchaseInvoice" maxlength="100" required>
+          </div>
+          <div class="field">
+            <label for="purchaseDate">Purchase date</label>
+            <input id="purchaseDate" type="date" required>
+          </div>
         </div>
-        <button type="submit">Prepare Receipt</button>
+        <div id="purchaseTotal" class="notice">Enter quantity and buying price.</div>
+        <button class="btn" type="submit" id="purchaseSubmit">Save Purchase & Receive Stock</button>
+        <div id="purchaseMessage" class="notice hidden" role="status"></div>
       </form>
+    </section>
+    <section class="panel" style="margin-top:18px">
+      <h2>Purchase History</h2>
+      ${amkTable(purchases, Object.keys(purchases[0] || {
+        message: "No purchase records available"
+      }).slice(0, 8))}
     </section>`;
 
-  amkEl("amkReceiptForm").addEventListener("submit", event => {
+  amk$("purchaseDate").value = new Date().toISOString().slice(0, 10);
+
+  function updatePurchaseTotal() {
+    const quantity = Number(amk$("purchaseQty").value);
+    const price = Number(amk$("purchaseCost").value);
+    amk$("purchaseTotal").textContent =
+      "Purchase total: " + amkMoney(quantity * price);
+  }
+
+  amk$("purchaseQty").addEventListener("input", updatePurchaseTotal);
+  amk$("purchaseCost").addEventListener("input", updatePurchaseTotal);
+
+  amk$("purchaseItem").addEventListener("change", () => {
+    const row = inventory.find(item =>
+      String(item.id) === amk$("purchaseItem").value
+    );
+    if (row) amk$("purchaseCost").value = amkFindCost(row);
+    updatePurchaseTotal();
+  });
+
+  amk$("purchaseForm").addEventListener("submit", async event => {
     event.preventDefault();
 
-    const id = amkEl("receiptSaleId").value.trim();
-    const sale = sales.find(row => String(row.id) === id);
+    const quantity = Number(amk$("purchaseQty").value);
+    const unitCost = Number(amk$("purchaseCost").value);
 
-    if (!sale) {
-      alert("That sale ID was not found in the loaded records.");
+    if (!Number.isInteger(quantity) || quantity < 1 ||
+        !Number.isFinite(unitCost) || unitCost < 0) {
+      amkShowFormMessage("purchaseMessage", "Check quantity and buying price.", "error");
       return;
     }
 
-    const receipt = window.open("", "_blank");
-    if (!receipt) {
-      alert("Allow pop-ups to print a receipt, then try again.");
-      return;
-    }
+    const button = amk$("purchaseSubmit");
+    button.disabled = true;
+    amkShowFormMessage("purchaseMessage", "Recording purchase…");
 
-    receipt.document.write(`
-      <!doctype html>
-      <html><head><title>AMK Receipt</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <style>
-        body{font:16px Arial,sans-serif;max-width:650px;margin:30px auto;padding:20px;color:#111}
-        h1{text-align:center}hr{border:0;border-top:1px solid #bbb}
-        .line{display:flex;justify-content:space-between;gap:20px;padding:8px 0}
-        button{padding:10px 16px}
-        @media print{button{display:none}body{margin:0}}
-      </style></head><body>
-      <h1>AMK Gas • Sneakers • Barber</h1>
-      <p style="text-align:center">SALES RECEIPT</p><hr>
-      <div class="line"><b>Receipt / Sale ID</b><span>${amkEscape(sale.id)}</span></div>
-      <div class="line"><b>Date</b><span>${amkEscape(sale.created_at)}</span></div>
-      <div class="line"><b>Item</b><span>${amkEscape(sale.item)}</span></div>
-      <div class="line"><b>Category</b><span>${amkEscape(sale.category)}</span></div>
-      <div class="line"><b>Quantity</b><span>${amkEscape(sale.quantity)}</span></div>
-      <div class="line"><b>Payment method</b><span>${amkEscape(sale.payment_method)}</span></div>
-      <hr><div class="line"><b>TOTAL</b><b>${amkEscape(amkMoney(sale.amount))}</b></div>
-      <p>Thank you for choosing AMK.</p>
-      <button onclick="window.print()">Print Receipt</button>
-      </body></html>`);
-    receipt.document.close();
+    try {
+      const { error } = await amkDb.rpc("record_purchase", {
+        p_inventory_id: amk$("purchaseItem").value,
+        p_quantity: quantity,
+        p_unit_cost: unitCost,
+        p_supplier_name: amk$("purchaseSupplier").value.trim(),
+        p_invoice_number: amk$("purchaseInvoice").value.trim(),
+        p_purchase_date: amk$("purchaseDate").value
+      });
+
+      if (error) throw error;
+
+      amkShowFormMessage(
+        "purchaseMessage",
+        "Purchase recorded and stock received.",
+        "success"
+      );
+
+      await amkLoadInventory();
+      await amkRenderPurchases(root);
+      amkShowMessage("Purchase recorded successfully.", "success");
+    } catch (error) {
+      amkShowFormMessage(
+        "purchaseMessage",
+        amkRpcErrorMessage(error, "Purchase"),
+        "error"
+      );
+      button.disabled = false;
+    }
   });
 }
 
-/* ADMIN-ONLY PAYROLL */
-async function amkRenderPayroll(root) {
-  if (!amkCurrentProfile || amkCurrentProfile.role !== "admin") {
-    throw new Error("Payroll is restricted to the administrator.");
+/* SUPPLIER DIRECTORY */
+async function amkRenderSuppliers(root) {
+  root.innerHTML = `
+    <section class="panel">
+      <h2>Supplier Directory</h2>
+      <p class="muted">Supplier records need a dedicated Supabase suppliers table. This screen will report a clear error if it has not been created.</p>
+      <form id="supplierForm">
+        <div class="form-grid">
+          <div class="field"><label for="supplierName">Supplier / business name</label>
+            <input id="supplierName" required maxlength="150"></div>
+          <div class="field"><label for="supplierPhone">Phone number</label>
+            <input id="supplierPhone" maxlength="40"></div>
+          <div class="field"><label for="supplierEmail">Email</label>
+            <input id="supplierEmail" type="email" maxlength="150"></div>
+          <div class="field"><label for="supplierCategory">Supplies</label>
+            <select id="supplierCategory">
+              <option>Gas</option><option>Gas Accessories</option>
+              <option>Sneakers</option><option>Barber</option><option>Other</option>
+            </select></div>
+        </div>
+        <button class="btn" type="submit" id="supplierSubmit">Add Supplier</button>
+        <div id="supplierMessage" class="notice hidden" role="status"></div>
+      </form>
+    </section>
+    <section class="panel" style="margin-top:18px">
+      <h2>Saved Suppliers</h2>
+      <div id="supplierTable"><div class="empty">Loading…</div></div>
+    </section>`;
+
+  async function loadSuppliers() {
+    const { data, error } = await amkDb.from("suppliers")
+      .select("*").order("created_at", { ascending: false }).limit(300);
+    if (error) throw error;
+    amk$("supplierTable").innerHTML = amkTable(
+      data || [],
+      Object.keys(data?.[0] || {
+        message: "No suppliers added yet"
+      }).slice(0, 8)
+    );
   }
 
-  const { data: records, error } = await amkDb
-    .from("payroll_records")
-    .select("id,employee_name,pay_month,basic_salary,commission,deductions,payment_status,created_at")
-    .order("created_at", { ascending: false })
-    .limit(300);
+  try {
+    await loadSuppliers();
+  } catch (error) {
+    amk$("supplierTable").innerHTML =
+      `<div class="notice error">Could not load suppliers: ${amkEscape(error.message)}. The suppliers table may need to be created in Supabase.</div>`;
+  }
 
-  if (error) throw error;
+  amk$("supplierForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    const button = amk$("supplierSubmit");
+    button.disabled = true;
+
+    try {
+      const { error } = await amkDb.from("suppliers").insert({
+        name: amk$("supplierName").value.trim(),
+        phone: amk$("supplierPhone").value.trim() || null,
+        email: amk$("supplierEmail").value.trim() || null,
+        category: amk$("supplierCategory").value
+      });
+
+      if (error) throw error;
+
+      amkShowFormMessage("supplierMessage", "Supplier added.", "success");
+      await loadSuppliers();
+      amk$("supplierForm").reset();
+    } catch (error) {
+      amkShowFormMessage(
+        "supplierMessage",
+        "Supplier not saved: " + error.message +
+        ". Check the suppliers table columns and permissions.",
+        "error"
+      );
+    } finally {
+      button.disabled = false;
+    }
+  });
+}
+
+/* EXPENSES */
+async function amkRenderExpenses(root) {
+  root.innerHTML = `
+    <section class="panel">
+      <h2>Record Business Expense</h2>
+      <form id="expenseForm">
+        <div class="form-grid">
+          <div class="field"><label for="expenseDescription">Description</label>
+            <input id="expenseDescription" required maxlength="200"></div>
+          <div class="field"><label for="expenseAmount">Amount (KSh)</label>
+            <input id="expenseAmount" type="number" min="0.01" step="0.01" required></div>
+          <div class="field"><label for="expenseCategory">Category</label>
+            <select id="expenseCategory">
+              <option>Transport</option><option>Rent</option>
+              <option>Utilities</option><option>Wages</option>
+              <option>Stock delivery</option><option>Repairs</option>
+              <option>Other</option>
+            </select></div>
+          <div class="field"><label for="expenseDate">Date</label>
+            <input id="expenseDate" type="date" required></div>
+        </div>
+        <button class="btn" type="submit" id="expenseSubmit">Save Expense</button>
+        <div id="expenseMessage" class="notice hidden" role="status"></div>
+      </form>
+    </section>
+    <section class="panel" style="margin-top:18px">
+      <h2>Expense History</h2>
+      <div id="expenseTable"><div class="empty">Loading…</div></div>
+    </section>`;
+
+  amk$("expenseDate").value = new Date().toISOString().slice(0, 10);
+
+  async function loadExpenses() {
+    const { data, error } = await amkDb.from("expenses")
+      .select("*").order("created_at", { ascending: false }).limit(300);
+    if (error) throw error;
+    amk$("expenseTable").innerHTML = amkTable(
+      data || [],
+      Object.keys(data?.[0] || {
+        message: "No expenses recorded yet"
+      }).slice(0, 8)
+    );
+  }
+
+  try {
+    await loadExpenses();
+  } catch (error) {
+    amk$("expenseTable").innerHTML =
+      `<div class="notice error">Could not load expenses: ${amkEscape(error.message)}</div>`;
+  }
+
+  amk$("expenseForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const amount = Number(amk$("expenseAmount").value);
+    if (!Number.isFinite(amount) || amount <= 0) {
+      amkShowFormMessage("expenseMessage", "Enter a valid amount.", "error");
+      return;
+    }
+
+    const button = amk$("expenseSubmit");
+    button.disabled = true;
+
+    try {
+      const { error } = await amkDb.from("expenses").insert({
+        description: amk$("expenseDescription").value.trim(),
+        amount,
+        category: amk$("expenseCategory").value,
+        created_at: new Date(amk$("expenseDate").value + "T12:00:00").toISOString()
+      });
+
+      if (error) throw error;
+
+      amkShowFormMessage("expenseMessage", "Expense saved.", "success");
+      await loadExpenses();
+      amk$("expenseForm").reset();
+      amk$("expenseDate").value = new Date().toISOString().slice(0, 10);
+    } catch (error) {
+      amkShowFormMessage(
+        "expenseMessage",
+        "Expense not saved: " + error.message +
+        ". Check your expenses table and permissions.",
+        "error"
+      );
+    } finally {
+      button.disabled = false;
+    }
+  });
+}
+</script>
+``````html
+<script>
+/* AMK PART 5 — EMPLOYEES, PAYROLL, REPORTS, SETTINGS */
+
+/* EMPLOYEES */
+async function amkRenderEmployees(root) {
+  if (!["admin", "manager"].includes(amkProfile?.role)) {
+    root.innerHTML = `
+      <section class="panel">
+        <h2>Employees</h2>
+        <div class="notice error">Only administrators and managers can view employee records.</div>
+      </section>`;
+    return;
+  }
 
   root.innerHTML = `
-    <h2>Private Payroll — Administrator Only</h2>
-    <section class="form-card">
-      <h3>Add Payroll Record</h3>
-      <form id="amkPayrollForm">
+    <section class="panel">
+      <h2>Employee Records</h2>
+      <p class="muted">Staff accounts are managed through Supabase Authentication and the profiles table. This screen lists available employee profiles.</p>
+      <button class="btn btn-secondary" id="employeeRefresh" type="button">Refresh employees</button>
+      <div id="employeeTable" style="margin-top:14px">Loading employees…</div>
+    </section>
+    <section class="panel" style="margin-top:18px">
+      <h3>Staff access roles</h3>
+      <ul>
+        <li><strong>Admin:</strong> full business access, including payroll.</li>
+        <li><strong>Manager:</strong> operational access, subject to database policies.</li>
+        <li><strong>Barber:</strong> barber-related work, subject to database policies.</li>
+        <li><strong>Gas attendant:</strong> gas-related work, subject to database policies.</li>
+        <li><strong>Shop staff:</strong> shop operations, subject to database policies.</li>
+      </ul>
+      <p class="muted">Create staff accounts using Supabase Authentication, then assign the appropriate role to their profile. Do not give staff the admin role.</p>
+    </section>`;
+
+  async function loadEmployees() {
+    const { data, error } = await amkDb
+      .from("profiles")
+      .select("id,email,full_name,role,active")
+      .order("full_name", { ascending: true })
+      .limit(500);
+
+    if (error) throw error;
+
+    const employees = data || [];
+
+    if (!employees.length) {
+      amk$("employeeTable").innerHTML =
+        `<div class="empty">No employee profiles found.</div>`;
+      return;
+    }
+
+    amk$("employeeTable").innerHTML = `
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th><th>Email</th><th>Role</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${employees.map(employee => `
+              <tr>
+                <td>${amkEscape(employee.full_name || "—")}</td>
+                <td>${amkEscape(employee.email || "—")}</td>
+                <td>${amkEscape(employee.role || "—")}</td>
+                <td>${employee.active
+                  ? '<span class="status-good">Active</span>'
+                  : '<span class="status-bad">Inactive</span>'}</td>
+              </tr>`).join("")}
+          </tbody>
+        </table>
+      </div>`;
+  }
+
+  amk$("employeeRefresh").addEventListener("click", async () => {
+    amk$("employeeTable").textContent = "Refreshing…";
+    try {
+      await loadEmployees();
+    } catch (error) {
+      amk$("employeeTable").innerHTML =
+        `<div class="notice error">${amkEscape(error.message)}</div>`;
+    }
+  });
+
+  try {
+    await loadEmployees();
+  } catch (error) {
+    amk$("employeeTable").innerHTML =
+      `<div class="notice error">Could not load profiles: ${amkEscape(error.message)}. Check your profiles table policies.</div>`;
+  }
+}
+
+/* PAYROLL — ADMIN ONLY */
+async function amkRenderPayroll(root) {
+  if (amkProfile?.role !== "admin") {
+    root.innerHTML = `
+      <section class="panel">
+        <h2>Payroll</h2>
+        <div class="notice error">Access denied. Salary, commission, deductions and payslips are for administrators only.</div>
+      </section>`;
+    return;
+  }
+
+  root.innerHTML = `
+    <section class="panel">
+      <h2>Record Payroll</h2>
+      <p class="muted">Payroll details are confidential. Database Row Level Security must enforce administrator-only access.</p>
+      <form id="payrollForm">
         <div class="form-grid">
-          <div class="field"><label for="payEmployee">Employee name</label>
-            <input id="payEmployee" required maxlength="150"></div>
-          <div class="field"><label for="payMonth">Pay month</label>
-            <input id="payMonth" type="month" required></div>
-          <div class="field"><label for="payBasic">Basic salary (KSh)</label>
-            <input id="payBasic" type="number" min="0" step="0.01" required></div>
-          <div class="field"><label for="payCommission">Commission (KSh)</label>
-            <input id="payCommission" type="number" min="0" step="0.01" value="0" required></div>
-          <div class="field"><label for="payDeductions">Deductions (KSh)</label>
-            <input id="payDeductions" type="number" min="0" step="0.01" value="0" required></div>
-          <div class="field"><label for="payStatus">Payment status</label>
+          <div class="field">
+            <label for="payEmployee">Employee name</label>
+            <input id="payEmployee" maxlength="150" required>
+          </div>
+          <div class="field">
+            <label for="payMonth">Pay month</label>
+            <input id="payMonth" type="month" required>
+          </div>
+          <div class="field">
+            <label for="payBasic">Basic salary (KSh)</label>
+            <input id="payBasic" type="number" min="0" step="0.01" value="0" required>
+          </div>
+          <div class="field">
+            <label for="payCommission">Commission (KSh)</label>
+            <input id="payCommission" type="number" min="0" step="0.01" value="0" required>
+          </div>
+          <div class="field">
+            <label for="payDeductions">Deductions (KSh)</label>
+            <input id="payDeductions" type="number" min="0" step="0.01" value="0" required>
+          </div>
+          <div class="field">
+            <label for="payStatus">Payment status</label>
             <select id="payStatus">
               <option value="Pending">Pending</option>
               <option value="Paid">Paid</option>
-            </select></div>
+            </select>
+          </div>
         </div>
-        <button type="submit" id="amkPayrollSubmit">Save Payroll</button>
-        <p id="amkPayrollMessage" class="form-message" role="status"></p>
+        <div id="payPreview" class="notice">Net pay: KSh 0.00</div>
+        <button class="btn" id="paySave" type="submit">Save Payroll Record</button>
+        <div id="payMessage" class="notice hidden" role="status"></div>
       </form>
     </section>
-    <section class="dashboard-panel">
-      <h3>Payroll Records</h3>
-      ${amkTable(records || [], [
-        "id", "employee_name", "pay_month", "basic_salary",
-        "commission", "deductions", "payment_status"
-      ])}
+    <section class="panel" style="margin-top:18px">
+      <div class="toolbar">
+        <h2>Payroll Records</h2>
+        <button class="btn btn-secondary" id="payRefresh" type="button">Refresh</button>
+      </div>
+      <div id="payTable">Loading confidential payroll…</div>
     </section>`;
 
-  amkEl("amkPayrollForm").addEventListener("submit", async event => {
-    event.preventDefault();
+  amk$("payMonth").value = new Date().toISOString().slice(0, 7);
 
-    const button = amkEl("amkPayrollSubmit");
-    const message = amkEl("amkPayrollMessage");
-    button.disabled = true;
+  function calculateNet() {
+    const basic = Number(amk$("payBasic").value) || 0;
+    const commission = Number(amk$("payCommission").value) || 0;
+    const deductions = Number(amk$("payDeductions").value) || 0;
+    amk$("payPreview").textContent =
+      "Net pay: " + amkMoney(basic + commission - deductions);
+  }
 
-    const basic_salary = Number(amkEl("payBasic").value);
-    const commission = Number(amkEl("payCommission").value);
-    const deductions = Number(amkEl("payDeductions").value);
+  ["payBasic", "payCommission", "payDeductions"].forEach(id => {
+    amk$(id).addEventListener("input", calculateNet);
+  });
 
-    if ([basic_salary, commission, deductions].some(n =>
-      !Number.isFinite(n) || n < 0)) {
-      message.textContent = "Enter valid non-negative amounts.";
-      button.disabled = false;
+  async function loadPayroll() {
+    if (amkProfile?.role !== "admin") {
+      throw new Error("Administrator access is required.");
+    }
+
+    const { data, error } = await amkDb
+      .from("payroll_records")
+      .select("id,employee_name,pay_month,basic_salary,commission,deductions,payment_status,created_at")
+      .order("created_at", { ascending: false })
+      .limit(300);
+
+    if (error) throw error;
+
+    const records = data || [];
+    if (!records.length) {
+      amk$("payTable").innerHTML =
+        `<div class="empty">No payroll records yet.</div>`;
       return;
     }
 
+    amk$("payTable").innerHTML = `
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Employee</th><th>Month</th><th>Basic</th>
+            <th>Commission</th><th>Deductions</th><th>Net pay</th><th>Status</th>
+          </tr></thead>
+          <tbody>
+            ${records.map(record => {
+              const net = Number(record.basic_salary || 0) +
+                Number(record.commission || 0) -
+                Number(record.deductions || 0);
+              return `<tr>
+                <td>${amkEscape(record.employee_name)}</td>
+                <td>${amkEscape(record.pay_month)}</td>
+                <td>${amkMoney(record.basic_salary)}</td>
+                <td>${amkMoney(record.commission)}</td>
+                <td>${amkMoney(record.deductions)}</td>
+                <td><strong>${amkMoney(net)}</strong></td>
+                <td>${amkEscape(record.payment_status || "Pending")}</td>
+              </tr>`;
+            }).join("")}
+          </tbody>
+        </table>
+      </div>`;
+  }
+
+  amk$("payRefresh").addEventListener("click", async () => {
+    amk$("payTable").textContent = "Refreshing…";
+    try {
+      await loadPayroll();
+    } catch (error) {
+      amk$("payTable").innerHTML =
+        `<div class="notice error">${amkEscape(error.message)}</div>`;
+    }
+  });
+
+  amk$("payrollForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    if (amkProfile?.role !== "admin") {
+      amkShowFormMessage("payMessage", "Administrator access required.", "error");
+      return;
+    }
+
+    const basic = Number(amk$("payBasic").value);
+    const commission = Number(amk$("payCommission").value);
+    const deductions = Number(amk$("payDeductions").value);
+
+    if ([basic, commission, deductions].some(value =>
+      !Number.isFinite(value) || value < 0
+    )) {
+      amkShowFormMessage("payMessage", "Enter valid non-negative amounts.", "error");
+      return;
+    }
+
+    const button = amk$("paySave");
+    button.disabled = true;
+
     try {
       const { error } = await amkDb.from("payroll_records").insert({
-        employee_name: amkEl("payEmployee").value.trim(),
-        pay_month: amkEl("payMonth").value,
-        basic_salary,
+        employee_name: amk$("payEmployee").value.trim(),
+        pay_month: amk$("payMonth").value,
+        basic_salary: basic,
         commission,
         deductions,
-        payment_status: amkEl("payStatus").value,
-        created_by: amkCurrentUser.id
+        payment_status: amk$("payStatus").value,
+        created_by: amkUser.id
       });
 
       if (error) throw error;
 
-      message.textContent = "Payroll record saved.";
-      await amkRenderPayroll(root);
+      amkShowFormMessage("payMessage", "Payroll record saved.", "success");
+      amk$("payrollForm").reset();
+      amk$("payMonth").value = new Date().toISOString().slice(0, 7);
+      calculateNet();
+      await loadPayroll();
     } catch (error) {
-      message.textContent =
-        "Payroll was not saved: " + error.message;
+      amkShowFormMessage(
+        "payMessage",
+        "Payroll was not saved: " + error.message +
+        ". Confirm that your Supabase payroll policies allow only admins.",
+        "error"
+      );
+    } finally {
       button.disabled = false;
+    }
+  });
+
+  try {
+    await loadPayroll();
+  } catch (error) {
+    amk$("payTable").innerHTML =
+      `<div class="notice error">Payroll could not be loaded: ${amkEscape(error.message)}</div>`;
+  }
+}
+
+/* REPORTS */
+async function amkRenderReports(root) {
+  root.innerHTML = `
+    <section class="panel">
+      <h2>Business Reports</h2>
+      <p class="muted">Reports use the sales and expenses visible to your account. Staff may see only their own records depending on database policies.</p>
+      <button class="btn btn-secondary" id="reportRefresh" type="button">Refresh report</button>
+      <div id="reportSummary" style="margin-top:16px">Loading report…</div>
+    </section>`;
+
+  async function loadReports() {
+    const [salesResult, expenseResult] = await Promise.all([
+      amkDb.from("sales").select("quantity,amount,created_at,staff_id").limit(5000),
+      amkDb.from("expenses").select("amount,created_at").limit(5000)
+    ]);
+
+    if (salesResult.error) throw salesResult.error;
+    if (expenseResult.error) throw expenseResult.error;
+
+    const sales = salesResult.data || [];
+    const expenses = expenseResult.data || [];
+
+    const totalSales = sales.reduce(
+      (sum, row) => sum + Number(row.amount || 0), 0
+    );
+    const totalExpenses = expenses.reduce(
+      (sum, row) => sum + Number(row.amount || 0), 0
+    );
+    const unitsSold = sales.reduce(
+      (sum, row) => sum + Number(row.quantity || 0), 0
+    );
+
+    amk$("reportSummary").innerHTML = `
+      <div class="stats-grid">
+        <div class="stat-card"><span>Recorded sales</span>
+          <strong>${amkMoney(totalSales)}</strong></div>
+        <div class="stat-card"><span>Recorded expenses</span>
+          <strong>${amkMoney(totalExpenses)}</strong></div>
+        <div class="stat-card"><span>Sales minus expenses</span>
+          <strong>${amkMoney(totalSales - totalExpenses)}</strong></div>
+        <div class="stat-card"><span>Units sold</span>
+          <strong>${unitsSold.toLocaleString()}</strong></div>
+      </div>
+      <p class="muted">Sales minus expenses is not net profit: it excludes cost of goods sold, wages not recorded as expenses, taxes and other adjustments.</p>
+      <h3>Recent sales</h3>
+      ${amkTable(sales.slice(-50).reverse(), [
+        "created_at", "quantity", "amount", "staff_id"
+      ])}
+    `;
+  }
+
+  amk$("reportRefresh").addEventListener("click", async () => {
+    amk$("reportSummary").textContent = "Refreshing…";
+    try {
+      await loadReports();
+    } catch (error) {
+      amk$("reportSummary").innerHTML =
+        `<div class="notice error">${amkEscape(error.message)}</div>`;
+    }
+  });
+
+  try {
+    await loadReports();
+  } catch (error) {
+    amk$("reportSummary").innerHTML =
+      `<div class="notice error">Reports unavailable: ${amkEscape(error.message)}</div>`;
+  }
+}
+
+/* SETTINGS */
+async function amkRenderSettings(root) {
+  const profile = amkProfile || {};
+
+  root.innerHTML = `
+    <section class="panel">
+      <h2>Account & Business Settings</h2>
+      <div class="stats-grid">
+        <div class="stat-card"><span>Business</span><strong>AMK</strong></div>
+        <div class="stat-card"><span>Currency</span><strong>KSh</strong></div>
+        <div class="stat-card"><span>Account role</span>
+          <strong>${amkEscape(profile.role || "—")}</strong></div>
+      </div>
+      <div class="field">
+        <label>Signed-in email</label>
+        <input value="${amkEscape(amkUser?.email || "")}" readonly>
+      </div>
+      <div class="field">
+        <label>Profile name</label>
+        <input value="${amkEscape(profile.full_name || "")}" readonly>
+      </div>
+      <div class="field">
+        <label>Supabase project</label>
+        <input value="${amkEscape(AMK_SUPABASE_URL)}" readonly>
+      </div>
+      <p class="muted">User roles and access must be managed securely in Supabase. Do not expose the Supabase service-role key in this file.</p>
+      <button class="btn btn-secondary" id="settingsReload" type="button">Reload my profile</button>
+      <div id="settingsMessage" class="notice hidden" role="status"></div>
+    </section>`;
+
+  amk$("settingsReload").addEventListener("click", async () => {
+    try {
+      await amkLoadProfile();
+      await amkApplyPermissions();
+      amkShowFormMessage(
+        "settingsMessage",
+        "Profile refreshed. Your current role is " + (amkProfile?.role || "unknown") + ".",
+        "success"
+      );
+    } catch (error) {
+      amkShowFormMessage(
+        "settingsMessage",
+        "Could not refresh profile: " + error.message,
+        "error"
+      );
     }
   });
 }
 
-/* BASIC SALES REPORT */
-async function amkRenderReports(root) {
-  const sales = await amkLoadSales();
-  const total = sales.reduce((sum, row) => sum + Number(row.amount || 0), 0);
-  const categories = {};
-
-  sales.forEach(row => {
-    const category = row.category || "Other";
-    categories[category] = (categories[category] || 0) +
-      Number(row.amount || 0);
-  });
-
-  root.innerHTML = `
-    <h2>Sales Reports</h2>
-    <div class="dashboard-cards">
-      <article class="dashboard-card">
-        <h3>Total of Loaded Sales</h3>
-        <p class="dashboard-number">${amkEscape(amkMoney(total))}</p>
-      </article>
-      <article class="dashboard-card">
-        <h3>Transactions</h3>
-        <p class="dashboard-number">${sales.length}</p>
-      </article>
-    </div>
-    <section class="dashboard-panel">
-      <h3>Revenue by Category</h3>
-      ${amkTable(Object.entries(categories).map(([category, amount]) =>
-        ({ category, amount })), ["category", "amount"])}
-    </section>
-    <section class="dashboard-panel">
-      <h3>Transaction Details</h3>
-      ${amkTable(sales, [
-        "created_at", "item", "category", "quantity", "amount", "payment_method"
-      ])}
-    </section>`;
-}
-
-/* PREVENT ACCIDENTAL FORM SUBMISSION ON ENTER IN NON-FORM CONTROLS */
-document.querySelectorAll('input[type="month"]').forEach(input => {
-  if (!input.value) {
-    input.value = new Date().toISOString().slice(0, 7);
-  }
-});
+/* End of Part 5 */
 </script>
 </body>
 </html>
