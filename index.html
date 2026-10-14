@@ -1921,5 +1921,56 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
+<script>
+(function () {
+  const button = document.createElement("button");
+  button.textContent = "Export AMK Backup";
+  button.style.cssText =
+    "position:fixed;bottom:18px;right:12px;z-index:99999;" +
+    "padding:14px 18px;background:#1d3d70;color:white;" +
+    "border:0;border-radius:12px;font-size:15px;font-weight:bold;";
+
+  button.onclick = function () {
+    try {
+      const raw = localStorage.getItem("amk_business_v2");
+
+      if (!raw) {
+        alert("No AMK browser records were found in this Safari storage.");
+        return;
+      }
+
+      // Validate without changing the original stored value.
+      const parsed = JSON.parse(raw);
+      const backup = {
+        app: "AMK Gas Sneakers Barber",
+        key: "amk_business_v2",
+        exportedAt: new Date().toISOString(),
+        data: parsed
+      };
+
+      const blob = new Blob(
+        [JSON.stringify(backup, null, 2)],
+        { type: "application/json" }
+      );
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "AMK-backup-" +
+        new Date().toISOString().slice(0, 10) + ".json";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 3000);
+      alert("Backup export started. Save the JSON file in Files.");
+    } catch (error) {
+      alert("Backup failed: " + error.message);
+    }
+  };
+
+  document.body.appendChild(button);
+})();
+</script>
+
 </body>
 </html>
