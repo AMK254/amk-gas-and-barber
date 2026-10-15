@@ -1,413 +1,520 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="JIcMktQWOmy3LyI9mGIQeIEf87Dy8OQ2joHIn-WRSrI">
-<meta name="theme-color" content="#071a35">
-<meta name="description" content="AMK Gas, Sneakers and Barber — orders, sales, stock and customer services.">
-<link rel="canonical" href="https://amkgasandbarber.co.ke/">
-<title>AMK Gas • Sneakers • Barber</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<style>
-:root {
-  --navy: #071a35;
-  --blue: #0755c9;
-  --green: #168447;
-  --light: #f2f6fc;
-  --white: #ffffff;
-  --text: #172338;
-  --muted: #64748b;
-  --border: #dce4ef;
-  --red: #c62828;
-  --orange: #e88a13;
-  --radius: 14px;
-  --shadow: 0 5px 20px rgba(7,26,53,.07);
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  background: var(--light);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Arial, sans-serif;
-  font-size: 15px;
-}
-
-button, input, select, textarea { font: inherit; }
-button { cursor: pointer; }
-button:disabled { opacity: .55; cursor: not-allowed; }
-
-a { color: var(--blue); text-decoration: none; }
-
-.hidden { display: none !important; }
-
-.muted { color: var(--muted); }
-.small { font-size: 12px; }
-.text-right { text-align: right; }
-
-header {
-  background: var(--navy);
-  color: white;
-  padding: 17px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.brand { font-size: 19px; font-weight: 800; }
-.brand span { color: #78b4ff; }
-
-.header-actions {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-main {
-  max-width: 1400px;
-  margin: auto;
-  padding: 20px;
-}
-
-button, .button {
-  border: 0;
-  border-radius: 9px;
-  padding: 10px 14px;
-  background: var(--blue);
-  color: white;
-  font-weight: 650;
-}
-
-button.secondary {
-  background: #e8eef8;
-  color: var(--navy);
-}
-
-button.danger { background: var(--red); }
-button.success { background: var(--green); }
-
-input, select, textarea {
-  width: 100%;
-  padding: 11px 12px;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  background: white;
-  color: var(--text);
-  outline: none;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(7,85,201,.1);
-}
-
-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 650;
-  margin-bottom: 6px;
-}
-
-.field { margin-bottom: 14px; }
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  box-shadow: var(--shadow);
-  min-width: 0;
-}
-
-.card h2, .card h3 { margin-top: 0; }
-
-.section-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: 10px 0 18px;
-}
-
-.section-title h1, .section-title h2 { margin: 0; }
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
-.stat-label { color: var(--muted); font-size: 13px; }
-.stat-value { font-size: 25px; font-weight: 800; margin-top: 8px; }
-
-.layout-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
-nav {
-  display: flex;
-  gap: 7px;
-  flex-wrap: wrap;
-  background: white;
-  border-bottom: 1px solid var(--border);
-  padding: 12px 20px;
-}
-
-nav button {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid transparent;
-}
-
-nav button:hover, nav button.active {
-  background: #e8f0ff;
-  color: var(--blue);
-  border-color: #cbdcff;
-}
-
-.table-wrap {
-  width: 100%;
-  overflow-x: auto;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  min-width: 650px;
-}
-
-th, td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-}
-
-th {
-  background: #f5f8fd;
-  font-weight: 750;
-  white-space: nowrap;
-}
-
-tr:last-child td { border-bottom: 0; }
-
-.badge {
-  display: inline-block;
-  padding: 5px 8px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 750;
-  background: #e8eef8;
-  color: var(--navy);
-}
-
-.badge.green { background: #e1f5e8; color: #126b35; }
-.badge.red { background: #fde7e7; color: #a51f1f; }
-.badge.orange { background: #fff0d9; color: #8a5000; }
-
-.notice {
-  padding: 12px 14px;
-  border-radius: 9px;
-  margin-bottom: 14px;
-  background: #eaf2ff;
-  color: #123b79;
-  font-size: 13px;
-}
-
-.notice.error { background: #fde7e7; color: #a51f1f; }
-.notice.success { background: #e1f5e8; color: #126b35; }
-
-#toast {
-  position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: 20px;
-  max-width: 460px;
-  margin: auto;
-  padding: 14px 16px;
-  border-radius: 11px;
-  background: var(--navy);
-  color: white;
-  box-shadow: var(--shadow);
-  z-index: 9999;
-}
-
-#loginScreen {
-  max-width: 440px;
-  margin: 45px auto;
-}
-
-.login-logo {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.login-logo .brand { font-size: 26px; }
-
-#appScreen { min-height: 70vh; }
-
-.chart-box {
-  position: relative;
-  min-height: 260px;
-  width: 100%;
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 30px 15px;
-  color: var(--muted);
-}
-
-footer {
-  padding: 25px 15px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-@media (max-width: 850px) {
-  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .layout-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 520px) {
-  main { padding: 12px; }
-  header { padding: 14px; }
-  nav { padding: 10px; gap: 4px; }
-  nav button { padding: 9px 10px; font-size: 12px; }
-  .form-grid { grid-template-columns: 1fr; }
-  .card { padding: 14px; }
-  .stat-value { font-size: 21px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="PASTE_YOUR_EXISTING_VERIFICATION_CODE_HERE">
+  <meta name="description" content="AMK Gas, Sneakers and Barber — gas delivery, sneaker shopping and barber appointments in Nanyuki and Nairobi, Kenya.">
+  <meta name="theme-color" content="#0755c9">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://amkgasandbarber.co.ke/">
+  <meta property="og:title" content="AMK Gas • Sneakers • Barber">
+  <meta property="og:description" content="Order gas, shop sneakers and book your barber appointment with AMK.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://amkgasandbarber.co.ke/">
+  <title>AMK Gas • Sneakers • Barber</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --blue: #0755c9;
+      --navy: #061a38;
+      --light: #eef5ff;
+      --green: #168447;
+      --white: #ffffff;
+      --text: #192536;
+      --muted: #68778b;
+      --border: #dce5f0;
+      --danger: #c62828;
+      --shadow: 0 8px 28px rgba(6, 26, 56, .09);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: #f6f8fc;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    button, input, select, textarea {
+      font: inherit;
+    }
+    button, .button {
+      cursor: pointer;
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+    .primary { background: var(--blue); color: white; }
+    .success { background: var(--green); color: white; }
+    .secondary { background: #e8eef8; color: var(--navy); }
+    .danger { background: #ffebee; color: var(--danger); }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      background: white;
+      color: var(--text);
+      min-width: 0;
+    }
+    textarea { resize: vertical; }
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .field { margin-bottom: 14px; }
+    .muted { color: var(--muted); }
+    .small { font-size: 12px; }
+    .hidden { display: none !important; }
+    .topbar {
+      background: var(--navy);
+      color: white;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+    .brand span { color: #7db4ff; }
+    .public-nav {
+      background: white;
+      padding: 10px 16px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .public-nav button {
+      background: transparent;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    .public-nav button:hover { background: var(--light); }
+    .container {
+      width: min(1180px, 100%);
+      margin: auto;
+      padding: 20px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #061a38, #0755c9);
+      color: white;
+      padding: 34px 24px;
+      border-radius: 22px;
+      margin: 18px 0 24px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 46px);
+      line-height: 1.12;
+      margin: 0 0 12px;
+    }
+    .hero p { max-width: 650px; color: #e0ebff; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat( auto-fit, minmax(min(100%, 230px), 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .card h2, .card h3 { margin-top: 0; }
+    .price {
+      font-size: 25px;
+      font-weight: 800;
+      color: var(--blue);
+    }
+    .section-title {
+      margin: 28px 0 14px;
+      font-size: 24px;
+      color: var(--navy);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat( auto-fit, minmax(min(100%, 200px), 1fr));
+      gap: 12px;
+    }
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 600px;
+      font-size: 13px;
+    }
+    th, td {
+      text-align: left;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    th { background: var(--light); color: var(--navy); }
+    .badge {
+      display: inline-block;
+      border-radius: 30px;
+      padding: 4px 9px;
+      font-size: 11px;
+      font-weight: 800;
+      background: #e8eef8;
+    }
+    .badge.green { background: #e1f5e8; color: #126b35; }
+    .badge.red { background: #ffebee; color: #a31919; }
+    .notice {
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: var(--light);
+      border: 1px solid #c9dcff;
+      margin: 12px 0;
+    }
+    .error-notice {
+      background: #fff0f0;
+      border-color: #ffc9c9;
+      color: #9d2020;
+    }
+    .success-notice {
+      background: #e9f8ef;
+      border-color: #bde8cb;
+      color: #176a36;
+    }
+    .footer {
+      margin-top: 40px;
+      background: var(--navy);
+      color: #d9e5f7;
+      padding: 24px 18px;
+      text-align: center;
+    }
+    .toast {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 100;
+      max-width: calc(100% - 32px);
+      background: var(--navy);
+      color: white;
+      padding: 13px 17px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .admin-only { display: none; }
+    @media (max-width: 600px) {
+      .container { padding: 13px; }
+      .hero { padding: 25px 18px; }
+      .topbar { padding: 12px; }
+      .brand { font-size: 18px; }
+      .card { padding: 15px; }
+    }
+    @media print {
+      .topbar, .public-nav, .no-print, button { display: none !important; }
+      body { background: white; }
+      .card { box-shadow: none; }
+    }
+  </style>
 </head>
-
 <body>
-
-<header>
-  <div class="brand">AMK <span>Gas • Sneakers • Barber</span></div>
-  <div class="header-actions">
-    <span id="userLabel" class="small">Staff Portal</span>
-    <button id="logoutBtn" class="secondary hidden" onclick="logout()">Log out</button>
-  </div>
-</header>
-
-<div id="loginScreen">
-  <div class="login-logo">
-    <div class="brand">AMK <span>Business Portal</span></div>
-    <p class="muted">Gas • Sneakers • Barber</p>
-  </div>
-
-  <div class="card">
-    <h2>Sign in</h2>
-    <p class="muted">Use your authorized AMK staff account.</p>
-
-    <div id="loginMessage" class="notice hidden"></div>
-
-    <form id="loginForm">
-      <div class="field">
-        <label for="loginEmail">Email address</label>
-        <input id="loginEmail" type="email" autocomplete="username"
-          placeholder="you@example.com" required>
-      </div>
-
-      <div class="field">
-        <label for="loginPassword">Password</label>
-        <input id="loginPassword" type="password"
-          autocomplete="current-password" required>
-      </div>
-
-      <button id="loginBtn" type="submit" style="width:100%">
-        Sign in
-      </button>
-    </form>
-
-    <p class="small muted">
-      Access is limited to staff accounts activated by an administrator.
-    </p>
-  </div>
-</div>
-
-<div id="appScreen" class="hidden">
-
-  <nav id="mainNav">
-    <button class="active" data-view="overview">Dashboard</button>
-    <button data-view="inventory">Inventory</button>
-    <button data-view="sales">Sales / Invoices</button>
-    <button data-view="purchases">Purchases</button>
-    <button data-view="suppliers">Suppliers</button>
-    <button data-view="expenses">Expenses</button>
-    <button data-view="requests">Customer Requests</button>
-    <button data-view="deliveries">Deliveries</button>
-    <button data-view="staff">Employees</button>
-    <button data-view="payroll" id="payrollNav" class="hidden">Payroll</button>
+  <header class="topbar">
+    <div class="brand">AMK <span>Gas • Sneakers • Barber</span></div>
+    <button class="secondary" onclick="showPage('login')">Staff Login</button>
+  </header>
+  <nav class="public-nav no-print">
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('gas')">Gas</button>
+    <button onclick="showPage('sneakers')">Sneakers</button>
+    <button onclick="showPage('barber')">Barber</button>
+    <button onclick="showPage('requests')">My Requests</button>
+    <button onclick="showPage('login')">Staff Portal</button>
   </nav>
-
-  <main>
-    <div id="pageMessage" class="notice hidden"></div>
-    <div id="pageContent">
-      <div class="empty-state">Loading AMK dashboard...</div>
-    </div>
+  <main class="container">
+    <section id="page-home" class="page">
+      <div class="hero">
+        <h1>Welcome to AMK</h1>
+        <p>Order cooking gas, shop sneakers and book your barber appointment — all in one place.</p>
+        <button class="success" onclick="showPage('gas')">Order Gas</button>
+        <button class="secondary" onclick="showPage('sneakers')">Shop Sneakers</button>
+        <button class="secondary" onclick="showPage('barber')">Book Barber</button>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>🔥 Cooking Gas</h3>
+          <p>Order gas cylinders and request delivery.</p>
+          <button class="primary" onclick="showPage('gas')">View Gas Prices</button>
+        </article>
+        <article class="card">
+          <h3>👟 Sneakers</h3>
+          <p>Browse available sneakers and request your size.</p>
+          <button class="primary" onclick="showPage('sneakers')">Shop Now</button>
+        </article>
+        <article class="card">
+          <h3>💈 Barber Services</h3>
+          <p>Choose a service and request an appointment.</p>
+          <button class="primary" onclick="showPage('barber')">Book Appointment</button>
+        </article>
+      </div>
+    </section>
+    <section id="page-gas" class="page hidden">
+      <h2 class="section-title">Cooking Gas Orders</h2>
+      <div class="notice">
+        Confirm the final amount with AMK before making payment.
+        <br>Gas enquiries: <a href="tel:+254117414318">0117 414 318</a>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>6 KG Gas</h3>
+          <div class="price">KSh 1,200</div>
+          <p>Contact us to confirm brand and availability.</p>
+          <button class="primary" onclick="selectGas('6 KG',1200)">Order 6 KG</button>
+        </article>
+        <article class="card">
+          <h3>12 KG Gas</h3>
+          <div class="price">KSh 2,000</div>
+          <p>Contact us to confirm brand and availability.</p>
+          <button class="primary" onclick="selectGas('12 KG',2000)">Order 12 KG</button>
+        </article>
+      </div>
+      <div class="card" style="margin-top:18px">
+        <h3>Request Gas Delivery</h3>
+        <form id="gas-form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="gas-name">Your name</label>
+              <input id="gas-name" required>
+            </div>
+            <div class="field">
+              <label for="gas-phone">Phone number</label>
+              <input id="gas-phone" type="tel" required>
+            </div>
+            <div class="field">
+              <label for="gas-size">Cylinder size</label>
+              <select id="gas-size" required>
+                <option value="">Choose size</option>
+                <option value="6 KG">6 KG — KSh 1,200</option>
+                <option value="12 KG">12 KG — KSh 2,000</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="gas-qty">Quantity</label>
+              <input id="gas-qty" type="number" min="1" value="1" required>
+            </div>
+            <div class="field">
+              <label for="gas-location">Delivery location</label>
+              <input id="gas-location" required>
+            </div>
+            <div class="field">
+              <label for="gas-payment">Preferred payment</label>
+              <select id="gas-payment">
+                <option> M-Pesa </option>
+                <option>Cash</option>
+                <option>Bank transfer</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="gas-notes">Additional instructions</label>
+            <textarea id="gas-notes" rows="3"></textarea>
+          </div>
+          <button class="success" type="submit">Send Gas Request</button>
+        </form>
+      </div>
+    </section>
+    <section id="page-sneakers" class="page hidden">
+      <h2 class="section-title">Sneakers</h2>
+      <div class="notice">Sizes 36–45. Availability and final prices must be confirmed before payment. Countrywide delivery can be arranged.</div>
+      <div class="card">
+        <h3>Request Sneakers</h3>
+        <form id="sneaker-form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="sneaker-name">Your name</label>
+              <input id="sneaker-name" required>
+            </div>
+            <div class="field">
+              <label for="sneaker-phone">Phone number</label>
+              <input id="sneaker-phone" type="tel" required>
+            </div>
+            <div class="field">
+              <label for="sneaker-style">Style or product</label>
+              <input id="sneaker-style" placeholder="e.g. Classic Sneakers" required>
+            </div>
+            <div class="field">
+              <label for="sneaker-size">Shoe size</label>
+              <select id="sneaker-size" required>
+                <option value="">Choose size</option>
+                <option>36</option><option>37</option><option>38</option>
+                <option>39</option><option>40</option><option>41</option>
+                <option>42</option><option>43</option><option>44</option><option>45</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sneaker-qty">Quantity</label>
+              <input id="sneaker-qty" type="number" min="1" value="1" required>
+            </div>
+            <div class="field">
+              <label for="sneaker-location">Delivery location</label>
+              <input id="sneaker-location" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="sneaker-notes">Additional details</label>
+            <textarea id="sneaker-notes" rows="3"></textarea>
+          </div>
+          <button class="primary" type="submit">Send Sneaker Request</button>
+        </form>
+      </div>
+    </section>
+    <section id="page-barber" class="page hidden">
+      <h2 class="section-title">Barber Services & Appointments</h2>
+      <div class="grid">
+        <article class="card"><h3>Regular Haircut</h3><div class="price">KSh 200</div></article>
+        <article class="card"><h3>Skin Fade</h3><div class="price">KSh 300</div></article>
+        <article class="card"><h3>Beard Trim</h3><div class="price">KSh 100</div></article>
+        <article class="card"><h3>Haircut + Beard</h3><div class="price">KSh 300</div></article>
+        <article class="card"><h3>Fade + Beard</h3><div class="price">KSh 400</div></article>
+        <article class="card"><h3>Kids Haircut</h3><div class="price">KSh 150</div></article>
+      </div>
+      <div class="card" style="margin-top:18px">
+        <h3>Request an Appointment</h3>
+        <form id="barber-form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="barber-name">Your name</label>
+              <input id="barber-name" required>
+            </div>
+            <div class="field">
+              <label for="barber-phone">Phone number</label>
+              <input id="barber-phone" type="tel" required>
+            </div>
+            <div class="field">
+              <label for="barber-service">Service</label>
+              <select id="barber-service" required>
+                <option value="">Choose service</option>
+                <option value="Regular Haircut" data-price="200">Regular Haircut — KSh 200</option>
+                <option value="Skin Fade" data-price="300">Skin Fade — KSh 300</option>
+                <option value="Beard Trim" data-price="100">Beard Trim — KSh 100</option>
+                <option value="Haircut + Beard" data-price="300">Haircut + Beard — KSh 300</option>
+                <option value="Fade + Beard" data-price="400">Fade + Beard — KSh 400</option>
+                <option value="Kids Haircut" data-price="150">Kids Haircut — KSh 150</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="barber-date">Preferred date</label>
+              <input id="barber-date" type="date" required>
+            </div>
+            <div class="field">
+              <label for="barber-time">Preferred time</label>
+              <input id="barber-time" type="time" required>
+            </div>
+          </div>
+          <button class="primary" type="submit">Request Appointment</button>
+          <p class="muted small">Your appointment is a request, not a confirmed booking, until AMK approves it.</p>
+        </form>
+      </div>
+    </section>
+    <section id="page-requests" class="page hidden">
+      <h2 class="section-title">My Requests</h2>
+      <div class="card">
+        <p>To check a gas order, sneaker request or barber appointment, contact AMK and provide the phone number you used when submitting the request.</p>
+        <a class="button success" href="https://wa.me/254118311141" target="_blank" rel="noopener">Contact AMK on WhatsApp</a>
+      </div>
+    </section>
+    <section id="page-login" class="page hidden">
+      <h2 class="section-title">Staff Login</h2>
+      <div class="card" style="max-width:480px;margin:auto">
+        <p class="muted">Authorized AMK employees only.</p>
+        <form id="login-form">
+          <div class="field">
+            <label for="login-email">Email address</label>
+            <input id="login-email" type="email" autocomplete="username" required>
+          </div>
+          <div class="field">
+            <label for="login-password">Password</label>
+            <input id="login-password" type="password" autocomplete="current-password" required>
+          </div>
+          <button class="primary" type="submit">Sign In</button>
+        </form>
+        <p id="login-message" class="muted small"></p>
+      </div>
+    </section>
+    <section id="page-dashboard" class="page hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <h2 class="section-title">Staff Dashboard</h2>
+        <button class="danger" onclick="logout()">Sign Out</button>
+      </div>
+      <p id="staff-welcome" class="muted"></p>
+      <nav id="staff-nav" class="public-nav no-print" style="position:static;border:1px solid var(--border);border-radius:12px;margin-bottom:18px">
+        <button onclick="staffPage('overview')">Overview</button>
+        <button onclick="staffPage('inventory')">Inventory</button>
+        <button onclick="staffPage('sales')">Sales / POS</button>
+        <button onclick="staffPage('purchases')">Purchases</button>
+        <button onclick="staffPage('suppliers')">Suppliers</button>
+        <button onclick="staffPage('expenses')">Expenses</button>
+        <button onclick="staffPage('employees')">Employees</button>
+        <button class="admin-only" onclick="staffPage('payroll')">Payroll</button>
+      </nav>
+      <div id="staff-content"></div>
+    </section>
   </main>
-</div>
-
-<div id="toast" class="hidden" role="status"></div>
-
-<footer>
-  AMK Gas • Sneakers • Barber
-  <br>
-  Nanyuki & Nairobi, Kenya
-  <br>
-  Gas enquiries: 0117 414 318
-  • Barber enquiries: 0118 311 141
-</footer>
-
-<script>
+  <footer class="footer">
+    <strong>AMK Gas • Sneakers • Barber</strong>
+    <p>Serving Nanyuki and Nairobi, Kenya.</p>
+    <p>Gas: <a href="tel:+254117414318" style="color:white">0117 414 318</a> · Barber: <a href="tel:+254118311141" style="color:white">0118 311 141</a></p>
+    <p class="small">Confirm availability, delivery charges and payment details before paying.</p>
+  </footer>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <script>
 "use strict";
-
-/* AMK SUPABASE CONFIGURATION */
+/* AMK SUPABASE CONNECTION */
 const SUPABASE_URL = "https://snvulxcguwofowhglbrw.supabase.co";
-const SUPABASE_KEY = "sb_publishable_3DLOM4jXxzCwM1nyAlAEkQ_b2EwnTZd";
-
-let db = null;
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_3DLOM4jXxzCwM1nyAlAEkQ_b2EwnTZd";
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 let currentUser = null;
 let currentProfile = null;
-let currentView = "overview";
-let dashboardCharts = [];
-
-const $ = (id) => document.getElementById(id);
-
+let dashboardChart = null;
+const KSH = new Intl.NumberFormat("en-KE", {
+  style: "currency",
+  currency: "KES",
+  maximumFractionDigits: 2
+});
+function money(value) {
+  return KSH.format(Number(value) || 0);
+}
 function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
@@ -415,2050 +522,1660 @@ function escapeHTML(value) {
     "'": "&#39;"
   })[char]);
 }
-
-function money(value) {
-  return "KSh " + Number(value || 0).toLocaleString("en-KE", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
-}
-
-function numberValue(value) {
-  const n = Number(value);
-  return Number.isFinite(n) ? n : 0;
-}
-
-function isAdmin() {
-  return currentProfile?.role === "admin";
-}
-
-function isManager() {
-  return ["admin", "manager"].includes(currentProfile?.role);
-}
-
-function canManageStock() {
-  return isManager();
-}
-
-function showToast(message, type = "info") {
-  const toast = $("toast");
+function showToast(message, duration = 3500) {
+  const toast = document.getElementById("toast");
   if (!toast) return;
-
-  toast.textContent = message;
-  toast.className = "";
-
-  if (type === "error") toast.style.background = "#a51f1f";
-  else if (type === "success") toast.style.background = "#126b35";
-  else toast.style.background = "#071a35";
-
-  window.clearTimeout(showToast.timer);
-  showToast.timer = window.setTimeout(() => {
-    toast.className = "hidden";
-  }, 4000);
+  toast.textContent = String(message);
+  toast.classList.remove("hidden");
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => {
+    toast.classList.add("hidden");
+  }, duration);
 }
-
-function showPageMessage(message, type = "info") {
-  const el = $("pageMessage");
-  if (!el) return;
-
-  el.textContent = message;
-  el.className = "notice" + (type ? " " + type : "");
-  el.classList.remove("hidden");
-}
-
-function hidePageMessage() {
-  $("pageMessage")?.classList.add("hidden");
-}
-
-function setLoginMessage(message, isError = true) {
-  const el = $("loginMessage");
-  if (!el) return;
-
-  el.textContent = message;
-  el.className = "notice" + (isError ? " error" : " success");
-  el.classList.remove("hidden");
-}
-
-function setLoading(button, loading, label = "Please wait...") {
-  if (!button) return;
-
-  if (loading) {
-    button.dataset.originalText = button.textContent;
-    button.disabled = true;
-    button.textContent = label;
-  } else {
-    button.disabled = false;
-    button.textContent = button.dataset.originalText || "Submit";
-  }
-}
-
 function friendlyError(error) {
-  if (!error) return "An unexpected error occurred.";
-
-  const message = error.message || String(error);
-
-  if (/failed to fetch|networkerror/i.test(message)) {
-    return "Connection failed. Check your internet connection and try again.";
+  const message = error?.message || String(error || "Unknown error");
+  if (/row-level security|permission denied|not allowed/i.test(message)) {
+    return "Permission denied. Check your staff role and Supabase security policies.";
   }
-
   if (/invalid login credentials/i.test(message)) {
     return "Incorrect email or password.";
   }
-
-  if (/permission denied|row-level security|not allowed/i.test(message)) {
-    return "You don't have permission to perform this action.";
+  if (/failed to fetch|network/i.test(message)) {
+    return "Connection failed. Check your internet and Supabase settings.";
   }
-
   return message;
 }
-
-async function dbSelect(table, columns = "*", options = {}) {
-  if (!db) throw new Error("Supabase is not connected.");
-
-  let query = db.from(table).select(columns);
-
-  if (options.order) {
-    query = query.order(options.order, {
-      ascending: options.ascending ?? false
-    });
-  }
-
-  if (options.limit) query = query.limit(options.limit);
-
-  const { data, error } = await query;
-  if (error) throw error;
-
-  return data || [];
+function isAdmin() {
+  return currentProfile?.role === "admin" &&
+         currentProfile?.active === true;
 }
-
-async function dbInsert(table, record) {
-  if (!db) throw new Error("Supabase is not connected.");
-
-  const { data, error } = await db
-    .from(table)
-    .insert(record)
-    .select()
-    .single();
-
-  if (error) throw error;
-  return data;
+function isManager() {
+  return isAdmin() ||
+    (currentProfile?.role === "manager" &&
+     currentProfile?.active === true);
 }
-
-async function dbUpdate(table, id, changes) {
-  if (!db) throw new Error("Supabase is not connected.");
-
-  const { data, error } = await db
-    .from(table)
-    .update(changes)
-    .eq("id", id)
-    .select()
-    .single();
-
-  if (error) throw error;
-  return data;
+function canManageStock() {
+  return isManager();
 }
-
-async function dbDelete(table, id) {
-  if (!db) throw new Error("Supabase is not connected.");
-
-  const { error } = await db.from(table).delete().eq("id", id);
-  if (error) throw error;
-}
-
-function todayISO() {
-  const now = new Date();
-  const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-  return local.toISOString().slice(0, 10);
-}
-
-function monthStartISO() {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-01`;
-}
-
-function dateLabel(value) {
-  if (!value) return "—";
-
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return escapeHTML(value);
-
-  return date.toLocaleDateString("en-KE", {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
-}
-
-function safeNumberInput(value, label, allowZero = false) {
-  const n = Number(value);
-
-  if (!Number.isFinite(n) || (allowZero ? n < 0 : n <= 0)) {
-    throw new Error(label + (allowZero
-      ? " must be zero or greater."
-      : " must be greater than zero."));
-  }
-
-  return n;
-}
-
-function roleLabel(role) {
-  const labels = {
-    admin: "Administrator",
-    manager: "Manager",
-    barber: "Barber",
-    gas_attendant: "Gas Attendant",
-    shop_staff: "Shop Staff"
-  };
-
-  return labels[role] || role || "Staff";
-}
-
-/* Only the authenticated Supabase user can access this app. */
 function requireLogin() {
-  if (!currentUser || !currentProfile || !currentProfile.active) {
-    throw new Error("Please sign in with an active staff account.");
+  if (!currentUser || !currentProfile) {
+    showToast("Please sign in first.");
+    showPage("login");
+    return false;
   }
-}
-
-/* Prevent accidental use of privileged screens by non-admin staff. */
-function requireAdmin() {
-  requireLogin();
-
-  if (!isAdmin()) {
-    throw new Error("Only the administrator can access payroll information.");
+  if (currentProfile.active !== true) {
+    showToast("Your staff account is inactive.");
+    return false;
   }
+  return true;
 }
-
 function requireManager() {
-  requireLogin();
-
+  if (!requireLogin()) return false;
   if (!isManager()) {
-    throw new Error("Only an administrator or manager can manage this section.");
+    showToast("Only an admin or manager can perform this action.");
+    return false;
   }
+  return true;
 }
-
-/* Remove any old chart instances before drawing refreshed charts. */
-function destroyDashboardCharts() {
-  dashboardCharts.forEach((chart) => {
-    try { chart.destroy(); } catch (_) {}
+function requireAdmin() {
+  if (!requireLogin()) return false;
+  if (!isAdmin()) {
+    showToast("Administrator access is required.");
+    return false;
+  }
+  return true;
+}
+function showPage(page) {
+  document.querySelectorAll(".page").forEach(section => {
+    section.classList.add("hidden");
   });
-
-  dashboardCharts = [];
-}
-
-console.info("AMK shared functions loaded.");
-</script>
-
-<script>
-/* AMK AUTHENTICATION AND STAFF ACCESS */
-
-async function initializeAMK() {
-  try {
-    if (!window.supabase) {
-      throw new Error("The Supabase library did not load. Refresh the page and try again.");
-    }
-
-    db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    const { data, error } = await db.auth.getSession();
-    if (error) throw error;
-
-    if (data.session?.user) {
-      currentUser = data.session.user;
-      await loadStaffProfile();
-    } else {
-      showLoginScreen();
-    }
-
-    db.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_OUT") {
-        currentUser = null;
-        currentProfile = null;
-        showLoginScreen();
-      }
-    });
-  } catch (error) {
-    console.error("AMK initialization error:", error);
-    showLoginScreen();
-    setLoginMessage(friendlyError(error));
-  }
-}
-
-function showLoginScreen() {
-  $("loginScreen")?.classList.remove("hidden");
-  $("appScreen")?.classList.add("hidden");
-  $("logoutBtn")?.classList.add("hidden");
-  $("payrollNav")?.classList.add("hidden");
-  $("userLabel").textContent = "Staff Portal";
-}
-
-function showAppScreen() {
-  $("loginScreen")?.classList.add("hidden");
-  $("appScreen")?.classList.remove("hidden");
-  $("logoutBtn")?.classList.remove("hidden");
-
-  $("userLabel").textContent =
-    (currentProfile.full_name || currentUser.email) +
-    " • " + roleLabel(currentProfile.role);
-
-  $("payrollNav")?.classList.toggle("hidden", !isAdmin());
-}
-
-async function loadStaffProfile() {
-  if (!currentUser) {
-    showLoginScreen();
+  const target = document.getElementById("page-" + page);
+  if (!target) {
+    document.getElementById("page-home")?.classList.remove("hidden");
     return;
   }
-
-  const { data: profile, error } = await db
+  target.classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function selectGas(size, price) {
+  const sizeInput = document.getElementById("gas-size");
+  if (sizeInput) sizeInput.value = size;
+  showPage("gas");
+  showToast(size + " selected. Estimated price: " + money(price));
+}
+function staffPage(page) {
+  if (!requireLogin()) return;
+  if (page === "payroll" && !requireAdmin()) return;
+  if (page === "employees" && !requireManager()) return;
+  if (page === "inventory" ||
+      page === "purchases" ||
+      page === "suppliers" ||
+      page === "expenses") {
+    if (!requireManager()) return;
+  }
+  if (typeof renderStaffPage === "function") {
+    renderStaffPage(page);
+  } else {
+    showToast("This section will be enabled in a later part.");
+  }
+}
+function setLoading(button, loading, loadingText = "Please wait...") {
+  if (!button) return;
+  if (loading) {
+    button.dataset.originalText = button.textContent;
+    button.textContent = loadingText;
+    button.disabled = true;
+  } else {
+    button.textContent = button.dataset.originalText || "Submit";
+    button.disabled = false;
+  }
+}
+async function getActiveProfile(userId) {
+  const { data, error } = await db
     .from("profiles")
     .select("id,email,full_name,role,active")
-    .eq("id", currentUser.id)
+    .eq("id", userId)
     .maybeSingle();
-
-  if (error) {
-    throw error;
+  if (error) throw error;
+  if (!data) {
+    throw new Error("No staff profile exists for this account.");
   }
-
-  if (!profile) {
-    await db.auth.signOut();
-    showLoginScreen();
-    setLoginMessage(
-      "Your account has no staff profile. Ask the AMK administrator to set it up."
-    );
-    return;
+  if (data.active !== true) {
+    throw new Error("This staff account is inactive.");
   }
-
-  if (profile.active !== true) {
-    await db.auth.signOut();
-    currentUser = null;
-    currentProfile = null;
-    showLoginScreen();
-    setLoginMessage("Your staff account is inactive. Contact the administrator.");
-    return;
-  }
-
-  currentProfile = profile;
-  showAppScreen();
-
-  if (typeof loadView === "function") {
-    await loadView("overview");
-  }
+  return data;
 }
-
-$("loginForm").addEventListener("submit", async function(event) {
+async function refreshCurrentProfile() {
+  if (!currentUser) {
+    currentProfile = null;
+    return null;
+  }
+  currentProfile = await getActiveProfile(currentUser.id);
+  return currentProfile;
+}
+/* DISPLAY HELPER FOR TABLES */
+function renderEmptyRow(columns, message = "No records found.") {
+  return `<tr><td colspan="${Number(columns) || 1}" class="muted">${escapeHTML(message)}</td></tr>`;
+}
+/* DO NOT PUT A SUPABASE SERVICE-ROLE KEY IN THIS FILE.
+   The publishable key is intended for browser use.
+   Supabase RLS policies must protect all sensitive data. */
+</script>
+<script>
+/* STAFF LOGIN */
+document.getElementById("login-form")?.addEventListener("submit", async function(event) {
   event.preventDefault();
-
-  const button = $("loginBtn");
-  const email = $("loginEmail").value.trim();
-  const password = $("loginPassword").value;
-
+  const form = event.currentTarget;
+  const button = form.querySelector('button[type="submit"]');
+  const message = document.getElementById("login-message");
+  const email = document.getElementById("login-email").value.trim();
+  const password = document.getElementById("login-password").value;
   setLoading(button, true, "Signing in...");
-  $("loginMessage").classList.add("hidden");
-
+  if (message) message.textContent = "";
   try {
-    if (!db) {
-      throw new Error("Connection is not ready. Refresh the page and try again.");
-    }
-
     const { data, error } = await db.auth.signInWithPassword({
       email,
       password
     });
-
     if (error) throw error;
-
     currentUser = data.user;
-    await loadStaffProfile();
-
-    if (currentProfile) {
-      showToast("Welcome to AMK Business Portal.", "success");
+    try {
+      currentProfile = await getActiveProfile(currentUser.id);
+    } catch (profileError) {
+      await db.auth.signOut();
+      currentUser = null;
+      currentProfile = null;
+      throw profileError;
     }
+    const welcome = document.getElementById("staff-welcome");
+    if (welcome) {
+      welcome.textContent =
+        "Welcome, " +
+        (currentProfile.full_name || currentProfile.email) +
+        " · Role: " + currentProfile.role.replaceAll("_", " ");
+    }
+    updateRoleNavigation();
+    form.reset();
+    showPage("dashboard");
+    await staffPage("overview");
+    showToast("Welcome to AMK, " + (currentProfile.full_name || "staff") + "!");
   } catch (error) {
-    console.error("AMK login error:", error);
-    setLoginMessage(friendlyError(error));
+    if (message) message.textContent = friendlyError(error);
+    else showToast(friendlyError(error));
   } finally {
-    setLoading(button, false, "Sign in");
+    setLoading(button, false);
   }
 });
-
+function updateRoleNavigation() {
+  document.querySelectorAll(".admin-only").forEach(element => {
+    element.style.display = isAdmin() ? "inline-flex" : "none";
+  });
+  const employeesButton = [...document.querySelectorAll("#staff-nav button")]
+    .find(button => button.textContent.trim() === "Employees");
+  if (employeesButton) {
+    employeesButton.style.display = isManager() ? "inline-flex" : "none";
+  }
+  const inventoryButton = [...document.querySelectorAll("#staff-nav button")]
+    .find(button => button.textContent.includes("Inventory"));
+  const purchasesButton = [...document.querySelectorAll("#staff-nav button")]
+    .find(button => button.textContent.includes("Purchases"));
+  const suppliersButton = [...document.querySelectorAll("#staff-nav button")]
+    .find(button => button.textContent.includes("Suppliers"));
+  const expensesButton = [...document.querySelectorAll("#staff-nav button")]
+    .find(button => button.textContent.includes("Expenses"));
+  [inventoryButton, purchasesButton, suppliersButton, expensesButton]
+    .filter(Boolean)
+    .forEach(button => {
+      button.style.display = isManager() ? "inline-flex" : "none";
+    });
+}
+/* LOGOUT */
 async function logout() {
   try {
-    if (db) {
-      const { error } = await db.auth.signOut();
-      if (error) throw error;
+    const { error } = await db.auth.signOut();
+    if (error) throw error;
+  } catch (error) {
+    showToast("Logout error: " + friendlyError(error));
+    return;
+  }
+  currentUser = null;
+  currentProfile = null;
+  if (dashboardChart) {
+    dashboardChart.destroy();
+    dashboardChart = null;
+  }
+  document.getElementById("staff-content").innerHTML = "";
+  updateRoleNavigation();
+  showPage("home");
+  showToast("You have signed out.");
+}
+/* RESTORE SESSION AFTER REFRESH */
+async function restoreSession() {
+  try {
+    const { data, error } = await db.auth.getSession();
+    if (error) throw error;
+    const user = data.session?.user;
+    if (!user) {
+      currentUser = null;
+      currentProfile = null;
+      updateRoleNavigation();
+      return;
     }
-
+    currentUser = user;
+    currentProfile = await getActiveProfile(user.id);
+    const welcome = document.getElementById("staff-welcome");
+    if (welcome) {
+      welcome.textContent =
+        "Welcome, " +
+        (currentProfile.full_name || currentProfile.email) +
+        " · Role: " + currentProfile.role.replaceAll("_", " ");
+    }
+    updateRoleNavigation();
+  } catch (error) {
     currentUser = null;
     currentProfile = null;
-    showLoginScreen();
-    showToast("You have signed out.", "success");
-  } catch (error) {
-    showToast(friendlyError(error), "error");
+    await db.auth.signOut().catch(() => {});
+    updateRoleNavigation();
+    console.warn("Session restoration:", friendlyError(error));
   }
 }
-
-/* Start the app after the HTML and shared functions are available. */
-window.addEventListener("DOMContentLoaded", () => {
-  initializeAMK();
+/* Keep the local session state synchronized. */
+db.auth.onAuthStateChange((event, session) => {
+  if (event === "SIGNED_OUT" || !session) {
+    currentUser = null;
+    currentProfile = null;
+    updateRoleNavigation();
+  }
 });
+updateRoleNavigation();
+restoreSession();
 </script>
-
 <script>
-/* AMK DASHBOARD */
-
-async function showDashboard() {
-  await loadView("overview");
+/* CUSTOMER REQUESTS
+   Uses WhatsApp so requests can be received without assuming
+   the database schema for customer_requests.
+*/
+const AMK_WHATSAPP = "254118311141";
+function sendAMKWhatsApp(message) {
+  const url = "https://wa.me/" + AMK_WHATSAPP +
+    "?text=" + encodeURIComponent(message);
+  window.open(url, "_blank", "noopener,noreferrer");
 }
-
-async function renderOverview() {
-  requireLogin();
-
-  const page = $("pageContent");
-  page.innerHTML = `
-    <div class="section-title">
-      <div>
-        <h1>Business Dashboard</h1>
-        <p class="muted">AMK Gas • Sneakers • Barber</p>
-      </div>
-      <button class="secondary" onclick="loadView('overview')">
-        Refresh
-      </button>
-    </div>
-
-    <div id="dashboardStats" class="stats-grid">
-      <div class="card">Loading sales...</div>
-      <div class="card">Loading stock...</div>
-      <div class="card">Loading expenses...</div>
-      <div class="card">Loading requests...</div>
-    </div>
-
-    <div class="layout-grid">
-      <div class="card">
-        <h3>Sales — last 7 days</h3>
-        <div class="chart-box"><canvas id="salesChart"></canvas></div>
-      </div>
-      <div class="card">
-        <h3>Sales by category</h3>
-        <div class="chart-box"><canvas id="categoryChart"></canvas></div>
-      </div>
-    </div>
-
-    <div class="layout-grid" style="margin-top:16px">
-      <div class="card">
-        <h3>Low-stock items</h3>
-        <div id="lowStockList">Loading...</div>
-      </div>
-      <div class="card">
-        <h3>Recent sales</h3>
-        <div id="recentSalesList">Loading...</div>
-      </div>
-    </div>
-  `;
-
-  destroyDashboardCharts();
-
+document.getElementById("gas-form")?.addEventListener("submit", function(event) {
+  event.preventDefault();
+  const name = document.getElementById("gas-name").value.trim();
+  const phone = document.getElementById("gas-phone").value.trim();
+  const size = document.getElementById("gas-size").value;
+  const quantity = Number(document.getElementById("gas-qty").value);
+  const location = document.getElementById("gas-location").value.trim();
+  const payment = document.getElementById("gas-payment").value.trim();
+  const notes = document.getElementById("gas-notes").value.trim();
+  if (!name || !phone || !size || !location ||
+      !Number.isInteger(quantity) || quantity < 1) {
+    showToast("Please complete all required gas order fields.");
+    return;
+  }
+  const prices = { "6 KG": 1200, "12 KG": 2000 };
+  const estimated = prices[size] * quantity;
+  const message = [
+    "AMK GAS DELIVERY REQUEST",
+    "Name: " + name,
+    "Phone: " + phone,
+    "Cylinder: " + size,
+    "Quantity: " + quantity,
+    "Estimated cylinder total: " + money(estimated),
+    "Delivery location: " + location,
+    "Preferred payment: " + payment,
+    "Notes: " + (notes || "None"),
+    "",
+    "Please confirm stock, delivery charges and final price."
+  ].join("\n");
+  sendAMKWhatsApp(message);
+  showToast("WhatsApp opened with your gas request. Send the message to complete it.");
+});
+document.getElementById("sneaker-form")?.addEventListener("submit", function(event) {
+  event.preventDefault();
+  const name = document.getElementById("sneaker-name").value.trim();
+  const phone = document.getElementById("sneaker-phone").value.trim();
+  const style = document.getElementById("sneaker-style").value.trim();
+  const size = document.getElementById("sneaker-size").value;
+  const quantity = Number(document.getElementById("sneaker-qty").value);
+  const location = document.getElementById("sneaker-location").value.trim();
+  const notes = document.getElementById("sneaker-notes").value.trim();
+  if (!name || !phone || !style || !size || !location ||
+      !Number.isInteger(quantity) || quantity < 1) {
+    showToast("Please complete all required sneaker request fields.");
+    return;
+  }
+  const message = [
+    "AMK SNEAKER REQUEST",
+    "Name: " + name,
+    "Phone: " + phone,
+    "Style: " + style,
+    "Shoe size: " + size,
+    "Quantity: " + quantity,
+    "Delivery location: " + location,
+    "Additional details: " + (notes || "None"),
+    "",
+    "Please confirm stock, price and delivery charges."
+  ].join("\n");
+  sendAMKWhatsApp(message);
+  showToast("WhatsApp opened with your sneaker request. Send the message to complete it.");
+});
+document.getElementById("barber-form")?.addEventListener("submit", function(event) {
+  event.preventDefault();
+  const name = document.getElementById("barber-name").value.trim();
+  const phone = document.getElementById("barber-phone").value.trim();
+  const serviceSelect = document.getElementById("barber-service");
+  const service = serviceSelect.value;
+  const date = document.getElementById("barber-date").value;
+  const time = document.getElementById("barber-time").value;
+  if (!name || !phone || !service || !date || !time) {
+    showToast("Please complete all appointment fields.");
+    return;
+  }
+  const chosenDate = new Date(date + "T00:00:00");
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  if (Number.isNaN(chosenDate.getTime()) || chosenDate < today) {
+    showToast("Please choose today or a future date.");
+    return;
+  }
+  const option = serviceSelect.selectedOptions[0];
+  const price = Number(option?.dataset?.price || 0);
+  const message = [
+    "AMK BARBER APPOINTMENT REQUEST",
+    "Name: " + name,
+    "Phone: " + phone,
+    "Service: " + service,
+    "Listed price: " + money(price),
+    "Preferred date: " + date,
+    "Preferred time: " + time,
+    "",
+    "Please confirm availability. This is a request, not a confirmed booking."
+  ].join("\n");
+  sendAMKWhatsApp(message);
+  showToast("WhatsApp opened with your appointment request. Send the message to complete it.");
+});
+/* Prevent choosing a past appointment date. */
+(function setBarberDateMinimum() {
+  const input = document.getElementById("barber-date");
+  if (!input) return;
+  const now = new Date();
+  const localDate = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0")
+  ].join("-");
+  input.min = localDate;
+})();
+</script>
+  <script>
+/* DASHBOARD */
+async function renderDashboard() {
+  if (!requireLogin()) return;
+  const host = document.getElementById("staff-content");
+  host.innerHTML = '<div class="card">Loading dashboard...</div>';
   try {
-    const [sales, inventory, expenses, requests] = await Promise.all([
-      dbSelect("sales", "*", { order: "created_at", limit: 500 }),
-      dbSelect("inventory", "*", { order: "item", ascending: true }),
-      dbSelect("expenses", "*", { order: "created_at", limit: 500 }),
-      dbSelect("customer_requests", "*", { order: "created_at", limit: 200 })
-    ]);
-
-    const today = todayISO();
-    const monthStart = monthStartISO();
-
+    const [salesResult, purchasesResult, expensesResult, stockResult] =
+      await Promise.all([
+        db.from("sales").select("amount,created_at"),
+        db.from("purchases").select("quantity,unit_cost,created_at"),
+        db.from("expenses").select("amount,created_at"),
+        db.from("inventory").select("id,item,quantity,buying_price,selling_price")
+      ]);
+    const errors = [
+      salesResult.error,
+      purchasesResult.error,
+      expensesResult.error,
+      stockResult.error
+    ].filter(Boolean);
+    if (errors.length) throw errors[0];
+    const sales = salesResult.data || [];
+    const purchases = purchasesResult.data || [];
+    const expenses = expensesResult.data || [];
+    const stock = stockResult.data || [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+    const isToday = value => value && new Date(value) >= today;
+    const isThisMonth = value => value && new Date(value) >= monthStart;
     const todaySales = sales
-      .filter(row => String(row.created_at || "").slice(0, 10) === today)
-      .reduce((sum, row) => sum + numberValue(row.amount), 0);
-
+      .filter(row => isToday(row.created_at))
+      .reduce((sum, row) => sum + Number(row.amount || 0), 0);
     const monthSales = sales
-      .filter(row => String(row.created_at || "").slice(0, 10) >= monthStart)
-      .reduce((sum, row) => sum + numberValue(row.amount), 0);
-
+      .filter(row => isThisMonth(row.created_at))
+      .reduce((sum, row) => sum + Number(row.amount || 0), 0);
     const monthExpenses = expenses
-      .filter(row => String(row.created_at || "").slice(0, 10) >= monthStart)
-      .reduce((sum, row) => sum + numberValue(row.amount), 0);
-
-    const stockUnits = inventory.reduce(
-      (sum, row) => sum + numberValue(row.quantity), 0
-    );
-
-    $("dashboardStats").innerHTML = `
-      <div class="card">
-        <div class="stat-label">Today's Sales</div>
-        <div class="stat-value">${money(todaySales)}</div>
+      .filter(row => isThisMonth(row.created_at))
+      .reduce((sum, row) => sum + Number(row.amount || 0), 0);
+    const monthPurchases = purchases
+      .filter(row => isThisMonth(row.created_at))
+      .reduce((sum, row) =>
+        sum + Number(row.quantity || 0) * Number(row.unit_cost || 0), 0);
+    const inventoryCost = stock.reduce((sum, row) =>
+      sum + Number(row.quantity || 0) * Number(row.buying_price || 0), 0);
+    const lowStock = stock.filter(row => Number(row.quantity || 0) <= 5);
+    const salesByDay = {};
+    for (let i = 6; i >= 0; i--) {
+      const day = new Date();
+      day.setHours(0, 0, 0, 0);
+      day.setDate(day.getDate() - i);
+      const key = day.toLocaleDateString("en-KE", {
+        day: "2-digit",
+        month: "short"
+      });
+      salesByDay[key] = 0;
+    }
+    sales.forEach(row => {
+      if (!row.created_at) return;
+      const date = new Date(row.created_at);
+      const key = date.toLocaleDateString("en-KE", {
+        day: "2-digit",
+        month: "short"
+      });
+      if (Object.prototype.hasOwnProperty.call(salesByDay, key)) {
+        salesByDay[key] += Number(row.amount || 0);
+      }
+    });
+    host.innerHTML = `
+      <h2 class="section-title">Business Overview</h2>
+      <div class="grid">
+        <div class="card">
+          <p class="muted">Today's Sales</p>
+          <div class="price">${money(todaySales)}</div>
+        </div>
+        <div class="card">
+          <p class="muted">This Month's Sales</p>
+          <div class="price">${money(monthSales)}</div>
+        </div>
+        <div class="card">
+          <p class="muted">This Month's Expenses</p>
+          <div class="price">${money(monthExpenses)}</div>
+        </div>
+        <div class="card">
+          <p class="muted">This Month's Purchases</p>
+          <div class="price">${money(monthPurchases)}</div>
+        </div>
+        <div class="card">
+          <p class="muted">Inventory Cost Value</p>
+          <div class="price">${money(inventoryCost)}</div>
+        </div>
+        <div class="card">
+          <p class="muted">Low-Stock Items</p>
+          <div class="price">${lowStock.length}</div>
+        </div>
       </div>
-      <div class="card">
-        <div class="stat-label">This Month's Sales</div>
-        <div class="stat-value">${money(monthSales)}</div>
+      <div class="grid" style="margin-top:18px">
+        <div class="card">
+          <h3>Sales — Last 7 Days</h3>
+          <canvas id="sales-chart" height="220"></canvas>
+        </div>
+        <div class="card">
+          <h3>Monthly Business Outgoings</h3>
+          <canvas id="outgoings-chart" height="220"></canvas>
+        </div>
       </div>
-      <div class="card">
-        <div class="stat-label">This Month's Expenses</div>
-        <div class="stat-value">${money(monthExpenses)}</div>
+      <div class="card" style="margin-top:18px">
+        <h3>Low-Stock Items</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Item</th><th>Quantity</th><th>Buying Price</th></tr></thead>
+            <tbody>
+              ${lowStock.length ? lowStock.map(row => `
+                <tr>
+                  <td>${escapeHTML(row.item)}</td>
+                  <td>${Number(row.quantity || 0)}</td>
+                  <td>${money(row.buying_price)}</td>
+                </tr>
+              `).join("") : renderEmptyRow(3, "No low-stock items.")}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="card">
-        <div class="stat-label">Stock Units / Requests</div>
-        <div class="stat-value">${stockUnits.toLocaleString()} / ${requests.length}</div>
+      <p class="muted small">
+        Dashboard totals are based on records your account can access.
+        Sales revenue is not the same as net profit; cost of goods, refunds,
+        unpaid balances and other costs may need separate accounting.
+      </p>
+    `;
+    if (dashboardChart) {
+      dashboardChart.destroy();
+      dashboardChart = null;
+    }
+    if (typeof Chart !== "undefined") {
+      dashboardChart = new Chart(
+        document.getElementById("sales-chart"),
+        {
+          type: "line",
+          data: {
+            labels: Object.keys(salesByDay),
+            datasets: [{
+              label: "Sales (KSh)",
+              data: Object.values(salesByDay),
+              borderColor: "#0755c9",
+              backgroundColor: "rgba(7,85,201,.12)",
+              fill: true,
+              tension: 0.3
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: true } }
+          }
+        }
+      );
+      new Chart(document.getElementById("outgoings-chart"), {
+        type: "bar",
+        data: {
+          labels: ["Purchases", "Expenses"],
+          datasets: [{
+            label: "KSh this month",
+            data: [monthPurchases, monthExpenses],
+            backgroundColor: ["#0755c9", "#168447"]
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+  } catch (error) {
+    host.innerHTML = `
+      <div class="card notice error-notice">
+        <h3>Dashboard could not load</h3>
+        <p>${escapeHTML(friendlyError(error))}</p>
+        <button class="primary" onclick="renderDashboard()">Try Again</button>
       </div>
     `;
-
-    const dayKeys = [];
-    const dayLabels = [];
-
-    for (let i = 6; i >= 0; i--) {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
-      const key = [
-        d.getFullYear(),
-        String(d.getMonth() + 1).padStart(2, "0"),
-        String(d.getDate()).padStart(2, "0")
-      ].join("-");
-
-      dayKeys.push(key);
-      dayLabels.push(d.toLocaleDateString("en-KE", {
-        day: "numeric",
-        month: "short"
-      }));
-    }
-
-    const dailyValues = dayKeys.map(day =>
-      sales.filter(row =>
-        String(row.created_at || "").slice(0, 10) === day
-      ).reduce((sum, row) => sum + numberValue(row.amount), 0)
-    );
-
-    if (window.Chart) {
-      dashboardCharts.push(new Chart($("salesChart"), {
-        type: "line",
-        data: {
-          labels: dayLabels,
-          datasets: [{
-            label: "Sales (KSh)",
-            data: dailyValues,
-            borderColor: "#0755c9",
-            backgroundColor: "rgba(7,85,201,.12)",
-            fill: true,
-            tension: .3
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: true } }
-        }
-      }));
-
-      const categoryTotals = {};
-
-      sales.forEach(row => {
-        const category = row.category || "Other";
-        categoryTotals[category] =
-          (categoryTotals[category] || 0) + numberValue(row.amount);
-      });
-
-      dashboardCharts.push(new Chart($("categoryChart"), {
-        type: "doughnut",
-        data: {
-          labels: Object.keys(categoryTotals),
-          datasets: [{
-            data: Object.values(categoryTotals)
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false
-        }
-      }));
-    }
-
-    const lowStock = inventory.filter(row => numberValue(row.quantity) <= 5);
-
-    $("lowStockList").innerHTML = lowStock.length
-      ? `<div class="table-wrap"><table>
-          <thead><tr><th>Item</th><th>Stock</th></tr></thead>
-          <tbody>${lowStock.map(row => `
-            <tr>
-              <td>${escapeHTML(row.item)}</td>
-              <td><span class="badge ${numberValue(row.quantity) <= 0 ? "red" : "orange"}">
-                ${numberValue(row.quantity)}
-              </span></td>
-            </tr>`).join("")}</tbody>
-        </table></div>`
-      : `<div class="empty-state">No low-stock items.</div>`;
-
-    const recent = [...sales]
-      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-      .slice(0, 8);
-
-    $("recentSalesList").innerHTML = recent.length
-      ? `<div class="table-wrap"><table>
-          <thead><tr><th>Invoice</th><th>Item</th><th>Amount</th></tr></thead>
-          <tbody>${recent.map(row => `
-            <tr>
-              <td>${escapeHTML(row.invoice_number || "—")}</td>
-              <td>${escapeHTML(row.item || "—")}</td>
-              <td>${money(row.amount)}</td>
-            </tr>`).join("")}</tbody>
-        </table></div>`
-      : `<div class="empty-state">No sales recorded yet.</div>`;
-
-  } catch (error) {
-    console.error("Dashboard error:", error);
-    showPageMessage(
-      "The dashboard could not load all data. Check database access and table permissions. " +
-      friendlyError(error),
-      "error"
-    );
   }
 }
 </script>
-
-<script>
-/* AMK INVENTORY MANAGEMENT */
-
+  <script>
 async function renderInventory() {
-  requireLogin();
-
-  const page = $("pageContent");
-
-  page.innerHTML = `
-    <div class="section-title">
-      <div>
-        <h1>Inventory</h1>
-        <p class="muted">Gas cylinders, accessories and sneakers</p>
+  if (!requireManager()) return;
+  const host = document.getElementById("staff-content");
+  host.innerHTML = '<div class="card">Loading inventory...</div>';
+  try {
+    const { data, error } = await db
+      .from("inventory")
+      .select("id,item,category,quantity,buying_price,selling_price,created_at,updated_at")
+      .order("item", { ascending: true });
+    if (error) throw error;
+    const items = data || [];
+    host.innerHTML = `
+      <h2 class="section-title">Inventory Management</h2>
+      <div class="grid">
+        <div class="card">
+          <p class="muted">Different Products</p>
+          <div class="price">${items.length}</div>
+        </div>
+        <div class="card">
+          <p class="muted">Units in Stock</p>
+          <div class="price">${items.reduce((sum, row) => sum + Number(row.quantity || 0), 0)}</div>
+        </div>
+        <div class="card">
+          <p class="muted">Stock Buying Value</p>
+          <div class="price">${money(items.reduce((sum, row) => sum + Number(row.quantity || 0) * Number(row.buying_price || 0), 0))}</div>
+        </div>
       </div>
-      <button class="secondary" onclick="loadView('inventory')">Refresh</button>
-    </div>
-
-    ${canManageStock() ? `
-      <div class="card" style="margin-bottom:16px">
+      <div class="card" style="margin-top:18px">
         <h3>Add Inventory Item</h3>
-        <form id="inventoryForm">
+        <form id="inventory-add-form">
           <div class="form-grid">
             <div class="field">
-              <label>Item name</label>
-              <input name="item" required placeholder="e.g. 6 KG Gas Cylinder">
+              <label for="inv-item">Product name</label>
+              <input id="inv-item" required maxlength="120">
             </div>
             <div class="field">
-              <label>Category</label>
-              <select name="category" required>
+              <label for="inv-category">Category</label>
+              <select id="inv-category" required>
                 <option value="Gas">Gas</option>
                 <option value="Gas Accessories">Gas Accessories</option>
                 <option value="Sneakers">Sneakers</option>
-                <option value="Barber">Barber</option>
                 <option value="Other">Other</option>
               </select>
             </div>
             <div class="field">
-              <label>Opening stock quantity</label>
-              <input name="quantity" type="number" min="0" step="1" required value="0">
+              <label for="inv-qty">Opening quantity</label>
+              <input id="inv-qty" type="number" min="0" step="1" value="0" required>
             </div>
             <div class="field">
-              <label>Buying price per unit (KSh)</label>
-              <input name="buying_price" type="number" min="0" step="0.01" required>
+              <label for="inv-buy">Buying price per unit (KSh)</label>
+              <input id="inv-buy" type="number" min="0" step="0.01" required>
             </div>
             <div class="field">
-              <label>Selling price per unit (KSh)</label>
-              <input name="selling_price" type="number" min="0" step="0.01" required>
+              <label for="inv-sell">Selling price per unit (KSh)</label>
+              <input id="inv-sell" type="number" min="0" step="0.01" required>
             </div>
           </div>
-          <button type="submit">Save Item</button>
+          <button class="primary" type="submit">Add Item</button>
         </form>
       </div>
-    ` : ""}
-
-    <div class="card">
-      <div class="field">
-        <label>Search inventory</label>
-        <input id="inventorySearch" placeholder="Search item or category...">
-      </div>
-      <div id="inventoryTable">Loading inventory...</div>
-    </div>
-  `;
-
-  try {
-    const items = await dbSelect("inventory", "*", {
-      order: "item",
-      ascending: true
-    });
-
-    function drawInventory(filter = "") {
-      const filtered = items.filter(item =>
-        String(item.item || "").toLowerCase().includes(filter.toLowerCase()) ||
-        String(item.category || "").toLowerCase().includes(filter.toLowerCase())
-      );
-
-      $("inventoryTable").innerHTML = filtered.length
-        ? `<div class="table-wrap"><table>
-            <thead><tr>
-              <th>Item</th>
-              <th>Category</th>
-              <th>Stock</th>
-              <th>Buying Price</th>
-              <th>Selling Price</th>
-              <th>Est. Profit / Unit</th>
-            </tr></thead>
-            <tbody>${filtered.map(item => {
-              const qty = numberValue(item.quantity);
-              const buy = numberValue(item.buying_price);
-              const sell = numberValue(item.selling_price);
-              const profit = sell - buy;
-
-              return `<tr>
-                <td>${escapeHTML(item.item)}</td>
-                <td>${escapeHTML(item.category || "Other")}</td>
-                <td><span class="badge ${qty <= 0 ? "red" : qty <= 5 ? "orange" : "green"}">${qty}</span></td>
-                <td>${money(buy)}</td>
-                <td>${money(sell)}</td>
-                <td>${money(profit)}</td>
-              </tr>`;
-            }).join("")}</tbody>
-          </table></div>`
-        : `<div class="empty-state">No matching inventory items found.</div>`;
-    }
-
-    drawInventory();
-
-    $("inventorySearch").addEventListener("input", event => {
-      drawInventory(event.target.value);
-    });
-
-    if (canManageStock()) {
-      $("inventoryForm").addEventListener("submit", async event => {
-        event.preventDefault();
-
-        const form = event.currentTarget;
-        const button = form.querySelector('button[type="submit"]');
-        setLoading(button, true, "Saving...");
-
-        try {
-          requireManager();
-
-          const fd = new FormData(form);
-          const itemName = String(fd.get("item") || "").trim();
-
-          if (!itemName) throw new Error("Enter an item name.");
-
-          const quantity = safeNumberInput(fd.get("quantity"), "Quantity", true);
-
-          if (!Number.isInteger(quantity)) {
-            throw new Error("Quantity must be a whole number.");
-          }
-
-          const buyingPrice = safeNumberInput(
-            fd.get("buying_price"), "Buying price", true
-          );
-
-          const sellingPrice = safeNumberInput(
-            fd.get("selling_price"), "Selling price", true
-          );
-
-          await dbInsert("inventory", {
-            item: itemName,
-            category: fd.get("category"),
-            quantity,
-            buying_price: buyingPrice,
-            selling_price: sellingPrice
-          });
-
-          showToast("Inventory item added.", "success");
-          await loadView("inventory");
-
-        } catch (error) {
-          showToast(friendlyError(error), "error");
-        } finally {
-          setLoading(button, false, "Save Item");
-        }
-      });
-    }
-
-  } catch (error) {
-    console.error("Inventory error:", error);
-    $("inventoryTable").textContent = friendlyError(error);
-  }
-}
-</script>
-
-<script>
-/* AMK SALES, INVOICES AND RECEIPTS */
-
-async function renderSales() {
-  requireLogin();
-
-  $("pageContent").innerHTML = `
-    <div class="section-title">
-      <div>
-        <h1>Sales & Customer Invoices</h1>
-        <p class="muted">Record sales, payments and printable receipts.</p>
-      </div>
-      <button class="secondary" onclick="loadView('sales')">Refresh</button>
-    </div>
-
-    <div class="card" style="margin-bottom:16px">
-      <h3>New Sale</h3>
-      <form id="saleForm">
-        <div class="form-grid">
-          <div class="field">
-            <label>Customer name (optional)</label>
-            <input name="customer_name" placeholder="Customer name">
-          </div>
-          <div class="field">
-            <label>Inventory item</label>
-            <select name="inventory_id" id="saleItem" required>
-              <option value="">Loading stock...</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Quantity</label>
-            <input name="quantity" type="number" min="1" step="1" value="1" required>
-          </div>
-          <div class="field">
-            <label>Unit selling price (KSh)</label>
-            <input name="unit_price" id="saleUnitPrice" type="number" min="0.01" step="0.01" required>
-          </div>
-          <div class="field">
-            <label>Discount (KSh)</label>
-            <input name="discount" type="number" min="0" step="0.01" value="0" required>
-          </div>
-          <div class="field">
-            <label>Payment method</label>
-            <select name="payment_method" required>
-              <option>Cash</option>
-              <option>M-Pesa</option>
-              <option>Card</option>
-              <option>Bank Transfer</option>
-              <option>Credit / Unpaid</option>
-            </select>
-          </div>
+      <div class="card" style="margin-top:18px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+          <h3>Current Stock</h3>
+          <button class="secondary" onclick="renderInventory()">Refresh</button>
         </div>
-        <div id="saleEstimate" class="notice">Choose an item to calculate the total.</div>
-        <button type="submit">Record Sale & Generate Invoice</button>
-      </form>
-    </div>
-
-    <div class="card">
-      <h3>Recorded Sales</h3>
-      <div class="field">
-        <label>Search invoices</label>
-        <input id="salesSearch" placeholder="Invoice number, customer or item">
-      </div>
-      <div id="salesTable">Loading sales...</div>
-    </div>
-  `;
-
-  let inventory = [];
-
-  try {
-    inventory = await dbSelect("inventory", "*", {
-      order: "item",
-      ascending: true
-    });
-
-    const select = $("saleItem");
-    select.innerHTML = `<option value="">Select an item</option>` +
-      inventory.map(item => `
-        <option value="${escapeHTML(item.id)}"
-          data-price="${numberValue(item.selling_price)}"
-          data-stock="${numberValue(item.quantity)}">
-          ${escapeHTML(item.item)} — stock: ${numberValue(item.quantity)}
-        </option>
-      `).join("");
-
-    const form = $("saleForm");
-
-    function updateEstimate() {
-      const option = select.selectedOptions[0];
-      const qty = numberValue(form.quantity.value);
-      const price = numberValue(form.unit_price.value);
-      const discount = numberValue(form.discount.value);
-      const stock = numberValue(option?.dataset.stock);
-      const subtotal = qty * price;
-      const total = subtotal - discount;
-
-      $("saleEstimate").textContent = option?.value
-        ? `Available stock: ${stock} | Subtotal: ${money(subtotal)} | Discount: ${money(discount)} | Total: ${money(Math.max(0, total))}`
-        : "Choose an item to calculate the total.";
-    }
-
-    select.addEventListener("change", () => {
-      const option = select.selectedOptions[0];
-      if (option?.value) {
-        form.unit_price.value = option.dataset.price || "";
-      }
-      updateEstimate();
-    });
-
-    ["quantity", "unit_price", "discount"].forEach(name => {
-      form.elements[name].addEventListener("input", updateEstimate);
-    });
-
-    form.addEventListener("submit", async event => {
-      event.preventDefault();
-
-      const button = form.querySelector('button[type="submit"]');
-      setLoading(button, true, "Recording sale...");
-
-      try {
-        requireLogin();
-
-        const inventoryId = form.inventory_id.value;
-        const item = inventory.find(row => row.id === inventoryId);
-        if (!item) throw new Error("Select a valid inventory item.");
-
-        const quantity = safeNumberInput(form.quantity.value, "Quantity");
-        if (!Number.isInteger(quantity)) {
-          throw new Error("Quantity must be a whole number.");
-        }
-
-        const unitPrice = safeNumberInput(form.unit_price.value, "Unit price");
-        const discount = safeNumberInput(form.discount.value, "Discount", true);
-        const total = quantity * unitPrice - discount;
-
-        if (discount > quantity * unitPrice) {
-          throw new Error("Discount cannot exceed the subtotal.");
-        }
-
-        if (quantity > numberValue(item.quantity)) {
-          throw new Error("Not enough stock available.");
-        }
-
-        const customerName = form.customer_name.value.trim() || null;
-        const paymentMethod = form.payment_method.value;
-
-        /*
-         * The database function records the invoice and deducts stock
-         * atomically. Do not insert a second sales row in the browser.
-         */
-        const { data, error } = await db.rpc("record_sale", {
-          p_inventory_id: inventoryId,
-          p_quantity: quantity,
-          p_unit_price: unitPrice,
-          p_discount: discount,
-          p_payment_method: paymentMethod,
-          p_customer_name: customerName
-        });
-
-        if (error) throw error;
-
-        const invoice = Array.isArray(data) ? data[0] : data;
-
-        showToast("Sale recorded successfully.", "success");
-        if (invoice && typeof invoice === "object") {
-          printAMKReceipt({
-            invoice_number: invoice.invoice_number,
-            customer_name: customerName,
-            item: item.item,
-            quantity,
-            unit_price: unitPrice,
-            discount,
-            amount: total,
-            payment_method: paymentMethod,
-            created_at: new Date().toISOString()
-          });
-        }
-
-        await loadView("sales");
-
-      } catch (error) {
-        console.error("Sale error:", error);
-        showToast(friendlyError(error), "error");
-      } finally {
-        setLoading(button, false, "Record Sale & Generate Invoice");
-      }
-    });
-
-  } catch (error) {
-    console.error("Sales setup error:", error);
-    showToast(friendlyError(error), "error");
-  }
-
-  try {
-    const sales = await dbSelect("sales", "*", {
-      order: "created_at",
-      limit: 500
-    });
-
-    function drawSales(search = "") {
-      const filtered = sales.filter(row =>
-        [
-          row.invoice_number,
-          row.customer_name,
-          row.item,
-          row.payment_method
-        ].some(value => String(value || "").toLowerCase().includes(search.toLowerCase()))
-      );
-
-      $("salesTable").innerHTML = filtered.length
-        ? `<div class="table-wrap"><table>
-            <thead><tr>
-              <th>Date</th><th>Invoice</th><th>Customer</th>
-              <th>Item</th><th>Qty</th><th>Discount</th>
-              <th>Total</th><th>Payment</th><th>Receipt</th>
-            </tr></thead>
-            <tbody>${filtered.map(row => `
-              <tr>
-                <td>${dateLabel(row.created_at)}</td>
-                <td>${escapeHTML(row.invoice_number || "—")}</td>
-                <td>${escapeHTML(row.customer_name || "Walk-in")}</td>
-                <td>${escapeHTML(row.item)}</td>
-                <td>${numberValue(row.quantity)}</td>
-                <td>${money(row.discount)}</td>
-                <td>${money(row.amount)}</td>
-                <td>${escapeHTML(row.payment_method || "—")}</td>
-                <td><button class="secondary" onclick="printAMKReceiptById('${escapeHTML(row.id)}')">Print</button></td>
-              </tr>
-            `).join("")}</tbody>
-          </table></div>`
-        : `<div class="empty-state">No matching sales found.</div>`;
-    }
-
-    drawSales();
-
-    $("salesSearch").addEventListener("input", event => {
-      drawSales(event.target.value);
-    });
-
-    window.amkSalesCache = sales;
-
-  } catch (error) {
-    console.error("Sales list error:", error);
-    $("salesTable").textContent = friendlyError(error);
-  }
-}
-
-function printAMKReceiptById(id) {
-  const row = (window.amkSalesCache || []).find(sale => sale.id === id);
-  if (!row) {
-    showToast("Receipt record not found. Refresh sales and try again.", "error");
-    return;
-  }
-
-  printAMKReceipt(row);
-}
-
-function printAMKReceipt(row) {
-  const receiptWindow = window.open("", "_blank", "width=700,height=800");
-
-  if (!receiptWindow) {
-    showToast("Allow pop-ups to print the receipt.", "error");
-    return;
-  }
-
-  const invoice = row.invoice_number || "AMK";
-  const total = numberValue(row.amount);
-  const quantity = numberValue(row.quantity);
-  const unitPrice = numberValue(row.unit_price);
-  const subtotal = unitPrice * quantity;
-  const discount = numberValue(row.discount);
-
-  receiptWindow.document.write(`<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AMK Receipt ${escapeHTML(invoice)}</title>
-<style>
-body{font-family:Arial,sans-serif;max-width:600px;margin:25px auto;padding:20px;color:#172338}
-h1{text-align:center;color:#0755c9;margin-bottom:5px}
-p.center{text-align:center;margin-top:0}
-hr{border:0;border-top:1px dashed #999;margin:20px 0}
-table{width:100%;border-collapse:collapse}
-td{padding:9px 0;border-bottom:1px solid #eee}
-td:last-child{text-align:right}
-.total{font-size:20px;font-weight:bold}
-button{padding:10px 16px;background:#0755c9;color:white;border:0;border-radius:8px}
-@media print{button{display:none}}
-</style>
-</head>
-<body>
-<h1>AMK</h1>
-<p class="center">Gas • Sneakers • Barber</p>
-<p class="center">Nanyuki & Nairobi, Kenya</p>
-<hr>
-<p><b>Invoice:</b> ${escapeHTML(invoice)}</p>
-<p><b>Date:</b> ${escapeHTML(dateLabel(row.created_at))}</p>
-<p><b>Customer:</b> ${escapeHTML(row.customer_name || "Walk-in customer")}</p>
-<hr>
-<table>
-<tr><td>Item</td><td>${escapeHTML(row.item)}</td></tr>
-<tr><td>Quantity</td><td>${quantity}</td></tr>
-<tr><td>Unit price</td><td>${money(unitPrice)}</td></tr>
-<tr><td>Subtotal</td><td>${money(subtotal)}</td></tr>
-<tr><td>Discount</td><td>${money(discount)}</td></tr>
-<tr class="total"><td>Total</td><td>${money(total)}</td></tr>
-<tr><td>Payment method</td><td>${escapeHTML(row.payment_method || "—")}</td></tr>
-</table>
-<hr>
-<p class="center">Thank you for shopping with AMK!</p>
-<p class="center"><button onclick="window.print()">Print Receipt</button></p>
-</body>
-</html>`);
-
-  receiptWindow.document.close();
-}
-</script>
-
-<script>
-/* AMK PURCHASES AND SUPPLIER INVOICES */
-
-async function renderPurchases() {
-  requireManager();
-
-  $("pageContent").innerHTML = `
-    <div class="section-title">
-      <div>
-        <h1>Purchases</h1>
-        <p class="muted">Record stock received and supplier invoices.</p>
-      </div>
-      <button class="secondary" onclick="loadView('purchases')">Refresh</button>
-    </div>
-
-    <div class="card" style="margin-bottom:16px">
-      <h3>Record a Purchase</h3>
-      <form id="purchaseForm">
-        <div class="form-grid">
-          <div class="field">
-            <label>Inventory item</label>
-            <select name="inventory_id" id="purchaseItem" required>
-              <option value="">Loading inventory...</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Quantity purchased</label>
-            <input name="quantity" type="number" min="1" step="1" required>
-          </div>
-          <div class="field">
-            <label>Buying cost per unit (KSh)</label>
-            <input name="unit_cost" type="number" min="0.01" step="0.01" required>
-          </div>
-          <div class="field">
-            <label>Supplier name</label>
-            <input name="supplier_name" required placeholder="Supplier or company">
-          </div>
-          <div class="field">
-            <label>Supplier invoice number</label>
-            <input name="invoice_number" required placeholder="e.g. INV-1001">
-          </div>
-          <div class="field">
-            <label>Purchase date</label>
-            <input name="purchase_date" type="date" value="${todayISO()}" required>
-          </div>
+        <div class="field">
+          <label for="inventory-search">Search products</label>
+          <input id="inventory-search" placeholder="Search by name or category">
         </div>
-        <button type="submit">Save Purchase & Update Stock</button>
-      </form>
-    </div>
-
-    <div class="card">
-      <h3>Purchase History</h3>
-      <div class="field">
-        <label>Search purchases</label>
-        <input id="purchaseSearch" placeholder="Item, supplier or invoice number">
-      </div>
-      <div id="purchaseTable">Loading purchases...</div>
-    </div>
-  `;
-
-  try {
-    const inventory = await dbSelect("inventory", "*", {
-      order: "item",
-      ascending: true
-    });
-
-    $("purchaseItem").innerHTML =
-      `<option value="">Select an item</option>` +
-      inventory.map(item => `
-        <option value="${escapeHTML(item.id)}">
-          ${escapeHTML(item.item)} — current stock: ${numberValue(item.quantity)}
-        </option>
-      `).join("");
-
-    const form = $("purchaseForm");
-
-    form.addEventListener("submit", async event => {
-      event.preventDefault();
-
-      const button = form.querySelector('button[type="submit"]');
-      setLoading(button, true, "Saving purchase...");
-
-      try {
-        requireManager();
-
-        const quantity = safeNumberInput(form.quantity.value, "Quantity");
-        if (!Number.isInteger(quantity)) {
-          throw new Error("Quantity must be a whole number.");
-        }
-
-        const unitCost = safeNumberInput(form.unit_cost.value, "Unit cost");
-        const inventoryId = form.inventory_id.value;
-
-        if (!inventory.some(item => item.id === inventoryId)) {
-          throw new Error("Select a valid inventory item.");
-        }
-
-        const supplierName = form.supplier_name.value.trim();
-        const invoiceNumber = form.invoice_number.value.trim();
-
-        if (!supplierName || !invoiceNumber) {
-          throw new Error("Supplier name and invoice number are required.");
-        }
-
-        const { error } = await db.rpc("record_purchase", {
-          p_inventory_id: inventoryId,
-          p_quantity: quantity,
-          p_unit_cost: unitCost,
-          p_supplier_name: supplierName,
-          p_invoice_number: invoiceNumber,
-          p_purchase_date: form.purchase_date.value || todayISO()
-        });
-
-        if (error) throw error;
-
-        showToast("Purchase recorded and stock updated.", "success");
-        await loadView("purchases");
-
-      } catch (error) {
-        console.error("Purchase error:", error);
-        showToast(friendlyError(error), "error");
-      } finally {
-        setLoading(button, false, "Save Purchase & Update Stock");
-      }
-    });
-
-    const purchases = await dbSelect("purchases", "*", {
-      order: "purchase_date"
-    });
-
-    function drawPurchases(search = "") {
-      const filtered = purchases.filter(row =>
-        [
-          row.item,
-          row.supplier_name,
-          row.invoice_number
-        ].some(value =>
-          String(value || "").toLowerCase().includes(search.toLowerCase())
-        )
-      );
-
-      $("purchaseTable").innerHTML = filtered.length
-        ? `<div class="table-wrap"><table>
-            <thead><tr>
-              <th>Date</th><th>Supplier Invoice</th><th>Item</th>
-              <th>Quantity</th><th>Unit Cost</th><th>Total Cost</th>
-              <th>Supplier</th>
-            </tr></thead>
-            <tbody>${filtered.map(row => `
-              <tr>
-                <td>${dateLabel(row.purchase_date)}</td>
-                <td>${escapeHTML(row.invoice_number || "—")}</td>
-                <td>${escapeHTML(row.item || "—")}</td>
-                <td>${numberValue(row.quantity)}</td>
-                <td>${money(row.unit_cost)}</td>
-                <td>${money(numberValue(row.quantity) * numberValue(row.unit_cost))}</td>
-                <td>${escapeHTML(row.supplier_name || "—")}</td>
-              </tr>
-            `).join("")}</tbody>
-          </table></div>`
-        : `<div class="empty-state">No purchase records found.</div>`;
-    }
-
-    drawPurchases();
-
-    $("purchaseSearch").addEventListener("input", event => {
-      drawPurchases(event.target.value);
-    });
-
-  } catch (error) {
-    console.error("Purchase setup error:", error);
-    $("purchaseTable").textContent = friendlyError(error);
-    showToast(friendlyError(error), "error");
-  }
-}
-</script>
-
-<script>
-/* AMK SUPPLIER MANAGEMENT */
-
-async function renderSuppliers() {
-  requireManager();
-
-  $("pageContent").innerHTML = `
-    <div class="section-title">
-      <div>
-        <h1>Suppliers</h1>
-        <p class="muted">Manage contacts for gas, accessories and sneakers.</p>
-      </div>
-      <button class="secondary" onclick="loadView('suppliers')">Refresh</button>
-    </div>
-
-    <div class="card" style="margin-bottom:16px">
-      <h3>Add Supplier</h3>
-      <form id="supplierForm">
-        <div class="form-grid">
-          <div class="field">
-            <label>Supplier / Company Name</label>
-            <input name="name" required placeholder="Company or supplier name">
-          </div>
-          <div class="field">
-            <label>Phone Number</label>
-            <input name="phone" type="tel" placeholder="+254...">
-          </div>
-          <div class="field">
-            <label>Email Address</label>
-            <input name="email" type="email" placeholder="supplier@example.com">
-          </div>
-          <div class="field">
-            <label>Supplier Category</label>
-            <select name="category">
-              <option value="Gas">Gas</option>
-              <option value="Gas Accessories">Gas Accessories</option>
-              <option value="Sneakers">Sneakers</option>
-              <option value="Barber Supplies">Barber Supplies</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        </div>
-        <button type="submit">Save Supplier</button>
-      </form>
-    </div>
-
-    <div class="card">
-      <h3>Supplier Directory</h3>
-      <div class="field">
-        <label>Search suppliers</label>
-        <input id="supplierSearch" placeholder="Name, phone, email or category">
-      </div>
-      <div id="supplierTable">Loading suppliers...</div>
-    </div>
-  `;
-
-  try {
-    const suppliers = await dbSelect("suppliers", "*", {
-      order: "name",
-      ascending: true
-    });
-
-    function drawSuppliers(search = "") {
-      const filtered = suppliers.filter(row =>
-        [row.name, row.phone, row.email, row.category].some(value =>
-          String(value || "").toLowerCase().includes(search.toLowerCase())
-        )
-      );
-
-      $("supplierTable").innerHTML = filtered.length
-        ? `<div class="table-wrap"><table>
-            <thead><tr>
-              <th>Supplier</th><th>Category</th><th>Phone</th>
-              <th>Email</th><th>Added</th>
-            </tr></thead>
-            <tbody>${filtered.map(row => `
-              <tr>
-                <td>${escapeHTML(row.name)}</td>
-                <td>${escapeHTML(row.category || "Other")}</td>
-                <td>${escapeHTML(row.phone || "—")}</td>
-                <td>${escapeHTML(row.email || "—")}</td>
-                <td>${dateLabel(row.created_at)}</td>
-              </tr>
-            `).join("")}</tbody>
-          </table></div>`
-        : `<div class="empty-state">No suppliers found.</div>`;
-    }
-
-    drawSuppliers();
-
-    $("supplierSearch").addEventListener("input", event => {
-      drawSuppliers(event.target.value);
-    });
-
-    $("supplierForm").addEventListener("submit", async event => {
-      event.preventDefault();
-
-      const form = event.currentTarget;
-      const button = form.querySelector('button[type="submit"]');
-      setLoading(button, true, "Saving...");
-
-      try {
-        requireManager();
-
-        const fd = new FormData(form);
-        const name = String(fd.get("name") || "").trim();
-
-        if (!name) throw new Error("Supplier name is required.");
-
-        await dbInsert("suppliers", {
-          name,
-          phone: String(fd.get("phone") || "").trim() || null,
-          email: String(fd.get("email") || "").trim() || null,
-          category: String(fd.get("category") || "Other")
-        });
-
-        showToast("Supplier saved successfully.", "success");
-        await loadView("suppliers");
-
-      } catch (error) {
-        console.error("Supplier error:", error);
-        showToast(friendlyError(error), "error");
-      } finally {
-        setLoading(button, false, "Save Supplier");
-      }
-    });
-
-  } catch (error) {
-    console.error("Supplier setup error:", error);
-    $("supplierTable").textContent = friendlyError(error);
-    showToast(friendlyError(error), "error");
-  }
-}
-</script>
-
-<script>
-/* PART 10 — AMK EXPENSES */
-
-async function renderExpenses() {
-  const root = document.getElementById("pageContent");
-
-  if (!canManageStock()) {
-    root.innerHTML = `
-      <div class="card">
-        <h2>Business Expenses</h2>
-        <p>You need an admin or manager account to manage expenses.</p>
-      </div>`;
-    return;
-  }
-
-  root.innerHTML = `
-    <div class="page-heading">
-      <h2>Business Expenses</h2>
-      <p>Record rent, transport, electricity, salaries and other business costs.</p>
-    </div>
-
-    <div class="card">
-      <h3>Record an Expense</h3>
-      <form id="expenseForm" class="form-grid">
-        <label>
-          Description
-          <input name="description" required maxlength="150"
-            placeholder="e.g. Gas delivery transport">
-        </label>
-
-        <label>
-          Category
-          <select name="category" required>
-            <option value="">Choose category</option>
-            <option>Transport</option>
-            <option>Rent</option>
-            <option>Utilities</option>
-            <option>Supplies</option>
-            <option>Repairs</option>
-            <option>Marketing</option>
-            <option>Salaries</option>
-            <option>Other</option>
-          </select>
-        </label>
-
-        <label>
-          Amount (KSh)
-          <input name="amount" type="number" min="0.01"
-            step="0.01" required placeholder="0.00">
-        </label>
-
-        <button type="submit" id="expenseSaveBtn">Save Expense</button>
-      </form>
-    </div>
-
-    <div class="card">
-      <h3>Expense History</h3>
-      <div id="expenseSummary"></div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Category</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody id="expenseRows">
-            <tr><td colspan="4">Loading expenses...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>`;
-
-  const form = document.getElementById("expenseForm");
-
-  form.addEventListener("submit", async function (event) {
-    event.preventDefault();
-
-    const button = document.getElementById("expenseSaveBtn");
-    const data = new FormData(form);
-    const description = String(data.get("description") || "").trim();
-    const category = String(data.get("category") || "").trim();
-    const amount = Number(data.get("amount"));
-
-    if (!description || !category || !Number.isFinite(amount) || amount <= 0) {
-      showToast("Enter a valid description, category and amount.", "error");
-      return;
-    }
-
-    setLoading(button, true);
-
-    try {
-      const { error } = await db.from("expenses").insert({
-        description,
-        category,
-        amount,
-        staff_id: currentUser.id
-      });
-
-      if (error) throw error;
-
-      showToast("Expense saved successfully.");
-      form.reset();
-      await loadView("expenses");
-    } catch (error) {
-      console.error("Expense save failed:", error);
-      showToast(friendlyError(error), "error");
-    } finally {
-      setLoading(button, false);
-    }
-  });
-
-  try {
-    const { data, error } = await db
-      .from("expenses")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(200);
-
-    if (error) throw error;
-
-    const expenses = data || [];
-    const total = expenses.reduce(
-      (sum, item) => sum + Number(item.amount || 0), 0
-    );
-
-    document.getElementById("expenseSummary").innerHTML = `
-      <p><strong>Displayed expenses total:</strong> ${money(total)}</p>
-      <p class="muted">Showing up to 200 recent records.</p>`;
-
-    document.getElementById("expenseRows").innerHTML = expenses.length
-      ? expenses.map(item => `
-        <tr>
-          <td>${escapeHTML(dateLabel(item.created_at))}</td>
-          <td>${escapeHTML(item.description || "")}</td>
-          <td>${escapeHTML(item.category || "Other")}</td>
-          <td>${money(item.amount)}</td>
-        </tr>`).join("")
-      : `<tr><td colspan="4">No expenses recorded yet.</td></tr>`;
-
-  } catch (error) {
-    console.error("Expense loading failed:", error);
-    document.getElementById("expenseRows").innerHTML =
-      `<tr><td colspan="4">Could not load expenses. Check the database permissions.</td></tr>`;
-    showToast(friendlyError(error), "error");
-  }
-}
-</script>
-
-<script>
-/* PART 11 — CUSTOMER REQUESTS & DELIVERIES */
-
-function amkReadableValue(value) {
-  if (value === null || value === undefined || value === "") return "—";
-  if (typeof value === "object") return JSON.stringify(value);
-  return String(value);
-}
-
-function amkDynamicTable(rows, emptyMessage) {
-  if (!rows || !rows.length) {
-    return `<p>${escapeHTML(emptyMessage)}</p>`;
-  }
-
-  const preferred = [
-    "created_at", "customer_name", "name", "phone", "email",
-    "request_type", "service", "item", "quantity", "address",
-    "delivery_address", "status", "payment_status", "amount",
-    "notes", "description", "id"
-  ];
-
-  const keys = [...new Set(rows.flatMap(row => Object.keys(row)))];
-  keys.sort((a, b) => {
-    const ai = preferred.indexOf(a);
-    const bi = preferred.indexOf(b);
-    return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
-  });
-
-  const visibleKeys = keys.filter(key =>
-    !["staff_id", "user_id", "updated_at"].includes(key)
-  ).slice(0, 8);
-
-  return `
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>${visibleKeys.map(key =>
-            `<th>${escapeHTML(key.replace(/_/g, " "))}</th>`
-          ).join("")}</tr>
-        </thead>
-        <tbody>
-          ${rows.map(row => `
-            <tr>${visibleKeys.map(key => {
-              let value = row[key];
-              if (key === "created_at" && value) value = dateLabel(value);
-              return `<td>${escapeHTML(amkReadableValue(value))}</td>`;
-            }).join("")}</tr>
-          `).join("")}
-        </tbody>
-      </table>
-    </div>`;
-}
-
-async function renderRequests() {
-  const root = document.getElementById("pageContent");
-
-  root.innerHTML = `
-    <div class="page-heading">
-      <h2>Customer Requests</h2>
-      <p>Review requests submitted through the AMK customer website.</p>
-    </div>
-    <div class="card" id="requestsCard">Loading customer requests...</div>`;
-
-  try {
-    const { data, error } = await db
-      .from("customer_requests")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(100);
-
-    if (error) throw error;
-
-    document.getElementById("requestsCard").innerHTML =
-      amkDynamicTable(data || [], "No customer requests found.");
-
-  } catch (error) {
-    console.error("Customer requests loading failed:", error);
-    document.getElementById("requestsCard").innerHTML =
-      `<p>Could not load customer requests. Check the table permissions.</p>`;
-    showToast(friendlyError(error), "error");
-  }
-}
-
-async function renderDeliveries() {
-  const root = document.getElementById("pageContent");
-
-  root.innerHTML = `
-    <div class="page-heading">
-      <h2>Deliveries</h2>
-      <p>Review delivery records and customer delivery details.</p>
-    </div>
-    <div class="card" id="deliveriesCard">Loading deliveries...</div>`;
-
-  try {
-    const { data, error } = await db
-      .from("deliveries")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(100);
-
-    if (error) throw error;
-
-    document.getElementById("deliveriesCard").innerHTML =
-      amkDynamicTable(data || [], "No delivery records found.");
-
-  } catch (error) {
-    console.error("Deliveries loading failed:", error);
-    document.getElementById("deliveriesCard").innerHTML =
-      `<p>Could not load deliveries. Check the table permissions.</p>`;
-    showToast(friendlyError(error), "error");
-  }
-}
-</script>
-
-<script>
-/* PART 12 — AMK STAFF MANAGEMENT */
-
-async function renderStaff() {
-  const root = document.getElementById("pageContent");
-
-  root.innerHTML = `
-    <div class="page-heading">
-      <h2>Staff Management</h2>
-      <p>View staff accounts, roles and account status.</p>
-    </div>
-    <div class="card" id="staffCard">Loading staff records...</div>`;
-
-  try {
-    let query = db
-      .from("profiles")
-      .select("id,email,full_name,role,active");
-
-    /*
-      Only admins are allowed to request the full staff directory.
-      Other users may see their own profile if the database policy
-      permits it.
-    */
-    if (!isAdmin()) {
-      query = query.eq("id", currentUser.id);
-    }
-
-    const { data, error } = await query.order("full_name", {
-      ascending: true
-    });
-
-    if (error) throw error;
-
-    const staff = data || [];
-
-    document.getElementById("staffCard").innerHTML = staff.length
-      ? `
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Employee</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Account status</th>
+                <th>Product</th><th>Category</th><th>Qty</th>
+                <th>Buying</th><th>Selling</th><th>Potential Margin / Unit</th><th>Actions</th>
               </tr>
             </thead>
-            <tbody>
-              ${staff.map(person => `
-                <tr>
-                  <td>${escapeHTML(person.full_name || "Not provided")}</td>
-                  <td>${escapeHTML(person.email || "—")}</td>
-                  <td>${escapeHTML(roleLabel(person.role || ""))}</td>
-                  <td>
-                    ${person.active
-                      ? '<span class="status-active">Active</span>'
-                      : '<span class="status-inactive">Inactive</span>'}
-                  </td>
-                </tr>
-              `).join("")}
+            <tbody id="inventory-rows">
+              ${inventoryRows(items)}
             </tbody>
           </table>
         </div>
-        ${isAdmin() ? "" : `
-          <p class="muted">
-            Your current role does not have access to the full staff directory.
-          </p>`}
-      `
-      : `<p>No staff profiles are available to this account.</p>`;
-
+      </div>
+    `;
+    document.getElementById("inventory-search").addEventListener("input", event => {
+      const query = event.target.value.toLowerCase().trim();
+      const filtered = items.filter(row =>
+        String(row.item || "").toLowerCase().includes(query) ||
+        String(row.category || "").toLowerCase().includes(query)
+      );
+      document.getElementById("inventory-rows").innerHTML = inventoryRows(filtered);
+    });
+    document.getElementById("inventory-add-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      if (!requireManager()) return;
+      const button = event.currentTarget.querySelector('button[type="submit"]');
+      setLoading(button, true, "Adding...");
+      const item = document.getElementById("inv-item").value.trim();
+      const category = document.getElementById("inv-category").value;
+      const quantity = Number(document.getElementById("inv-qty").value);
+      const buyingPrice = Number(document.getElementById("inv-buy").value);
+      const sellingPrice = Number(document.getElementById("inv-sell").value);
+      try {
+        if (!item || !Number.isInteger(quantity) || quantity < 0 ||
+            !Number.isFinite(buyingPrice) || buyingPrice < 0 ||
+            !Number.isFinite(sellingPrice) || sellingPrice < 0) {
+          throw new Error("Enter valid product details and non-negative prices.");
+        }
+        const { error } = await db.from("inventory").insert({
+          item,
+          category,
+          quantity,
+          buying_price: buyingPrice,
+          selling_price: sellingPrice
+        });
+        if (error) throw error;
+        showToast("Inventory item added.");
+        await renderInventory();
+      } catch (error) {
+        showToast(friendlyError(error));
+      } finally {
+        setLoading(button, false);
+      }
+    });
   } catch (error) {
-    console.error("Staff loading failed:", error);
-
-    document.getElementById("staffCard").innerHTML = `
-      <p>Staff records could not be loaded.</p>
-      <p class="muted">
-        Check your profile table permissions and the active user's role.
-      </p>`;
-
-    showToast(friendlyError(error), "error");
+    host.innerHTML = `
+      <div class="card notice error-notice">
+        <h3>Inventory could not load</h3>
+        <p>${escapeHTML(friendlyError(error))}</p>
+        <button class="primary" onclick="renderInventory()">Try Again</button>
+      </div>`;
+  }
+}
+function inventoryRows(items) {
+  if (!items.length) return renderEmptyRow(7, "No inventory items found.");
+  return items.map(row => {
+    const qty = Number(row.quantity || 0);
+    const buying = Number(row.buying_price || 0);
+    const selling = Number(row.selling_price || 0);
+    return `
+      <tr>
+        <td>${escapeHTML(row.item)}</td>
+        <td>${escapeHTML(row.category || "Other")}</td>
+        <td><span class="badge ${qty <= 5 ? "red" : "green"}">${qty}</span></td>
+        <td>${money(buying)}</td>
+        <td>${money(selling)}</td>
+        <td>${money(selling - buying)}</td>
+        <td>
+          <button class="secondary" onclick="editInventoryItem('${escapeHTML(row.id)}')">Edit</button>
+        </td>
+      </tr>`;
+  }).join("");
+}
+async function editInventoryItem(id) {
+  if (!requireManager()) return;
+  const { data: item, error } = await db
+    .from("inventory")
+    .select("id,item,category,quantity,buying_price,selling_price")
+    .eq("id", id)
+    .single();
+  if (error || !item) {
+    showToast(friendlyError(error || "Item not found."));
+    return;
+  }
+  const name = prompt("Product name:", item.item);
+  if (name === null) return;
+  const quantityText = prompt("Quantity in stock:", item.quantity);
+  if (quantityText === null) return;
+  const buyingText = prompt("Buying price per unit:", item.buying_price);
+  if (buyingText === null) return;
+  const sellingText = prompt("Selling price per unit:", item.selling_price);
+  if (sellingText === null) return;
+  const quantity = Number(quantityText);
+  const buyingPrice = Number(buyingText);
+  const sellingPrice = Number(sellingText);
+  if (!name.trim() || !Number.isInteger(quantity) || quantity < 0 ||
+      !Number.isFinite(buyingPrice) || buyingPrice < 0 ||
+      !Number.isFinite(sellingPrice) || sellingPrice < 0) {
+    showToast("Invalid product details. No changes saved.");
+    return;
+  }
+  const { error: updateError } = await db
+    .from("inventory")
+    .update({
+      item: name.trim(),
+      quantity,
+      buying_price: buyingPrice,
+      selling_price: sellingPrice,
+      updated_at: new Date().toISOString()
+    })
+    .eq("id", id);
+  if (updateError) {
+    showToast(friendlyError(updateError));
+    return;
+  }
+  showToast("Inventory item updated.");
+  await renderInventory();
+}
+</script>
+ <script>
+async function renderSales() {
+  if (!requireLogin()) return;
+  const host = document.getElementById("staff-content");
+  host.innerHTML = '<div class="card">Loading POS...</div>';
+  try {
+    const { data: items, error } = await db
+      .from("inventory")
+      .select("id,item,category,quantity,selling_price")
+      .gt("quantity", 0)
+      .order("item", { ascending: true });
+    if (error) throw error;
+    const options = (items || []).map(item => `
+      <option value="${escapeHTML(item.id)}"
+        data-price="${Number(item.selling_price || 0)}"
+        data-quantity="${Number(item.quantity || 0)}">
+        ${escapeHTML(item.item)} — Stock: ${Number(item.quantity || 0)}
+        — ${money(item.selling_price)}
+      </option>
+    `).join("");
+    host.innerHTML = `
+      <h2 class="section-title">Point of Sale</h2>
+      <div class="card">
+        <h3>Record a Sale</h3>
+        <form id="pos-form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="pos-customer">Customer name (optional)</label>
+              <input id="pos-customer" maxlength="120">
+            </div>
+            <div class="field">
+              <label for="pos-item">Product</label>
+              <select id="pos-item" required>
+                <option value="">Select product</option>
+                ${options}
+              </select>
+            </div>
+            <div class="field">
+              <label for="pos-quantity">Quantity</label>
+              <input id="pos-quantity" type="number" min="1" step="1" value="1" required>
+            </div>
+            <div class="field">
+              <label for="pos-price">Selling price per unit (KSh)</label>
+              <input id="pos-price" type="number" min="0" step="0.01" required>
+            </div>
+            <div class="field">
+              <label for="pos-discount">Discount (KSh, total)</label>
+              <input id="pos-discount" type="number" min="0" step="0.01" value="0" required>
+            </div>
+            <div class="field">
+              <label for="pos-payment">Payment method</label>
+              <select id="pos-payment" required>
+                <option>Cash</option>
+                <option>M-Pesa</option>
+                <option>Bank transfer</option>
+                <option>Card</option>
+                <option>Credit / Unpaid</option>
+              </select>
+            </div>
+          </div>
+          <div class="notice">
+            <strong>Estimated total: <span id="pos-total">${money(0)}</span></strong>
+            <p class="small muted">Confirm the final amount before completing the sale.</p>
+          </div>
+          <button class="primary" type="submit">Complete Sale & Create Invoice</button>
+        </form>
+      </div>
+      <div id="invoice-output" style="margin-top:18px"></div>
+    `;
+    const product = document.getElementById("pos-item");
+    const quantity = document.getElementById("pos-quantity");
+    const price = document.getElementById("pos-price");
+    const discount = document.getElementById("pos-discount");
+    const total = document.getElementById("pos-total");
+    function updatePOS() {
+      const selected = product.selectedOptions[0];
+      const maxStock = Number(selected?.dataset?.quantity || 0);
+      const qty = Number(quantity.value || 0);
+      const unitPrice = Number(price.value || 0);
+      const disc = Number(discount.value || 0);
+      if (selected?.value && !price.dataset.userEdited) {
+        price.value = selected.dataset.price || "0";
+      }
+      const effectivePrice = Number(price.value || 0);
+      const calculated = Math.max(0, qty * effectivePrice - disc);
+      total.textContent = money(calculated);
+      quantity.max = maxStock || "";
+    }
+    product.addEventListener("change", () => {
+      const selected = product.selectedOptions[0];
+      price.value = selected?.dataset?.price || "";
+      delete price.dataset.userEdited;
+      updatePOS();
+    });
+    price.addEventListener("input", () => {
+      price.dataset.userEdited = "true";
+      updatePOS();
+    });
+    quantity.addEventListener("input", updatePOS);
+    discount.addEventListener("input", updatePOS);
+    document.getElementById("pos-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      if (!requireLogin()) return;
+      const form = event.currentTarget;
+      const button = form.querySelector('button[type="submit"]');
+      setLoading(button, true, "Recording sale...");
+      try {
+        const selected = product.selectedOptions[0];
+        const inventoryId = product.value;
+        const qty = Number(quantity.value);
+        const unitPrice = Number(price.value);
+        const disc = Number(discount.value);
+        const payment = document.getElementById("pos-payment").value;
+        const customer = document.getElementById("pos-customer").value.trim();
+        const maxStock = Number(selected?.dataset?.quantity || 0);
+        if (!inventoryId || !Number.isInteger(qty) || qty < 1 ||
+            qty > maxStock || !Number.isFinite(unitPrice) || unitPrice < 0 ||
+            !Number.isFinite(disc) || disc < 0 ||
+            disc > qty * unitPrice) {
+          throw new Error("Check the product, stock, quantity, price and discount.");
+        }
+        const { data, error } = await db.rpc("record_sale", {
+          p_inventory_id: inventoryId,
+          p_quantity: qty,
+          p_unit_price: unitPrice,
+          p_discount: disc,
+          p_payment_method: payment,
+          p_customer_name: customer || null
+        });
+        if (error) throw error;
+        if (!data || data.success !== true) {
+          throw new Error(data?.message || "Sale was not confirmed by the server.");
+        }
+        const invoiceNumber = data.invoice_number || "AMK-" + Date.now();
+        const amount = Number(data.amount ?? (qty * unitPrice - disc));
+        document.getElementById("invoice-output").innerHTML = `
+          <div class="card" id="print-invoice">
+            <h2>AMK GAS • SNEAKERS • BARBER</h2>
+            <h3>Sales Receipt / Invoice</h3>
+            <p><strong>Invoice:</strong> ${escapeHTML(invoiceNumber)}</p>
+            <p><strong>Date:</strong> ${escapeHTML(new Date().toLocaleString())}</p>
+            <p><strong>Customer:</strong> ${escapeHTML(customer || "Walk-in customer")}</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Product</th><th>Qty</th><th>Unit Price</th><th>Discount</th><th>Total</th></tr></thead>
+                <tbody><tr>
+                  <td>${escapeHTML(selected.textContent.split("—")[0].trim())}</td>
+                  <td>${qty}</td>
+                  <td>${money(unitPrice)}</td>
+                  <td>${money(disc)}</td>
+                  <td>${money(amount)}</td>
+                </tr></tbody>
+              </table>
+            </div>
+            <p><strong>Payment method:</strong> ${escapeHTML(payment)}</p>
+            <h3>Total: ${money(amount)}</h3>
+            <p class="small muted">Thank you for shopping with AMK.</p>
+            <button class="primary no-print" onclick="window.print()">Print Receipt</button>
+          </div>
+        `;
+        showToast("Sale recorded. Invoice: " + invoiceNumber);
+        form.reset();
+        price.value = "";
+        delete price.dataset.userEdited;
+        updatePOS();
+      } catch (error) {
+        showToast(friendlyError(error));
+      } finally {
+        setLoading(button, false);
+      }
+    });
+    updatePOS();
+  } catch (error) {
+    host.innerHTML = `
+      <div class="card notice error-notice">
+        <h3>POS could not load</h3>
+        <p>${escapeHTML(friendlyError(error))}</p>
+        <button class="primary" onclick="renderSales()">Try Again</button>
+      </div>`;
   }
 }
 </script>
-
-<script>
-/* PART 13 — ADMIN-ONLY PAYROLL */
-
-async function renderPayroll() {
-  const root = document.getElementById("pageContent");
-
-  if (!isAdmin()) {
-    root.innerHTML = `
+  <script>
+async function renderPurchases() {
+  if (!requireManager()) return;
+  const host = document.getElementById("staff-content");
+  host.innerHTML = '<div class="card">Loading purchases...</div>';
+  try {
+    const [{ data: items, error: itemError }, { data: purchases, error: purchaseError }] =
+      await Promise.all([
+        db.from("inventory")
+          .select("id,item,quantity,buying_price")
+          .order("item", { ascending: true }),
+        db.from("purchases")
+          .select("id,item,quantity,unit_cost,supplier_name,invoice_number,purchase_date,created_at")
+          .order("created_at", { ascending: false })
+          .limit(100)
+      ]);
+    if (itemError) throw itemError;
+    if (purchaseError) throw purchaseError;
+    const options = (items || []).map(item => `
+      <option value="${escapeHTML(item.id)}">
+        ${escapeHTML(item.item)} — Stock: ${Number(item.quantity || 0)}
+      </option>
+    `).join("");
+    const rows = (purchases || []).map(p => `
+      <tr>
+        <td>${escapeHTML(p.purchase_date || p.created_at || "")}</td>
+        <td>${escapeHTML(p.invoice_number || "—")}</td>
+        <td>${escapeHTML(p.item || "—")}</td>
+        <td>${escapeHTML(p.supplier_name || "—")}</td>
+        <td>${Number(p.quantity || 0)}</td>
+        <td>${money(p.unit_cost)}</td>
+        <td>${money(Number(p.quantity || 0) * Number(p.unit_cost || 0))}</td>
+      </tr>
+    `).join("");
+    host.innerHTML = `
+      <h2 class="section-title">Purchases & Supplier Invoices</h2>
       <div class="card">
-        <h2>Payroll & Payslips</h2>
-        <p>Access denied. Only the administrator can access payroll.</p>
+        <h3>Record Stock Purchase</h3>
+        <form id="purchase-form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="purchase-item">Inventory item</label>
+              <select id="purchase-item" required>
+                <option value="">Select item</option>
+                ${options}
+              </select>
+            </div>
+            <div class="field">
+              <label for="purchase-quantity">Quantity purchased</label>
+              <input id="purchase-quantity" type="number" min="1" step="1" required>
+            </div>
+            <div class="field">
+              <label for="purchase-cost">Buying price per unit (KSh)</label>
+              <input id="purchase-cost" type="number" min="0" step="0.01" required>
+            </div>
+            <div class="field">
+              <label for="purchase-supplier">Supplier name</label>
+              <input id="purchase-supplier" maxlength="150" required>
+            </div>
+            <div class="field">
+              <label for="purchase-invoice">Supplier invoice number</label>
+              <input id="purchase-invoice" maxlength="100" required>
+            </div>
+            <div class="field">
+              <label for="purchase-date">Purchase date</label>
+              <input id="purchase-date" type="date" required>
+            </div>
+          </div>
+          <button class="primary" type="submit">Save Purchase Invoice</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Recent Purchases</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th><th>Invoice No.</th><th>Item</th>
+                <th>Supplier</th><th>Qty</th><th>Unit Cost</th><th>Total Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows || '<tr><td colspan="7">No purchases recorded yet.</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+    const dateInput = document.getElementById("purchase-date");
+    dateInput.value = new Date().toLocaleDateString("en-CA");
+    document.getElementById("purchase-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      if (!requireManager()) return;
+      const form = event.currentTarget;
+      const button = form.querySelector('button[type="submit"]');
+      setLoading(button, true, "Saving purchase...");
+      try {
+        const inventoryId = document.getElementById("purchase-item").value;
+        const quantity = Number(document.getElementById("purchase-quantity").value);
+        const unitCost = Number(document.getElementById("purchase-cost").value);
+        const supplier = document.getElementById("purchase-supplier").value.trim();
+        const invoice = document.getElementById("purchase-invoice").value.trim();
+        const purchaseDate = document.getElementById("purchase-date").value;
+        if (!inventoryId || !Number.isInteger(quantity) || quantity < 1 ||
+            !Number.isFinite(unitCost) || unitCost < 0 ||
+            !supplier || !invoice || !purchaseDate) {
+          throw new Error("Please check all purchase details.");
+        }
+        const { data, error } = await db.rpc("record_purchase", {
+          p_inventory_id: inventoryId,
+          p_quantity: quantity,
+          p_unit_cost: unitCost,
+          p_supplier_name: supplier,
+          p_invoice_number: invoice,
+          p_purchase_date: purchaseDate
+        });
+        if (error) throw error;
+        if (!data || data.success !== true) {
+          throw new Error(data?.message || "The server did not confirm this purchase.");
+        }
+        showToast("Purchase invoice saved successfully.");
+        await renderPurchases();
+      } catch (error) {
+        showToast(friendlyError(error));
+      } finally {
+        setLoading(button, false);
+      }
+    });
+  } catch (error) {
+    host.innerHTML = `
+      <div class="card">
+        <h3>Purchases could not load</h3>
+        <p>${escapeHTML(friendlyError(error))}</p>
+        <button class="primary" onclick="renderPurchases()">Try Again</button>
+      </div>`;
+  }
+}
+</script>
+  <script>
+async function renderSuppliers() {
+  if (!requireManager()) return;
+  const host = document.getElementById("staff-content");
+  host.innerHTML = '<div class="card">Loading suppliers...</div>';
+  try {
+    const { data: suppliers, error } = await db
+      .from("suppliers")
+      .select("id,name,phone,email,category,created_at")
+      .order("name", { ascending: true });
+    if (error) throw error;
+    const rows = (suppliers || []).map(s => `
+      <tr>
+        <td>${escapeHTML(s.name || "")}</td>
+        <td>${escapeHTML(s.phone || "—")}</td>
+        <td>${escapeHTML(s.email || "—")}</td>
+        <td>${escapeHTML(s.category || "—")}</td>
+        <td>
+          <button type="button" class="secondary"
+            onclick="deleteSupplier('${escapeHTML(s.id)}')">
+            Delete
+          </button>
+        </td>
+      </tr>
+    `).join("");
+    host.innerHTML = `
+      <h2 class="section-title">Supplier Management</h2>
+      <div class="card">
+        <h3>Add Supplier</h3>
+        <form id="supplier-form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="supplier-name">Supplier / Company Name</label>
+              <input id="supplier-name" maxlength="150" required>
+            </div>
+            <div class="field">
+              <label for="supplier-phone">Phone Number</label>
+              <input id="supplier-phone" type="tel" maxlength="40">
+            </div>
+            <div class="field">
+              <label for="supplier-email">Email Address</label>
+              <input id="supplier-email" type="email" maxlength="150">
+            </div>
+            <div class="field">
+              <label for="supplier-category">Goods Supplied</label>
+              <select id="supplier-category">
+                <option value="Gas">Gas</option>
+                <option value="Gas Accessories">Gas Accessories</option>
+                <option value="Sneakers">Sneakers</option>
+                <option value="Barber Supplies">Barber Supplies</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <button class="primary" type="submit">Save Supplier</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Supplier Register (${(suppliers || []).length})</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Phone</th><th>Email</th><th>Category</th><th>Action</th></tr>
+            </thead>
+            <tbody>
+              ${rows || '<tr><td colspan="5">No suppliers saved yet.</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+    document.getElementById("supplier-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      if (!requireManager()) return;
+      const form = event.currentTarget;
+      const button = form.querySelector('button[type="submit"]');
+      setLoading(button, true, "Saving supplier...");
+      try {
+        const supplier = {
+          name: document.getElementById("supplier-name").value.trim(),
+          phone: document.getElementById("supplier-phone").value.trim() || null,
+          email: document.getElementById("supplier-email").value.trim() || null,
+          category: document.getElementById("supplier-category").value
+        };
+        if (!supplier.name) throw new Error("Enter a supplier name.");
+        const { error: insertError } = await db
+          .from("suppliers")
+          .insert(supplier);
+        if (insertError) throw insertError;
+        showToast("Supplier saved successfully.");
+        await renderSuppliers();
+      } catch (error) {
+        showToast(friendlyError(error));
+      } finally {
+        setLoading(button, false);
+      }
+    });
+  } catch (error) {
+    host.innerHTML = `
+      <div class="card">
+        <h3>Suppliers could not load</h3>
+        <p>${escapeHTML(friendlyError(error))}</p>
+        <button class="primary" onclick="renderSuppliers()">Try Again</button>
+      </div>`;
+  }
+}
+async function deleteSupplier(id) {
+  if (!requireManager()) return;
+  if (!confirm("Delete this supplier record? Purchase history will not be deleted.")) {
+    return;
+  }
+  try {
+    const { error } = await db
+      .from("suppliers")
+      .delete()
+      .eq("id", id);
+    if (error) throw error;
+    showToast("Supplier deleted.");
+    await renderSuppliers();
+  } catch (error) {
+    showToast(friendlyError(error));
+  }
+}
+</script>
+  <script>
+async function renderExpenses() {
+  if (!requireManager()) return;
+  const host = document.getElementById("staff-content");
+  host.innerHTML = '<div class="card">Loading expenses...</div>';
+  try {
+    const { data: expenses, error } = await db
+      .from("expenses")
+      .select("id,description,category,amount,staff_id,created_at")
+      .order("created_at", { ascending: false })
+      .limit(200);
+    if (error) throw error;
+    const total = (expenses || []).reduce(
+      (sum, expense) => sum + Number(expense.amount || 0), 0
+    );
+    const rows = (expenses || []).map(expense => `
+      <tr>
+        <td>${escapeHTML(expense.created_at
+          ? new Date(expense.created_at).toLocaleDateString()
+          : "—")}</td>
+        <td>${escapeHTML(expense.description || "")}</td>
+        <td>${escapeHTML(expense.category || "Other")}</td>
+        <td>${money(expense.amount)}</td>
+        <td>
+          <button type="button" class="secondary"
+            onclick="deleteExpense('${escapeHTML(expense.id)}')">
+            Delete
+          </button>
+        </td>
+      </tr>
+    `).join("");
+    host.innerHTML = `
+      <h2 class="section-title">Business Expenses</h2>
+      <div class="grid">
+        <div class="card">
+          <p class="muted">Total of Recent 200 Records</p>
+          <h2>${money(total)}</h2>
+        </div>
+        <div class="card">
+          <p class="muted">Records Displayed</p>
+          <h2>${(expenses || []).length}</h2>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Record an Expense</h3>
+        <form id="expense-form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="expense-description">Description</label>
+              <input id="expense-description" maxlength="200"
+                placeholder="e.g. Delivery fuel" required>
+            </div>
+            <div class="field">
+              <label for="expense-category">Category</label>
+              <select id="expense-category">
+                <option value="Rent">Rent</option>
+                <option value="Transport">Transport</option>
+                <option value="Fuel">Fuel</option>
+                <option value="Delivery">Delivery</option>
+                <option value="Electricity">Electricity</option>
+                <option value="Repairs">Repairs</option>
+                <option value="Supplies">Supplies</option>
+                <option value="Salary">Salary</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="expense-amount">Amount (KSh)</label>
+              <input id="expense-amount" type="number" min="0.01"
+                step="0.01" required>
+            </div>
+          </div>
+          <button class="primary" type="submit">Save Expense</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Recent Expenses</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th>Action</th></tr>
+            </thead>
+            <tbody>
+              ${rows || '<tr><td colspan="5">No expenses recorded yet.</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+    document.getElementById("expense-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      if (!requireManager()) return;
+      const form = event.currentTarget;
+      const button = form.querySelector('button[type="submit"]');
+      setLoading(button, true, "Saving expense...");
+      try {
+        const description = document.getElementById("expense-description")
+          .value.trim();
+        const category = document.getElementById("expense-category").value;
+        const amount = Number(document.getElementById("expense-amount").value);
+        if (!description || !Number.isFinite(amount) || amount <= 0) {
+          throw new Error("Enter a description and a valid amount.");
+        }
+        const { error: insertError } = await db
+          .from("expenses")
+          .insert({
+            description,
+            category,
+            amount,
+            staff_id: currentUser.id
+          });
+        if (insertError) throw insertError;
+        showToast("Expense recorded.");
+        await renderExpenses();
+      } catch (error) {
+        showToast(friendlyError(error));
+      } finally {
+        setLoading(button, false);
+      }
+    });
+  } catch (error) {
+    host.innerHTML = `
+      <div class="card">
+        <h3>Expenses could not load</h3>
+        <p>${escapeHTML(friendlyError(error))}</p>
+        <button class="primary" onclick="renderExpenses()">Try Again</button>
+      </div>`;
+  }
+}
+async function deleteExpense(id) {
+  if (!requireManager()) return;
+  if (!confirm("Delete this expense record?")) return;
+  try {
+    const { error } = await db
+      .from("expenses")
+      .delete()
+      .eq("id", id);
+    if (error) throw error;
+    showToast("Expense deleted.");
+    await renderExpenses();
+  } catch (error) {
+    showToast(friendlyError(error));
+  }
+}
+</script>
+  <script>
+async function renderPayroll() {
+  if (!requireAdmin()) return;
+  const host = document.getElementById("staff-content");
+  host.innerHTML = '<div class="card">Loading confidential payroll...</div>';
+  try {
+    const { data: payroll, error } = await db
+      .from("payroll_records")
+      .select("id,employee_name,pay_month,basic_salary,commission,deductions,payment_status,created_at")
+      .order("pay_month", { ascending: false })
+      .limit(200);
+    if (error) throw error;
+    const totalNet = (payroll || []).reduce((sum, record) => {
+      return sum +
+        Number(record.basic_salary || 0) +
+        Number(record.commission || 0) -
+        Number(record.deductions || 0);
+    }, 0);
+    const rows = (payroll || []).map(record => {
+      const net =
+        Number(record.basic_salary || 0) +
+        Number(record.commission || 0) -
+        Number(record.deductions || 0);
+      return `
+        <tr>
+          <td>${escapeHTML(record.employee_name || "")}</td>
+          <td>${escapeHTML(record.pay_month || "")}</td>
+          <td>${money(record.basic_salary)}</td>
+          <td>${money(record.commission)}</td>
+          <td>${money(record.deductions)}</td>
+          <td><strong>${money(net)}</strong></td>
+          <td>${escapeHTML(record.payment_status || "Pending")}</td>
+          <td>
+            <button type="button" class="secondary"
+              onclick="deletePayrollRecord('${escapeHTML(record.id)}')">
+              Delete
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join("");
+    host.innerHTML = `
+      <h2 class="section-title">Confidential Payroll</h2>
+      <p class="muted">Admin-only section. Salary information is confidential.</p>
+      <div class="grid">
+        <div class="card">
+          <p class="muted">Net Total of Displayed Records</p>
+          <h2>${money(totalNet)}</h2>
+        </div>
+        <div class="card">
+          <p class="muted">Payroll Records</p>
+          <h2>${(payroll || []).length}</h2>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Add Payroll Record</h3>
+        <form id="payroll-form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="payroll-employee">Employee name</label>
+              <input id="payroll-employee" maxlength="150" required>
+            </div>
+            <div class="field">
+              <label for="payroll-month">Pay month</label>
+              <input id="payroll-month" type="month" required>
+            </div>
+            <div class="field">
+              <label for="payroll-basic">Basic salary (KSh)</label>
+              <input id="payroll-basic" type="number" min="0"
+                step="0.01" value="0" required>
+            </div>
+            <div class="field">
+              <label for="payroll-commission">Commission (KSh)</label>
+              <input id="payroll-commission" type="number" min="0"
+                step="0.01" value="0" required>
+            </div>
+            <div class="field">
+              <label for="payroll-deductions">Deductions (KSh)</label>
+              <input id="payroll-deductions" type="number" min="0"
+                step="0.01" value="0" required>
+            </div>
+            <div class="field">
+              <label for="payroll-status">Payment status</label>
+              <select id="payroll-status" required>
+                <option value="Pending">Pending</option>
+                <option value="Paid">Paid</option>
+              </select>
+            </div>
+          </div>
+          <p><strong>Net pay: <span id="payroll-net">${money(0)}</span></strong></p>
+          <button class="primary" type="submit">Save Payroll Record</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Payroll Register</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Employee</th><th>Month</th><th>Basic</th>
+                <th>Commission</th><th>Deductions</th><th>Net Pay</th>
+                <th>Status</th><th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows || '<tr><td colspan="8">No payroll records yet.</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+    const monthInput = document.getElementById("payroll-month");
+    monthInput.value = new Date().toISOString().slice(0, 7);
+    function updateNetPay() {
+      const basic = Number(document.getElementById("payroll-basic").value || 0);
+      const commission = Number(document.getElementById("payroll-commission").value || 0);
+      const deductions = Number(document.getElementById("payroll-deductions").value || 0);
+      document.getElementById("payroll-net").textContent =
+        money(basic + commission - deductions);
+    }
+    ["payroll-basic", "payroll-commission", "payroll-deductions"].forEach(id => {
+      document.getElementById(id).addEventListener("input", updateNetPay);
+    });
+    document.getElementById("payroll-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      if (!requireAdmin()) return;
+      const form = event.currentTarget;
+      const button = form.querySelector('button[type="submit"]');
+      setLoading(button, true, "Saving payroll...");
+      try {
+        const employeeName = document.getElementById("payroll-employee").value.trim();
+        const month = document.getElementById("payroll-month").value;
+        const basic = Number(document.getElementById("payroll-basic").value);
+        const commission = Number(document.getElementById("payroll-commission").value);
+        const deductions = Number(document.getElementById("payroll-deductions").value);
+        const status = document.getElementById("payroll-status").value;
+        if (!employeeName || !month ||
+            ![basic, commission, deductions].every(Number.isFinite) ||
+            basic < 0 || commission < 0 || deductions < 0) {
+          throw new Error("Check the employee, month, and payroll amounts.");
+        }
+        if (deductions > basic + commission) {
+          throw new Error("Deductions cannot exceed salary plus commission.");
+        }
+        const { error: insertError } = await db
+          .from("payroll_records")
+          .insert({
+            employee_name: employeeName,
+            pay_month: month + "-01",
+            basic_salary: basic,
+            commission,
+            deductions,
+            payment_status: status,
+            created_by: currentUser.id
+          });
+        if (insertError) throw insertError;
+        showToast("Payroll record saved.");
+        await renderPayroll();
+      } catch (error) {
+        showToast(friendlyError(error));
+      } finally {
+        setLoading(button, false);
+      }
+    });
+  } catch (error) {
+    host.innerHTML = `
+      <div class="card">
+        <h3>Payroll could not load</h3>
+        <p>${escapeHTML(friendlyError(error))}</p>
+        <button class="primary" onclick="renderPayroll()">Try Again</button>
+      </div>`;
+  }
+}
+async function deletePayrollRecord(id) {
+  if (!requireAdmin()) return;
+  if (!confirm("Permanently delete this payroll record?")) return;
+  try {
+    const { error } = await db
+      .from("payroll_records")
+      .delete()
+      .eq("id", id);
+    if (error) throw error;
+    showToast("Payroll record deleted.");
+    await renderPayroll();
+  } catch (error) {
+    showToast(friendlyError(error));
+  }
+}
+</script>
+  <script>
+async function renderStaffPage(page) {
+  if (!requireLogin()) return;
+  const routes = {
+    overview: {
+      permission: "staff",
+      render: renderDashboard
+    },
+    inventory: {
+      permission: "manager",
+      render: renderInventory
+    },
+    sales: {
+      permission: "staff",
+      render: renderSales
+    },
+    purchases: {
+      permission: "manager",
+      render: renderPurchases
+    },
+    suppliers: {
+      permission: "manager",
+      render: renderSuppliers
+    },
+    expenses: {
+      permission: "manager",
+      render: renderExpenses
+    },
+    payroll: {
+      permission: "admin",
+      render: renderPayroll
+    },
+    employees: {
+      permission: "manager",
+      render: renderEmployees
+    }
+  };
+  const route = routes[page];
+  if (!route) {
+    showToast("Unknown dashboard section.");
+    return;
+  }
+  if (route.permission === "admin" && !requireAdmin()) return;
+  if (route.permission === "manager" && !requireManager()) return;
+  if (typeof route.render !== "function") {
+    document.getElementById("staff-content").innerHTML = `
+      <div class="card">
+        <h3>Section not ready</h3>
+        <p>This section will be available after its implementation is added.</p>
       </div>`;
     return;
   }
-
-  root.innerHTML = `
-    <div class="page-heading">
-      <h2>Payroll & Payslips</h2>
-      <p>Private administrator area for salaries, commissions and deductions.</p>
-    </div>
-
-    <div class="card">
-      <h3>Record Payroll</h3>
-      <form id="payrollForm" class="form-grid">
-        <label>
-          Employee name
-          <input name="employee_name" required maxlength="150">
-        </label>
-
-        <label>
-          Payroll month
-          <input name="pay_month" type="month" required>
-        </label>
-
-        <label>
-          Basic salary (KSh)
-          <input name="basic_salary" type="number" min="0"
-            step="0.01" value="0" required>
-        </label>
-
-        <label>
-          Commission (KSh)
-          <input name="commission" type="number" min="0"
-            step="0.01" value="0" required>
-        </label>
-
-        <label>
-          Deductions (KSh)
-          <input name="deductions" type="number" min="0"
-            step="0.01" value="0" required>
-        </label>
-
-        <label>
-          Payment status
-          <select name="payment_status" required>
-            <option value="Pending">Pending</option>
-            <option value="Paid">Paid</option>
-          </select>
-        </label>
-
-        <button type="submit" id="payrollSaveBtn">Save Payroll</button>
-      </form>
-    </div>
-
-    <div class="card">
-      <h3>Payroll Records</h3>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Month</th>
-              <th>Employee</th>
-              <th>Basic salary</th>
-              <th>Commission</th>
-              <th>Deductions</th>
-              <th>Net pay</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="payrollRows">
-            <tr><td colspan="7">Loading payroll...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>`;
-
-  const form = document.getElementById("payrollForm");
-
-  form.addEventListener("submit", async function (event) {
-    event.preventDefault();
-
-    if (!isAdmin()) {
-      showToast("Administrator access is required.", "error");
-      return;
-    }
-
-    const data = new FormData(form);
-    const employeeName = String(data.get("employee_name") || "").trim();
-    const month = String(data.get("pay_month") || "");
-    const basic = Number(data.get("basic_salary"));
-    const commission = Number(data.get("commission"));
-    const deductions = Number(data.get("deductions"));
-
-    if (
-      !employeeName ||
-      !/^\d{4}-\d{2}$/.test(month) ||
-      ![basic, commission, deductions].every(Number.isFinite) ||
-      basic < 0 || commission < 0 || deductions < 0
-    ) {
-      showToast("Please check all payroll details.", "error");
-      return;
-    }
-
-    const button = document.getElementById("payrollSaveBtn");
-    setLoading(button, true);
-
-    try {
-      const { error } = await db.from("payroll_records").insert({
-        employee_name: employeeName,
-        pay_month: `${month}-01`,
-        basic_salary: basic,
-        commission,
-        deductions,
-        payment_status: String(data.get("payment_status")),
-        created_by: currentUser.id
-      });
-
-      if (error) throw error;
-
-      showToast("Payroll record saved.");
-      form.reset();
-      form.elements.basic_salary.value = "0";
-      form.elements.commission.value = "0";
-      form.elements.deductions.value = "0";
-
-      await loadView("payroll");
-    } catch (error) {
-      console.error("Payroll save failed:", error);
-      showToast(friendlyError(error), "error");
-    } finally {
-      setLoading(button, false);
-    }
-  });
-
   try {
-    const { data, error } = await db
-      .from("payroll_records")
-      .select("*")
-      .order("pay_month", { ascending: false })
-      .limit(200);
-
+    await route.render();
+  } catch (error) {
+    showToast(friendlyError(error));
+  }
+}
+async function renderEmployees() {
+  if (!requireManager()) return;
+  const host = document.getElementById("staff-content");
+  host.innerHTML = '<div class="card">Loading staff records...</div>';
+  try {
+    const { data: profiles, error } = await db
+      .from("profiles")
+      .select("id,email,full_name,role,active")
+      .order("full_name", { ascending: true });
     if (error) throw error;
-
-    const records = data || [];
-
-    document.getElementById("payrollRows").innerHTML = records.length
-      ? records.map(record => {
-          const basic = Number(record.basic_salary || 0);
-          const commission = Number(record.commission || 0);
-          const deductions = Number(record.deductions || 0);
-          const net = basic + commission - deductions;
-
-          return `
-            <tr>
-              <td>${escapeHTML(String(record.pay_month || "").slice(0, 7))}</td>
-              <td>${escapeHTML(record.employee_name || "")}</td>
-              <td>${money(basic)}</td>
-              <td>${money(commission)}</td>
-              <td>${money(deductions)}</td>
-              <td><strong>${money(net)}</strong></td>
-              <td>${escapeHTML(record.payment_status || "Pending")}</td>
-            </tr>`;
-        }).join("")
-      : `<tr><td colspan="7">No payroll records found.</td></tr>`;
-
+    const rows = (profiles || []).map(profile => `
+      <tr>
+        <td>${escapeHTML(profile.full_name || "—")}</td>
+        <td>${escapeHTML(profile.email || "—")}</td>
+        <td>${escapeHTML(profile.role || "staff")}</td>
+        <td>${profile.active ? "Active" : "Inactive"}</td>
+      </tr>
+    `).join("");
+    host.innerHTML = `
+      <h2 class="section-title">Employee Records</h2>
+      <div class="card">
+        <p class="muted">
+          Staff accounts must be created securely in Supabase Authentication.
+          This page lists staff profiles; it does not create login accounts.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Full Name</th><th>Email</th><th>Role</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              ${rows || '<tr><td colspan="4">No staff profiles found.</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
   } catch (error) {
-    console.error("Payroll loading failed:", error);
-
-    document.getElementById("payrollRows").innerHTML =
-      `<tr><td colspan="7">Payroll could not be loaded. Check the administrator's database permissions.</td></tr>`;
-
-    showToast(friendlyError(error), "error");
+    host.innerHTML = `
+      <div class="card">
+        <h3>Employee records could not load</h3>
+        <p>${escapeHTML(friendlyError(error))}</p>
+        <button class="primary" onclick="renderEmployees()">Try Again</button>
+      </div>`;
   }
 }
 </script>
-
-<script>
-/* PART 14 — AMK NAVIGATION & PAGE ROUTER */
-
-async function loadView(view) {
-  if (!currentUser) {
-    showLoginScreen();
-    return;
-  }
-
-  const allowedViews = [
-    "overview",
-    "inventory",
-    "sales",
-    "purchases",
-    "suppliers",
-    "expenses",
-    "requests",
-    "deliveries",
-    "staff",
-    "payroll"
-  ];
-
-  if (!allowedViews.includes(view)) {
-    view = "overview";
-  }
-
-  if (view === "payroll" && !isAdmin()) {
-    showToast("Payroll is restricted to the administrator.", "error");
-    view = "overview";
-  }
-
-  if (
-    ["purchases", "suppliers", "expenses"].includes(view) &&
-    !canManageStock()
-  ) {
-    showToast("You do not have permission to open that section.", "error");
-    view = "overview";
-  }
-
-  currentView = view;
-
-  document.querySelectorAll("[data-view]").forEach(button => {
-    const active = button.dataset.view === view;
-    button.classList.toggle("active", active);
-    button.setAttribute("aria-current", active ? "page" : "false");
-  });
-
-  hidePageMessage();
-
-  try {
-    switch (view) {
-      case "overview":
-        await renderOverview();
-        break;
-
-      case "inventory":
-        await renderInventory();
-        break;
-
-      case "sales":
-        await renderSales();
-        break;
-
-      case "purchases":
-        await renderPurchases();
-        break;
-
-      case "suppliers":
-        await renderSuppliers();
-        break;
-
-      case "expenses":
-        await renderExpenses();
-        break;
-
-      case "requests":
-        await renderRequests();
-        break;
-
-      case "deliveries":
-        await renderDeliveries();
-        break;
-
-      case "staff":
-        await renderStaff();
-        break;
-
-      case "payroll":
-        await renderPayroll();
-        break;
-
-      default:
-        await renderOverview();
-    }
-  } catch (error) {
-    console.error("Page loading failed:", error);
-    showPageMessage(
-      "This section could not be loaded. Check your database permissions and try again."
-    );
-  }
-}
-
-function initializeNavigation() {
-  document.querySelectorAll("[data-view]").forEach(button => {
-    button.addEventListener("click", function () {
-      loadView(button.dataset.view);
-    });
-  });
-}
-
-document.addEventListener("DOMContentLoaded", initializeNavigation);
-</script>
-
-</body>
+  </body>
 </html>
+  
